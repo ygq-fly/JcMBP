@@ -1,0 +1,476 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{816218D6-35A4-4267-8E1C-EB2AAFC1B3FC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JcMBP</RootNamespace>
+    <AssemblyName>JcMBP</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>pim.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2, Version=12.4.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="itextsharp, Version=5.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\x86\Release\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="jcXY2dPlotEx, Version=1.2.4.8889, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\x86\Debug\jcXY2dPlotEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CompactFramework.Build.Tasks" />
+    <Reference Include="System" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChangePass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePass.Designer.cs">
+      <DependentUpon>ChangePass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClsDataDefine.cs" />
+    <Compile Include="ClsDataUserParam.cs" />
+    <Compile Include="ClsJcPimDll.cs" />
+    <Compile Include="ClsUpLoad.cs" />
+    <Compile Include="Code.cs" />
+    <Compile Include="CustomScrollbar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataSweep.cs" />
+    <Compile Include="Debug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Debug.Designer.cs">
+      <DependentUpon>Debug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DebugPoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugPoi.Designer.cs">
+      <DependentUpon>DebugPoi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileName.Designer.cs">
+      <DependentUpon>FileName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FreqSweepLeft.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FreqSweepLeft.Designer.cs">
+      <DependentUpon>FreqSweepLeft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FreqSweepMid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FreqSweepMid.Designer.cs">
+      <DependentUpon>FreqSweepMid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEnableSwitch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEnableSwitch.Designer.cs">
+      <DependentUpon>FrmEnableSwitch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GainJbdata.cs" />
+    <Compile Include="JbComfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JbComfig.Designer.cs">
+      <DependentUpon>JbComfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JbData.cs" />
+    <Compile Include="Jbplot.cs" />
+    <Compile Include="JpgReport.cs" />
+    <Compile Include="J_TestResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="J_TestResultForm.Designer.cs">
+      <DependentUpon>J_TestResultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoopTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoopTest.Designer.cs">
+      <DependentUpon>LoopTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NPFreqSweepLeft.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NPFreqSweepLeft.Designer.cs">
+      <DependentUpon>NPFreqSweepLeft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NpJbConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NpJbConfig.Designer.cs">
+      <DependentUpon>NpJbConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NPTimeSweepLeft.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NPTimeSweepLeft.Designer.cs">
+      <DependentUpon>NPTimeSweepLeft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OfftenMethod.cs" />
+    <Compile Include="PauseMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PauseMessage.Designer.cs">
+      <DependentUpon>PauseMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PoiFreqSweepLeft.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PoiFreqSweepLeft.Designer.cs">
+      <DependentUpon>PoiFreqSweepLeft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PoiOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PoiOrder.Designer.cs">
+      <DependentUpon>PoiOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PoiTimeSweepLeft.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PoiTimeSweepLeft.Designer.cs">
+      <DependentUpon>PoiTimeSweepLeft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="poi_script.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="poi_script.Designer.cs">
+      <DependentUpon>poi_script.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PowerProgramBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PowerProgramBar.designer.cs" />
+    <Compile Include="PowerProgramBar1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PowerProgramBar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rx.Designer.cs">
+      <DependentUpon>Rx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RxRange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RxRange.Designer.cs">
+      <DependentUpon>RxRange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SaveMess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SaveMess.Designer.cs">
+      <DependentUpon>SaveMess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SavePicture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SavePicture.Designer.cs">
+      <DependentUpon>SavePicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingFreq.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingFreq.Designer.cs">
+      <DependentUpon>SettingFreq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SingleSweepDataResult.cs" />
+    <Compile Include="SleepTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SleepTime.Designer.cs">
+      <DependentUpon>SleepTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StaticMethod.cs" />
+    <Compile Include="Sweep.cs" />
+    <Compile Include="TimesSweep.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimesSweep.Designer.cs">
+      <DependentUpon>TimesSweep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSweepLeft.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimeSweepLeft.Designer.cs">
+      <DependentUpon>TimeSweepLeft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSweepMid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimeSweepMid.Designer.cs">
+      <DependentUpon>TimeSweepMid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSweepRight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimeSweepRight.Designer.cs">
+      <DependentUpon>TimeSweepRight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TouchPad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TouchPad.Designer.cs">
+      <DependentUpon>TouchPad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tx.Designer.cs">
+      <DependentUpon>Tx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OffsetPass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OffsetPass.Designer.cs">
+      <DependentUpon>OffsetPass.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ChangePass.resx">
+      <DependentUpon>ChangePass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Debug.resx">
+      <DependentUpon>Debug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DebugPoi.resx">
+      <DependentUpon>DebugPoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileName.resx">
+      <DependentUpon>FileName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FreqSweepLeft.resx">
+      <DependentUpon>FreqSweepLeft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FreqSweepMid.resx">
+      <DependentUpon>FreqSweepMid.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEnableSwitch.resx">
+      <DependentUpon>FrmEnableSwitch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JbComfig.resx">
+      <DependentUpon>JbComfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="J_TestResultForm.resx">
+      <DependentUpon>J_TestResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoopTest.resx">
+      <DependentUpon>LoopTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NPFreqSweepLeft.resx">
+      <DependentUpon>NPFreqSweepLeft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NpJbConfig.resx">
+      <DependentUpon>NpJbConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NPTimeSweepLeft.resx">
+      <DependentUpon>NPTimeSweepLeft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PauseMessage.resx">
+      <DependentUpon>PauseMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PoiFreqSweepLeft.resx">
+      <DependentUpon>PoiFreqSweepLeft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PoiOrder.resx">
+      <DependentUpon>PoiOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PoiTimeSweepLeft.resx">
+      <DependentUpon>PoiTimeSweepLeft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="poi_script.resx">
+      <DependentUpon>poi_script.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PowerProgramBar.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PowerProgramBar1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Rx.resx">
+      <DependentUpon>Rx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RxRange.resx">
+      <DependentUpon>RxRange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaveMess.resx">
+      <DependentUpon>SaveMess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SavePicture.resx">
+      <DependentUpon>SavePicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingFreq.resx">
+      <DependentUpon>SettingFreq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SleepTime.resx">
+      <DependentUpon>SleepTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimesSweep.resx">
+      <DependentUpon>TimesSweep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeSweepLeft.resx">
+      <DependentUpon>TimeSweepLeft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeSweepMid.resx">
+      <DependentUpon>TimeSweepMid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeSweepRight.resx">
+      <DependentUpon>TimeSweepRight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TouchPad.resx">
+      <DependentUpon>TouchPad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tx.resx">
+      <DependentUpon>Tx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OffsetPass.resx">
+      <DependentUpon>OffsetPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down1.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ThumbMiddle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\top1.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_im9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_im7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_im5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_im3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pB_pwron.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pB_pwroff.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\x86\Release\logo.gif" />
+    <Content Include="pim.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
