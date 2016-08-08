@@ -55,6 +55,7 @@
             this.nud_txoffset_7 = new System.Windows.Forms.NumericUpDown();
             this.nud_txoffset_1 = new System.Windows.Forms.NumericUpDown();
             this.txoffset_btn_start_a = new System.Windows.Forms.Button();
+            this.tx_lbl_show_band = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.cb_txoffset_band = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -71,10 +72,6 @@
             this.nud_txoffset_3 = new System.Windows.Forms.NumericUpDown();
             this.nud_txoffset_4 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.groupBox12.SuspendLayout();
             this.groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tx_offset_pb)).BeginInit();
@@ -93,8 +90,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_txoffset_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_txoffset_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_txoffset_4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox12
@@ -186,10 +181,6 @@
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.label3);
-            this.groupBox10.Controls.Add(this.numericUpDown1);
-            this.groupBox10.Controls.Add(this.label4);
-            this.groupBox10.Controls.Add(this.numericUpDown2);
             this.groupBox10.Controls.Add(this.label2);
             this.groupBox10.Controls.Add(this.nud_txoffset_12);
             this.groupBox10.Controls.Add(this.label56);
@@ -207,6 +198,7 @@
             this.groupBox10.Controls.Add(this.nud_txoffset_7);
             this.groupBox10.Controls.Add(this.nud_txoffset_1);
             this.groupBox10.Controls.Add(this.txoffset_btn_start_a);
+            this.groupBox10.Controls.Add(this.tx_lbl_show_band);
             this.groupBox10.Controls.Add(this.label20);
             this.groupBox10.Controls.Add(this.cb_txoffset_band);
             this.groupBox10.Controls.Add(this.label12);
@@ -246,7 +238,6 @@
             this.nud_txoffset_12.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_12.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_12.DecimalPlaces = 2;
-            this.nud_txoffset_12.Enabled = false;
             this.nud_txoffset_12.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_12.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_12.Location = new System.Drawing.Point(186, 364);
@@ -277,7 +268,6 @@
             this.nud_txoffset_10.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_10.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_10.DecimalPlaces = 2;
-            this.nud_txoffset_10.Enabled = false;
             this.nud_txoffset_10.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_10.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_10.Location = new System.Drawing.Point(186, 313);
@@ -297,7 +287,6 @@
             this.nud_txoffset_11.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_11.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_11.DecimalPlaces = 2;
-            this.nud_txoffset_11.Enabled = false;
             this.nud_txoffset_11.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_11.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_11.Location = new System.Drawing.Point(186, 339);
@@ -328,9 +317,9 @@
             // 
             this.txoffset_btn_start_b.BackColor = System.Drawing.Color.White;
             this.txoffset_btn_start_b.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txoffset_btn_start_b.Location = new System.Drawing.Point(172, 518);
+            this.txoffset_btn_start_b.Location = new System.Drawing.Point(172, 499);
             this.txoffset_btn_start_b.Name = "txoffset_btn_start_b";
-            this.txoffset_btn_start_b.Size = new System.Drawing.Size(93, 33);
+            this.txoffset_btn_start_b.Size = new System.Drawing.Size(93, 52);
             this.txoffset_btn_start_b.TabIndex = 181;
             this.txoffset_btn_start_b.Text = "PORT2";
             this.txoffset_btn_start_b.UseVisualStyleBackColor = false;
@@ -341,7 +330,7 @@
             this.label43.BackColor = System.Drawing.Color.Transparent;
             this.label43.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label43.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label43.Location = new System.Drawing.Point(50, 482);
+            this.label43.Location = new System.Drawing.Point(50, 428);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(90, 19);
             this.label43.TabIndex = 180;
@@ -355,9 +344,9 @@
             this.nud_txoffset_pow.DecimalPlaces = 1;
             this.nud_txoffset_pow.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_pow.ForeColor = System.Drawing.Color.White;
-            this.nud_txoffset_pow.Location = new System.Drawing.Point(186, 482);
+            this.nud_txoffset_pow.Location = new System.Drawing.Point(186, 428);
             this.nud_txoffset_pow.Maximum = new decimal(new int[] {
-            47,
+            49,
             0,
             0,
             0});
@@ -394,7 +383,6 @@
             this.nud_txoffset_8.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_8.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_8.DecimalPlaces = 2;
-            this.nud_txoffset_8.Enabled = false;
             this.nud_txoffset_8.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_8.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_8.Location = new System.Drawing.Point(186, 261);
@@ -414,7 +402,6 @@
             this.nud_txoffset_9.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_9.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_9.DecimalPlaces = 2;
-            this.nud_txoffset_9.Enabled = false;
             this.nud_txoffset_9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_9.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_9.Location = new System.Drawing.Point(186, 287);
@@ -458,7 +445,6 @@
             this.nud_txoffset_7.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_7.DecimalPlaces = 2;
-            this.nud_txoffset_7.Enabled = false;
             this.nud_txoffset_7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_7.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_7.Location = new System.Drawing.Point(186, 235);
@@ -478,7 +464,6 @@
             this.nud_txoffset_1.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_1.DecimalPlaces = 2;
-            this.nud_txoffset_1.Enabled = false;
             this.nud_txoffset_1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_1.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_1.Location = new System.Drawing.Point(186, 79);
@@ -497,20 +482,32 @@
             // 
             this.txoffset_btn_start_a.BackColor = System.Drawing.Color.White;
             this.txoffset_btn_start_a.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txoffset_btn_start_a.Location = new System.Drawing.Point(34, 518);
+            this.txoffset_btn_start_a.Location = new System.Drawing.Point(34, 499);
             this.txoffset_btn_start_a.Name = "txoffset_btn_start_a";
-            this.txoffset_btn_start_a.Size = new System.Drawing.Size(93, 33);
+            this.txoffset_btn_start_a.Size = new System.Drawing.Size(93, 52);
             this.txoffset_btn_start_a.TabIndex = 145;
             this.txoffset_btn_start_a.Text = "PORT1";
             this.txoffset_btn_start_a.UseVisualStyleBackColor = false;
             this.txoffset_btn_start_a.Click += new System.EventHandler(this.txoffset_btn_start_a_Click);
+            // 
+            // tx_lbl_show_band
+            // 
+            this.tx_lbl_show_band.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(69)))), ((int)(((byte)(72)))));
+            this.tx_lbl_show_band.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tx_lbl_show_band.ForeColor = System.Drawing.Color.White;
+            this.tx_lbl_show_band.Location = new System.Drawing.Point(6, 457);
+            this.tx_lbl_show_band.Name = "tx_lbl_show_band";
+            this.tx_lbl_show_band.Size = new System.Drawing.Size(286, 30);
+            this.tx_lbl_show_band.TabIndex = 144;
+            this.tx_lbl_show_band.Text = "开始 TX 校准";
+            this.tx_lbl_show_band.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label20
             // 
             this.label20.BackColor = System.Drawing.Color.Transparent;
             this.label20.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label20.Location = new System.Drawing.Point(50, 454);
+            this.label20.Location = new System.Drawing.Point(50, 400);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(90, 19);
             this.label20.TabIndex = 142;
@@ -535,7 +532,7 @@
             "10 移动TD_LTE(E频段)",
             "11 电信TD_LTE_2.3G",
             "12 联通TD_LTE_2.3G"});
-            this.cb_txoffset_band.Location = new System.Drawing.Point(151, 454);
+            this.cb_txoffset_band.Location = new System.Drawing.Point(151, 400);
             this.cb_txoffset_band.Name = "cb_txoffset_band";
             this.cb_txoffset_band.Size = new System.Drawing.Size(134, 21);
             this.cb_txoffset_band.TabIndex = 140;
@@ -558,7 +555,6 @@
             this.nud_txoffset_0.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_0.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_0.DecimalPlaces = 2;
-            this.nud_txoffset_0.Enabled = false;
             this.nud_txoffset_0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_0.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_0.Location = new System.Drawing.Point(186, 53);
@@ -602,7 +598,6 @@
             this.nud_txoffset_5.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_5.DecimalPlaces = 2;
-            this.nud_txoffset_5.Enabled = false;
             this.nud_txoffset_5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_5.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_5.Location = new System.Drawing.Point(186, 183);
@@ -634,7 +629,6 @@
             this.nud_txoffset_6.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_6.DecimalPlaces = 2;
-            this.nud_txoffset_6.Enabled = false;
             this.nud_txoffset_6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_6.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_6.Location = new System.Drawing.Point(186, 209);
@@ -666,7 +660,6 @@
             this.nud_txoffset_2.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_2.DecimalPlaces = 2;
-            this.nud_txoffset_2.Enabled = false;
             this.nud_txoffset_2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_2.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_2.Location = new System.Drawing.Point(186, 105);
@@ -710,7 +703,6 @@
             this.nud_txoffset_3.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_3.DecimalPlaces = 2;
-            this.nud_txoffset_3.Enabled = false;
             this.nud_txoffset_3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_3.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_3.Location = new System.Drawing.Point(187, 131);
@@ -730,7 +722,6 @@
             this.nud_txoffset_4.BackColor = System.Drawing.Color.Black;
             this.nud_txoffset_4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_txoffset_4.DecimalPlaces = 2;
-            this.nud_txoffset_4.Enabled = false;
             this.nud_txoffset_4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_txoffset_4.ForeColor = System.Drawing.Color.White;
             this.nud_txoffset_4.Location = new System.Drawing.Point(186, 157);
@@ -756,68 +747,6 @@
             this.label9.TabIndex = 118;
             this.label9.Text = "设置";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label3.Location = new System.Drawing.Point(46, 414);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 19);
-            this.label3.TabIndex = 191;
-            this.label3.Text = "------";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.BackColor = System.Drawing.Color.Black;
-            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Enabled = false;
-            this.numericUpDown1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.numericUpDown1.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown1.Location = new System.Drawing.Point(187, 414);
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(99, 19);
-            this.numericUpDown1.TabIndex = 190;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label4.Location = new System.Drawing.Point(46, 389);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(127, 19);
-            this.label4.TabIndex = 189;
-            this.label4.Text = "------";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.BackColor = System.Drawing.Color.Black;
-            this.numericUpDown2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown2.DecimalPlaces = 2;
-            this.numericUpDown2.Enabled = false;
-            this.numericUpDown2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.numericUpDown2.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown2.Location = new System.Drawing.Point(187, 389);
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(99, 19);
-            this.numericUpDown2.TabIndex = 188;
-            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Tx
             // 
@@ -851,8 +780,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_txoffset_2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_txoffset_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_txoffset_4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -883,6 +810,7 @@
         private System.Windows.Forms.NumericUpDown nud_txoffset_7;
         private System.Windows.Forms.NumericUpDown nud_txoffset_1;
         private System.Windows.Forms.Button txoffset_btn_start_a;
+        private System.Windows.Forms.Label tx_lbl_show_band;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cb_txoffset_band;
         private System.Windows.Forms.Label label12;
@@ -901,10 +829,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown nud_txoffset_12;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
 
     }
 }

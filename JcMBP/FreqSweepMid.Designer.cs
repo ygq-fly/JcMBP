@@ -41,14 +41,11 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.eng_pB_title = new System.Windows.Forms.Label();
             this.freq_plot = new jcXY2dPlotEx.XY2dPlotEx();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.freq_dgvPim = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fluctuate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label59 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
@@ -59,6 +56,9 @@
             this.time_tb_show_tx2 = new System.Windows.Forms.TextBox();
             this.label64 = new System.Windows.Forms.Label();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
@@ -167,69 +167,6 @@
             this.freq_plot.YShowTitle = false;
             this.freq_plot.YTitleFont = new System.Drawing.Font("宋体", 12F);
             // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "Im_V(dBm)";
-            this.dataGridViewTextBoxColumn7.FillWeight = 105F;
-            this.dataGridViewTextBoxColumn7.HeaderText = "P_im(dBm)";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Im_F(MHz)";
-            this.dataGridViewTextBoxColumn6.FillWeight = 105F;
-            this.dataGridViewTextBoxColumn6.HeaderText = "F_im(MHz)";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "P2(dBm)";
-            this.dataGridViewTextBoxColumn4.FillWeight = 75F;
-            this.dataGridViewTextBoxColumn4.HeaderText = "P2(dBm)";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "F2(MHz)";
-            this.dataGridViewTextBoxColumn5.FillWeight = 75F;
-            this.dataGridViewTextBoxColumn5.HeaderText = "F2(MHz)";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "P1(dBm)";
-            this.dataGridViewTextBoxColumn2.FillWeight = 75F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "P1(dBm)";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "F1(MHz)";
-            this.dataGridViewTextBoxColumn3.FillWeight = 76F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "F1(MHz)";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "NO.";
-            this.dataGridViewTextBoxColumn1.FillWeight = 44F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "N0.";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // freq_dgvPim
             // 
             this.freq_dgvPim.AllowUserToAddRows = false;
@@ -240,6 +177,7 @@
             this.freq_dgvPim.BackgroundColor = System.Drawing.Color.Black;
             this.freq_dgvPim.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_dgvPim.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
@@ -251,11 +189,8 @@
             this.freq_dgvPim.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.freq_dgvPim.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn6,
+            this.Fluctuate,
             this.dataGridViewTextBoxColumn7});
             this.freq_dgvPim.Cursor = System.Windows.Forms.Cursors.Default;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -298,6 +233,42 @@
             this.freq_dgvPim.TabIndex = 152;
             this.freq_dgvPim.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.freq_dgvPim_RowPrePaint);
             this.freq_dgvPim.Scroll += new System.Windows.Forms.ScrollEventHandler(this.freq_dgvPim_Scroll);
+            this.freq_dgvPim.MouseClick += new System.Windows.Forms.MouseEventHandler(this.freq_dgvPim_MouseClick);
+            this.freq_dgvPim.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.freq_dgvPim_MouseDoubleClick);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "NO.";
+            this.dataGridViewTextBoxColumn1.FillWeight = 44F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "N0.";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Peak";
+            this.dataGridViewTextBoxColumn6.FillWeight = 105F;
+            this.dataGridViewTextBoxColumn6.HeaderText = "Peak(dBm)";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Fluctuate
+            // 
+            this.Fluctuate.DataPropertyName = "Fluctuate";
+            this.Fluctuate.HeaderText = "波动(dBm)";
+            this.Fluctuate.Name = "Fluctuate";
+            this.Fluctuate.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "Result";
+            this.dataGridViewTextBoxColumn7.FillWeight = 105F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "结果";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // panel1
             // 
@@ -414,6 +385,9 @@
             // groupBox17
             // 
             this.groupBox17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox17.Controls.Add(this.textBox1);
+            this.groupBox17.Controls.Add(this.label2);
+            this.groupBox17.Controls.Add(this.textBox2);
             this.groupBox17.Controls.Add(this.button1);
             this.groupBox17.Controls.Add(this.label1);
             this.groupBox17.Controls.Add(this.numericUpDown2);
@@ -432,14 +406,60 @@
             this.groupBox17.Controls.Add(this.time_tb_pim_now_dbc);
             this.groupBox17.Location = new System.Drawing.Point(806, 1);
             this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(217, 361);
+            this.groupBox17.Size = new System.Drawing.Size(217, 376);
             this.groupBox17.TabIndex = 161;
             this.groupBox17.TabStop = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.DimGray;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.ForeColor = System.Drawing.Color.White;
+            this.textBox1.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.textBox1.Location = new System.Drawing.Point(87, 164);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ShortcutsEnabled = false;
+            this.textBox1.Size = new System.Drawing.Size(109, 27);
+            this.textBox1.TabIndex = 168;
+            this.textBox1.TabStop = false;
+            this.textBox1.Text = "---";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.label2.Location = new System.Drawing.Point(5, 171);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 17);
+            this.label2.TabIndex = 167;
+            this.label2.Text = "波动(dBm):";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.DimGray;
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox2.ForeColor = System.Drawing.Color.White;
+            this.textBox2.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.textBox2.Location = new System.Drawing.Point(87, 164);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.ShortcutsEnabled = false;
+            this.textBox2.Size = new System.Drawing.Size(109, 27);
+            this.textBox2.TabIndex = 169;
+            this.textBox2.TabStop = false;
+            this.textBox2.Text = "---";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(87, 320);
+            this.button1.Location = new System.Drawing.Point(87, 336);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(86, 29);
             this.button1.TabIndex = 166;
@@ -452,7 +472,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label1.Location = new System.Drawing.Point(3, 329);
+            this.label1.Location = new System.Drawing.Point(3, 345);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 17);
             this.label1.TabIndex = 163;
@@ -466,7 +486,7 @@
             this.numericUpDown2.DecimalPlaces = 1;
             this.numericUpDown2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.numericUpDown2.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown2.Location = new System.Drawing.Point(88, 287);
+            this.numericUpDown2.Location = new System.Drawing.Point(88, 303);
             this.numericUpDown2.Minimum = new decimal(new int[] {
             500,
             0,
@@ -487,7 +507,7 @@
             this.time_tb_pim_now.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_tb_pim_now.ForeColor = System.Drawing.Color.White;
             this.time_tb_pim_now.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.time_tb_pim_now.Location = new System.Drawing.Point(87, 145);
+            this.time_tb_pim_now.Location = new System.Drawing.Point(87, 131);
             this.time_tb_pim_now.Name = "time_tb_pim_now";
             this.time_tb_pim_now.ReadOnly = true;
             this.time_tb_pim_now.ShortcutsEnabled = false;
@@ -502,11 +522,11 @@
             this.label21.BackColor = System.Drawing.Color.Transparent;
             this.label21.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label21.Location = new System.Drawing.Point(6, 152);
+            this.label21.Location = new System.Drawing.Point(6, 138);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(78, 17);
             this.label21.TabIndex = 125;
-            this.label21.Text = "Now(dBm):";
+            this.label21.Text = "平均(dBm):";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label65
@@ -527,7 +547,7 @@
             this.time_tB_valMax.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.time_tB_valMax.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_tB_valMax.ForeColor = System.Drawing.Color.White;
-            this.time_tB_valMax.Location = new System.Drawing.Point(88, 61);
+            this.time_tB_valMax.Location = new System.Drawing.Point(88, 57);
             this.time_tB_valMax.Name = "time_tB_valMax";
             this.time_tB_valMax.ReadOnly = true;
             this.time_tB_valMax.ShortcutsEnabled = false;
@@ -544,7 +564,7 @@
             this.time_tB_valMin.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_tB_valMin.ForeColor = System.Drawing.Color.White;
             this.time_tB_valMin.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.time_tB_valMin.Location = new System.Drawing.Point(88, 103);
+            this.time_tB_valMin.Location = new System.Drawing.Point(88, 94);
             this.time_tB_valMin.Name = "time_tB_valMin";
             this.time_tB_valMin.ReadOnly = true;
             this.time_tB_valMin.ShortcutsEnabled = false;
@@ -560,7 +580,7 @@
             this.time_tb_limit.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.time_tb_limit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_tb_limit.ForeColor = System.Drawing.Color.White;
-            this.time_tb_limit.Location = new System.Drawing.Point(88, 287);
+            this.time_tb_limit.Location = new System.Drawing.Point(88, 303);
             this.time_tb_limit.Name = "time_tb_limit";
             this.time_tb_limit.Size = new System.Drawing.Size(72, 22);
             this.time_tb_limit.TabIndex = 110;
@@ -574,7 +594,7 @@
             this.label66.BackColor = System.Drawing.Color.Transparent;
             this.label66.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label66.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label66.Location = new System.Drawing.Point(9, 292);
+            this.label66.Location = new System.Drawing.Point(9, 308);
             this.label66.Name = "label66";
             this.label66.Size = new System.Drawing.Size(73, 16);
             this.label66.TabIndex = 117;
@@ -588,7 +608,7 @@
             this.time_tB_valMin_dbc.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_tB_valMin_dbc.ForeColor = System.Drawing.Color.White;
             this.time_tB_valMin_dbc.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.time_tB_valMin_dbc.Location = new System.Drawing.Point(88, 103);
+            this.time_tB_valMin_dbc.Location = new System.Drawing.Point(88, 94);
             this.time_tB_valMin_dbc.Name = "time_tB_valMin_dbc";
             this.time_tB_valMin_dbc.ReadOnly = true;
             this.time_tB_valMin_dbc.ShortcutsEnabled = false;
@@ -604,7 +624,7 @@
             this.label67.BackColor = System.Drawing.Color.Transparent;
             this.label67.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label67.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label67.Location = new System.Drawing.Point(6, 111);
+            this.label67.Location = new System.Drawing.Point(6, 102);
             this.label67.Name = "label67";
             this.label67.Size = new System.Drawing.Size(78, 17);
             this.label67.TabIndex = 115;
@@ -617,7 +637,7 @@
             this.time_tB_valMax_dbc.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.time_tB_valMax_dbc.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_tB_valMax_dbc.ForeColor = System.Drawing.Color.White;
-            this.time_tB_valMax_dbc.Location = new System.Drawing.Point(88, 61);
+            this.time_tB_valMax_dbc.Location = new System.Drawing.Point(88, 57);
             this.time_tB_valMax_dbc.Name = "time_tB_valMax_dbc";
             this.time_tB_valMax_dbc.ReadOnly = true;
             this.time_tB_valMax_dbc.ShortcutsEnabled = false;
@@ -633,7 +653,7 @@
             this.label68.BackColor = System.Drawing.Color.Transparent;
             this.label68.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label68.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label68.Location = new System.Drawing.Point(7, 68);
+            this.label68.Location = new System.Drawing.Point(7, 64);
             this.label68.Name = "label68";
             this.label68.Size = new System.Drawing.Size(78, 17);
             this.label68.TabIndex = 113;
@@ -645,7 +665,7 @@
             this.time_lbl_limitResulte.BackColor = System.Drawing.Color.DimGray;
             this.time_lbl_limitResulte.Font = new System.Drawing.Font("微软雅黑", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_lbl_limitResulte.ForeColor = System.Drawing.Color.Lime;
-            this.time_lbl_limitResulte.Location = new System.Drawing.Point(6, 185);
+            this.time_lbl_limitResulte.Location = new System.Drawing.Point(6, 201);
             this.time_lbl_limitResulte.Name = "time_lbl_limitResulte";
             this.time_lbl_limitResulte.Size = new System.Drawing.Size(196, 83);
             this.time_lbl_limitResulte.TabIndex = 112;
@@ -659,7 +679,7 @@
             this.time_tb_pim_now_dbc.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_tb_pim_now_dbc.ForeColor = System.Drawing.Color.White;
             this.time_tb_pim_now_dbc.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.time_tb_pim_now_dbc.Location = new System.Drawing.Point(87, 145);
+            this.time_tb_pim_now_dbc.Location = new System.Drawing.Point(87, 131);
             this.time_tb_pim_now_dbc.Name = "time_tb_pim_now_dbc";
             this.time_tb_pim_now_dbc.ReadOnly = true;
             this.time_tb_pim_now_dbc.ShortcutsEnabled = false;
@@ -794,9 +814,9 @@
             this.groupBox1.Controls.Add(this.time_tb_rxPass);
             this.groupBox1.Controls.Add(this.time_tb_show_tx1);
             this.groupBox1.Controls.Add(this.time_tb_show_tx2);
-            this.groupBox1.Location = new System.Drawing.Point(806, 368);
+            this.groupBox1.Location = new System.Drawing.Point(806, 383);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(217, 249);
+            this.groupBox1.Size = new System.Drawing.Size(217, 234);
             this.groupBox1.TabIndex = 164;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
@@ -859,13 +879,6 @@
         private System.Windows.Forms.Label eng_pB_title;
         private System.Windows.Forms.GroupBox groupBox2;
         private jcXY2dPlotEx.XY2dPlotEx freq_plot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridView freq_dgvPim;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label59;
@@ -900,6 +913,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox time_tb_pim_now_dbc;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fluctuate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
 
 
     }

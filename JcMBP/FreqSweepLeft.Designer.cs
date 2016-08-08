@@ -59,6 +59,8 @@
             this.label45 = new System.Windows.Forms.Label();
             this.time_pb_pwr_show1 = new System.Windows.Forms.PictureBox();
             this.time_pb_pwr_show2 = new System.Windows.Forms.PictureBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.label76 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_fstart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_fstop1)).BeginInit();
@@ -75,6 +77,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.button9);
+            this.groupBox1.Controls.Add(this.label76);
             this.groupBox1.Controls.Add(this.freq_nud_fstart2);
             this.groupBox1.Controls.Add(this.ctrl_lbl_fstop2);
             this.groupBox1.Controls.Add(this.freq_nud_fstop1);
@@ -98,10 +102,9 @@
             this.groupBox1.Controls.Add(this.freq_nud_pow1);
             this.groupBox1.Location = new System.Drawing.Point(3, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(217, 393);
+            this.groupBox1.Size = new System.Drawing.Size(217, 408);
             this.groupBox1.TabIndex = 127;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // freq_nud_fstart2
             // 
@@ -290,6 +293,7 @@
             this.freq_cb_step.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.freq_cb_step.FormattingEnabled = true;
             this.freq_cb_step.Items.AddRange(new object[] {
+            "0.5m",
             "1m",
             "2m",
             "3m",
@@ -437,7 +441,7 @@
             this.freq_nud_pow2.ForeColor = System.Drawing.Color.White;
             this.freq_nud_pow2.Location = new System.Drawing.Point(123, 222);
             this.freq_nud_pow2.Maximum = new decimal(new int[] {
-            60,
+            49,
             0,
             0,
             0});
@@ -467,7 +471,7 @@
             this.freq_nud_pow1.ForeColor = System.Drawing.Color.White;
             this.freq_nud_pow1.Location = new System.Drawing.Point(124, 121);
             this.freq_nud_pow1.Maximum = new decimal(new int[] {
-            60,
+            49,
             0,
             0,
             0});
@@ -497,9 +501,9 @@
             this.groupBox11.Controls.Add(this.label45);
             this.groupBox11.Controls.Add(this.time_pb_pwr_show1);
             this.groupBox11.Controls.Add(this.time_pb_pwr_show2);
-            this.groupBox11.Location = new System.Drawing.Point(3, 399);
+            this.groupBox11.Location = new System.Drawing.Point(3, 408);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(217, 220);
+            this.groupBox11.Size = new System.Drawing.Size(217, 211);
             this.groupBox11.TabIndex = 140;
             this.groupBox11.TabStop = false;
             // 
@@ -507,7 +511,7 @@
             // 
             this.time_btn_stop.BackColor = System.Drawing.Color.White;
             this.time_btn_stop.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_btn_stop.Location = new System.Drawing.Point(56, 168);
+            this.time_btn_stop.Location = new System.Drawing.Point(56, 162);
             this.time_btn_stop.Name = "time_btn_stop";
             this.time_btn_stop.Size = new System.Drawing.Size(93, 43);
             this.time_btn_stop.TabIndex = 172;
@@ -519,19 +523,20 @@
             // 
             this.time_check_vco.AutoSize = true;
             this.time_check_vco.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_check_vco.Location = new System.Drawing.Point(36, 63);
+            this.time_check_vco.Location = new System.Drawing.Point(36, 65);
             this.time_check_vco.Name = "time_check_vco";
             this.time_check_vco.Size = new System.Drawing.Size(148, 21);
             this.time_check_vco.TabIndex = 171;
             this.time_check_vco.Text = "启用VCO, RX链路检测";
             this.time_check_vco.UseVisualStyleBackColor = true;
+            this.time_check_vco.Visible = false;
             this.time_check_vco.CheckedChanged += new System.EventHandler(this.time_check_vco_CheckedChanged);
             // 
             // time_btn_start_b
             // 
             this.time_btn_start_b.BackColor = System.Drawing.Color.White;
             this.time_btn_start_b.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_btn_start_b.Location = new System.Drawing.Point(105, 100);
+            this.time_btn_start_b.Location = new System.Drawing.Point(105, 94);
             this.time_btn_start_b.Name = "time_btn_start_b";
             this.time_btn_start_b.Size = new System.Drawing.Size(93, 62);
             this.time_btn_start_b.TabIndex = 170;
@@ -543,7 +548,7 @@
             // 
             this.time_btn_start_a.BackColor = System.Drawing.Color.White;
             this.time_btn_start_a.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_btn_start_a.Location = new System.Drawing.Point(7, 100);
+            this.time_btn_start_a.Location = new System.Drawing.Point(7, 94);
             this.time_btn_start_a.Name = "time_btn_start_a";
             this.time_btn_start_a.Size = new System.Drawing.Size(93, 62);
             this.time_btn_start_a.TabIndex = 169;
@@ -583,6 +588,29 @@
             this.time_pb_pwr_show2.TabIndex = 126;
             this.time_pb_pwr_show2.TabStop = false;
             // 
+            // button9
+            // 
+            this.button9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button9.Location = new System.Drawing.Point(75, 376);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(136, 23);
+            this.button9.TabIndex = 164;
+            this.button9.Text = "Rx接收范围";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // label76
+            // 
+            this.label76.BackColor = System.Drawing.Color.Transparent;
+            this.label76.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label76.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.label76.Location = new System.Drawing.Point(10, 377);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(63, 22);
+            this.label76.TabIndex = 163;
+            this.label76.Text = "接收范围:";
+            this.label76.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // FreqSweepLeft
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -594,7 +622,6 @@
             this.Name = "FreqSweepLeft";
             this.Text = "FreqSweepLeft";
             this.Load += new System.EventHandler(this.FreqSweepLeft_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FreqSweepLeft_KeyDown);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_fstart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_fstop1)).EndInit();
@@ -643,5 +670,7 @@
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.PictureBox time_pb_pwr_show1;
         private System.Windows.Forms.PictureBox time_pb_pwr_show2;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Label label76;
     }
 }

@@ -52,7 +52,6 @@
     <ApplicationIcon>pim.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevComponents.DotNetBar2, Version=12.4.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="itextsharp, Version=5.1.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\x86\Release\itextsharp.dll</HintPath>
@@ -61,7 +60,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\x86\Debug\jcXY2dPlotEx.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CompactFramework.Build.Tasks" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=10.0.4504.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\x86\Release\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Design" />
     <Reference Include="System.Data" />
@@ -69,14 +72,11 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VsWebSite.Interop, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangePass.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChangePass.Designer.cs">
-      <DependentUpon>ChangePass.cs</DependentUpon>
-    </Compile>
     <Compile Include="ClsDataDefine.cs" />
     <Compile Include="ClsDataUserParam.cs" />
     <Compile Include="ClsJcPimDll.cs" />
@@ -129,6 +129,24 @@
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="GainJbdata.cs" />
+    <Compile Include="GRMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GRMessageForm.Designer.cs">
+      <DependentUpon>GRMessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GRMid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GRMid.Designer.cs">
+      <DependentUpon>GRMid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GRSaveWin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GRSaveWin.Designer.cs">
+      <DependentUpon>GRSaveWin.cs</DependentUpon>
+    </Compile>
     <Compile Include="JbComfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +167,12 @@
     </Compile>
     <Compile Include="LoopTest.Designer.cs">
       <DependentUpon>LoopTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Message.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Message.Designer.cs">
+      <DependentUpon>Message.cs</DependentUpon>
     </Compile>
     <Compile Include="NPFreqSweepLeft.cs">
       <SubType>Form</SubType>
@@ -222,12 +246,6 @@
     <Compile Include="RxRange.Designer.cs">
       <DependentUpon>RxRange.cs</DependentUpon>
     </Compile>
-    <Compile Include="SaveMess.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SaveMess.Designer.cs">
-      <DependentUpon>SaveMess.cs</DependentUpon>
-    </Compile>
     <Compile Include="SavePicture.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,6 +259,12 @@
       <DependentUpon>SettingFreq.cs</DependentUpon>
     </Compile>
     <Compile Include="SingleSweepDataResult.cs" />
+    <Compile Include="SingleTestData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SingleTestData.Designer.cs">
+      <DependentUpon>SingleTestData.cs</DependentUpon>
+    </Compile>
     <Compile Include="SleepTime.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -249,6 +273,13 @@
     </Compile>
     <Compile Include="StaticMethod.cs" />
     <Compile Include="Sweep.cs" />
+    <Compile Include="SweepTimes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SweepTimes.Designer.cs">
+      <DependentUpon>SweepTimes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestData.cs" />
     <Compile Include="TimesSweep.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -285,15 +316,6 @@
     <Compile Include="Tx.Designer.cs">
       <DependentUpon>Tx.cs</DependentUpon>
     </Compile>
-    <Compile Include="OffsetPass.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OffsetPass.Designer.cs">
-      <DependentUpon>OffsetPass.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="ChangePass.resx">
-      <DependentUpon>ChangePass.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Debug.resx">
       <DependentUpon>Debug.cs</DependentUpon>
     </EmbeddedResource>
@@ -316,6 +338,15 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GRMessageForm.resx">
+      <DependentUpon>GRMessageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GRMid.resx">
+      <DependentUpon>GRMid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GRSaveWin.resx">
+      <DependentUpon>GRSaveWin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="JbComfig.resx">
       <DependentUpon>JbComfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -324,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoopTest.resx">
       <DependentUpon>LoopTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Message.resx">
+      <DependentUpon>Message.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NPFreqSweepLeft.resx">
       <DependentUpon>NPFreqSweepLeft.cs</DependentUpon>
@@ -369,17 +403,20 @@
     <EmbeddedResource Include="RxRange.resx">
       <DependentUpon>RxRange.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SaveMess.resx">
-      <DependentUpon>SaveMess.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SavePicture.resx">
       <DependentUpon>SavePicture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingFreq.resx">
       <DependentUpon>SettingFreq.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SingleTestData.resx">
+      <DependentUpon>SingleTestData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SleepTime.resx">
       <DependentUpon>SleepTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SweepTimes.resx">
+      <DependentUpon>SweepTimes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TimesSweep.resx">
       <DependentUpon>TimesSweep.cs</DependentUpon>
@@ -398,9 +435,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Tx.resx">
       <DependentUpon>Tx.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OffsetPass.resx">
-      <DependentUpon>OffsetPass.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
@@ -463,7 +497,37 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\x86\Release\logo.gif" />
+    <None Include="bin\x86\Release\Band\发射校准.JPG" />
     <Content Include="pim.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADODB">
+      <Guid>{B691E011-1797-432E-907A-4D8C69339129}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="ADOMD">
+      <Guid>{22813728-8BD3-11D0-B4EF-00A0C9138CA4}</Guid>
+      <VersionMajor>6</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -28,13 +28,5 @@ namespace JcMBP
         {
             textBox1.Text = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
         }
-
-        private void Save_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                button3_Click(null, null);
-            }
-        }
     }
 }

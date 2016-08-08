@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,15 +27,21 @@ namespace JcMBP
         int dbc_y_e = -123;
        //singleSweepDataResult
        //   List<singleSweepDataResult>  JiaobenSweepDatRult =new 
-        public  DataSweep ds;
+        //public  DataSweep ds;
+
+       public TestData testdata_;
+        int currentSweepCont = 0;
+        int isFirstAdd = 0;
+
         public  List<DataSweep> ds_arr=new List<DataSweep>();
-        Sweep sweep;
+        Sweep sweep=null;
         int getnum = 0;
         float _pim_max = float.MinValue;
         float _pim_min = float.MaxValue;
+        float current_pim_max = float.MinValue;
+        float current_pim_min = float.MaxValue;
         float _pim_limit = -110;
         string type = "0";
-     
         
         FrmMain fm;
         public FreqSweepMid(ClsUpLoad cul,FrmMain fm)
@@ -43,6 +50,15 @@ namespace JcMBP
             this.fm = fm;
             this.cul = cul;
             type = ClsUpLoad._type.ToString();
+
+            //freq_dgvPim.Columns.Clear();
+            //freq_dgvPim.Columns.Add(new DataGridViewColumn());
+            //freq_dgvPim.Columns.Add(new DataGridViewColumn());
+            //freq_dgvPim.Columns.Add(new DataGridViewColumn());
+            //freq_dgvPim.Columns[0].HeaderText = "No.";
+            //freq_dgvPim.Columns[1].HeaderText = "Peak";
+            //freq_dgvPim.Columns[2].HeaderText = "Result";
+            //freq_dgvPim.Columns[0].Width = 100;
         }
 
         public FreqSweepMid()
@@ -80,7 +96,7 @@ namespace JcMBP
         private void FreqSweepMid_Load(object sender, EventArgs e)
         {
             isLoad = true;
-            ds = new DataSweep();                   
+            //ds = new DataSweep();                   
             if (ClsUpLoad.sm == SweepMode.Hw)
                 form = new FreqSweepLeft(cul,this);
             else if (ClsUpLoad.sm == SweepMode.Poi)
@@ -158,14 +174,14 @@ namespace JcMBP
         {
             try
             {
-                
-                ds.limit=_pim_limit= float.Parse(numericUpDown2.Value.ToString());
+
+                testdata_.limit = _pim_limit = float.Parse(numericUpDown2.Value.ToString());
               
                 fm.Limit = Convert.ToSingle(numericUpDown2.Value.ToString());
                
             }
             catch { }
-            Main_SetLimit(ds.limit);
+            Main_SetLimit(_pim_limit);
         }
 
         /// <summary>
@@ -218,7 +234,6 @@ namespace JcMBP
                {
 
                    this.time_tb_rxPass.Text = "PASS";
-                   this.time_tb_rxPass.ForeColor = Color.Green;
                }
                else
                {
@@ -239,7 +254,7 @@ namespace JcMBP
         /// </summary>
         /// <param name="s"></param>
         /// <param name="sen_tx1"></param>
-        void Tx1Hand(int s, ref double sen_tx1, bool istrue)//ture 假测量值，false 真测量值
+        void Tx1Hand(int s, ref double sen_tx1)
         {
                if (s <= -10000&&ClsUpLoad._checkPow)
                {
@@ -260,19 +275,9 @@ namespace JcMBP
                }
                else
                {
-                   if (istrue)
-                   {
-                       Random rd = new Random();
-                       float val = rd.Next(1, 4) / 10f;
-                       sen_tx1 = ds.pow1+val+ds.off1;
-                       //MessageBox.Show("pow1=" + ds.pow1.ToString());
-                   }
-                   else
-                       sen_tx1 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX1);//tx1显示功率
-                   
+                   sen_tx1 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX1);//tx1显示功率
                    double r = sen_tx1;
-
-                   ds.sen_tx1 = r;
+                   testdata_.pimDate[currentSweepCont].sen_tx1 = Convert.ToSingle(r);
                    this.Invoke(new ThreadStart(delegate
                     {
                         this.time_tb_show_tx1.Text = r.ToString("0.00");//显示功率    
@@ -281,7 +286,7 @@ namespace JcMBP
         }
 
         //tx2检测
-        void Tx2Hand(int s, ref double sen_tx2,bool istrue)//ture 假测量值，false 真测量值
+        void Tx2Hand(int s, ref double sen_tx2)
         {
                if (s <= -10000&&ClsUpLoad._checkPow)
                {
@@ -303,16 +308,9 @@ namespace JcMBP
                }
                else
                {
-                   if (istrue)
-                   {
-                       Random rd = new Random();
-                       float val = rd.Next(1, 4)/10f;
-                       sen_tx2 = ds.pow2+val+ds.off2;
-                   }
-                   else
-                       sen_tx2 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX2);//读取tx2显示功率
+                   sen_tx2 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX2);//读取tx2显示功率
                    double r = sen_tx2;
-                   ds.sen_tx2 = r;
+                   testdata_.pimDate[currentSweepCont].sen_tx2 = Convert.ToSingle(r);
                    this.Invoke(new ThreadStart(delegate
            {
                this.time_tb_show_tx2.Text = r.ToString("0.00");//设置显示功率text
@@ -324,147 +322,193 @@ namespace JcMBP
         /// 扫描数据更新
         /// </summary>
         /// <param name="ds"></param>
-        void SweepControl(DataSweep ds)
+        void SweepControl(TestData testdata)
         {
+            float currenty = 0;
+            int currenttime = testdata.pimDate[currentSweepCont].currentTime;
+            
             this.Invoke(new ThreadStart(delegate
            {
-               FrmMain.isjb = false;
-               float currenty = 0;
-               this.time_tb_show_tx1.Text = ds.sen_tx1.ToString("0.00");
-               this.time_tb_show_tx2.Text = ds.sen_tx2.ToString("0.00");
-               if (ds.sxy.x <= ds.MaxRx && ds.sxy.x >= ds.MinRx)
-               {
-                   time_tb_pim_now.Text = ds.sxy.y.ToString("0.0");////控件改变text显示互调当前值
-                   time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString("0.0");
-                   currenty = (float)ds.sxy.y;
-               }
-               else
-               {
-                       ds.sxy.y = -200;
-                       currenty = (float)ds.sxy.y;
-               }
+               int length = testdata.pimDate[currentSweepCont].pimFreq.Count-1;//更具存入的互调值的数组的长度来计算当前的点 
+               this.time_tb_show_tx1.Text = testdata.pimDate[currentSweepCont].sen_tx1.ToString("0.00");//控件显示tx1功率
+               this.time_tb_show_tx2.Text = testdata.pimDate[currentSweepCont].sen_tx2.ToString("0.00");//控件显示tx2功率
+
+               //if (testdata.pimDate[currentSweepCont].pimFreq[length] <= testdata.rxDate[currentSweepCont].currentRxe &&
+               //    testdata.pimDate[currentSweepCont].pimFreq[length] >= testdata.rxDate[currentSweepCont].currentRxs)
+               //{
+                
+                   currenty = testdata.pimDate[currentSweepCont].pimVal_dbm[length];
+                 
+               //}
+               //else
+               //{
+               //    testdata.pimDate[currentSweepCont].pimVal_dbm[length] = -200;
+               //    currenty = -200;
+               //}
               
                //if (fm.isdBm)
 
                 
                //else
                //    currenty = (float)ds.sxy.y - 43;
-               if (currenty > _pim_max&&ds.sxy.x <= ds.MaxRx && ds.sxy.x >= ds.MinRx)
+               if (currenty > _pim_max)
                {
                    _pim_max = currenty;//设置pim最大值
                    time_tB_valMax.Text = _pim_max.ToString("0.0");//控件改变text显示互调最大值
-                   time_tB_valMax_dbc.Text = (_pim_max - ds.pow1 ).ToString("0.0");
-                   ds.sxy.max = _pim_max;
+                   time_tB_valMax_dbc.Text = (_pim_max - testdata.tx1Date[currentSweepCont].pow).ToString("0.0");
+                   if(fm.isdBm)
+                   textBox1.Text = (_pim_max  - _pim_limit).ToString("0.0");
+                   else
+                    textBox1.Text = (_pim_max - testdata.tx1Date[currentSweepCont].pow - _pim_limit).ToString("0.0");
+
                }
-               if (currenty < _pim_min && ds.sxy.x <= ds.MaxRx && ds.sxy.x >= ds.MinRx)
+
+               if (currenty > current_pim_max )
                {
-                   _pim_min = currenty;//设置pim最小值
-                   time_tB_valMin.Text = _pim_min.ToString("0.0");//控件改变text显示互调最小值
-                   time_tB_valMin_dbc.Text = (_pim_min - ds.pow1).ToString("0.0");
+                    current_pim_max = currenty;//设置pim最大值
+                   if (testdata.surFaceData_dbm.Rows.Count >= currentSweepCont + 1)
+                   {
+                       DataRow dt = testdata.surFaceData_dbm.Rows[currentSweepCont];
+                       DataRow dtc = testdata.surFaceData_dbc.Rows[currentSweepCont];
+                       dt[1] = current_pim_max.ToString("0.0");
+                       dtc[1] = (current_pim_max - (float)FreqSweepLeft.st_pow).ToString("0.0");
+                       testdata.pimDate[currentSweepCont].currentpimMax = current_pim_max;
+                       testdata.pimDate[currentSweepCont].currentpimMax_dbc = current_pim_max - (float)FreqSweepLeft.st_pow;
+                      
+                   }
                }
+
+               if (currenty < current_pim_min)
+               {
+                   current_pim_min = currenty;//设置pim最大值
+                   time_tB_valMin.Text = current_pim_min.ToString("0.0");//控件改变text显示互调最大值
+                   time_tB_valMin_dbc.Text = (current_pim_min - testdata.tx1Date[currentSweepCont].pow).ToString("0.0");
+
+               }
+
+               //if (current_pim_max < current_pim_min )
+               //{
+               //    current_pim_min = current_pim_max;//设置pim最小值
+               //    time_tB_valMin.Text = current_pim_min.ToString("0.0");//控件改变text显示互调最小值
+               //    time_tB_valMin_dbc.Text = (current_pim_min - (float)FreqSweepLeft.st_pow).ToString("0.0");
+               //}
                if (fm.isdBm)
                {
-                   if (currenty > _pim_limit&&currenty!=-200)
+                   if (currenty > _pim_limit)
                    {
                        time_lbl_limitResulte.Text = "FAIL";//互调值大于limit改变控件text
                        time_lbl_limitResulte.ForeColor = Color.Red;
+                       if (testdata.surFaceData_dbm.Rows.Count >= currentSweepCont+1)
+                       {
+                           DataRow dt = testdata.surFaceData_dbm.Rows[currentSweepCont];
+                           DataRow dtc = testdata.surFaceData_dbc.Rows[currentSweepCont];
+                           dt[3] = "FAIL";
+                           dtc[3] = "FAIL";
+                       }
                    }
                }
                else
                {
-                   if (currenty - 43 > _pim_limit && currenty != -243)
+                   if (currenty - (float)FreqSweepLeft.st_pow > _pim_limit )
                    {
                        time_lbl_limitResulte.Text = "FAIL";//互调值大于limit改变控件text
                        time_lbl_limitResulte.ForeColor = Color.Red;
+                       if (testdata.surFaceData_dbm.Rows.Count >= currentSweepCont+1)
+                       {
+                           DataRow dt = testdata.surFaceData_dbm.Rows[currentSweepCont];
+                           DataRow dtc = testdata.surFaceData_dbc.Rows[currentSweepCont];
+                           dt[3] = "FAIL";
+                           dtc[3] = "FAIL";
+                       }
                    }
                }
-             
-               //double y_start = -160;
-               //double y_end = -60;
-               //freq_plot.SetYStartStop(y_start, y_end);
-               PointF pf = new PointF(ds.sxy.x, ds.sxy.y);
-               PointF pfc = new PointF(ds.sxy.x, ds.sxy.y - (float)ds.pow1);
-               ChangeY(ds.sxy.y);
-               this.freq_plot.Add(new PointF[1] { pf }, ds.sxy.currentPlot, ds.sxy.current);//坐标控件添加点
-               this.freq_plot.Add(new PointF[1] { pfc }, ds.sxy.currentPlot + 4, ds.sxy.current);//坐标控件添加点
+
+               int freqlength = testdata.pimDate[currentSweepCont].pimFreq.Count;
+               PointF pf = new PointF(testdata.pimDate[currentSweepCont].pimFreq[freqlength-1], testdata.pimDate[currentSweepCont].pimVal_dbm[freqlength-1]);
+               PointF pfc = new PointF(testdata.pimDate[currentSweepCont].pimFreq[freqlength-1], testdata.pimDate[currentSweepCont].pimVal_dbc[freqlength-1]);
+               ChangeY(testdata.pimDate[currentSweepCont].pimVal_dbm[freqlength-1]);
+               this.freq_plot.Add(new PointF[1] { pf }, testdata.pimDate[currentSweepCont].currentPort, length+1);//坐标控件添加点
+               this.freq_plot.Add(new PointF[1] { pfc }, testdata.pimDate[currentSweepCont].currentPort + 4, length + 1);//坐标控件添加点
                this.freq_plot.MajorLineWidth = this.freq_plot.MajorLineWidth;
-               OfftenMethod.ToNewRows(ds.dtm, ds.sxy.currentCount,
-                         (float)ds.sxy.f1, (float)ds.sen_tx1,
-                         (float)ds.sxy.f2, (float)ds.sen_tx2,
-                         ds.sxy.x, ds.sxy.y);//添加数据到表格
-               OfftenMethod.ToNewRows(ds.dtm_c, ds.sxy.currentCount,
-                         (float)ds.sxy.f1, (float)ds.sen_tx1,
-                         (float)ds.sxy.f2, (float)ds.sen_tx2,
-                         ds.sxy.x, ds.sxy.y - (float)ds.pow1);//添加数据到表格
-               freq_dgvPim.FirstDisplayedScrollingRowIndex = freq_dgvPim.Rows.Count- 1;//显示当前行
+
+               int m = length + 1;
+
+               if (isFirstAdd==0)
+               {
+                   isFirstAdd++;
+                   OfftenMethod.ToNewRows(testdata.surFaceData_dbm, currentSweepCont+1,
+                                               currenty,"--", time_lbl_limitResulte.Text);//添加数据到表格
+                   OfftenMethod.ToNewRows(testdata.surFaceData_dbc, currentSweepCont+1,
+                                            currenty - (float)FreqSweepLeft.st_pow,"--", time_lbl_limitResulte.Text);//添加数据到表格
+                   testdata.pimDate[currentSweepCont].currentpimMax = _pim_max;
+                   testdata.pimDate[currentSweepCont].currentpimMax_dbc = _pim_max - (float)FreqSweepLeft.st_pow;
+
+               }
+               OfftenMethod.ToNewRows(testdata.pimDate[currentSweepCont].dt_dbm, m, testdata.pimDate[currentSweepCont].currentTestF1,
+                                   testdata.pimDate[currentSweepCont].sen_tx1, testdata.pimDate[currentSweepCont].currentTestF2, testdata.pimDate[currentSweepCont].sen_tx1,
+                                    testdata.pimDate[currentSweepCont].pimFreq[m - 1], testdata.pimDate[currentSweepCont].pimVal_dbm[m - 1]);//添加数据到表格
+               OfftenMethod.ToNewRows(testdata.pimDate[currentSweepCont].dt_dbc, m, testdata.pimDate[currentSweepCont].currentTestF1,
+                                 testdata.pimDate[currentSweepCont].sen_tx1, testdata.pimDate[currentSweepCont].currentTestF2, testdata.pimDate[currentSweepCont].sen_tx1,
+                                  testdata.pimDate[currentSweepCont].pimFreq[m - 1], testdata.pimDate[currentSweepCont].pimVal_dbc[m - 1]);//添加数据到表
+               if (freq_dgvPim.Rows.Count >= 1)
+               {
+                   freq_dgvPim.FirstDisplayedScrollingRowIndex = freq_dgvPim.Rows.Count - 1;//显示当前行
+                   freq_dgvPim.Rows[freq_dgvPim.Rows.Count - 1].Selected = true;
+               }
                CreatScrollbar();
            }));
         }
 
         void ChangeY(float y)
         {
-           //if (y == -200)
-           //     return;
-           // if (y > ds.dbm_y_e)
-           // {
-           //     ds.dbm_y_e = (int)y + 10;
-           //     ds.dbc_y_e = ds.dbm_y_e - 43;
-           // }
-           // if (y < ds.dbm_y)
-           // {
-           //     ds.dbm_y = (int)y - 10;
-           //     ds.dbc_y = ds.dbm_y - 43;
-           // }
-           // if (fm.isdBm)
-           //     freq_plot.SetYStartStop(ds.dbm_y, ds.dbm_y_e);
-           // else
-           //     freq_plot.SetYStartStop(ds.dbc_y, ds.dbc_y_e);
+
             if (y == -200)
                 return;
-            if (y > ds.dbm_y_e)
+            if (y > testdata_.dbm_y_e)
             {
-                ds.dbm_y_e = (int)y + 10;
-                ds.dbc_y_e = ds.dbm_y_e - 43;
+                testdata_.dbm_y_e = (int)y + 10;
+                testdata_.dbc_y_e = testdata_.dbm_y_e - (float)FreqSweepLeft.st_pow;
             }
-            if (y < ds.dbm_y)
+            if (y < testdata_.dbm_y)
             {
-                ds.dbm_y = (int)y - 10;
-                ds.dbc_y = ds.dbm_y - 43;
-            }
-            if (fm.isdBm)
-                freq_plot.SetYStartStop(ds.dbm_y, ds.dbm_y_e);
-            else
-                freq_plot.SetYStartStop(ds.dbc_y, ds.dbc_y_e);
-        }
-        void ChangeY_j(float y)
-        {
-            if (y == -200)
-                return;
-            if (y > ds.dbm_y_e)
-            {
-                ds.dbm_y_e = (int)y + 10;
-                ds.dbc_y_e = ds.dbm_y_e - 43;
-            }
-            if (y < ds.dbm_y)
-            {
-                ds.dbm_y = (int)y - 10;
-                ds.dbc_y = ds.dbm_y - 43;
+                testdata_.dbm_y = (int)y - 10;
+                testdata_.dbc_y = testdata_.dbm_y - (float)FreqSweepLeft.st_pow;
             }
             if (fm.isdBm)
-                freq_plot.SetYStartStop(ds.dbm_y, ds.dbm_y_e);
+                freq_plot.SetYStartStop(testdata_.dbm_y, testdata_.dbm_y_e);
             else
-                freq_plot.SetYStartStop(ds.dbc_y, ds.dbc_y_e);
+                freq_plot.SetYStartStop(testdata_.dbc_y, testdata_.dbc_y_e);
         }
+        //void ChangeY_j(float y)
+        //{
+        //    if (y == -200)
+        //        return;
+        //    if (y > ds.dbm_y_e)
+        //    {
+        //        ds.dbm_y_e = (int)y + 10;
+        //        ds.dbc_y_e = ds.dbm_y_e - 43;
+        //    }
+        //    if (y < ds.dbm_y)
+        //    {
+        //        ds.dbm_y = (int)y - 10;
+        //        ds.dbc_y = ds.dbm_y - 43;
+        //    }
+        //    if (fm.isdBm)
+        //        freq_plot.SetYStartStop(ds.dbm_y, ds.dbm_y_e);
+        //    else
+        //        freq_plot.SetYStartStop(ds.dbc_y, ds.dbc_y_e);
+        //}
 
         /// <summary>
         /// 脚本扫描数据更新
         /// </summary>
         /// <param name="ds"></param>
+        /// 
         void SweepControl_j(DataSweep ds)
         {
             this.Invoke(new ThreadStart(delegate
             {
-                FrmMain.isjb = true;
+
                 this.time_tb_show_tx1.Text = ds.sen_tx1.ToString("0.0");
                 this.time_tb_show_tx2.Text = ds.sen_tx2.ToString("0.0");
                 //time_tb_pim_now.Text = ds.sxy.y.ToString();////控件改变text显示互调当前值
@@ -477,7 +521,7 @@ namespace JcMBP
                     if (ds.sxy.x <= ds.MaxRx && ds.sxy.x >= ds.MinRx)
                     {
                         time_tb_pim_now.Text = ds.sxy.y.ToString("0.0");////控件改变text显示互调当前值
-                        time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString("0.0");
+                        time_tb_pim_now_dbc.Text = (ds.sxy.y - (float)FreqSweepLeft.st_pow).ToString("0.0");
                         currenty = (float)ds.sxy.y;
                     }
                     else
@@ -491,14 +535,14 @@ namespace JcMBP
                     _pim_max = currenty;//设置pim最大值
                     ds.sxy.max = _pim_max;
                     time_tB_valMax.Text = _pim_max.ToString();//控件改变text显示互调最大值
-                    time_tB_valMax_dbc.Text = (_pim_max - ds.pow1).ToString();
+                    time_tB_valMax_dbc.Text = (_pim_max - (float)FreqSweepLeft.st_pow).ToString();
                 }
                     if (currenty < _pim_min && ds.sxy.x <= ds.MaxRx && ds.sxy.x >= ds.MinRx)
                 {
                     _pim_min = currenty;//设置pim最小值
                     ds.sxy.min = _pim_min;
                     time_tB_valMin.Text = _pim_min.ToString();//控件改变text显示互调最小值
-                    time_tB_valMin_dbc.Text = (_pim_min - ds.pow1).ToString();
+                    time_tB_valMin_dbc.Text = (_pim_min - (float)FreqSweepLeft.st_pow).ToString();
                 }
                 if (fm.isdBm)
                 {
@@ -510,7 +554,7 @@ namespace JcMBP
                 }
                 else
                 {
-                    if (currenty - 43 > _pim_limit && currenty != -243)
+                    if (currenty - (float)FreqSweepLeft.st_pow > _pim_limit && currenty != -243)
                     {
                         time_lbl_limitResulte.Text = "FAIL";//互调值大于limit改变控件text
                         time_lbl_limitResulte.ForeColor = Color.Red;
@@ -529,7 +573,7 @@ namespace JcMBP
                     pf = new PointF(ds.sxy.x, ds.sxy.y);
                     pfc = new PointF(ds.sxy.x, ds.sxy.y - (float)ds.pow1);
                 }
-                ChangeY_j(ds.sxy.y);
+                ChangeY(ds.sxy.y);
                 this.freq_plot.Add(new PointF[1] { pf }, ds.sxy.currentPlot, ds.sxy.current);//坐标控件添加点
                 this.freq_plot.Add(new PointF[1] { pfc }, ds.sxy.currentPlot + 4, ds.sxy.current);//坐标控件添加点
                 this.freq_plot.MajorLineWidth = this.freq_plot.MajorLineWidth;
@@ -557,87 +601,7 @@ namespace JcMBP
         }
 
 
-        void SweepControl_Count(DataSweep ds)
-        {
-            this.Invoke(new ThreadStart(delegate
-            {
-                FrmMain.isjb = false;
-                this.time_tb_show_tx1.Text = ds.sen_tx1.ToString("0.0");
-                this.time_tb_show_tx2.Text = ds.sen_tx2.ToString("0.0");
-                time_tb_pim_now.Text = ds.sxy.y.ToString();////控件改变text显示互调当前值
-                time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString();
-                float currenty = 0;
-                //if (fm.isdBm)
-                currenty = (float)ds.sxy.y;
-                //else
-                //    currenty = (float)ds.sxy.y - 43;
-                if (currenty > _pim_max)
-                {
-                    _pim_max = currenty;//设置pim最大值
-                    ds.sxy.max = _pim_max;
-                    time_tB_valMax.Text = _pim_max.ToString();//控件改变text显示互调最大值
-                    time_tB_valMax_dbc.Text = (_pim_max - ds.pow1).ToString();
-                }
-                if (currenty < _pim_min)
-                {
-                    _pim_min = currenty;//设置pim最小值
-                    ds.sxy.min = _pim_min;
-                    time_tB_valMin.Text = _pim_min.ToString();//控件改变text显示互调最小值
-                    time_tB_valMin_dbc.Text = (_pim_min - ds.pow1).ToString();
-                }
-                if (fm.isdBm)
-                {
-                    if (currenty > _pim_limit)
-                    {
-                        time_lbl_limitResulte.Text = "FAIL";//互调值大于limit改变控件text
-                        time_lbl_limitResulte.ForeColor = Color.Red;
-                    }
-                }
-                else
-                {
-                    if (currenty - 43 > _pim_limit)
-                    {
-                        time_lbl_limitResulte.Text = "FAIL";//互调值大于limit改变控件text
-                        time_lbl_limitResulte.ForeColor = Color.Red;
-                    }
-                }
-                ds.sxy.result = time_lbl_limitResulte.Text;
-                PointF pf;
-                PointF pfc;
-                if (ds.sxy.model == 1)
-                {
-                    pf = new PointF(ds.sxy.currentCount + 1, ds.sxy.y);
-                    pfc = new PointF(ds.sxy.currentCount + 1, ds.sxy.y - (float)ds.pow1);
-                }
-                else
-                {
-                    pf = new PointF(ds.sxy.x, ds.sxy.y);
-                    pfc = new PointF(ds.sxy.x, ds.sxy.y - (float)ds.pow1);
-                }
-                ChangeY_j(ds.sxy.y);
-                this.freq_plot.Add(new PointF[1] { pf }, ds.sxy.currentPlot, ds.sxy.current);//坐标控件添加点
-                this.freq_plot.Add(new PointF[1] { pfc }, ds.sxy.currentPlot + 4, ds.sxy.current);//坐标控件添加点
-                this.freq_plot.MajorLineWidth = this.freq_plot.MajorLineWidth;
-                DataRow dr_test = ds.dtm_count.Rows[getnum];
-                DataRow dr_testc = ds.dtm_c_count.Rows[getnum];
-                dr_test[1] = _pim_max.ToString("0.0");              
-                dr_test[2] = time_lbl_limitResulte.Text;
-                dr_testc[1] = (_pim_max - ds.pow1).ToString("0.0");
-                dr_testc[2] = time_lbl_limitResulte.Text;
-                ds.sxy.pf_arr[ds.sxy.currentPlot].Add(pf);
-                ds.sxy.pf_arr[ds.sxy.currentPlot + 4].Add(pfc);
-                OfftenMethod.ToNewRows(ds.dtm, ds.sxy.currentCount,
-                       (float)ds.sxy.f1, (float)ds.sen_tx1,
-                       (float)ds.sxy.f2, (float)ds.sen_tx2,
-                       ds.sxy.x, ds.sxy.y);//添加数据到表格
-                OfftenMethod.ToNewRows(ds.dtm_c, ds.sxy.currentCount,
-                          (float)ds.sxy.f1, (float)ds.sen_tx1,
-                          (float)ds.sxy.f2, (float)ds.sen_tx2,
-                          ds.sxy.x, ds.sxy.y - (float)ds.pow1);//添加数据到表格
-                dataGridView1.FirstDisplayedScrollingRowIndex = ds.dtm_count.Rows.Count - 1;
-                curr_row = ds.dtm_count.Rows.Count - 1;
-            }));
-        }
+       
 
         void CreatScrollbar()
         {
@@ -656,7 +620,7 @@ namespace JcMBP
         /// <param name="ds"></param>
         public void Clone(DataSweep ds)
         {
-            this.ds = ds;
+            //this.ds = ds;
         }
 
         /// <summary>
@@ -718,110 +682,127 @@ namespace JcMBP
             return d;
         }
 
+        public void DataINIT()
+        {
+          
+            jb_err = false;
+            _pim_max = float.MinValue;
+            _pim_min = float.MaxValue;
+            current_pim_min = float.MaxValue;
+            dbm_y = -140;
+            dbm_y_e = -80;
+            dbc_y = -183;
+            dbc_y_e = -123;
+            isFirstAdd = 0;
+          
+            this.Invoke(new ThreadStart(delegate()
+            {
+                button1.Enabled = false;
+                freq_dgvPim.Enabled = false;
+                time_tb_pim_now.Text = "--";
+                time_tB_valMax.Text = "--";
+                time_tB_valMin.Text = "--";
+                time_tb_pim_now_dbc.Text = "--";
+                time_tB_valMax_dbc.Text = "--";
+                time_tB_valMin_dbc.Text = "--";
+                time_lbl_limitResulte.Text = "PASS";
+                textBox1.Text = "--";
+                time_lbl_limitResulte.ForeColor = Color.Lime;
+            }));
+        }
+
+        public void LastINIT()
+        {
+            button1.Enabled = true;
+            freq_dgvPim.Enabled = true;
+            MessageBox.Show("扫描完成");
+        }
+
         /// <summary>
         /// 开始扫描
         /// </summary>
         /// <param name="s"></param>
-        public void Start(Sweep s)
+        public void Start(Sweep s, TestData testdata, int currentNum)
         {
+            testdata_ = testdata;
+            isFirstAdd = 0;
+            currentSweepCont = currentNum;
+            isThreadStart = true;
+            current_pim_max = float.MinValue;
+            //current_pim_min = float.MaxValue;
             this.Invoke(new ThreadStart(delegate
-            {
-                FrmMain.isjb = false;
-                dbm_y = -140;
-                dbm_y_e = -80;
-                dbc_y = -183;
-                dbc_y_e = -123;
-                freq_plot.SetXStartStop(ds.MinRx-2, ds.MaxRx+2);
+            {             
+                freq_plot.SetXStartStop(testdata.rxDate[currentNum].currentRxs - 2, testdata.rxDate[currentNum].currentRxe + 2);
                 if (fm.isdBm)
                     freq_plot.SetYStartStop(dbm_y,dbm_y_e);//设置坐标起始结束
                 else
                     freq_plot.SetYStartStop(dbc_y,dbc_y_e);//设置坐标起始结束
                 time_lbl_limitResulte.Text = "PASS";
                 time_lbl_limitResulte.ForeColor = Color.Lime;
-            }));
+           
             freq_plot.Clear();
-            this.Invoke(new ThreadStart(delegate
-            {
-                 ds.dtm.Clear();
-                 ds.dtm_c.Clear();
-                _pim_max = float.MinValue;
-                _pim_min = float.MaxValue;
+       
                 if (fm.isdBm)
-                    freq_dgvPim.DataSource = ds.dtm;
+                    freq_dgvPim.DataSource = testdata.surFaceData_dbm;
                 else
-                    freq_dgvPim.DataSource = ds.dtm_c;
+                    freq_dgvPim.DataSource = testdata.surFaceData_dbc;
             }));
 
             sweep = s;
-
-            sweep.PowerHander += new ControlIni_Sweep_Pow(Powhand_f);
-            sweep.VcoHander += new ControlIni_Sweep_Vco(VcoHand);
-            sweep.Tx1Hander += new ControlIni_Sweep_Tx1(Tx1Hand);
-            sweep.Tx2Hander += new ControlIni_Sweep_Tx2(Tx2Hand);
+            //if (currentSweepCont == 0)
+            //{
+                sweep.PowerHander += new ControlIni_Sweep_Pow(Powhand_f);
+                sweep.VcoHander += new ControlIni_Sweep_Vco(VcoHand);
+                sweep.Tx1Hander += new ControlIni_Sweep_Tx1(Tx1Hand);
+                sweep.Tx2Hander += new ControlIni_Sweep_Tx2(Tx2Hand);
+            //}
             sweep.StHander += new Sweep_Test(SweepControl);
 
-            Ths();
-            rem_jpg_data_f(ds);
-            this.Invoke(new ThreadStart(delegate
+            if ( Ths())
+            {
+                double val = 0;
+                double val_dbc = 0;
+                for (int i = 0; i < freq_dgvPim.Rows.Count; i++)
+                {
+                    val += testdata_.pimDate[i].currentpimMax;
+                    val_dbc += testdata_.pimDate[i].currentpimMax_dbc;
+                }
+                this.Invoke(new ThreadStart(delegate
                {
-                   isThreadStart = false;
-           
+                   if (freq_dgvPim.Rows.Count != 0)
+                   {
+                       time_tb_pim_now.Text = (val / freq_dgvPim.Rows.Count).ToString("0.0");////控件改变text显示互调当前值
+                       time_tb_pim_now_dbc.Text = (val_dbc / freq_dgvPim.Rows.Count).ToString("0.0");
+                       if (testdata.surFaceData_dbm.Rows[currentSweepCont] != null)
+                       {
+                           DataRow dt = testdata.surFaceData_dbm.Rows[currentSweepCont];
+                           DataRow dtc = testdata.surFaceData_dbc.Rows[currentSweepCont];
+                           if (fm.isdBm)
+                           {
+                               dt[2] = (Convert.ToSingle(dt[1]) - _pim_limit).ToString("0.0");
+                               dtc[2] = dt[2];
+                           }
+                           else
+                           {
+                               dtc[2] = (Convert.ToSingle(dtc[1]) - _pim_limit).ToString("0.0");
+                               dt[2] = dtc[2];
+                           }
+                       }
+                   }
                }));
-            sweep.PowerHander -= new ControlIni_Sweep_Pow(Powhand_f);
-            sweep.VcoHander -= new ControlIni_Sweep_Vco(VcoHand);
-            sweep.Tx1Hander -= new ControlIni_Sweep_Tx1(Tx1Hand);
-            sweep.Tx2Hander -= new ControlIni_Sweep_Tx2(Tx2Hand);
-            sweep.StHander -= new Sweep_Test(SweepControl);
+            }
+            else
+            jb_err = true;
+                isThreadStart = false;
+                sweep.PowerHander -= new ControlIni_Sweep_Pow(Powhand_f);
+                sweep.VcoHander -= new ControlIni_Sweep_Vco(VcoHand);
+                sweep.Tx1Hander -= new ControlIni_Sweep_Tx1(Tx1Hand);
+                sweep.Tx2Hander -= new ControlIni_Sweep_Tx2(Tx2Hand);
+                sweep.StHander -= new Sweep_Test(SweepControl);
+            //}
         }
 
-        public void Start_Count(int i, Sweep s)
-        {
-            this.Invoke(new ThreadStart(delegate
-            {
-                FrmMain.isjb = false;
-                dbm_y = -140;
-                dbm_y_e = -80;
-                dbc_y = -183;
-                dbc_y_e = -123;
-                freq_plot.SetXStartStop(ds.MinRx - 2, ds.MaxRx + 2);
-                if (fm.isdBm)
-                    freq_plot.SetYStartStop(dbm_y, dbm_y_e);//设置坐标起始结束
-                else
-                    freq_plot.SetYStartStop(dbc_y, dbc_y_e);//设置坐标起始结束
-                time_lbl_limitResulte.Text = "PASS";
-                time_lbl_limitResulte.ForeColor = Color.Lime;
-            }));
-            freq_plot.Clear();
-            this.Invoke(new ThreadStart(delegate
-            {
-                ds.dtm.Clear();
-                ds.dtm_c.Clear();
-                _pim_max = float.MinValue;
-                _pim_min = float.MaxValue;
-                if (fm.isdBm)
-                    freq_dgvPim.DataSource = ds.dtm;
-                else
-                    freq_dgvPim.DataSource = ds.dtm_c;
-            }));
-
-            sweep = s;
-
-            sweep.PowerHander += new ControlIni_Sweep_Pow(Powhand_f);
-            sweep.VcoHander += new ControlIni_Sweep_Vco(VcoHand);
-            sweep.Tx1Hander += new ControlIni_Sweep_Tx1(Tx1Hand);
-            sweep.Tx2Hander += new ControlIni_Sweep_Tx2(Tx2Hand);
-            sweep.StHander += new Sweep_Test(SweepControl_Count);
-
-            Ths();
-            ds_arr.Add(Clone_j(ds));
-            rem_jpg_data_f(ds);
-            isThreadStart = false;
-            sweep.PowerHander -= new ControlIni_Sweep_Pow(Powhand_f);
-            sweep.VcoHander -= new ControlIni_Sweep_Vco(VcoHand);
-            sweep.Tx1Hander -= new ControlIni_Sweep_Tx1(Tx1Hand);
-            sweep.Tx2Hander -= new ControlIni_Sweep_Tx2(Tx2Hand);
-            sweep.StHander -= new Sweep_Test(SweepControl);
-        }
+      
         
         /// <summary>
         /// 开始脚本扫描
@@ -829,105 +810,112 @@ namespace JcMBP
         /// <param name="s"></param>
         /// <param name="i"></param>
         /// <param name="mesage"></param>
-        public void JbStart(Sweep s,int i,string mesage)
-        {
-            this.Invoke(new ThreadStart(delegate
-            {
-                FrmMain.isjb = true;
-                ds.dbm_y = -140;
-                ds.dbm_y_e = -80;
-                ds.dbc_y = -183;
-                ds.dbc_y_e = -123;
-                numericUpDown2.Value = (decimal)PoiFreqSweepLeft.jd[curr_row].limit;
-               if(ds.sxy.model==0)
-                freq_plot.SetXStartStop(ds.MinRx - 2, ds.MaxRx + 2);
-                else
-                   freq_plot.SetXStartStop(0, ds.time1+2);
-                if (fm.isdBm)
-                    freq_plot.SetYStartStop(dbm_y,dbm_y_e);//设置坐标起始结束
-                else
-                    freq_plot.SetYStartStop(dbc_y, dbc_y_e);//设置坐标起始结束
-                time_lbl_limitResulte.Text = "PASS";
-                time_lbl_limitResulte.ForeColor = Color.Lime;
-                ds.dt.Clear();
-                ds.dtc.Clear();
-                ds.sxy.lf0.Clear();
-                ds.sxy.lf1.Clear();
-                ds.sxy.lf2.Clear();
-                ds.sxy.lf3.Clear();
-                ds.sxy.lf0c.Clear();
-                ds.sxy.lf1c.Clear();
-                ds.sxy.lf2c.Clear();
-                ds.sxy.lf3c.Clear();
-                ds.sxy.pdf_val.Clear();
-                ds.sxy.str_data = "";
-                ds.sxy.overViewMessage = "";
-                jb_err = false;
-            }));
-            if (mesage != "-")
-            {
-                this.Invoke(new ThreadStart(delegate
-                {
-                    MessageBox.Show(mesage);
-                    progressBar1.Value += 1;
-                }));
-                ds_arr.Add(Clone_j(ds));
-                rem_jpg_data(i, ds_arr);
+        //public void JbStart(Sweep s,int i,string mesage)
+        //{
+        //    this.Invoke(new ThreadStart(delegate
+        //    {
+        //        ds.dbm_y = -140;
+        //        ds.dbm_y_e = -80;
+        //        ds.dbc_y = -183;
+        //        ds.dbc_y_e = -123;
+        //        numericUpDown2.Value = (decimal)PoiFreqSweepLeft.jd[curr_row].limit;
+        //       if(ds.sxy.model==0)
+        //        freq_plot.SetXStartStop(ds.MinRx - 2, ds.MaxRx + 2);
+        //        else
+        //           freq_plot.SetXStartStop(0, ds.time1+2);
+        //        if (fm.isdBm)
+        //            freq_plot.SetYStartStop(dbm_y,dbm_y_e);//设置坐标起始结束
+        //        else
+        //            freq_plot.SetYStartStop(dbc_y, dbc_y_e);//设置坐标起始结束
+        //        time_lbl_limitResulte.Text = "PASS";
+        //        time_lbl_limitResulte.ForeColor = Color.Lime;
+        //        ds.dt.Clear();
+        //        ds.dtc.Clear();
+        //        ds.sxy.lf0.Clear();
+        //        ds.sxy.lf1.Clear();
+        //        ds.sxy.lf2.Clear();
+        //        ds.sxy.lf3.Clear();
+        //        ds.sxy.lf0c.Clear();
+        //        ds.sxy.lf1c.Clear();
+        //        ds.sxy.lf2c.Clear();
+        //        ds.sxy.lf3c.Clear();
+        //        ds.sxy.pdf_val.Clear();
+        //        ds.sxy.str_data = "";
+        //        ds.sxy.overViewMessage = "";
+        //        jb_err = false;
+        //    }));
+        //    if (mesage != "-")
+        //    {
+        //        this.Invoke(new ThreadStart(delegate
+        //        {
+        //            MessageBox.Show(mesage);
+        //            progressBar1.Value += 1;
+        //        }));
+        //        ds_arr.Add(Clone_j(ds));
+        //        rem_jpg_data(i, ds_arr);
                 
-                return;
-            }
+        //        return;
+        //    }
           
-            freq_plot.Clear();
-            this.Invoke(new ThreadStart(delegate
-            {
-                _pim_max = float.MinValue;
-                _pim_min = float.MaxValue;
-                if (fm.isdBm)
-                    dataGridView1.DataSource = ds.jb;
-                else
-                    dataGridView1.DataSource = ds.jbc;
-            }));
-            sweep = s;
-            sweep.PowerHander += new ControlIni_Sweep_Pow(Powhand_f);
-            sweep.VcoHander += new ControlIni_Sweep_Vco(VcoHand);
-            sweep.Tx1Hander += new ControlIni_Sweep_Tx1(Tx1Hand);
-            sweep.Tx2Hander += new ControlIni_Sweep_Tx2(Tx2Hand);
-            sweep.StHander += new Sweep_Test(SweepControl_j);
-            getnum = i;
-            freq_plot.Clear();
+        //    freq_plot.Clear();
+        //    this.Invoke(new ThreadStart(delegate
+        //    {
+        //        _pim_max = float.MinValue;
+        //        _pim_min = float.MaxValue;
+        //        if (fm.isdBm)
+        //            dataGridView1.DataSource = ds.jb;
+        //        else
+        //            dataGridView1.DataSource = ds.jbc;
+        //    }));
+        //    sweep = s;
+        //    sweep.PowerHander += new ControlIni_Sweep_Pow(Powhand_f);
+        //    sweep.VcoHander += new ControlIni_Sweep_Vco(VcoHand);
+        //    sweep.Tx1Hander += new ControlIni_Sweep_Tx1(Tx1Hand);
+        //    sweep.Tx2Hander += new ControlIni_Sweep_Tx2(Tx2Hand);
+        //    sweep.StHander += new Sweep_Test(SweepControl_j);
+        //    getnum = i;
+        //    freq_plot.Clear();
            
-            sweep = s;
-            Ths();
-            ds_arr.Add(Clone_j(ds));
-            rem_jpg_data(i, ds_arr);
-            this.Invoke(new ThreadStart(delegate
-           {
-               progressBar1.Value += 1;
-           }));
-            isThreadStart = false;
-            sweep.PowerHander -= new ControlIni_Sweep_Pow(Powhand_f);
-            sweep.VcoHander -= new ControlIni_Sweep_Vco(VcoHand);
-            sweep.Tx1Hander -= new ControlIni_Sweep_Tx1(Tx1Hand);
-            sweep.Tx2Hander -= new ControlIni_Sweep_Tx2(Tx2Hand);
-            sweep.StHander -= new Sweep_Test(SweepControl_j);
-        }
+        //    sweep = s;
+        //    Ths();
+        //    ds_arr.Add(Clone_j(ds));
+        //    rem_jpg_data(i, ds_arr);
+        //    this.Invoke(new ThreadStart(delegate
+        //   {
+        //       progressBar1.Value += 1;
+        //   }));
+        //    isThreadStart = false;
+        //    sweep.PowerHander -= new ControlIni_Sweep_Pow(Powhand_f);
+        //    sweep.VcoHander -= new ControlIni_Sweep_Vco(VcoHand);
+        //    sweep.Tx1Hander -= new ControlIni_Sweep_Tx1(Tx1Hand);
+        //    sweep.Tx2Hander -= new ControlIni_Sweep_Tx2(Tx2Hand);
+        //    sweep.StHander -= new Sweep_Test(SweepControl_j);
+        //}
 
         /// <summary>
         /// 停止扫描
         /// </summary>
         public void Stop()
         {
-            sweep.Stop();
-            isThreadStart = false;
+            //sweep.Stop();
+            //isThreadStart = false;
+            //if (isThreadStart)
+            //{
+            if (sweep != null)
+            {
+                sweep.Stop();
+            }
+            //    isThreadStart = false;
+            //}
         }
 
         /// <summary>
         /// 开始扫描
         /// </summary>
-        void Ths()
+        bool  Ths()
         {
-            isThreadStart = true;
-            sweep.Ini();
+            //isThreadStart = true;
+            return  sweep.Ini();
         }
 
        
@@ -935,7 +923,6 @@ namespace JcMBP
         {
             progressBar1.Visible = true;
             dataGridView1.Visible = true;
-            FrmMain.isjb = true;
             if(dataGridView1.RowCount>0)
             UpdatePlotControl(dataGridView1.CurrentRow.Index);
         }
@@ -964,7 +951,7 @@ namespace JcMBP
             freq_plot.Clear();
             progressBar1.Hide();
             dataGridView1.Hide();
-            UpdatePlotControl(ds);
+            //UpdatePlotControl(ds);
         }
 
 
@@ -978,19 +965,19 @@ namespace JcMBP
             int pointf_num = dataGridView1.CurrentRow.Index;
             curr_row = pointf_num;
             this.dataGridView1.Rows[pointf_num].Selected = true;
-            if (ds_arr[pointf_num].timeou_mes == "")
-                return;
+            //if (ds_arr[pointf_num].timeou_mes == "")
+            //    return;
             UpdatePlotControl(pointf_num);
-            if (ClsUpLoad.sm == SweepMode.Np)
-            {
-                NPFreqSweepLeft nsf = (NPFreqSweepLeft)form;
-                nsf.UpdateGroupControl(pointf_num);
-            }
-            else
-            {
-                PoiFreqSweepLeft nsf = (PoiFreqSweepLeft)form;
-                nsf.UpdateGroupControl(pointf_num);
-            }
+            //if (ClsUpLoad.sm == SweepMode.Np)
+            //{
+            //    NPFreqSweepLeft nsf = (NPFreqSweepLeft)form;
+            //    nsf.UpdateGroupControl(pointf_num);
+            //}
+            //else
+            //{
+            //    PoiFreqSweepLeft nsf = (PoiFreqSweepLeft)form;
+            //    nsf.UpdateGroupControl(pointf_num);
+            //}
         }
 
         /// <summary>
@@ -1056,74 +1043,79 @@ namespace JcMBP
 
         void UpdatePlotControl(int num)
         {
-            if (ds_arr.Count <= 0)
+            if (testdata_==null)
                 return;
-            this.dataGridView1.Rows[num].Selected = true;
+            this.freq_dgvPim.Rows[num].Selected = true;
             freq_plot.Clear();
             if (!fm.isdBm)
-                freq_plot.SetYStartStop(ds_arr[num].dbc_y, ds_arr[num].dbc_y_e);
+                freq_plot.SetYStartStop(testdata_.dbc_y, testdata_.dbc_y_e);
             else
-                freq_plot.SetYStartStop(ds_arr[num].dbm_y, ds_arr[num].dbm_y_e);
-            if (ds_arr[num].sxy.model == 1)
-            {              
-                freq_plot.SetXStartStop(0, ds_arr[num].time1 + 2);
-                for (int i = 0; i < ds_arr[num].sxy.lf0.Count; i++)
-                {
-                    freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf0[i] }, 0, i);
-                    freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf0c[i] }, 4, i);
-                }
-            }
-            else
-            {
+                freq_plot.SetYStartStop(testdata_.dbm_y, testdata_.dbm_y_e);
+            //if (ds_arr[num].sxy.model == 1)
+            //{              
+            //    freq_plot.SetXStartStop(0, ds_arr[num].time1 + 2);
+            //    for (int i = 0; i < ds_arr[num].sxy.lf0.Count; i++)
+            //    {
+            //        freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf0[i] }, 0, i);
+            //        freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf0c[i] }, 4, i);
+            //    }
+            //}
+            //else
+            //{
 
-                freq_plot.SetXStartStop(ds_arr[num].MinRx - 2, ds_arr[num].MaxRx + 2);
-                if (ds_arr[num].sxy.lf0.Count > 0)
+                freq_plot.SetXStartStop(testdata_.rxDate[num].currentRxs - 2, testdata_.rxDate[num].currentRxe + 2);
+                int n1 = testdata_.pimDate[num].num1;
+                int n2 = testdata_.pimDate[num].num2;
+                int n3 = testdata_.pimDate[num].num3;
+                int n4 = testdata_.pimDate[num].num4;
+                if (n1 > 0)
                 {
-                    for (int i = 0; i < ds_arr[num].sxy.lf0.Count; i++)
+                    for (int i = 0; i < testdata_.pimDate[num].num1; i++)
                     {
-                        freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf0[i] }, 0, i);
-                        freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf0c[i] }, 4, i);
+                        freq_plot.Add(new PointF[1] { new PointF(testdata_.pimDate[num].pimFreq[i], testdata_.pimDate[num].pimVal_dbm[i]) }, 0, i);
+                        freq_plot.Add(new PointF[1] { new PointF(testdata_.pimDate[num].pimFreq[i], testdata_.pimDate[num].pimVal_dbc[i]) }, 4, i);
                     }
                 }
-                if (ds_arr[num].sxy.lf1.Count > 0)
+                if (n2 > 0)
                 {
-                    for (int i = 0; i < ds_arr[num].sxy.lf1.Count; i++)
+                    //for (int i = 0; i < ds_arr[num].sxy.lf1.Count; i++)
+                    //{
+                    //    freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf1[i] }, 1, i);
+                    //    freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf1c[i] }, 5, i);
+                    //}
+                }
+                if (n3 > 0)
+                {
+                  
+                    for (int i = n1+n2; i < n1+n2+n3; i++)
                     {
-                        freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf1[i] }, 1, i);
-                        freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf1c[i] }, 5, i);
+                        freq_plot.Add(new PointF[1] {new PointF(testdata_.pimDate[num].pimFreq[i], testdata_.pimDate[num].pimVal_dbm[i]) }, 1, i-n1-n2);
+                        freq_plot.Add(new PointF[1] { new PointF(testdata_.pimDate[num].pimFreq[i], testdata_.pimDate[num].pimVal_dbc[i]) }, 5, i-n1-n2);
                     }
                 }
-                if (ds_arr[num].sxy.lf2.Count > 0)
+                if (n4 > 0)
                 {
-                    for (int i = 0; i < ds_arr[num].sxy.lf2.Count; i++)
-                    {
-                        freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf2[i] }, 2, i);
-                        freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf2c[i] }, 6, i);
-                    }
+                    //for (int i = 0; i < ds_arr[num].sxy.lf3.Count; i++)
+                    //{
+                    //    freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf3[i] }, 3, i);
+                    //    freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf3c[i] }, 7, i);
+                    //}
                 }
-                if (ds_arr[num].sxy.lf3.Count > 0)
-                {
-                    for (int i = 0; i < ds_arr[num].sxy.lf3.Count; i++)
-                    {
-                        freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf3[i] }, 3, i);
-                        freq_plot.Add(new PointF[1] { ds_arr[num].sxy.lf3c[i] }, 7, i);
-                    }
-                }
-            }
+            //}
             freq_plot.MajorLineWidth = freq_plot.MajorLineWidth;
-            time_tB_valMax.Text = ds_arr[num].sxy.max.ToString("0.0");
-            time_tB_valMin.Text = ds_arr[num].sxy.min.ToString("0.0");
-            time_tB_valMax_dbc.Text = (ds_arr[num].sxy.max-ds_arr[num].pow1).ToString("0.0");
-            time_tB_valMin_dbc.Text = (ds_arr[num].sxy.min - ds_arr[num].pow1).ToString("0.0");
-            time_lbl_limitResulte.Text = ds_arr[num].sxy.result;
-            if (ds_arr[num].sxy.result == "FAIL")
-            {
-                time_lbl_limitResulte.ForeColor = Color.Red;
-            }
-            else
-                time_lbl_limitResulte.ForeColor = Color.Lime;
-            time_tb_pim_now.Text = "---";
-            time_tb_pim_now_dbc.Text = "---";
+            //time_tB_valMax.Text = ds_arr[num].sxy.max.ToString("0.0");
+            //time_tB_valMin.Text = ds_arr[num].sxy.min.ToString("0.0");
+            //time_tB_valMax_dbc.Text = (ds_arr[num].sxy.max-43).ToString("0.0");
+            //time_tB_valMin_dbc.Text = (ds_arr[num].sxy.min-43).ToString("0.0");
+            //time_lbl_limitResulte.Text = ds_arr[num].sxy.result;
+            //if (ds_arr[num].sxy.result == "FAIL")
+            //{
+            //    time_lbl_limitResulte.ForeColor = Color.Red;
+            //}
+            //else
+            //    time_lbl_limitResulte.ForeColor = Color.Lime;
+            //time_tb_pim_now.Text = "---";
+            //time_tb_pim_now_dbc.Text = "---";
         }
 
         /// <summary>
@@ -1139,16 +1131,16 @@ namespace JcMBP
         /// 记录扫描jpg图和数据
         /// </summary>
         /// <param name="i"></param>
-        /// <param name="ds"></param>
+        /// <param name="ds"></param
         void rem_jpg_data(int i, List<DataSweep> ds)
         {
             this.Invoke(new ThreadStart(delegate
             {
                double maxval=0;
-                //if(fm.isdBm)
+                if(fm.isdBm)
                     maxval=ds[i].sxy.max;
-                //else
-                //    maxval=ds[i].sxy.max+43;
+                else
+                    maxval = ds[i].sxy.max + FreqSweepLeft.st_pow;
                 if (ds[i].sxy.time_out_M != "-")
                 {
                     ds[i].sxy.str_data += "NO" + (i + 1).ToString() + "\r\n" + ds[i].sxy.time_out_M;
@@ -1158,18 +1150,15 @@ namespace JcMBP
                 ds[i].sxy.image1 = OfftenMethod.SaveImage(groupBox2);//保存图形到内存
                 ds[i].sxy.image2 = OfftenMethod.SaveImage(groupBox17);//保存图形到内存
                 this.Refresh();
-                //ds[i].sxy.overViewMessage += "NO" + (getnum + 1).ToString() + " 发射频段：" + "(" + cul.BandNames[ds[i].tx1] + ")+(" + c + ")" + " 接收频段:" + "(" + cul.BandNames[ds[i].rx] + ")"
+                //ds[i].sxy.overViewMessage += "NO" + (getnum + 1).ToString() + " 发射频段：" + "(" + cul.BandNames[ds[i].tx1] + ")+(" + cul.BandNames[ds[i].tx2] + ")" + " 接收频段:" + "(" + cul.BandNames[ds[i].rx] + ")"
                 //                            + " 阶数：" + OfftenMethod.PimFormula(ds[i].imCo1, ds[i].imCo2, ds[i].imLow, ds[i].imLess) + " 最大值：" + ds[i].sxy.max.ToString("0.0") +
                 //                            " 测试结果：" + ds[i].sxy.result;
                  
                 if (ds[i].sxy.model == 0)//保存测试信息到内存
                 {
-                    //ds[i].sxy.pdf_val.AddRange(new string[]{(getnum + 1).ToString(), " 扫频", ds[i].freq1s.ToString() + "-" + ds[i].freq1e.ToString() ,
-                    //                       ds[i].freq2s.ToString() + "-" + ds[i].freq2e.ToString() , ds[i].MinRx.ToString() + "-" + ds[i].MaxRx.ToString() ,
-                    //                         OfftenMethod.PimFormula(ds[i].imCo1, ds[i].imCo2, ds[i].imLow, ds[i].imLess), maxval.ToString("0.00"), ds[i].sxy.result});
-                    ds[i].sxy.pdf_val.AddRange(new string[]{(getnum + 1).ToString(), " 扫频", cul.BandNames[ds[i].tx1] ,
-                                           cul.BandNames[ds[i].tx2] , cul.BandNames[ds[i].rx] ,
-                                            ((int)(ds[i].imCo1)+(int)(ds[i].imCo2)).ToString(), maxval.ToString("0.00"), ds[i].sxy.result});
+                    ds[i].sxy.pdf_val.AddRange(new string[]{(getnum + 1).ToString(), " 扫频", ds[i].freq1s.ToString() + "-" + ds[i].freq1e.ToString() ,
+                                           ds[i].freq2s.ToString() + "-" + ds[i].freq2e.ToString() , ds[i].MinRx.ToString() + "-" + ds[i].MaxRx.ToString() ,
+                                             OfftenMethod.PimFormula(ds[i].imCo1, ds[i].imCo2, ds[i].imLow, ds[i].imLess), maxval.ToString("0.00"), ds[i].sxy.result});
                     ds[i].sxy.str_data += "NO" + (getnum + 1).ToString() + "   扫频模式\r\n";
                     ds[i].sxy.sweep_data_header = "NO" + (getnum + 1).ToString() + "   扫频模式\r\n\r\n";
                     ds[i].sxy.str_data += "F1: " + ds[i].freq1s.ToString() + " - " + ds[i].freq1e.ToString() + "MHz" + " (" + cul.BandNames[ds[i].tx1] + ")\r\n";
@@ -1177,12 +1166,9 @@ namespace JcMBP
                 }
                 else
                 {
-                    //ds[i].sxy.pdf_val.AddRange(new string[]{ (getnum + 1).ToString(), " 点频", ds[i].freq1s.ToString() + "-" + ds[i].freq1e.ToString(),
-                    //                      ds[i].freq2s.ToString() + "-" + ds[i].freq2e.ToString(), ds[i].MinRx.ToString() + "-" + ds[i].MaxRx.ToString() ,
-                    //                        OfftenMethod.PimFormula(ds[i].imCo1, ds[i].imCo2, ds[i].imLow, ds[i].imLess), maxval.ToString("0.00"), ds[i].sxy.result});
-                    ds[i].sxy.pdf_val.AddRange(new string[]{ (getnum + 1).ToString(), " 点频",  cul.BandNames[ds[i].tx1],
-                                          cul.BandNames[ds[i].tx2], cul.BandNames[ds[i].rx]  ,
-                                             ((int)(ds[i].imCo1)+(int)(ds[i].imCo2)).ToString(), maxval.ToString("0.00"), ds[i].sxy.result});
+                    ds[i].sxy.pdf_val.AddRange(new string[]{ (getnum + 1).ToString(), " 点频", ds[i].freq1s.ToString() + "-" + ds[i].freq1e.ToString(),
+                                          ds[i].freq2s.ToString() + "-" + ds[i].freq2e.ToString(), ds[i].MinRx.ToString() + "-" + ds[i].MaxRx.ToString() ,
+                                            OfftenMethod.PimFormula(ds[i].imCo1, ds[i].imCo2, ds[i].imLow, ds[i].imLess), maxval.ToString("0.00"), ds[i].sxy.result});
                     ds[i].sxy.str_data += "NO" + (getnum + 1).ToString() + "   点频模式\r\n";
                     ds[i].sxy.sweep_data_header = "NO" + (getnum + 1).ToString() + "   点频模式\r\n\r\n";
                     ds[i].sxy.str_data += "F1: " + ds[i].freq1s.ToString() + "MHz" + " (" + cul.BandNames[ds[i].tx1] + ")\r\n";
@@ -1304,38 +1290,37 @@ namespace JcMBP
         {
             if (fm.isdBm)
             {
-                freq_plot.SetYStartStop(ds.dbc_y, ds.dbc_y_e);
+               
                 button1.Text = "dBc";
                 label66.Text = "Limit(dBc):";
                 label68.Text = "最大(dBc):";
                 label67.Text = "最小(dBc):";
-                label21.Text = "Now(dBc):";
+                label21.Text = "平均(dBc):";
                 //numericUpDown2.Value -= 43;
-               
-                freq_dgvPim.DataSource = ds.dtm_c;
-            
-                if (dataGridView1.Visible)
+                if (testdata_ != null)
                 {
-                   
-                    dataGridView1.DataSource = ds.jbc;
-                    dataGridView1.FirstDisplayedScrollingRowIndex = curr_row;
-                    this.dataGridView1.Rows[curr_row].Selected = true;
-                    for (int i = 0; i < PoiFreqSweepLeft.jd.Length; i++)
-                    {
-                        PoiFreqSweepLeft.jd[i].limit -= 43;
-
-                    }
-                    numericUpDown2.Value = (decimal)PoiFreqSweepLeft.jd[curr_row].limit;
-                    if (ds_arr.Count > 0 && ds_arr.Count > curr_row)
-                    freq_plot.SetYStartStop(ds_arr[curr_row].dbc_y, ds_arr[curr_row].dbc_y_e);
-                    else
-                        freq_plot.SetYStartStop(ds.dbc_y, ds.dbc_y_e);
-                    dataGridView1.Columns[1].HeaderText = "Max(dBc)";
-                    dataGridView1.Columns[2].HeaderText = "Min(dBc)";
+                    freq_dgvPim.DataSource = testdata_.surFaceData_dbc;
+                    freq_plot.SetYStartStop(testdata_.dbc_y, testdata_.dbc_y_e);
                 }
+                //if (dataGridView1.Visible)
+                //{
+                //    dataGridView1.DataSource = ds.jbc;
+                //    dataGridView1.FirstDisplayedScrollingRowIndex = curr_row;
+                //    this.dataGridView1.Rows[curr_row].Selected = true;
+                //    for (int i = 0; i < PoiFreqSweepLeft.jd.Length; i++)
+                //    {
+                //        PoiFreqSweepLeft.jd[i].limit -= 43;
+
+                //    }
+                //    numericUpDown2.Value = (decimal)PoiFreqSweepLeft.jd[curr_row].limit;
+                //    if (ds_arr.Count > 0 && ds_arr.Count > curr_row)
+                //    freq_plot.SetYStartStop(ds_arr[curr_row].dbc_y, ds_arr[curr_row].dbc_y_e);
+                //    else
+                //        freq_plot.SetYStartStop(ds.dbc_y, ds.dbc_y_e);
+                //}
 
                 ShowPimValue(false);
-                freq_dgvPim.Columns[6].HeaderText = "P_im(dBc)";
+                freq_dgvPim.Columns[1].HeaderText = "Peak(dBc)";
                 freq_plot.SetChannelVisible(0, false);//设置通道是否显示
                 freq_plot.SetChannelVisible(1, false);//设置通道是否显示
                 freq_plot.SetChannelVisible(4, true);//设置通道是否显示
@@ -1352,36 +1337,37 @@ namespace JcMBP
             }
             else
             {
-                freq_plot.SetYStartStop(ds.dbm_y, ds.dbm_y_e);
+              
                 button1.Text = "dBm";
                 label66.Text = "Limit(dBm):";
                 label68.Text = "最大(dBm):";
                 label67.Text = "最小(dBm):";
-                label21.Text = "Now(dBm):";
+                label21.Text = "平均(dBm):";
                 //numericUpDown2.Value += 43;
-             
-                freq_dgvPim.DataSource = ds.dtm;
-                if (dataGridView1.Visible)
+                if (testdata_ != null)
                 {
-                    dataGridView1.DataSource = ds.jb;
-                    dataGridView1.FirstDisplayedScrollingRowIndex = curr_row;
-                    this.dataGridView1.Rows[curr_row].Selected = true;
-                    for (int i = 0; i < PoiFreqSweepLeft.jd.Length; i++)
-                    {
-                        PoiFreqSweepLeft.jd[i].limit += 43;
-                        
-                    }
-                  
-                    numericUpDown2.Value = (decimal)PoiFreqSweepLeft.jd[curr_row].limit;
-                    if(ds_arr.Count>0&&ds_arr.Count>curr_row)
-                    freq_plot.SetYStartStop(ds_arr[curr_row].dbm_y, ds_arr[curr_row].dbm_y_e);
-                    else
-                        freq_plot.SetYStartStop(ds.dbm_y, ds.dbm_y_e);
-                    dataGridView1.Columns[1].HeaderText = "Max(dBm)";
-                    dataGridView1.Columns[2].HeaderText = "Min(dBm)";
+                    freq_dgvPim.DataSource = testdata_.surFaceData_dbm;
+                    freq_plot.SetYStartStop(testdata_.dbm_y, testdata_.dbm_y_e);
                 }
+                //if (dataGridView1.Visible)
+                //{
+                //    dataGridView1.DataSource = ds.jb;
+                //    dataGridView1.FirstDisplayedScrollingRowIndex = curr_row;
+                //    this.dataGridView1.Rows[curr_row].Selected = true;
+                //    for (int i = 0; i < PoiFreqSweepLeft.jd.Length; i++)
+                //    {
+                //        PoiFreqSweepLeft.jd[i].limit += 43;
+                        
+                //    }
+                  
+                //    numericUpDown2.Value = (decimal)PoiFreqSweepLeft.jd[curr_row].limit;
+                //    if(ds_arr.Count>0&&ds_arr.Count>curr_row)
+                //    freq_plot.SetYStartStop(ds_arr[curr_row].dbm_y, ds_arr[curr_row].dbm_y_e);
+                //    else
+                //        freq_plot.SetYStartStop(ds.dbm_y, ds.dbm_y_e);
+                //}
                 ShowPimValue(true);
-                freq_dgvPim.Columns[6].HeaderText = "P_im(dBm)";
+                freq_dgvPim.Columns[1].HeaderText = "Peak(dBm)";
                 freq_plot.SetChannelVisible(0, true );//设置通道是否显示
                 freq_plot.SetChannelVisible(1, true);//设置通道是否显示
                 freq_plot.SetChannelVisible(4, false );//设置通道是否显示
@@ -1406,33 +1392,33 @@ namespace JcMBP
             time_tb_pim_now_dbc.Visible = !dbm;
             time_tB_valMax_dbc.Visible = !dbm;
             time_tB_valMin_dbc.Visible = !dbm;
-            if (ds.jb.Rows.Count<=0)
-                return;
-            if (dbm)
-            {
-                DataRow dr_test = ds.jb.Rows[curr_row];
-                time_tB_valMax.Text = dr_test[1].ToString();
-                time_tB_valMin.Text = dr_test[2].ToString();
-            }
-            else
-            {
-                DataRow dr_testc = ds.jbc.Rows[curr_row];
-                time_tB_valMax_dbc.Text = dr_testc[1].ToString();
-                time_tB_valMin_dbc.Text = dr_testc[2].ToString();
-            }
+            //if (ds.jb.Rows.Count<=0)
+            //    return;
+            //if (dbm)
+            //{
+            //    DataRow dr_test = ds.jb.Rows[curr_row];
+            //    time_tB_valMax.Text = dr_test[1].ToString();
+            //    time_tB_valMin.Text = dr_test[2].ToString();
+            //}
+            //else
+            //{
+            //    DataRow dr_testc = ds.jbc.Rows[curr_row];
+            //    time_tB_valMax_dbc.Text = dr_testc[1].ToString();
+            //    time_tB_valMin_dbc.Text = dr_testc[2].ToString();
+            //}
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (fm.isdBm)
             {
-                numericUpDown2.Value -= 43;
+                numericUpDown2.Value -=Convert.ToDecimal(FreqSweepLeft.st_pow);
                 fm.IsdBm = false;
             
             }
             else
             {
-                numericUpDown2.Value += 43;
+                numericUpDown2.Value +=Convert.ToDecimal(FreqSweepLeft.st_pow);
                 fm.IsdBm = true;
               
             }
@@ -1445,12 +1431,11 @@ namespace JcMBP
             if (!fm.isdBm)
             {
 
-                dataGridView1.DataSource = ds.jbc;
-                //dataGridView1.FirstDisplayedScrollingRowIndex = curr_row;
-                //this.dataGridView1.Rows[curr_row].Selected = true;
+                dataGridView1.DataSource = testdata_.surFaceData_dbc; ;
+
                 for (int i = 0; i < PoiFreqSweepLeft.jd.Length; i++)
                 {
-                    PoiFreqSweepLeft.jd[i].limit -= 43;
+                    PoiFreqSweepLeft.jd[i].limit -= (float)FreqSweepLeft.st_pow;
 
                 }
             }
@@ -1465,36 +1450,29 @@ namespace JcMBP
         {
             DataGridView dgv = (DataGridView)sender;
             DataGridViewRow dgr = dgv.Rows[e.RowIndex];   //获得DataGridViewRow  
-            if (Convert.ToSingle(dgr.Cells[5].Value) > ds.MaxRx || Convert.ToSingle(dgr.Cells[5].Value) < ds.MinRx)
-            {
-                dgr.DefaultCellStyle.ForeColor = Color.Red; //设置行背景色     
-            }    
+            //if (Convert.ToSingle(dgr.Cells[5].Value) > testdata_.rxDate[currentSweepCont].currentRxe ||
+            //    Convert.ToSingle(dgr.Cells[5].Value) < testdata_.rxDate[currentSweepCont].currentRxs)
+            //{
+            //    dgr.DefaultCellStyle.ForeColor = Color.Red; //设置行背景色     
+            //}    
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void freq_dgvPim_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ds = new DataSweep();
-            OfftenMethod.ToAddColumns(ds.dt);
-            OfftenMethod.ToAddColumns(ds.dtc);
-            FrmMain.isjb = true;
-            for (int i = 0; i < 10; i++)
-            {
+            if (freq_dgvPim.Rows.Count <= 0) return;
+            SingleTestData std;
+            if (fm.isdBm) std = new SingleTestData(testdata_.pimDate[freq_dgvPim.CurrentRow.Index].dt_dbm,fm.isdBm);
+            else std = new SingleTestData(testdata_.pimDate[freq_dgvPim.CurrentRow.Index].dt_dbc,fm.isdBm);
+            std.ShowDialog();
+            
+        }
 
-                OfftenMethod.ToNewRows(ds.dt, 1,
-                         930, 43,
-                         940, 950,
-                          960, -120);//添加数据到表格
-                OfftenMethod.ToNewRows(ds.dtc, ds.sxy.currentCount,
-                           930, 43,
-                         940, 950,
-                          960, -163);//添加数据到表格
-            }
-            ds_arr.Add(ds);
-            ds_arr.Add(ds);
-            ds_arr.Add(ds);
-            ds_arr.Add(ds);
-            rem_jpg_data(0, ds_arr);
-            //dataGridView1.DataSource = ds.jb;
+        private void freq_dgvPim_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (freq_dgvPim.Rows.Count<=0) return;
+            int pointf_num = freq_dgvPim.CurrentRow.Index;
+            this.freq_dgvPim.Rows[pointf_num].Selected = true;
+            UpdatePlotControl(pointf_num);
         }
     }
 }

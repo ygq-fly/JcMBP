@@ -1,4 +1,4 @@
-﻿//build 1.5.0.30(2015/11/30)
+﻿//build 1.5.0.30(2015/11/30)  
 //  完成调试
 //
 // build 1.5.0.31(2015/12/2)  
@@ -57,8 +57,15 @@
 ////build 1.5.1.51(2015/2/1)  
 //修改了点频次数为自由可设，添加了vco检测，是否检查功率，脚本测试暂停时间
 
-////build 1.5.1.52(2015/3/28)  
-//修改了保存数据中列表peak dbc保存的peak有误问题
+
+
+
+
+
+
+
+
+////2.*.*.*.*国人版本
 
 using System;
 using System.Collections.Generic;
@@ -88,32 +95,32 @@ namespace JcMBP
             string su = IniFile.GetString("SN", "su", "0", Application.StartupPath + "\\JcConfig.ini");//超级账号
             bool iscode = su == "637" ? true : false;
 
-            //if (!iscode)
-            //{
-            //    //判断授权文件
-            //    Code c = new Code();
-            //    try
-            //    {
-            //        if (File.Exists(Code.strFilePath))
-            //        {
-            //            if (!c.CheckFile(sn))
-            //            {
-            //                running = false;
-            //                MessageBox.Show("授权日期已到！");
-            //            }
-            //        }
-            //        else
-            //        {
-            //            running = false;
-            //            MessageBox.Show("请先生成授权文件！");
-            //        }
-            //    }
-            //    catch
-            //    {
-            //        running = false;
-            //        MessageBox.Show("授权文件缺失或错误，请重新生成授权文件！");
-            //    }
-            //}
+            if (!iscode)
+            {
+                //判断授权文件
+                Code c = new Code();
+                try
+                {
+                    if (File.Exists(Code.strFilePath))
+                    {
+                        if (!c.CheckFile(sn))
+                        {
+                            running = false;
+                            MessageBox.Show("授权日期已到！");
+                        }
+                    }
+                    else
+                    {
+                        running = false;
+                        MessageBox.Show("请先生成授权文件！");
+                    }
+                }
+                catch
+                {
+                    running = false;
+                    MessageBox.Show("授权文件缺失或错误，请重新生成授权文件！");
+                }
+            }
             if (!running)
                 Application.Exit();
             else

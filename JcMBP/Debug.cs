@@ -17,7 +17,7 @@ namespace JcMBP
             InitializeComponent();
             this.cul=cul;
             OfftenMethod.LoadComboBox_d(cb_switchband, cul.AllBandNames);
-            OfftenMethod.LoadComboBox(comboBox1, cul.BandNames);
+            OfftenMethod.LoadComboBox_d(comboBox1, cul.BandNames);
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
             comboBox3.SelectedIndex = 0;

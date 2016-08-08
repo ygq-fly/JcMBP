@@ -118,8 +118,7 @@ namespace JcMBP
             {
                 byte[] bError = new byte[512];
                 ClsJcPimDll.JcGetError(bError, 512);
-                //tb_log.AppendText(Encoding.ASCII.GetString(bError) + "\r\n");
-                MessageBox.Show(Encoding.ASCII.GetString(bError));
+                tb_log.AppendText(Encoding.ASCII.GetString(bError) + "\r\n");
             }
         }
 

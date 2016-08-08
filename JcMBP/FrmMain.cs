@@ -19,7 +19,6 @@ namespace JcMBP
         public static  event ChangeBand CBHandle;
         public event ChangeLimit CLHandle;
         public static event ChangeVco_enable CVHandle;
-
         public FrmMain()
         {
             InitializeComponent();
@@ -29,14 +28,13 @@ namespace JcMBP
         public static int band = 0;//华为模式频段联动
         public static int count = 1;
         public static bool vco = true;
-        public static bool offsetPassword = false;
         public  float limit = -110;
-        public  static bool isjb = false;
         //
         TimeSweepMid tm = null;
        public  FreqSweepMid fm = null;
         Rx rx = null;
         Tx tx = null;
+        GRMid gr = null;
         ClsUpLoad cul = null;
         CheckMode cm=CheckMode.ST;
         private void FrmMain_Load(object sender, EventArgs e)
@@ -78,11 +76,15 @@ namespace JcMBP
             }
             if (tm == null)
             {
-                tm = new TimeSweepMid();
+                tm = new TimeSweepMid(cul,this);
                 OfftenMethod.SwitchWindow(this, tm, panel1);
             }
+            if (gr == null)
+            {
+                gr = new GRMid(cul);
+                OfftenMethod.SwitchWindow(this, gr, panel1);
+            }
             Setting();
-       
             //========================================
         }
 
@@ -207,10 +209,12 @@ namespace JcMBP
             button2.BackColor = Color.White;
             button3.BackColor = Color.White;
             button5.BackColor = Color.White;
+            button6.BackColor = Color.White;
             button1.ForeColor = Color.Black;
             button2.ForeColor = Color.Black;
             button3.ForeColor = Color.Black;
             button5.ForeColor = Color.Black;
+            button6.ForeColor = Color.Black;
             //timeToolStripMenuItem.Checked = false;
             //freqToolStripMenuItem.Checked = false;
             //rXToolStripMenuItem.Checked = false;
@@ -227,6 +231,8 @@ namespace JcMBP
                 case 3: rx.Hide();
                     break;
                 case 4: tx.Hide();
+                    break;
+                case 5: gr.Hide();
                     break;
             }
         }
@@ -301,12 +307,12 @@ namespace JcMBP
             }
             else
             {
-                byte[] bError = new byte[512];
-                ClsJcPimDll.JcGetError(bError, 512);//获取错误
-                MessageBox.Show(Encoding.ASCII.GetString(bError));//显示错误
-                ClsJcPimDll.fnSetExit();//关闭连接
+                    byte[] bError = new byte[512];
+                    ClsJcPimDll.JcGetError(bError, 512);//获取错误
+                    MessageBox.Show(Encoding.ASCII.GetString(bError));//显示错误
+                    ClsJcPimDll.fnSetExit();//关闭连接
+                }
             }
-        }
 
         private void btn_close_Click(object sender, EventArgs e)
         {
@@ -321,11 +327,31 @@ namespace JcMBP
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Save sp=new Save();
-            sp.ShowDialog();
-            if (sp.DialogResult == DialogResult.OK)
-                if (OfftenMethod.SaveJpg(Application.StartupPath + "\\picture\\" + sp.pictureName + ".jpg", this))
-                    MessageBox.Show("Success");
+            //Save sp=new Save();
+            //sp.ShowDialog();
+            bool success=false;
+            string s="";
+            SaveFileDialog sfd = new SaveFileDialog();
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                if (OfftenMethod.SaveJpg(sfd.FileName + ".jpg", this))
+                {
+                    success = true;
+                    s += " Save Picture Success\r\n";
+                }
+
+                if (cm == CheckMode.Sf)
+                {
+                    success = OfftenMethod.SaveCsv_pdf(sfd.FileName, fm.testdata_, isdBm);
+                }
+                else if (cm == CheckMode.ST)
+                {
+                    success = OfftenMethod.SaveCsv_pdf(sfd.FileName, tm.testdata_, isdBm);
+                }
+                if (success) s += "Save Excel Success";
+                else s += "Save Excel Fail";
+                MessageBox.Show(s);
+            }
         }
 
         private void 保存校准结果ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -341,224 +367,130 @@ namespace JcMBP
 
         private void rxoffset_btn_save_Click(object sender, EventArgs e)
         {
-           
-            Save sp = new Save();
-             bool success = false;
-            //SaveFileDialog sfd = new SaveFileDialog();
-            //sfd.InitialDirectory(Application.StartupPath);
-
-             if (ClsUpLoad.saveFormat == "1")
-             {
-                 if (ClsUpLoad._type == 0)
-                 {
-
-                 }
-                 if (!isjb)
-                 {
-                     if (cm == CheckMode.Sf)
-                     {
-                         if (fm.ds.sxy.image1 == null)
-                             return;
-                     }
-                     else
-                     {
-                         if (tm.ds.sxy.image1 == null)
-                             return;
-                     }
-
-
-                     if (sp.ShowDialog() == DialogResult.OK)
-                     {
-                         //string s = sfd.FileName;
-                         //MessageBox.Show(s);
-                         try
-                         {
-                             if (cm == CheckMode.Sf)
-                             {
-                                 success = OfftenMethod.savepdf(Application.StartupPath + "\\pdf\\" + sp.pictureName, fm.ds, isdBm, true);
-                                 success = OfftenMethod.SaveCsv_pdf(Application.StartupPath + "\\csv\\" + sp.pictureName + ".csv", fm.ds, isdBm, true);
-                             }
-                             else if (cm == CheckMode.ST)
-                             {
-                                 success = OfftenMethod.savepdf(Application.StartupPath + "\\pdf\\" + sp.pictureName, tm.ds, isdBm, false);
-                                 success = OfftenMethod.SaveCsv_pdf(Application.StartupPath + "\\csv\\" + sp.pictureName + ".csv", tm.ds, isdBm, false);
-                             }
-                         }
-                         catch (Exception ex)
-                         {
-                             MessageBox.Show(ex.Message);
-                         }
-
-                     }
-                 }
-                 else
-                 {
-
-                     try
-                     {
-                         if (sp.ShowDialog() == DialogResult.OK)
-                         {
-                             success = OfftenMethod.savepdf(Application.StartupPath + "\\pdf\\" + sp.pictureName, fm.ds_arr, isdBm);
-                             success = OfftenMethod.SaveCsv_pdf(Application.StartupPath + "\\csv\\" + sp.pictureName + ".csv", fm.ds_arr, isdBm);
-                         }
-                     }
-                     catch (Exception ex)
-                     {
-                         MessageBox.Show(ex.Message);
-                     }
-                 }
-
-                 if (success)
-                     MessageBox.Show("Success");
-                 else
-                     MessageBox.Show("Fail");
-             }
-             else
-             {
-
-                 SaveMess sm = new SaveMess();
-                 if (sm.ShowDialog() == DialogResult.OK)
-                 {
-                     if (sp.ShowDialog() == DialogResult.OK)
-                     {
-                         if (cm == CheckMode.Sf)
-                             success = OfftenMethod.SaveTxt(Application.StartupPath + "\\txt\\" + sp.pictureName, fm.ds, sm.val, isdBm);
-                         else
-                             success = OfftenMethod.SaveTxt(Application.StartupPath + "\\txt\\" + sp.pictureName, tm.ds, sm.val, isdBm);
-                     }
-                 }
+            // Save sp = new Save();
+            // bool success = false;
+            // if (ClsUpLoad._type == 0)
+            // { 
              
-             }
+            // }
+            // if (fm.ds_arr.Count <= 0 )
+            //{
+                //if (cm == CheckMode.Sf)
+                //{
+                //    if (fm.ds.sxy.image1 == null)
+                //        return;
+                //}
+                //else
+                //{
+                //    if (tm.ds.sxy.image1 == null)
+                //        return;
+                //}
+           //      sp.ShowDialog();
+           //      if (sp.DialogResult == DialogResult.OK)
+           //      {
+           //          try
+           //          {
+           //              if (cm == CheckMode.Sf)
+           //              {
+           //                  success = OfftenMethod.savepdf(sp.pictureName, fm.ds, isdBm, true);
+           //                  success = OfftenMethod.SaveCsv_pdf(sp.pictureName, fm.ds, isdBm, true);
+           //              }
+           //              else if (cm == CheckMode.ST)
+           //              {
+           //                  success = OfftenMethod.savepdf(sp.pictureName, tm.ds, isdBm, false);
+           //                  success = OfftenMethod.SaveCsv_pdf(sp.pictureName, tm.ds, isdBm, false);
+           //              }
+           //          }
+           //          catch (Exception ex)
+           //          {
+           //              MessageBox.Show(ex.Message);
+           //          }
 
+           //      }
+           // }
+           //else
+           // {
+           //     sp.ShowDialog();
+           //     try
+           //     {
+           //         if (sp.DialogResult == DialogResult.OK)
+           //             success = OfftenMethod.savepdf(sp.pictureName, fm.ds_arr, isdBm);
+           //     }
+           //     catch (Exception ex)
+           //     {
+           //         MessageBox.Show(ex.Message);
+           //     }
+           // }
+
+           // if(success)
+           //     MessageBox.Show("Success");
+           // else
+           //     MessageBox.Show("Fail");
+            //OfftenMethod.savepdf("800",fm.ds_arr,true);
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
-
        
-            if (fm.isThreadStart || tx.isThreadStart || rx.isThreadStart)
+            if (fm.isThreadStart || tx.isThreadStart || rx.isThreadStart||gr.isThreadStart)
                 return;
             SingleButtonCheck(sender);
             tm.Show();
             cm = CheckMode.ST;
-            this.button1.Focus();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
       
-            if (tm.isThreadStart||tx.isThreadStart||rx.isThreadStart)
+            if (tm.isThreadStart||tx.isThreadStart||rx.isThreadStart|| gr.isThreadStart)
                 return;
             SingleButtonCheck(sender);
             fm.Show();
             cm = CheckMode.Sf;
-            this.button2.Focus();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {         
           
-            if (tm.isThreadStart || tx.isThreadStart || fm.isThreadStart)
+            if (tm.isThreadStart || tx.isThreadStart || fm.isThreadStart|| gr.isThreadStart)
                 return;
             SingleButtonCheck(sender);
             rx.Show();
             cm = CheckMode.Rx;
-            this.Focus();
-            this.button3.Focus();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
            
-            if (tm.isThreadStart || fm.isThreadStart || rx.isThreadStart)
+            if (tm.isThreadStart || fm.isThreadStart || rx.isThreadStart|| gr.isThreadStart)
                 return;
             SingleButtonCheck(sender);
             tx.Show();
             cm = CheckMode.Tx;
-            this.button5.Focus();
         }
 
         private void 测试次数ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SweepTimes sts=new SweepTimes();
+            sts.ShowDialog(); 
+        }
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
 
         }
 
-        private void toolStripMenuItem2_CheckedChanged(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
-            if (toolStripMenuItem2.Checked)
-            { 
-           
-            }
-        }
-
-        private void FrmMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Shift && e.KeyCode == Keys.Enter)
-            {
-                button4_Click(null, null);
-            }
-        }
-
-        private void button1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Shift && e.KeyCode == Keys.Enter)
-            {
-                button4_Click(null, null);
-            }
-        }
-
-        private void FrmMain_KeyPress(object sender, KeyPressEventArgs e)
-        {
-           
-        }
-
-        private void 解锁校准配置ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (tx == null && rx == null) return;
-            if (解锁校准配置ToolStripMenuItem.Text == "加锁校准配置")
-            {
-                if (tx != null)
-                {
-                    OfftenMethod.Nud_Enabled(tx.nuds, false);
-                }
-
-                if (rx != null)
-                {
-                    OfftenMethod.Nud_Enabled(rx.nuds, false);
-                }
-                解锁校准配置ToolStripMenuItem.Text = "解锁校准配置";
-                offsetPassword = true;
+            if (tm.isThreadStart||fm.isThreadStart || tx.isThreadStart || rx.isThreadStart)
                 return;
-            }
-
-            OffsetPass of = new OffsetPass();
-            of.ShowDialog();
-            if (of.DialogResult == DialogResult.OK)
-            {
-                 
-                if (tx != null)
-                {
-                    OfftenMethod.Nud_Enabled(tx.nuds, true);
-                }
-
-                if (rx != null)
-                {
-                    OfftenMethod.Nud_Enabled(rx.nuds, true);
-                }
-                if (解锁校准配置ToolStripMenuItem.Text == "解锁校准配置")
-                {
-                    解锁校准配置ToolStripMenuItem.Text = "加锁校准配置";
-                    offsetPassword = false;
-                }
-
-
-            }
+            SingleButtonCheck(sender);
+            gr.Show();
+            cm = CheckMode.Gr;
         }
 
-       
 
-      
         //====================
 
     }

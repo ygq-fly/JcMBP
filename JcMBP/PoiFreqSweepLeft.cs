@@ -20,7 +20,6 @@ namespace JcMBP
         byte imCo2 = 1;
         byte imLow = 0;
         byte imLess = 0;
-        bool orderMode = true;
         float _rxs;
         float _rxe;
         double f1;
@@ -55,10 +54,10 @@ namespace JcMBP
         /// <param name="port"></param>
         void Ini(byte port)
         {       
-            ds.freq1s = Convert.ToDouble(freq_nud_fstart1.Value);
-            ds.freq1e = Convert.ToDouble(freq_nud_fstop1.Value);
-            ds.freq2s = Convert.ToDouble(freq_nud_fstart2.Value);
-            ds.freq2e = Convert.ToDouble(freq_nud_fstop2.Value);
+            ds.freq1s = Convert.ToSingle(freq_nud_fstart1.Value);
+            ds.freq1e = Convert.ToSingle(freq_nud_fstop1.Value);
+            ds.freq2s = Convert.ToSingle(freq_nud_fstart2.Value);
+            ds.freq2e = Convert.ToSingle(freq_nud_fstop2.Value);
             ds.pow1 = ds.pow2 = Convert.ToSingle(freq_nud_pow2.Value);
             ds.step1 = ds.step2 = Convert.ToSingle(freq_cb_step.Text.Replace('m', ' '));
             ds.tx1 = (byte)(cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]);
@@ -91,15 +90,15 @@ namespace JcMBP
         /// </summary>
         void start()
         {
-            Sweep s = new SweepFreq(ds, ClsUpLoad._type.ToString());
-            fsm.Start(s);
-            this.Invoke(new ThreadStart(delegate()
-            {
-                time_btn_start_a.Enabled = true;
-                time_btn_start_a.BackColor = Color.White;
-                time_btn_start_b.Enabled = true;
-                groupBox1.Enabled = true;
-            }));
+            //Sweep s = new SweepFreq(ds, ClsUpLoad._type.ToString());
+            //fsm.Start(s);
+            //this.Invoke(new ThreadStart(delegate()
+            //{
+            //    time_btn_start_a.Enabled = true;
+            //    time_btn_start_a.BackColor = Color.White;
+            //    time_btn_start_b.Enabled = true;
+            //    groupBox1.Enabled = true;
+            //}));
         }
 
         /// <summary>
@@ -111,9 +110,7 @@ namespace JcMBP
         {
             //if (!fsm.isThreadStart)
             //{
-            if ((int)(cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]) == 7 && (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox4.Text)]) == 7 && (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]) == 7||
-                (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]) == 9 && (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox4.Text)]) == 9 && (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]) == 9||
-                (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]) == 10  && (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]) == 10)
+            if (comboBox1.SelectedIndex == 12 && comboBox3.SelectedIndex == 12 && comboBox4.SelectedIndex == 12)
             {
                 MessageBox.Show("该频段tx和rx不能同一频段");
                 return;
@@ -234,7 +231,7 @@ namespace JcMBP
         /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
-            PoiOrder ord = new PoiOrder(imCo1, imCo2, imLow, imLess,orderMode);
+            PoiOrder ord = new PoiOrder(imCo1, imCo2, imLow, imLess);
             ord.ShowDialog();
             if (ord.DialogResult == DialogResult.OK)
             {
@@ -242,7 +239,6 @@ namespace JcMBP
                 imLow = ord.imLow;//阶数加减法
                 imCo1 = ord.imCo1;//阶数参数
                 imCo2 = ord.imCo2;//阶数参数
-                orderMode = ord.poi_order;
                 button5.Text = ord.val;//扫频阶数按钮text
                 label4.Text = OfftenMethod.GetTestBand_f(imCo1, imCo2, imLow, imLess, f1s, f1e, f2s, f2e);
             }
@@ -297,32 +293,32 @@ namespace JcMBP
 
         void Jbstart()
         {
-            ds.sxy.starttime = DateTime.Now;
+            //ds.sxy.starttime = DateTime.Now;
 
-            for (int i = 0; i < ds.num; i++)
-            {
-                JbIni_(jd[i], i);
-                UpdateGroupControl(i);
-                Sweep s;
-                if (ds.sxy.model == 1)
-                    s = new SweepTime(ds, ClsUpLoad._type.ToString());
-                else
-                    s = new SweepFreq(ds, ClsUpLoad._type.ToString());
-                fsm.JbStart(s, i, jd[i].time_out_M);
-                Thread.Sleep(Convert.ToInt32(ClsUpLoad._sleepTime));
-                if (FreqSweepMid.jb_err||time_btn_start_b.Enabled)
-                    break;
-            }
-            this.Invoke(new ThreadStart(delegate
-            {
-                ds.sxy.endtime = DateTime.Now;
-                ds.sxy.spantime = ds.sxy.endtime - ds.sxy.starttime;
-                fsm.DateAndGr();
-                time_btn_start_a.Enabled = true;
-                time_btn_start_b.Enabled = true;
-                groupBox1.Enabled = true;
-                time_btn_start_b.BackColor = Color.White;
-            }));
+            //for (int i = 0; i < ds.num; i++)
+            //{
+            //    JbIni_(jd[i], i);
+            //    UpdateGroupControl(i);
+            //    Sweep s;
+            //    if (ds.sxy.model == 1)
+            //        s = new SweepTime(ds, ClsUpLoad._type.ToString());
+            //    else
+            //        s = new SweepFreq(ds, ClsUpLoad._type.ToString());
+            //    fsm.JbStart(s, i, jd[i].time_out_M);
+            //    Thread.Sleep(Convert.ToInt32(ClsUpLoad._sleepTime));
+            //    if (FreqSweepMid.jb_err||time_btn_start_b.Enabled)
+            //        break;
+            //}
+            //this.Invoke(new ThreadStart(delegate
+            //{
+            //    ds.sxy.endtime = DateTime.Now;
+            //    ds.sxy.spantime = ds.sxy.endtime - ds.sxy.starttime;
+            //    fsm.DateAndGr();
+            //    time_btn_start_a.Enabled = true;
+            //    time_btn_start_b.Enabled = true;
+            //    groupBox1.Enabled = true;
+            //    time_btn_start_b.BackColor = Color.White;
+            //}));
         }
 
         void JbIni_(JbData jb, int i)
@@ -466,7 +462,10 @@ namespace JcMBP
         private void time_btn_stop_Click(object sender, EventArgs e)
         {
             fsm.Stop();
-           
+            time_btn_start_a.Enabled = true;
+            time_btn_start_a.BackColor = Color.White;
+            time_btn_start_b.Enabled = true;
+            groupBox1.Enabled = true;
         }
 
         private void freq_nud_fstart1_MouseClick(object sender, MouseEventArgs e)

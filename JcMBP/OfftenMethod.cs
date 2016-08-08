@@ -7,7 +7,6 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using System.Security.Cryptography;
 namespace JcMBP
 {
    
@@ -15,18 +14,6 @@ namespace JcMBP
 
     class OfftenMethod
     {
-
-
-
-        public static string  Mid5Lock(string mess)
-        {
-            byte[] result = Encoding.Default.GetBytes(mess.Trim());   
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] output = md5.ComputeHash(result);
-            string val = BitConverter.ToString(output).Replace("-", ""); 
-            return val;
-        }
-
         /// <summary>
         /// panel加载窗体
         /// </summary>
@@ -167,14 +154,6 @@ namespace JcMBP
             }
         }
 
-        public static void Nud_Enabled(NumericUpDown[] nuds,bool b)
-        {
-            for (int i = 0; i < nuds.Length; i++)
-            {
-                nuds[i].Enabled = b;
-            }
-        }
-
         /// <summary>
         /// 获取各个频段rx和tx补偿
         /// </summary>
@@ -193,6 +172,41 @@ namespace JcMBP
             else
                 IniFile.SetString("Tx_Offsets", "tx_band", val.ToString());//保存offset
             return val;
+        }
+
+
+        /// <summary>
+        /// 添加扫描数据到datatable
+        /// </summary>
+        /// <param name="dt">datatable</param>
+        /// <param name="n">当前点</param>
+        /// <param name="f1">起始频率</param>
+        /// <param name="p1">功率</param>
+        /// <param name="f2">结束频率</param>
+        /// <param name="p2">功率</param>
+        /// <param name="fpim">扫描频率</param>
+        /// <param name="fval">互调值</param>
+        public static void ToNewRows(DataTable dt, int n,
+                                  float maxval, string fluctuate, string result)
+        {
+            DataRow row = dt.NewRow();
+            row[0] = n.ToString();
+            row[1] = maxval.ToString("0.0");
+            row[2] = fluctuate;
+            row[3] = result;
+            dt.Rows.Add(row);//添加行
+        }
+
+        public static void ToNewRowsGR(DataTable dt, int n,int tx,
+                                 float maxval, string fluctuate, string result)
+        {
+            DataRow row = dt.NewRow();
+            row[0] = "TX" + n.ToString();
+            row[1] = tx.ToString();
+            row[2] = maxval.ToString("0.0");
+            row[3] = fluctuate;
+            row[4] = result;
+            dt.Rows.Add(row);//添加行
         }
 
 
@@ -403,6 +417,30 @@ namespace JcMBP
            return s;
        }
 
+       public static double[] GetTestBand_val(byte imCo1, byte imCo2, byte imLow, byte imLess, double f1, double f2, double f3, double f4)
+       {
+           double[] v = new double[2];
+           double num1 = GetTestBand(imCo1, imCo2, imLow, imLess, f1, f3);
+           double num2 = GetTestBand(imCo1, imCo2, imLow, imLess, f1, f4);
+           double num3 = GetTestBand(imCo1, imCo2, imLow, imLess, f2, f3);
+           double num4 = GetTestBand(imCo1, imCo2, imLow, imLess, f2, f4);
+           double max = 0;
+           double min = 0;
+           double[] num = new double[] { num1, num2, num3, num4 };
+           max = num[0];
+           min = num[0];
+           for (int i = 0; i < 4; i++)
+           {
+               max = num[i] >= max ? num[i] : max;
+               min = num[i] <= min ? num[i] : min;
+           }
+           v[0] = min;
+           v[1] = max;
+
+           return v;
+       
+       }
+
         /// <summary>
         /// 脚本测试，datatable添加数据
         /// </summary>
@@ -472,59 +510,6 @@ namespace JcMBP
            return pimImage;
        }
 
-
-
-
-       public static bool SaveTxt(string path, DataSweep cjt,List<string> info,bool isdbm)
-       {
-           string col="Instrument  Date	                Time	                 Content	Test Description	 Model Number	                Serial Number	                Operator	        Carrier 1 Freq MHz	 Carrier 2 Freq, MHz 	Carrier 1 Power	    Carrier 2 Power	    Carrier Power Units	    Carrier 1 Offset	Carrier 2 Offset	Carrier Offset Units	ALC	Averaging	Settling Time,     msec	       IM Measurement	Stimulus Port	IM Order	IM Freq, MHz	IM Power	Reference Value	    IM Peak Power	IM Units";
-
-           string val = "         26/07/2016	        12:16:28 PM	               Swept IM	                     [Enter Test Description]	    [Enter Model Number]		    [Enter Operator]	925.0	             960.0	                    OFF	                OFF	                dBm	                    0.0	                0.0	                dB	                    ON	            Normal	        0	       REV	Port        1	            3rd	        890.0	        -111.3	    -119.000000	        -135.380000	        dBm";
-
-           double max = cjt.sxy.max;
-           double limit = cjt.limit;
-           string unit = "dBm";
-           if (!isdbm)
-           {
-               unit = "dBc";
-               max = max - cjt.pow1;
-           }
-           string port="REV Port 1";
-           if(cjt.port==1)  port="FWD Port 2";
-           
-           if(!Directory.Exists(Application.StartupPath + "\\txt"))
-               Directory.CreateDirectory(Application.StartupPath + "\\txt");
-
-           bool exists = File.Exists(path + ".txt");
-           FileStream fs = new FileStream(path + ".txt", FileMode.Append, FileAccess.Write);
-           StreamWriter sw = new StreamWriter(fs);
-           bool result=true;
-           try
-           {	
-               if (!exists)
-                   sw.WriteLine("Instrument    Date    Time    Content    Test Description    Model Number    Serial Number    Operator" +
-               "    Carrier 1 Freq, MHz     Carrier 2 Freq, MHz    Carrier 1 Power    Carrier 2 Power    Carrier Power    Units    Carrier 1 Offset    Carrier 2 Offset" +
-               "    Carrier Offset Units    ALC Averaging    Settling Time, msec    IM Measurement    Stimulus Port    IM Order    IM Freq, MHz    IM Power    Reference Value    IM Peak Power    IM Units");
-
-               string blank = "    ";
-               string s = info[0] + blank + DateTime.Now.ToString("dd/MM/yyyy") + blank + DateTime.Now.ToString("hh:mm:ss tt").Replace("下午", "PM").Replace("上午", "AM") + blank + info[4] +
-                              blank + info[1] + blank + info[2] + blank + info[3] + blank + cjt.freq1s.ToString("0.0") + blank + cjt.freq2e.ToString("0.0") + blank + "ON" + blank + "ON" + blank + "dBm" + blank + cjt.off1.ToString("0.0") + blank + cjt.off2.ToString("0.0") + blank + "dBm" + blank + "ON" + blank + "Normal" + blank + "0" + blank + port + blank + cjt.port + blank + cjt.order.ToString() + "rd" + blank + StaticMethod.GetFreq(cjt.imCo1, cjt.imCo2, 0, 0, cjt.freq1s, cjt.freq2e).ToString("0.0") + blank + cjt.pow1.ToString("0.0") + blank + limit.ToString("0.000000") +blank+ max.ToString("0.000000") + blank + unit;
-               sw.WriteLine(s);
-
-
-           }
-           catch (Exception ex)
-           {
-               result = false;
-           }
-           finally
-           {
-               sw.Close();
-               fs.Close();
-           }
-           return result;
-       }
-
         /// <summary>
         /// 保存jpg文件
         /// </summary>
@@ -537,10 +522,10 @@ namespace JcMBP
            {
                if (!File.Exists(jpgFileName))//判断文件名是否存在
                {
-                   if (!Directory.Exists(Application.StartupPath + "\\picture"))//判断文件目录是否存在
-                   {
-                       Directory.CreateDirectory(Application.StartupPath + "\\picture");//不存在创建
-                   }
+                   //if (!Directory.Exists(Application.StartupPath + "\\picture"))//判断文件目录是否存在
+                   //{
+                   //    Directory.CreateDirectory(Application.StartupPath + "\\picture");//不存在创建
+                   //}
                    System.Drawing.Image pimImage = SaveImage(handel);
                  
                    pimImage.Save(jpgFileName);//保存图形
@@ -607,11 +592,11 @@ namespace JcMBP
            string path = Application.StartupPath + "\\pdf";
            try
            {
-               //if (!Directory.Exists(path))//判断存放的文件夹是否存在
-               //{
-               //    Directory.CreateDirectory(path);//不存在就创建
-               //}
-               string str = /*path + "\\" +*/ sre + ".pdf";//文件名
+               if (!Directory.Exists(path))//判断存放的文件夹是否存在
+               {
+                   Directory.CreateDirectory(path);//不存在就创建
+               }
+               string str = path + "\\" + sre + ".pdf";//文件名
                iTextSharp.text.Rectangle pageSize = new iTextSharp.text.Rectangle(400f, 400f);//设置pdf页面大小
                pageSize.BackgroundColor = new iTextSharp.text.BaseColor(0xFF, 0xFF, 0xDE);//设置页面颜色
                Document document = new Document(pageSize);//初始化
@@ -650,7 +635,7 @@ namespace JcMBP
                    //paragraph = new Paragraph("F1(MHz)", font2);
                    ////paragraph.Alignment = Element.ALIGN_RIGHT; ;
                    table2.TotalWidth = 950;
-                   table2.SetWidths(new float[] { 50f, 80f, 155f, 155f, 155f, 115f, 165f,75f});//设置每列的宽度
+                   table2.SetWidths(new float[] { 50f, 80f, 155f, 155f, 155f, 130f, 130f,95f});//设置每列的宽度
              
              
                    table2.AddCell( new Phrase("NO.", font2));//添加第一行第一列数据
@@ -658,11 +643,11 @@ namespace JcMBP
                    table2.AddCell(new Phrase("F1(MHz)", font2));//添加第一行第三列数据
                    table2.AddCell(new Phrase("F2(MHz)", font2));//添加第一行第四列数据
                    table2.AddCell(new Phrase("RX(MHz)", font2));//添加第一行第五列数据
-                   table2.AddCell(new Phrase("PIM阶数", font2));//添加第一行第六列数据               
-                    table2.AddCell(new Phrase("MAX(dBm/dBc)", font2));//添加第一行第七列数据
+                   table2.AddCell(new Phrase("PIM公式", font2));//添加第一行第六列数据
+                   table2.AddCell(new Phrase("PEAK(dBm)", font2));//添加第一行第七列数据
                    table2.AddCell(new Phrase("结论", font2));//添加第一行第七列数据
 
-                   if (cjt.Count <= 8)
+                   if (cjt.Count <= 14)
                    {
                        for (int j = 0; j < cjt.Count; j++)
                        {
@@ -673,9 +658,10 @@ namespace JcMBP
                            table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[3], font2));//添加第j行第四列数据
                            table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[4], font2));//添加第j行第五列数据
                            table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[5], font2));//添加第j行第六列数据
-                           table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[6] + "  / " + (double.Parse(cjt[j].sxy.pdf_val[6]) - 43).ToString(), font2));//添加第j行第七列数据
+                           table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[6], font2));//添加第j行第七列数据
                            table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[7], font2));//添加第j行第七列数据
-                           //table2.AddCell(new Phrase(j.ToString(), font2));//添加第j行第七列数据
+
+                           table2.AddCell(new Phrase(j.ToString(), font2));//添加第j行第七列数据
                            string oV = cjt[j].sxy.overViewMessage + "\r\n";
                            paragraph = new iTextSharp.text.Paragraph(oV, font);
                            document.Add(paragraph);
@@ -686,7 +672,7 @@ namespace JcMBP
                    else
                    {
 
-                       for (int j = 0; j < 8; j++)
+                       for (int j = 0; j < 14; j++)
                        {
 
                            table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[0].Trim(), font2));//添加第j行第一列数据
@@ -695,7 +681,7 @@ namespace JcMBP
                            table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[3].Trim(), font2));//添加第j行第四列数据
                            table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[4].Trim(), font2));//添加第j行第五列数据
                            table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[5].Trim(), font2));//添加第j行第六列数据
-                           table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[6] + "  / " + (double.Parse(cjt[j].sxy.pdf_val[6]) - 43).ToString(), font2));//添加第j行第七列数据
+                           table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[6].Trim(), font2));//添加第j行第七列数据
                            table2.AddCell(new Phrase(cjt[j].sxy.pdf_val[7].Trim(), font2));//添加第j行第七列数据
 
                        }
@@ -713,18 +699,18 @@ namespace JcMBP
                        table3.AddCell(new Phrase("F2(MHz)", font2));//添加第一行第四列数据
                        table3.AddCell(new Phrase("RX(MHz)", font2));//添加第一行第五列数据
                        table3.AddCell(new Phrase("PIM公式", font2));//添加第一行第六列数据
-                       table3.AddCell(new Phrase("MAX(dBm/dBc)", font2));//添加第一行第七列数据
+                       table3.AddCell(new Phrase("PEAK(dBm)", font2));//添加第一行第七列数据
                        table3.AddCell(new Phrase("结论", font2));//添加第一行第七列数据
-                       for (int j = 8; j < cjt.Count; j++)
+                       for (int j = 14; j < cjt.Count; j++)
                        {
 
                            table3.AddCell(new Phrase(cjt[j].sxy.pdf_val[0].Trim(), font2));//添加第j行第一列数据
                            table3.AddCell(new Phrase(cjt[j].sxy.pdf_val[1].Trim(), font2));//添加第j行第二列数据
-                           table3.AddCell(new Phrase(cjt[j].sxy.pdf_val[2].Trim(), font2));//添加第j行第三列数据
-                           table3.AddCell(new Phrase(cjt[j].sxy.pdf_val[3].Trim(), font2));//添加第j行第四列数据
-                           table3.AddCell(new Phrase(cjt[j].sxy.pdf_val[4].Trim(), font2));//添加第j行第五列数据
-                           table3.AddCell(new Phrase(cjt[j].sxy.pdf_val[5].Trim(), font2));//添加第j行第六列数据
-                           table3.AddCell(new Phrase(cjt[j].sxy.pdf_val[6] + "  / " + (double.Parse(cjt[j].sxy.pdf_val[6]) - 43).ToString(), font2));//添加第j行第七列数据
+                           table3.AddCell(new Phrase(cjt[j ].sxy.pdf_val[2].Trim(), font2));//添加第j行第三列数据
+                           table3.AddCell(new Phrase(cjt[j ].sxy.pdf_val[3].Trim(), font2));//添加第j行第四列数据
+                           table3.AddCell(new Phrase(cjt[j ].sxy.pdf_val[4].Trim(), font2));//添加第j行第五列数据
+                           table3.AddCell(new Phrase(cjt[j ].sxy.pdf_val[5].Trim(), font2));//添加第j行第六列数据
+                           table3.AddCell(new Phrase(cjt[j ].sxy.pdf_val[6].Trim(), font2));//添加第j行第七列数据
                            table3.AddCell(new Phrase(cjt[j].sxy.pdf_val[7].Trim(), font2));//添加第j行第七列数据
 
                        }
@@ -894,7 +880,157 @@ namespace JcMBP
                        }
                    }
 
-                 
+                   //for (int i = 0; i < 50; i++)
+                   //{
+
+
+
+                   //    if (i == 0)//第一页
+                   //    {
+                   //        document.SetMargins(36, 0, 36, 0);
+                   //        document.NewPage();//添加下一页
+                          
+                   //        paragraph = new iTextSharp.text.Paragraph(i.ToString(), font);
+                   //        document.Add(paragraph);//添加文本到pdf
+                   //        //iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(cjt[i].sxy.image1, BaseColor.WHITE);
+                   //        //img.SetAbsolutePosition(20, 20);//设置图片位置
+                   //        //img.ScaleAbsolute(270, 200);//设置图片大小
+                   //        //writer.DirectContent.AddImage(img);//添加图片大小
+                   //        //iTextSharp.text.Image img2 = iTextSharp.text.Image.GetInstance(cjt[i].sxy.image2, BaseColor.WHITE);
+                   //        //img2.SetAbsolutePosition(290, 20);//设置图片位置
+                   //        //img2.ScaleAbsolute(100, 200);//设置图片大小
+                   //        //writer.DirectContent.AddImage(img2);//添加图片大小
+                   //        int num_count = 2;//计算需要几张表格，
+                   //        int get_count = 20;//每张20行
+                   //        int cou = -1;//当前脚本数据行
+
+                   //        for (int w = 0; w < num_count + 1; w++)
+                   //        {
+                   //            PdfPTable table = new PdfPTable(7);//初始化7列的表格
+                   //            table.TotalWidth = 850;
+                   //            table.SetWidths(new float[] { 70f, 130f, 130f, 130f, 130f, 130f, 130f });//设置每列的宽度
+                   //            document.SetMargins(-40, -40, 0, 0);//设置表格边界 
+                   //            document.NewPage();//创建下一页
+                   //            paragraph = new iTextSharp.text.Paragraph(i.ToString()+"di jizhang", font);
+                   //            paragraph.Alignment = Element.ALIGN_CENTER;
+                   //            document.Add(paragraph);//添加文本
+                   //            if (w == num_count)//最后一张表格
+                   //            {
+                   //                get_count = 20;//计算最后一张表格行数
+                   //            }
+                   //            for (int j = 0; j < get_count; j++)
+                   //            {
+                   //                cou++;//当前脚本数据行
+                   //                //DataRow dtr = cjt[i].dt.Rows[cou];
+                   //                //if (!isdbm)
+                   //                //    dtr = cjt[i].dtc.Rows[cou];
+                   //                if (w == 0 && j == 0)//第一张表格第一行添加行标题
+                   //                {
+                   //                    cou--;//当前脚本数据行
+                   //                    table.AddCell(new Phrase("NO", font2));//添加第一行第一列数据
+                   //                    table.AddCell(new Phrase("F1(MHz)", font2));//添加第一行第二列数据
+                   //                    table.AddCell(new Phrase("P1(dBm)", font2));//添加第一行第三列数据
+                   //                    table.AddCell(new Phrase("F2(MHz)", font2));//添加第一行第四列数据
+                   //                    table.AddCell(new Phrase("P2(dBm)", font2));//添加第一行第五列数据
+                   //                    table.AddCell(new Phrase("F_im(MHz)", font2));//添加第一行第六列数据
+                   //                    if (isdbm)
+                   //                        table.AddCell(new Phrase("P_im(dBm)", font2));//添加第一行第七列数据
+                   //                    else
+                   //                        table.AddCell(new Phrase("P_im(dBc)", font2));//添加第一行第七列数据
+                   //                }
+                   //                else
+                   //                {
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第一列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第二列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第三列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第四列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第五列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第六列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第七列数据
+                   //                }
+                   //            }
+                   //            document.Add(table);//添加表格
+                   //        }
+                   //    }
+
+
+                   //    else
+                   //    {
+                   //        document.SetMargins(36, 0, 36, 0);
+                   //        document.NewPage();//添加下一页
+                   //        //if (!cjt[i].sxy.str_data.Contains("模式"))//判断是否是换线提示
+                   //        //{
+                   //        //    paragraph = new iTextSharp.text.Paragraph(cjt[i].sxy.str_data, font);
+
+                   //        //    document.Add(paragraph);//添加文本
+                   //        //    continue;
+                   //        //}
+                   //        paragraph = new iTextSharp.text.Paragraph(i.ToString(), font);
+                   //        document.Add(paragraph);//添加文本到pdf
+                   //        //iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(cjt[i].sxy.image1, BaseColor.WHITE);
+                   //        //img.SetAbsolutePosition(20, 20);//设置曲线图形图片位置
+                   //        //img.ScaleAbsolute(270, 200);//设置曲线图形图片大小
+                   //        //writer.DirectContent.AddImage(img);//添加图片
+                   //        //iTextSharp.text.Image img2 = iTextSharp.text.Image.GetInstance(cjt[i].sxy.image2, BaseColor.WHITE);
+                   //        //img2.SetAbsolutePosition(290, 20);//设置互调值图形图片位置
+                   //        //img2.ScaleAbsolute(100, 200);//设置互调值图形图片大小
+                   //        //writer.DirectContent.AddImage(img2);//添加图片
+                   //        int num_count = 2;//计算需要几张表格，
+                   //        int get_count = 20;//每张20行
+                   //        int cou = -1;//当前脚本数据行
+
+                   //        for (int w = 0; w < num_count + 1; w++)
+                   //        {
+                   //            PdfPTable table = new PdfPTable(7);//初始化7列的表格
+                   //            table.TotalWidth = 850;
+
+                   //            table.SetWidths(new float[] { 70f, 130f, 130f, 130f, 130f, 130f, 130f });//设置每列的宽度
+                   //            table.HorizontalAlignment = Element.ALIGN_CENTER;
+                   //            //table.TotalWidth = 850;
+                   //            document.SetMargins(-40, -40, 0, 0);//设置表格边界
+                   //            document.NewPage();//创建下一页
+                   //            paragraph = new iTextSharp.text.Paragraph(i.ToString()+"dijizhang", font);
+                   //            paragraph.Alignment = Element.ALIGN_CENTER;
+                   //            document.Add(paragraph);//添加文本
+                   //            if (w == num_count)//最后一张表格
+                   //            {
+                   //                get_count = 20;//计算最后一张表格行数
+                   //            }
+                   //            for (int j = 0; j < get_count; j++)
+                   //            {
+                   //                cou++;//当前脚本数据行
+                   //                //DataRow dtr = cjt[i].dt.Rows[cou];//计算最后一张表格行数
+                   //                //if (!isdbm)
+                   //                //    dtr = cjt[i].dtc.Rows[cou];//计算最后一张表格行数
+                   //                if (w == 0 && j == 0)
+                   //                {
+                   //                    cou--;//当前脚本数据行
+                   //                    table.AddCell(new Phrase("NO", font2));//添加第一行第一列数据
+                   //                    table.AddCell(new Phrase("F1(MHz)", font2));//添加第一行第二列数据
+                   //                    table.AddCell(new Phrase("P1(dBm)", font2));//添加第一行第三列数据
+                   //                    table.AddCell(new Phrase("F2(MHz)", font2));//添加第一行第四列数据
+                   //                    table.AddCell(new Phrase("P2(dBm)", font2));//添加第一行第五列数据
+                   //                    table.AddCell(new Phrase("F_im(MHz)", font2));//添加第一行第六列数据
+                   //                    if (isdbm)
+                   //                        table.AddCell(new Phrase("P_im(dBm)", font2));//添加第一行第七列数据
+                   //                    else
+                   //                        table.AddCell(new Phrase("P_im(dBc)", font2));//添加第一行第七列数据
+                   //                }
+                   //                else
+                   //                {
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第一列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第二列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第三列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第四列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第五列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第六列数据
+                   //                    table.AddCell(new Phrase(i.ToString(), font2));//添加第j行第七列数据
+                   //                }
+                   //            }
+                   //            document.Add(table);//添加表格
+                   //        }
+                   //    }
+                   //}
                document.Close();//关闭
                is_succ = true;
            }
@@ -1060,11 +1196,11 @@ namespace JcMBP
            string path = Application.StartupPath + "\\pdf";
            try
            {
-               //if (!Directory.Exists(path))//判断存放的文件夹是否存在
-               //{
-               //    Directory.CreateDirectory(path);//不存在就创建
-               //}
-               string str = sre + ".pdf";//文件名
+               if (!Directory.Exists(path))//判断存放的文件夹是否存在
+               {
+                   Directory.CreateDirectory(path);//不存在就创建
+               }
+               string str = path + "\\" + sre + ".pdf";//文件名
                iTextSharp.text.Rectangle pageSize = new iTextSharp.text.Rectangle(400f, 400f);//设置pdf页面大小
                pageSize.BackgroundColor = new iTextSharp.text.BaseColor(0xFF, 0xFF, 0xDE);//设置页面颜色
                Document document = new Document(pageSize);//初始化
@@ -1169,49 +1305,63 @@ namespace JcMBP
        }
 
 
-       public static bool SaveCsv_pdf(string csvFileName, DataSweep cjt, bool isdbm,bool mode)
+       public static bool SaveCsv_pdf(string csvFileName, TestData testdata, bool isdbm)
        {
            //string path = Application.StartupPath + "\\csv";//目录
            //if (!Directory.Exists(path))//判断目录是否存在
            //{
            //    Directory.CreateDirectory(path);//不存在创建
            //}
+           
            try
            {
+              
                if (!File.Exists(csvFileName))//判断文件名是否存在
                {
                    DataTable dtb;
-                   DataTable dt;
-                   DataTable dtc;
+                   DataTable resultDb;
                    CsvReport_Pim_Entry[] cp;
-                   if (mode)
+                   List<CsvReport_Pim_Entry[]> lcr = new List<CsvReport_Pim_Entry[]>();
+
+                   resultDb = testdata.surFaceData_dbm;
+                   if (!isdbm)
+                       resultDb = testdata.surFaceData_dbc;
+                   cp = new CsvReport_Pim_Entry[resultDb.Rows.Count];
+                   for (int i = 0; i < resultDb.Rows.Count; i++)//添加数据到csv
                    {
-                       dt = cjt.dtm;
-                       dtc = cjt.dtm_c;
+                       DataRow row = resultDb.Rows[i];
+                       cp[i] = new CsvReport_Pim_Entry();
+                       cp[i].No = int.Parse(row[0].ToString());
+                       cp[i].MaxVal = row[1].ToString();
+                       cp[i].Fluctuate = row[2].ToString();
+                       cp[i].Result =row[3].ToString();
+
                    }
-                   else
+                   lcr.Add(cp);//保存cp
+
+                   for (int j = 0; j < testdata.pimDate.Count; j++)
                    {
-                       dt = cjt.dt;
-                       dtc = cjt.dtc;
+
+                       dtb = testdata.pimDate[j].dt_dbm;
+                       if (!isdbm)
+                           dtb = testdata.pimDate[j].dt_dbc;
+                       cp = new CsvReport_Pim_Entry[dtb.Rows.Count];
+                       for (int i = 0; i < dtb.Rows.Count; i++)//添加数据到csv
+                       {
+                           DataRow row = dtb.Rows[i];
+                           cp[i] = new CsvReport_Pim_Entry();
+                           cp[i].No = int.Parse(row[0].ToString());
+                           cp[i].F1 = float.Parse(row[1].ToString());
+                           cp[i].P1 = float.Parse(row[2].ToString());
+                           cp[i].F2 = float.Parse(row[3].ToString());
+                           cp[i].P2 = float.Parse(row[4].ToString());
+                           cp[i].Im_F = float.Parse(row[5].ToString());
+                           cp[i].Im_V = float.Parse(row[6].ToString());
+                       }
+                       lcr.Add(cp);//保存cp
+                       if (j == testdata.pimDate.Count - 1)
+                           CsvReport.Save_Csv_Pim(csvFileName+".csv", lcr, testdata.pimDate.Count+1,isdbm);//保存到csv
                    }
-                   dtb = dt;
-                    if (!isdbm)
-                        dtb = dtc;
-                    cp = new CsvReport_Pim_Entry[dtb.Rows.Count];
-                    for (int i = 0; i < dtb.Rows.Count; i++)//添加数据到csv
-                    {
-                        DataRow row = dtb.Rows[i];
-                        cp[i] = new CsvReport_Pim_Entry();
-                        cp[i].No = int.Parse(row[0].ToString());
-                        cp[i].F1 = float.Parse(row[1].ToString());
-                        cp[i].P1 = float.Parse(row[2].ToString());
-                        cp[i].F2 = float.Parse(row[3].ToString());
-                        cp[i].P2 = float.Parse(row[4].ToString());
-                        cp[i].Im_F = float.Parse(row[5].ToString());
-                        cp[i].Im_V = float.Parse(row[6].ToString());
-                    }
-                    CsvReport.Save_Csv_Pim(csvFileName, cp);//保存到csv
-                   
                    return true;
                }
                else
@@ -1221,7 +1371,7 @@ namespace JcMBP
            }
            catch (Exception e)
            {
-               MessageBox.Show("保存CSV文件异常 "+e.Message);
+               MessageBox.Show("保存CSV文件异常");
                return false;
            }
        }
@@ -1242,7 +1392,7 @@ namespace JcMBP
                    CsvReport_Pim_Entry[] cp;
                    List<CsvReport_Pim_Entry[]> lcr = new List<CsvReport_Pim_Entry[]>();
                    int dt_num = cjt.Count;//数据数量
-                   for (int j = 0; j < cjt.Count ; j++)
+                   for (int j = 0; j < cjt.Count + 1; j++)
                    {
                        if (!cjt[j].sxy.str_data.Contains("模式"))//判断是否是换线信息
                        {
@@ -1267,7 +1417,7 @@ namespace JcMBP
                        }
                        lcr.Add(cp);//保存cp
                        if (j == dt_num-1)
-                           CsvReport.Save_Csv_Pim(csvFileName, lcr, dt_num);//保存到csv
+                           CsvReport.Save_Csv_Pim(csvFileName, lcr, dt_num,isdbm);//保存到csv
                    }
                    return true;
                }
@@ -1278,7 +1428,7 @@ namespace JcMBP
            }
            catch (Exception e)
            {
-               MessageBox.Show("保存CSV文件异常 "+e.Message);
+               MessageBox.Show("保存CSV文件异常");
                return false;
            }
        }
@@ -1324,6 +1474,28 @@ namespace JcMBP
         float f2;
         float im_f;
         float im_v;
+
+        string maxVal;
+        string result;
+        string fluctuate;
+
+        public string MaxVal
+        {
+            get { return maxVal; }
+            set { maxVal  = value; }
+        }
+
+        public string Fluctuate
+        {
+            get { return fluctuate; }
+            set { fluctuate = value; }
+        }
+
+        public string Result
+        {
+            get { return result; }
+            set { result = value; }
+        }
 
         /// <summary>
         /// 扫描项序号
@@ -1396,7 +1568,7 @@ namespace JcMBP
         /// <param name="fileName"></param>
         /// <param name="entries"></param>
         /// <param name="header"></param>
-        internal static void Save_Csv_Pim(string fileName, CsvReport_Pim_Entry[] entries)
+        internal static void Save_Csv_Pim(string fileName,List<CsvReport_Pim_Entry[]> entries ,bool isdbm)
         {
             StreamWriter sw = null;
 
@@ -1405,46 +1577,68 @@ namespace JcMBP
                 sw = new StreamWriter(fileName, false, Encoding.ASCII);
                 sw.WriteLine("NO., F1, P1, F2, P2, Im_V, Im_F");
 
-                string s4;
-                for (int i = 0; i < entries.Length; i++)
+                for (int j = 0; j < entries.Count; j++)
                 {
-                    s4 = entries[i].No.ToString() + ", " +
-                         entries[i].F1.ToString("0.0000000") + ", " +
-                         entries[i].P1.ToString("0.0000000") + ", " +
-                         entries[i].F2.ToString("0.0000000") + ", " +
-                         entries[i].P2.ToString("0.0000000") + ", " +
-                         entries[i].Im_F.ToString("0.0000000") + ", " +
-                         entries[i].Im_V.ToString("0.0000000");
 
-                    sw.WriteLine(s4);
-                    //sw.WriteLine("\r\n\r\n");
+
+                    string s4;
+                    for (int i = 0; i < entries[j].Length; i++)
+                    {
+                        s4 = entries[i][j].No.ToString() + ", " +
+                             entries[i][j].F1.ToString("0.0000000") + ", " +
+                             entries[i][j].P1.ToString("0.0000000") + ", " +
+                             entries[i][j].F2.ToString("0.0000000") + ", " +
+                             entries[i][j].P2.ToString("0.0000000") + ", " +
+                             entries[i][j].Im_F.ToString("0.0000000") + ", " +
+                             entries[i][j].Im_V.ToString("0.0000000");
+
+                        sw.WriteLine(s4);
+                        sw.WriteLine("\r\n\r\n");
+                    }
                 }
-
                 sw.Flush();
                 sw.Close();
                 sw.Dispose();
 
             }
-            catch(Exception ex)       
+            catch          
             {
                 if (sw != null)
                 {
                     sw.Close();
                     sw.Dispose();
                 }
-                MessageBox.Show(ex.Message);
             }
         }
-        internal static void Save_Csv_Pim(string fileName, List<CsvReport_Pim_Entry[]> entries, int num)
+        internal static void Save_Csv_Pim(string fileName, List<CsvReport_Pim_Entry[]> entries, int num,bool isdbm)
         {
             StreamWriter sw = null;
 
             try
             {
                 sw = new StreamWriter(fileName, false, Encoding.ASCII);
-                sw.WriteLine("NO., F1, P1, F2, P2, Im_V, Im_F");
+                if(isdbm)
+                    sw.WriteLine("NO., MaxVal(dBm), Fluctuate, Result");
+                else sw.WriteLine("NO., MaxVal(dBc), Fluctuate, Result");
+                string s;
+               
+                for (int i = 0; i < entries[0].Length; i++)
+                {
+                    s = entries[0][i].No.ToString() + ", " +entries[0][i].MaxVal + ", " +
+                            entries[0][i].Fluctuate + ", " +
+                            entries[0][i].Result;
+
+
+                    sw.WriteLine(s);
+
+                }
+                sw.WriteLine("\r\n\r\n");
+                
+
+                 if(isdbm) sw.WriteLine("NO., F1, P1, F2, P2, Im_V(dBm), Im_F");
+                 else sw.WriteLine("NO., F1, P1, F2, P2, Im_V(dBc), Im_F");
                 string s4;
-                for (int j = 0; j < num; j++)
+                for (int j = 1; j < num; j++)
                 {
 
                     for (int i = 0; i < entries[j].Length; i++)
@@ -1467,14 +1661,13 @@ namespace JcMBP
                 sw.Dispose();
 
             }
-            catch(Exception ex)
+            catch
             {
                 if (sw != null)
                 {
                     sw.Close();
                     sw.Dispose();
                 }
-                MessageBox.Show(ex.Message);
             }
         }
     }

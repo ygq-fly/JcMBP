@@ -17,7 +17,6 @@ namespace JcMBP
         byte imCo2 = 1;
         byte imLow = 0;
         byte imLess = 0;
-        bool orderMode = true;
         float _rxs;
         float _rxe;
         double f1s;
@@ -528,7 +527,7 @@ namespace JcMBP
 
         private void button8_Click(object sender, EventArgs e)
         {
-            PoiOrder ord = new PoiOrder(imCo1, imCo2, imLow, imLess,orderMode);
+            PoiOrder ord = new PoiOrder(imCo1, imCo2, imLow, imLess);
             ord.ShowDialog();
             if (ord.DialogResult == DialogResult.OK)
             {
@@ -536,7 +535,6 @@ namespace JcMBP
                 imLow = ord.imLow;//阶数加减法
                 imCo1 = ord.imCo1;//阶数参数
                 imCo2 = ord.imCo2;//阶数参数
-                orderMode = ord.poi_order;
                 button8.Text = ord.val;//扫频阶数按钮text
                 label70.Text = OfftenMethod.GetTestBand_f(imCo1, imCo2, imLow, imLess, f1s, f1e, f2s, f2e);
             }

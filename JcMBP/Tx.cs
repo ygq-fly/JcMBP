@@ -9,41 +9,35 @@ using System.Windows.Forms;
 
 namespace JcMBP
 {
-    public delegate void LockVal(bool lockval);
     public partial class Tx : Form
     {
-
-        public event LockVal LockValHandel;
         ClsUpLoad cul;
         public  bool isThreadStart=false;
         byte _off_band = 0;          
         byte _off_dutport = 0;
         double  _off_tx_loss = 0;
         double _off_tx_pow = 43;
-        public  NumericUpDown[] nuds;
+        NumericUpDown[] nuds;
         public Tx(ClsUpLoad cul)
         {
             InitializeComponent();
             this.cul = cul;
-            nuds = new NumericUpDown[]{nud_txoffset_0,nud_txoffset_1,nud_txoffset_2,nud_txoffset_3,
-                                                        nud_txoffset_4,nud_txoffset_5,nud_txoffset_6,nud_txoffset_7,
-                                                        nud_txoffset_8,nud_txoffset_9,nud_txoffset_10,nud_txoffset_11,nud_txoffset_12,numericUpDown2,numericUpDown1};
         }
 
         private void Tx_Load(object sender, EventArgs e)
         {
             tx_offset_pb.Image = Image.FromFile(Application.StartupPath + "\\Band\\发射校准.JPG");
-
-            if (ClsUpLoad._type == 2)
+            if (ClsUpLoad._type == 2||ClsUpLoad._type==1)
                 txoffset_btn_start_b.Visible = false;
             OfftenMethod.LoadComboBox(cb_txoffset_band, cul.BandNames);
             cb_txoffset_band.SelectedIndex = 0;
             Label[] lables = new Label[]{label12,label15,label16,label17,label18,label19,
-                                         label14,label41,label42,label40,label58,label56,label2,label4,label3};
-           
+                                         label14,label41,label42,label40,label58,label56,label2};
+            nuds = new NumericUpDown[]{nud_txoffset_0,nud_txoffset_1,nud_txoffset_2,nud_txoffset_3,
+                                                        nud_txoffset_4,nud_txoffset_5,nud_txoffset_6,nud_txoffset_7,
+                                                        nud_txoffset_8,nud_txoffset_9,nud_txoffset_10,nud_txoffset_11,nud_txoffset_12};
             OfftenMethod.LoadLabel(lables, cul.AllBandNames);
             OfftenMethod.LoadOffect(nuds, cul.TxVal);
-            if (FrmMain.offsetPassword) OfftenMethod.Nud_Enabled(nuds, true);
         }
 
         private void txoffset_btn_start_a_Click(object sender, EventArgs e)
@@ -165,8 +159,8 @@ namespace JcMBP
             this.Invoke(new ThreadStart(delegate()
             {
                 this.tb_offset_tx_log.AppendText("Tx Offset: " + offset_freq.ToString("0.00") + " , " +
-                                                                 (Offset_real_val + 43).ToString("0.00") + " , " +
-                                                                 (43 - Offset_dsp_val).ToString("0.00") + "\r\n");//添加tx校准信息
+                                                                 (Offset_real_val + Convert.ToDouble(nud_txoffset_pow.Value)).ToString("0.00") + " , " +
+                                                                 (Convert.ToDouble(nud_txoffset_pow.Value) - Offset_dsp_val).ToString("0.00") + "\r\n");//添加tx校准信息
                 this.progress_offset_tx.Value += 1;//进度条值加1
             }));
         }

@@ -20,8 +20,6 @@ namespace JcMBP
         byte imCo2 = 1;
         byte imLow = 0;
         byte imLess = 0;
-
-        bool orderMode = true;
         float _rxs;
         float _rxe;
         double f1s;
@@ -61,10 +59,10 @@ namespace JcMBP
 
         void Ini(byte port)
         {
-            ds.freq1s = Convert.ToDouble(f1s);
-            ds.freq1e = Convert.ToDouble(f1e);
-            ds.freq2s = Convert.ToDouble(f2s);
-            ds.freq2e = Convert.ToDouble(f2e);
+            ds.freq1s = Convert.ToSingle(f1s);
+            ds.freq1e = Convert.ToSingle(f1e);
+            ds.freq2s = Convert.ToSingle(f2s);
+            ds.freq2e = Convert.ToSingle(f2e);
             ds.pow1 = ds.pow2 = Convert.ToSingle(freq_nud_pow2.Value);
             ds.step1 = ds.step2 = Convert.ToSingle(freq_cb_step.Text.Replace('m', ' '));
             ds.tx1 = (byte)(cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]);
@@ -111,15 +109,15 @@ namespace JcMBP
 
         void start()
         {
-            Sweep  s= new SweepFreq(ds, ClsUpLoad._type.ToString());
-            fsm.Start(s);
-            this.Invoke(new ThreadStart(delegate()
-               {
-                   time_btn_start_a.Enabled = true;
-                   time_btn_start_a.BackColor = Color.White;
-                   time_btn_start_b.Enabled = true;
-                   groupBox1.Enabled = true;
-               }));
+            //Sweep  s= new SweepFreq(ds, ClsUpLoad._type.ToString());
+            //fsm.Start(s);
+            //this.Invoke(new ThreadStart(delegate()
+            //   {
+            //       time_btn_start_a.Enabled = true;
+            //       time_btn_start_a.BackColor = Color.White;
+            //       time_btn_start_b.Enabled = true;
+            //       groupBox1.Enabled = true;
+            //   }));
         }
         private void time_btn_start_a_Click(object sender, EventArgs e)
         {
@@ -163,7 +161,7 @@ namespace JcMBP
 
         private void button5_Click(object sender, EventArgs e)
         {
-            PoiOrder ord = new PoiOrder(imCo1, imCo2, imLow, imLess,orderMode);
+            PoiOrder ord = new PoiOrder(imCo1, imCo2, imLow, imLess);
             ord.ShowDialog();
             if (ord.DialogResult == DialogResult.OK)
             {
@@ -171,7 +169,6 @@ namespace JcMBP
                 imLow = ord.imLow;//阶数加减法
                 imCo1 = ord.imCo1;//阶数参数
                 imCo2 = ord.imCo2;//阶数参数
-                orderMode = ord.poi_order;
                 button5.Text = ord.val;//扫频阶数按钮text
                 label4.Text = OfftenMethod.GetTestBand_f(imCo1, imCo2, imLow, imLess, f1s, f1e, f2s, f2e);
             }
@@ -207,10 +204,10 @@ namespace JcMBP
 
         private void comboBox4_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            f2s = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox4.Text)]].ord3_F1UpS;
-            f2e = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox4.Text)]].ord3_F1UpE;
-            f2max = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox4.Text)]].F2Max;
-            f2min = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox4.Text)]].F2Min;
+            f2s = cul.ld[comboBox4.SelectedIndex].ord3_F1UpS;
+            f2e = cul.ld[comboBox4.SelectedIndex].ord3_F1UpE;
+            f2max = cul.ld[comboBox4.SelectedIndex].F2Max;
+            f2min = cul.ld[comboBox4.SelectedIndex].F2Min;
             button1.Text = f2s.ToString("0.00") + "-" + f2e.ToString("0.00");
             label4.Text = OfftenMethod.GetTestBand_f(imCo1, imCo2, imLow, imLess, f1s, f1e, f2s, f2e);
             if (comboBox3.SelectedIndex < 0 || comboBox4.SelectedIndex < 0 || comboBox1.SelectedIndex < 0)
@@ -233,10 +230,10 @@ namespace JcMBP
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            f1s = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].ord3_F1UpS;
-            f1e = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].ord3_F1UpE;
-            f1max = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].F1Max;
-            f1min = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].F1Min;
+            f1s = cul.ld[comboBox3.SelectedIndex].ord3_F1UpS;
+             f1e= cul.ld[comboBox3.SelectedIndex].ord3_F1UpE;
+             f1max = cul.ld[comboBox3.SelectedIndex].F1Max;
+             f1min = cul.ld[comboBox3.SelectedIndex].F1Min;
              
              button11.Text = f1s.ToString("0.00") + "-" + f1e.ToString("0.00");
              label4.Text = OfftenMethod.GetTestBand_f(imCo1, imCo2, imLow, imLess, f1s, f1e, f2s, f2e);
@@ -247,10 +244,10 @@ namespace JcMBP
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _rxs = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].ord3_imS;
-            _rxe = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].ord3_imE;
-            rmax = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].RxMax;
-            rmin = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].RxMin;
+            _rxs = cul.ld[comboBox1.SelectedIndex].ord3_imS;
+            _rxe = cul.ld[comboBox1.SelectedIndex].ord3_imE;
+            rmax = cul.ld[comboBox1.SelectedIndex].RxMax;
+            rmin = cul.ld[comboBox1.SelectedIndex].RxMin;
             button8.Text = _rxs.ToString("0.00") + "-" + _rxe.ToString("0.00");
             if (comboBox3.SelectedIndex < 0 || comboBox4.SelectedIndex < 0 || comboBox1.SelectedIndex < 0)
                 return;
@@ -355,33 +352,33 @@ namespace JcMBP
 
         void Jbstart()
         {
-            for (int i = 0; i < ds.num; i++)
-            {
-                Sweep s;
-                JbIni_(jd[i],i);
-                UpdateGroupControl(i);
-                if (ds.sxy.model == 1)
-                    s = new SweepTime(ds, ClsUpLoad._type.ToString());
-                else
-                    s = new SweepFreq(ds, ClsUpLoad._type.ToString());
-                fsm.JbStart(s, i, jd[i].time_out_M);
-                Thread.Sleep(Convert.ToInt32(ClsUpLoad._sleepTime));
-                if (FreqSweepMid.jb_err)
-                    break;
-            }
-            this.Invoke(new ThreadStart(delegate
-           {
-               fsm.DateAndGr();
-               time_btn_start_a.Enabled = true;
-               time_btn_start_b.Enabled = true;
-               groupBox1.Enabled = true;
-               time_btn_start_b.BackColor = Color.White;
-           }));
+           // for (int i = 0; i < ds.num; i++)
+           // {
+           //     Sweep s;
+           //     JbIni_(jd[i],i);
+           //     UpdateGroupControl(i);
+           //     if (ds.sxy.model == 1)
+           //         s = new SweepTime(ds, ClsUpLoad._type.ToString());
+           //     else
+           //         s = new SweepFreq(ds, ClsUpLoad._type.ToString());
+           //     fsm.JbStart(s, i, jd[i].time_out_M);
+           //     Thread.Sleep(Convert.ToInt32(ClsUpLoad._sleepTime));
+           //     if (FreqSweepMid.jb_err)
+           //         break;
+           // }
+           // this.Invoke(new ThreadStart(delegate
+           //{
+           //    fsm.DateAndGr();
+           //    time_btn_start_a.Enabled = true;
+           //    time_btn_start_b.Enabled = true;
+           //    groupBox1.Enabled = true;
+           //    time_btn_start_b.BackColor = Color.White;
+           //}));
         }
 
         private void button5_Click_1(object sender, EventArgs e)
         {
-            PoiOrder ord = new PoiOrder(imCo1, imCo2, imLow, imLess,orderMode);
+            PoiOrder ord = new PoiOrder(imCo1, imCo2, imLow, imLess);
             ord.ShowDialog();
             if (ord.DialogResult == DialogResult.OK)
             {
@@ -389,7 +386,6 @@ namespace JcMBP
                 imLow = ord.imLow;//阶数加减法
                 imCo1 = ord.imCo1;//阶数参数
                 imCo2 = ord.imCo2;//阶数参数
-                orderMode = ord.poi_order;
                 button5.Text = ord.val;//扫频阶数按钮text
                 label4.Text = OfftenMethod.GetTestBand_f(imCo1, imCo2, imLow, imLess, f1s, f1e, f2s, f2e);
             }

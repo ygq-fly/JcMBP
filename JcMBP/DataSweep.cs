@@ -54,10 +54,10 @@ namespace JcMBP
 
         #region 扫描数据
         //=============
-        public double freq1s;
-        public double freq1e;
-        public double freq2s;
-        public double freq2e;
+        public float freq1s;
+        public float freq1e;
+        public float freq2s;
+        public float freq2e;
         public float step1;
         public float step2;
         public float pow1;
@@ -111,8 +111,8 @@ namespace JcMBP
       public List<string> pdf_val = new List<string>();
         public float  x;
         public float   y;
-        public double f1;
-        public double f2;
+        public float f1;
+        public float f2;
         public int current;
         public int currentPlot;
         public float currentf1;

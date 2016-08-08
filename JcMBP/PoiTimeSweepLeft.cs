@@ -18,7 +18,6 @@ namespace JcMBP
          byte imCo2 = 1;
          byte imLow = 0;
          byte imLess = 0;
-         bool orderMode = true;
          int time = 1;
          float _rxs;
          float _rxe;
@@ -45,9 +44,7 @@ namespace JcMBP
 
         private void time_btn_start_a_Click(object sender, EventArgs e)
         {
-            if ((int)(cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]) == 7 && (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]) == 7 && (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]) == 7||
-                (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]) == 9 && (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]) == 9 && (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]) == 9||
-                (int)(cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]) == 10&&(int)(cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]) == 10)
+            if (comboBox1.SelectedIndex == 12 && comboBox3.SelectedIndex == 12 && comboBox2.SelectedIndex == 12)
             {
                 MessageBox.Show("该频段tx和rx不能同一频段");
                 return;
@@ -55,8 +52,8 @@ namespace JcMBP
             time_btn_start_a.Enabled = false;
             time_btn_start_a.BackColor = Color.Green;
             groupBox14.Enabled = false;
-            ds.freq1s = Convert.ToDouble(time_nud_f1.Value);
-            ds.freq2e = Convert.ToDouble(time_nud_f2.Value);
+            ds.freq1s = Convert.ToSingle(time_nud_f1.Value);
+            ds.freq2e = Convert.ToSingle(time_nud_f2.Value);
             ds.pow1= ds.pow2 = Convert.ToSingle(time_nud_p2.Value);
             //ds.timeout = int.Parse(time_cb_step.Text.Replace('s', ' '));
             ds.imCo1 = imCo1;
@@ -89,20 +86,22 @@ namespace JcMBP
 
         void start()
         {
-            Sweep s = new SweepTime(ds, ClsUpLoad._type.ToString());
-            tsm.Start(s);
-            this.Invoke(new ThreadStart(delegate
-           {
-               time_btn_start_a.Enabled = true;
-               time_btn_start_a.BackColor = Color.White;
-               groupBox14.Enabled = true;
-           }));
+           // Sweep s = new SweepTime(ds, ClsUpLoad._type.ToString());
+           // tsm.Start(s);
+           // this.Invoke(new ThreadStart(delegate
+           //{
+           //    time_btn_start_a.Enabled = true;
+           //    time_btn_start_a.BackColor = Color.White;
+           //    groupBox14.Enabled = true;
+           //}));
         }
 
         private void time_btn_stop_Click(object sender, EventArgs e)
         {
             tsm.Stop();
-            
+            time_btn_start_a.Enabled = true;
+            time_btn_start_a.BackColor = Color.White;
+            groupBox14.Enabled = true;
         }
 
         private void PoiTimeSweepLeft_Load(object sender, EventArgs e)
@@ -132,7 +131,7 @@ namespace JcMBP
 
         private void button6_Click(object sender, EventArgs e)
         {
-            PoiOrder ord = new PoiOrder(imCo1,imCo2,imLow,imLess,orderMode);
+            PoiOrder ord = new PoiOrder(imCo1,imCo2,imLow,imLess);
             ord.ShowDialog();
             if (ord.DialogResult == DialogResult.OK)
             {
@@ -140,7 +139,6 @@ namespace JcMBP
                 imLow= ord.imLow;//阶数加减法
                 imCo1 = ord.imCo1;//阶数参数
                 imCo2 = ord.imCo2;//阶数参数
-                orderMode = ord.poi_order;
                 button6.Text = ord.val;//扫频阶数按钮text
                 label2.Text = OfftenMethod.GetTestBand(imCo1, imCo2, imLow, imLess, f1, f2).ToString("0.00") + "MHz";
             }

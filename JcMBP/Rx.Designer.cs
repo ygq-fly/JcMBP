@@ -53,6 +53,7 @@
             this.label39 = new System.Windows.Forms.Label();
             this.nud_rxoffset_7 = new System.Windows.Forms.NumericUpDown();
             this.rxoffset_btn_start_a = new System.Windows.Forms.Button();
+            this.rx_lbl_show_band = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.cb_rxoffset_band = new System.Windows.Forms.ComboBox();
             this.label25 = new System.Windows.Forms.Label();
@@ -72,10 +73,6 @@
             this.label32 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.progress_offset_rx = new System.Windows.Forms.ProgressBar();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.groupBox13.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rx_offset_pb)).BeginInit();
@@ -93,8 +90,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_rxoffset_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_rxoffset_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_rxoffset_4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox13
@@ -178,10 +173,6 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.label2);
-            this.groupBox7.Controls.Add(this.numericUpDown1);
-            this.groupBox7.Controls.Add(this.label3);
-            this.groupBox7.Controls.Add(this.numericUpDown2);
             this.groupBox7.Controls.Add(this.label1);
             this.groupBox7.Controls.Add(this.nud_rxoffset_12);
             this.groupBox7.Controls.Add(this.label50);
@@ -198,6 +189,7 @@
             this.groupBox7.Controls.Add(this.label39);
             this.groupBox7.Controls.Add(this.nud_rxoffset_7);
             this.groupBox7.Controls.Add(this.rxoffset_btn_start_a);
+            this.groupBox7.Controls.Add(this.rx_lbl_show_band);
             this.groupBox7.Controls.Add(this.label24);
             this.groupBox7.Controls.Add(this.cb_rxoffset_band);
             this.groupBox7.Controls.Add(this.label25);
@@ -239,7 +231,6 @@
             this.nud_rxoffset_12.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_12.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_12.DecimalPlaces = 2;
-            this.nud_rxoffset_12.Enabled = false;
             this.nud_rxoffset_12.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_12.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_12.Location = new System.Drawing.Point(186, 364);
@@ -270,7 +261,6 @@
             this.nud_rxoffset_10.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_10.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_10.DecimalPlaces = 2;
-            this.nud_rxoffset_10.Enabled = false;
             this.nud_rxoffset_10.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_10.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_10.Location = new System.Drawing.Point(186, 313);
@@ -290,7 +280,6 @@
             this.nud_rxoffset_11.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_11.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_11.DecimalPlaces = 2;
-            this.nud_rxoffset_11.Enabled = false;
             this.nud_rxoffset_11.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_11.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_11.Location = new System.Drawing.Point(186, 339);
@@ -322,7 +311,7 @@
             this.label23.BackColor = System.Drawing.Color.Transparent;
             this.label23.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label23.Location = new System.Drawing.Point(38, 449);
+            this.label23.Location = new System.Drawing.Point(38, 397);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(127, 19);
             this.label23.TabIndex = 183;
@@ -333,7 +322,7 @@
             // 
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(186, 442);
+            this.button2.Location = new System.Drawing.Point(186, 390);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 31);
             this.button2.TabIndex = 182;
@@ -345,9 +334,9 @@
             // 
             this.rxoffset_btn_start_b.BackColor = System.Drawing.Color.White;
             this.rxoffset_btn_start_b.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rxoffset_btn_start_b.Location = new System.Drawing.Point(172, 510);
+            this.rxoffset_btn_start_b.Location = new System.Drawing.Point(172, 492);
             this.rxoffset_btn_start_b.Name = "rxoffset_btn_start_b";
-            this.rxoffset_btn_start_b.Size = new System.Drawing.Size(93, 33);
+            this.rxoffset_btn_start_b.Size = new System.Drawing.Size(93, 52);
             this.rxoffset_btn_start_b.TabIndex = 182;
             this.rxoffset_btn_start_b.Text = "PORT2";
             this.rxoffset_btn_start_b.UseVisualStyleBackColor = false;
@@ -370,7 +359,6 @@
             this.nud_rxoffset_8.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_8.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_8.DecimalPlaces = 2;
-            this.nud_rxoffset_8.Enabled = false;
             this.nud_rxoffset_8.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_8.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_8.Location = new System.Drawing.Point(186, 261);
@@ -390,7 +378,6 @@
             this.nud_rxoffset_9.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_9.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_9.DecimalPlaces = 2;
-            this.nud_rxoffset_9.Enabled = false;
             this.nud_rxoffset_9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_9.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_9.Location = new System.Drawing.Point(186, 287);
@@ -434,7 +421,6 @@
             this.nud_rxoffset_7.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_7.DecimalPlaces = 2;
-            this.nud_rxoffset_7.Enabled = false;
             this.nud_rxoffset_7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_7.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_7.Location = new System.Drawing.Point(186, 235);
@@ -453,20 +439,32 @@
             // 
             this.rxoffset_btn_start_a.BackColor = System.Drawing.Color.White;
             this.rxoffset_btn_start_a.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rxoffset_btn_start_a.Location = new System.Drawing.Point(32, 511);
+            this.rxoffset_btn_start_a.Location = new System.Drawing.Point(32, 492);
             this.rxoffset_btn_start_a.Name = "rxoffset_btn_start_a";
-            this.rxoffset_btn_start_a.Size = new System.Drawing.Size(93, 33);
+            this.rxoffset_btn_start_a.Size = new System.Drawing.Size(93, 52);
             this.rxoffset_btn_start_a.TabIndex = 166;
             this.rxoffset_btn_start_a.Text = "PORT1";
             this.rxoffset_btn_start_a.UseVisualStyleBackColor = false;
             this.rxoffset_btn_start_a.Click += new System.EventHandler(this.rxoffset_btn_start_a_Click);
+            // 
+            // rx_lbl_show_band
+            // 
+            this.rx_lbl_show_band.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(69)))), ((int)(((byte)(72)))));
+            this.rx_lbl_show_band.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rx_lbl_show_band.ForeColor = System.Drawing.Color.White;
+            this.rx_lbl_show_band.Location = new System.Drawing.Point(6, 455);
+            this.rx_lbl_show_band.Name = "rx_lbl_show_band";
+            this.rx_lbl_show_band.Size = new System.Drawing.Size(286, 30);
+            this.rx_lbl_show_band.TabIndex = 165;
+            this.rx_lbl_show_band.Text = "开始  RX 校准";
+            this.rx_lbl_show_band.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label24
             // 
             this.label24.BackColor = System.Drawing.Color.Transparent;
             this.label24.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label24.Location = new System.Drawing.Point(45, 483);
+            this.label24.Location = new System.Drawing.Point(45, 431);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(80, 19);
             this.label24.TabIndex = 163;
@@ -491,7 +489,7 @@
             "10 移动TD_LTE(E频段)",
             "11 电信TD_LTE_2.3G",
             "12 联通TD_LTE_2.3G"});
-            this.cb_rxoffset_band.Location = new System.Drawing.Point(152, 478);
+            this.cb_rxoffset_band.Location = new System.Drawing.Point(152, 426);
             this.cb_rxoffset_band.Name = "cb_rxoffset_band";
             this.cb_rxoffset_band.Size = new System.Drawing.Size(134, 21);
             this.cb_rxoffset_band.TabIndex = 161;
@@ -513,7 +511,6 @@
             this.nud_rxoffset_0.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_0.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_0.DecimalPlaces = 2;
-            this.nud_rxoffset_0.Enabled = false;
             this.nud_rxoffset_0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_0.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_0.Location = new System.Drawing.Point(186, 53);
@@ -557,7 +554,6 @@
             this.nud_rxoffset_5.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_5.DecimalPlaces = 2;
-            this.nud_rxoffset_5.Enabled = false;
             this.nud_rxoffset_5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_5.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_5.Location = new System.Drawing.Point(186, 183);
@@ -589,7 +585,6 @@
             this.nud_rxoffset_6.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_6.DecimalPlaces = 2;
-            this.nud_rxoffset_6.Enabled = false;
             this.nud_rxoffset_6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_6.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_6.Location = new System.Drawing.Point(186, 209);
@@ -621,7 +616,6 @@
             this.nud_rxoffset_2.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_2.DecimalPlaces = 2;
-            this.nud_rxoffset_2.Enabled = false;
             this.nud_rxoffset_2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_2.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_2.Location = new System.Drawing.Point(186, 105);
@@ -665,7 +659,6 @@
             this.nud_rxoffset_3.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_3.DecimalPlaces = 2;
-            this.nud_rxoffset_3.Enabled = false;
             this.nud_rxoffset_3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_3.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_3.Location = new System.Drawing.Point(187, 131);
@@ -685,7 +678,6 @@
             this.nud_rxoffset_1.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_1.DecimalPlaces = 2;
-            this.nud_rxoffset_1.Enabled = false;
             this.nud_rxoffset_1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_1.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_1.Location = new System.Drawing.Point(186, 79);
@@ -705,7 +697,6 @@
             this.nud_rxoffset_4.BackColor = System.Drawing.Color.Black;
             this.nud_rxoffset_4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.nud_rxoffset_4.DecimalPlaces = 2;
-            this.nud_rxoffset_4.Enabled = false;
             this.nud_rxoffset_4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nud_rxoffset_4.ForeColor = System.Drawing.Color.White;
             this.nud_rxoffset_4.Location = new System.Drawing.Point(186, 157);
@@ -752,68 +743,6 @@
             this.progress_offset_rx.TabIndex = 47;
             this.progress_offset_rx.Value = 100;
             // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label2.Location = new System.Drawing.Point(44, 415);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(127, 19);
-            this.label2.TabIndex = 193;
-            this.label2.Text = "------";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.BackColor = System.Drawing.Color.Black;
-            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Enabled = false;
-            this.numericUpDown1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.numericUpDown1.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown1.Location = new System.Drawing.Point(186, 415);
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(99, 19);
-            this.numericUpDown1.TabIndex = 192;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label3.Location = new System.Drawing.Point(44, 390);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 19);
-            this.label3.TabIndex = 191;
-            this.label3.Text = "------";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.BackColor = System.Drawing.Color.Black;
-            this.numericUpDown2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown2.DecimalPlaces = 2;
-            this.numericUpDown2.Enabled = false;
-            this.numericUpDown2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.numericUpDown2.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown2.Location = new System.Drawing.Point(186, 390);
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(99, 19);
-            this.numericUpDown2.TabIndex = 190;
-            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // Rx
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -825,7 +754,7 @@
             this.Controls.Add(this.groupBox7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Rx";
-            this.Text = "Rx";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.Rx_Load);
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
@@ -845,8 +774,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_rxoffset_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_rxoffset_1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_rxoffset_4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -875,6 +802,7 @@
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.NumericUpDown nud_rxoffset_7;
         private System.Windows.Forms.Button rxoffset_btn_start_a;
+        private System.Windows.Forms.Label rx_lbl_show_band;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.ComboBox cb_rxoffset_band;
         private System.Windows.Forms.Label label25;
@@ -896,9 +824,5 @@
         private System.Windows.Forms.ProgressBar progress_offset_rx;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nud_rxoffset_12;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
     }
 }

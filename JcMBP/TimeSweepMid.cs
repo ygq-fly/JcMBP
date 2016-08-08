@@ -11,16 +11,21 @@ namespace JcMBP
 {
     public partial class TimeSweepMid : Form
     {
+       public   TestData testdata_;
         float _pim_limit = -110;
         float _pim_max = -10000;
         float _pim_min = 0;
+        float current_pim_max = -10000;
+        float current_pim_min = float.MaxValue;
         ClsUpLoad cul;
-                    Form form;
-        public   DataSweep ds;
+        public static bool jb_err = false;
+        Form form;
+        //public   DataSweep ds;
         Sweep sweep;
         string type = "0";
         FrmMain fm;
         public  bool isThreadStart = false;
+        int currentSweepCont = 0;
         public TimeSweepMid(ClsUpLoad cul,FrmMain fm)
         {
             InitializeComponent();
@@ -28,6 +33,15 @@ namespace JcMBP
             this.fm = fm;
             type = ClsUpLoad._type.ToString();
             numericUpDown2.Value = (decimal)_pim_limit;
+            //time_dgvPim.Columns.Clear();
+            //time_dgvPim.Columns.Add(new DataGridViewColumn());
+            //time_dgvPim.Columns.Add(new DataGridViewColumn());
+            //time_dgvPim.Columns.Add(new DataGridViewColumn());
+            //time_dgvPim.Columns[0].HeaderText = "No.";
+            //time_dgvPim.Columns[1].HeaderText = "Peak";
+            //time_dgvPim.Columns[2].HeaderText = "Result";
+            //time_dgvPim.Columns[0].Width = 100;
+          
         }
 
         public TimeSweepMid()
@@ -63,9 +77,9 @@ namespace JcMBP
         private void TimeSweepMid_Load(object sender, EventArgs e)
         {
 
-            ds = new DataSweep();
-            OfftenMethod.ToAddColumns(ds.dt);
-            OfftenMethod.ToAddColumns(ds.dtc);
+            //ds = new DataSweep();
+            //OfftenMethod.ToAddColumns(ds.dt);
+            //OfftenMethod.ToAddColumns(ds.dtc);
 
             if (ClsUpLoad.sm == SweepMode.Hw)
                 form = new TimeSweepLeft(cul,this);
@@ -86,8 +100,8 @@ namespace JcMBP
         {
             try
             {
-               
-               ds.limit=_pim_limit = float.Parse(numericUpDown2.Value.ToString());
+                testdata_.limit = _pim_limit = float.Parse(numericUpDown2.Value.ToString());
+               //.limit=_pim_limit = float.Parse(numericUpDown2.Value.ToString());
                if (FreqSweepMid.isLoad)
                {
                
@@ -109,46 +123,164 @@ namespace JcMBP
 
         public void Clone(DataSweep ds)
         {
-            this.ds = ds;
+            //this.ds = ds;
         }
 
-        public void Start(Sweep s)
-        {
+        //普通测试
+        //public void Start(Sweep s)
+        //{
 
-            isThreadStart = true;
+        //    isThreadStart = true;
+        //    this.Invoke(new ThreadStart(delegate()
+        //        {
+        //            ds.dt.Clear();
+        //            ds.dtc.Clear();
+        //            _pim_max = float.MinValue;
+        //            _pim_min = float.MaxValue;
+        //            time_tb_log.Clear();
+        //            if (fm.isdBm)
+        //                time_dgvPim.DataSource = ds.dt;
+        //            else
+        //                time_dgvPim.DataSource = ds.dtc;
+        //            time_lbl_limitResulte.Text = "PASS";
+        //            time_lbl_limitResulte.ForeColor = Color.Lime;
+        //        }));
+        //    sweep = s;
+        //    sweep.VcoHander += new ControlIni_Sweep_Vco(VcoHand);
+        //    sweep.PowerHander += new ControlIni_Sweep_Pow(Powhand);
+        //    sweep.Tx1Hander += new ControlIni_Sweep_Tx1(Tx1Hand);
+        //    sweep.Tx2Hander += new ControlIni_Sweep_Tx2(Tx2Hand);
+        //    sweep.StHander += new Sweep_Test(SweepControl);
+        //    Ths();
+        //    this.Invoke(new ThreadStart(delegate()
+        //        {
+        //            time_tb_log.AppendText("功放关闭\r\n");
+        //        }));
+        //    rem_jpg_data_t(ds);
+        //   isThreadStart = false;
+        //   sweep.VcoHander -= new ControlIni_Sweep_Vco(VcoHand);
+        //   sweep.PowerHander -= new ControlIni_Sweep_Pow(Powhand);
+        //   sweep.Tx1Hander -= new ControlIni_Sweep_Tx1(Tx1Hand);
+        //   sweep.Tx2Hander -= new ControlIni_Sweep_Tx2(Tx2Hand);
+        //   sweep.StHander -= new Sweep_Test(SweepControl);
+        //}
+
+
+
+        public void DataINIT()
+        {
+           
+            jb_err = false;
+            _pim_max = float.MinValue;
+            _pim_min = float.MaxValue;
+            current_pim_min = float.MaxValue;
             this.Invoke(new ThreadStart(delegate()
-                {
-                    FrmMain.isjb = false;
-                    ds.dt.Clear();
-                    ds.dtc.Clear();
-                    _pim_max = float.MinValue;
-                    _pim_min = float.MaxValue;
-                    time_tb_log.Clear();
+               {
+                   button1.Enabled = false;
+                   time_dgvPim.Enabled = false;
+                   time_tb_pim_now.Text = "--";
+                   time_tB_valMax.Text = "--";
+                   time_tB_valMin.Text = "--";
+                   time_tb_pim_now_dbc.Text = "--";
+                   time_tB_valMax_dbc.Text = "--";
+                   time_tB_valMin_dbc.Text = "--";
+                   textBox1.Text = "--";
+                   time_lbl_limitResulte.Text = "PASS";
+                   time_lbl_limitResulte.ForeColor = Color.Lime;
+                   time_tb_log.Clear();
+               }));
+        }
+
+        public void LastINIT()
+        {
+            button1.Enabled = true;
+            time_dgvPim.Enabled = true;
+            MessageBox.Show("测试完成");
+        }
+
+        //刘敏要求
+        public void Start(Sweep s,TestData testdata,int currentNum)
+        {
+            //isThreadStart = true;
+                testdata_ = testdata;
+                currentSweepCont = currentNum;
+                isThreadStart = true;
+                current_pim_max = float.MinValue;
+                
+                this.Invoke(new ThreadStart(delegate()
+                {        
+                    //time_tb_log.Clear();
                     if (fm.isdBm)
-                        time_dgvPim.DataSource = ds.dt;
+                        time_dgvPim.DataSource = testdata.surFaceData_dbm;
                     else
-                        time_dgvPim.DataSource = ds.dtc;
-                    time_lbl_limitResulte.Text = "PASS";
-                    time_lbl_limitResulte.ForeColor = Color.Lime;
+                        time_dgvPim.DataSource = testdata.surFaceData_dbc;
+
                 }));
-            sweep = s;
-            sweep.VcoHander += new ControlIni_Sweep_Vco(VcoHand);
-            sweep.PowerHander += new ControlIni_Sweep_Pow(Powhand);
-            sweep.Tx1Hander += new ControlIni_Sweep_Tx1(Tx1Hand);
-            sweep.Tx2Hander += new ControlIni_Sweep_Tx2(Tx2Hand);
-            sweep.StHander += new Sweep_Test(SweepControl);
-            Ths();
-            this.Invoke(new ThreadStart(delegate()
+                sweep = s;
+
+                sweep.VcoHander += new ControlIni_Sweep_Vco(VcoHand);
+                sweep.PowerHander += new ControlIni_Sweep_Pow(Powhand);
+                sweep.Tx1Hander += new ControlIni_Sweep_Tx1(Tx1Hand);
+                sweep.Tx2Hander += new ControlIni_Sweep_Tx2(Tx2Hand);
+                sweep.StHander += new Sweep_Test(SweepControl);
+                
+                
+
+                if (Ths())
                 {
-                    time_tb_log.AppendText("功放关闭\r\n");
-                }));
-            rem_jpg_data_t(ds);
-           isThreadStart = false;
-           sweep.VcoHander -= new ControlIni_Sweep_Vco(VcoHand);
-           sweep.PowerHander -= new ControlIni_Sweep_Pow(Powhand);
-           sweep.Tx1Hander -= new ControlIni_Sweep_Tx1(Tx1Hand);
-           sweep.Tx2Hander -= new ControlIni_Sweep_Tx2(Tx2Hand);
-           sweep.StHander -= new Sweep_Test(SweepControl);
+                    double val = 0;
+                    double val_dbc = 0;
+
+                    for (int i = 0; i < time_dgvPim.Rows.Count; i++)
+                    {
+                        val += testdata_.pimDate[i].currentpimMax;
+                        val_dbc += testdata_.pimDate[i].currentpimMax_dbc;
+                    }
+                    this.Invoke(new ThreadStart(delegate()
+                       {
+
+                           if (time_dgvPim.Rows.Count != 0)
+                           {
+                               time_tb_pim_now.Text = (val / time_dgvPim.Rows.Count).ToString("0.0");//当前互调值
+                               time_tb_pim_now_dbc.Text = (val_dbc / time_dgvPim.Rows.Count).ToString("0.0");//当前互调值
+                               if (testdata.surFaceData_dbm.Rows[currentSweepCont] != null)
+                               {
+                                   DataRow dt = testdata.surFaceData_dbm.Rows[currentSweepCont];
+                                   DataRow dtc = testdata.surFaceData_dbc.Rows[currentSweepCont];
+                                   if (fm.isdBm)
+                                   {
+                                       dt[2] = (Convert.ToSingle(dt[1]) - _pim_limit).ToString("0.0");
+                                       dtc[2] = dt[2];
+                                   }
+                                   else
+                                   {
+                                       dtc[2] = (Convert.ToSingle(dtc[1]) - _pim_limit).ToString("0.0");
+                                       dt[2] = dtc[2];
+                                   }
+                               }
+                           }
+
+                       }));
+                    if (currentNum == ClsUpLoad.qiaoji_times - 1)
+                    {
+                        this.Invoke(new ThreadStart(delegate()
+                        {
+                            time_tb_log.AppendText("功放关闭\r\n");
+                        }));
+                        //rem_jpg_data_t(ds);
+
+                        //isThreadStart = false;
+                        //sweep.StHander -= new Sweep_Test(SweepControl);
+                    }
+                }
+            else
+                jb_err = true;
+                sweep.VcoHander -= new ControlIni_Sweep_Vco(VcoHand);
+                sweep.PowerHander -= new ControlIni_Sweep_Pow(Powhand);
+                sweep.Tx1Hander -= new ControlIni_Sweep_Tx1(Tx1Hand);
+                sweep.Tx2Hander -= new ControlIni_Sweep_Tx2(Tx2Hand);
+                sweep.StHander -= new Sweep_Test(SweepControl);
+        
         }
 
         public void Stop()
@@ -160,9 +292,10 @@ namespace JcMBP
             }
         }
 
-        void Ths()
+        bool   Ths()
         {   
-            sweep.Ini();
+           return  sweep.Ini();
+         
         }
 
         void CreatScrollbar_t()
@@ -180,6 +313,7 @@ namespace JcMBP
         {
             if (s <= -10000)
             {
+                jb_err = true;
                 if (s == -10004)
                 {
                     MessageBox.Show(this, "信号源设置功率过大，请检查校准文件!");//显示错误信息
@@ -190,72 +324,221 @@ namespace JcMBP
         }
 
         //=====
-        void SweepControl(DataSweep ds)
+        //void SweepControl(DataSweep ds)
+        //{
+        //    try
+        //    {
+        //        this.Invoke(new ThreadStart(delegate()
+        //            {
+        //                this.time_tb_show_tx1.Text = ds.sen_tx1.ToString("0.00");//控件显示tx1功率
+        //                this.time_tb_show_tx2.Text = ds.sen_tx2.ToString("0.00");//控件显示tx1功率
+        //                time_tb_pim_now.Text = ds.sxy.y.ToString("0.0");//当前互调值
+        //                time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString("0.0");//当前互调值
+        //                float currenty = 0;
+        //                //if (fm.isdBm)
+        //                currenty = ds.sxy.y;
+        //                //else
+        //                //currenty = ds.sxy.y -43;
+        //                if (currenty > _pim_max)
+        //                {
+        //                    _pim_max = currenty;//互调最大值
+        //                    time_tB_valMax.Text = _pim_max.ToString("0.0");//控件显示互调最大值
+        //                    time_tB_valMax_dbc.Text = (_pim_max - 43).ToString("0.0");
+        //                }
+        //                if (currenty < _pim_min)
+        //                {
+        //                    _pim_min = currenty;//互调最小值
+        //                    time_tB_valMin.Text = _pim_min.ToString("0.0");//控件显示互调最小值
+        //                    time_tB_valMin_dbc.Text = (_pim_min - 43).ToString("0.0");
+        //                }
+        //                if (fm.isdBm)
+        //                {
+        //                    if (currenty > _pim_limit)
+        //                    {
+        //                        time_lbl_limitResulte.Text = "FAIL";
+        //                        time_lbl_limitResulte.ForeColor = Color.Red;
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    if (currenty - 43 > _pim_limit)
+        //                    {
+        //                        time_lbl_limitResulte.Text = "FAIL";
+        //                        time_lbl_limitResulte.ForeColor = Color.Red;
+        //                    }
+        //                }
+        //                if (fm.isdBm)
+        //                    this.time_plot.RealValue = currenty;
+        //                else
+        //                    this.time_plot.RealValue = currenty - 43;
+        //                OfftenMethod.ToNewRows(ds.dt, ds.sxy.currentCount,
+        //                          (float)ds.sxy.f1, (float)ds.sen_tx1,
+        //                          (float)ds.sxy.f2, (float)ds.sen_tx2,
+        //                          ds.sxy.x, ds.sxy.y);//添加数据到表格
+        //                OfftenMethod.ToNewRows(ds.dtc, ds.sxy.currentCount,
+        //                          (float)ds.sxy.f1, (float)ds.sen_tx1,
+        //                          (float)ds.sxy.f2, (float)ds.sen_tx2,
+        //                          ds.sxy.x, ds.sxy.y - ds.pow1);//添加数据到表格
+        //                time_dgvPim.FirstDisplayedScrollingRowIndex = time_dgvPim.Rows.Count - 1;//显示当前行
+        //                CreatScrollbar_t();
+        //            }));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //    }
+        //}
+
+
+        void SweepControl(TestData testdata)
         {
             try
             {
                 this.Invoke(new ThreadStart(delegate()
+                {
+                    int currenttime=testdata.pimDate[currentSweepCont].currentTime;
+                    this.time_tb_show_tx1.Text = testdata.pimDate[currentSweepCont].sen_tx1.ToString("0.00");//控件显示tx1功率
+                    this.time_tb_show_tx2.Text = testdata.pimDate[currentSweepCont].sen_tx2.ToString("0.00");//控件显示tx1功率
+                    ////time_tb_pim_now.Text = testdata.pimDate[currentSweepCont].pimVal_dbm[currenttime].ToString("0.0");//当前互调值
+                    ////time_tb_pim_now_dbc.Text = testdata.pimDate[currentSweepCont].pimVal_dbc[currenttime].ToString("0.0");//当前互调值
+                    float currenty = 0;
+                    
+                    currenty = testdata.pimDate[currentSweepCont].pimVal_dbm[currenttime];
+                 
+                    if (currenty > _pim_max)
                     {
-                        this.time_tb_show_tx1.Text = ds.sen_tx1.ToString("0.00");//控件显示tx1功率
-                        this.time_tb_show_tx2.Text = ds.sen_tx2.ToString("0.00");//控件显示tx1功率
-                        time_tb_pim_now.Text = ds.sxy.y.ToString("0.0");//当前互调值
-                        time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString("0.0");//当前互调值
-                        float currenty = 0;
-                        //if (fm.isdBm)
-                        currenty = ds.sxy.y;
-                        //else
-                        //currenty = ds.sxy.y -43;
-                        if (currenty > _pim_max)
+                        _pim_max = currenty;//互调最大值
+                        time_tB_valMax.Text = _pim_max.ToString("0.0");//控件显示互调最大值
+                        time_tB_valMax_dbc.Text = (_pim_max - TimeSweepLeft.st_pow).ToString("0.0");
+                        if(fm.isdBm)
+                        textBox1.Text = (_pim_max  - _pim_limit).ToString("0.0");
+                          else
+                            textBox1.Text = (_pim_max - TimeSweepLeft.st_pow - _pim_limit).ToString("0.0");
+                        //if (testdata.surFaceData_dbm.Rows.Count >= currentSweepCont+1)
+                        //{
+                        //    DataRow dt = testdata.surFaceData_dbm.Rows[currentSweepCont];
+                        //    DataRow dtc = testdata.surFaceData_dbc.Rows[currentSweepCont];
+                        //    dt[1] = _pim_max.ToString("0.0");
+                        //    dtc[1] = (_pim_max-43).ToString("0.0");
+                        //}
+                    }
+
+                    if (currenty > current_pim_max)
+                    {
+                        current_pim_max = currenty;//互调最大值
+                        if (testdata.surFaceData_dbm.Rows.Count >= currentSweepCont + 1)
                         {
-                            _pim_max = currenty;//互调最大值
-                            time_tB_valMax.Text = _pim_max.ToString("0.0");//控件显示互调最大值
-                            time_tB_valMax_dbc.Text = (_pim_max - ds.pow1).ToString("0.0");
-                            ds.sxy.max = _pim_max;
+                            DataRow dt = testdata.surFaceData_dbm.Rows[currentSweepCont];
+                            DataRow dtc = testdata.surFaceData_dbc.Rows[currentSweepCont];
+                            dt[1] = current_pim_max.ToString("0.0");
+                            dtc[1] = (current_pim_max -TimeSweepLeft.st_pow).ToString("0.0");
+                            testdata.pimDate[currentSweepCont].currentpimMax = current_pim_max;
+                            testdata.pimDate[currentSweepCont].currentpimMax_dbc = current_pim_max - (float)TimeSweepLeft.st_pow;
+
+                             
                         }
-                        if (currenty < _pim_min)
+                    }
+
+
+                    if (currenty < current_pim_min)
+                    {
+                        current_pim_min = currenty;//设置pim最大值
+                        time_tB_valMin.Text = current_pim_min.ToString("0.0");//控件改变text显示互调最大值
+                        time_tB_valMin_dbc.Text = (current_pim_min - testdata.tx1Date[currentSweepCont].pow).ToString("0.0");
+
+                    }
+                    //if (current_pim_max < current_pim_min)
+                    //{
+                    //    current_pim_min = current_pim_max;//互调最小值
+                    //    time_tB_valMin.Text = current_pim_max.ToString("0.0");//控件显示互调最小值
+                    //    time_tB_valMin_dbc.Text = (current_pim_max - TimeSweepLeft.st_pow).ToString("0.0");
+                    //}
+                    if (fm.isdBm)
+                    {
+                        if (currenty > _pim_limit)
                         {
-                            _pim_min = currenty;//互调最小值
-                            time_tB_valMin.Text = _pim_min.ToString("0.0");//控件显示互调最小值
-                            time_tB_valMin_dbc.Text = (_pim_min - ds.pow1).ToString("0.0");
-                        }
-                        if (fm.isdBm)
-                        {
-                            if (currenty > _pim_limit)
+                            time_lbl_limitResulte.Text = "FAIL";
+                            time_lbl_limitResulte.ForeColor = Color.Red;
+                            if (testdata.surFaceData_dbm.Rows.Count >= currentSweepCont + 1)
                             {
-                                time_lbl_limitResulte.Text = "FAIL";
-                                time_lbl_limitResulte.ForeColor = Color.Red;
+                                DataRow dt = testdata.surFaceData_dbm.Rows[currentSweepCont];
+                                DataRow dtc = testdata.surFaceData_dbc.Rows[currentSweepCont];
+                                dt[3] = "FAIL";
+                                dtc[3] = "FAIL";
+                                //dt[2] = "--";
+                                //dtc[2] = "--";
                             }
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (currenty - TimeSweepLeft.st_pow > _pim_limit)
                         {
-                            if (currenty - 43 > _pim_limit)
+                            time_lbl_limitResulte.Text = "FAIL";
+                            time_lbl_limitResulte.ForeColor = Color.Red;
+                            if (testdata.surFaceData_dbm.Rows.Count >= currentSweepCont + 1)
                             {
-                                time_lbl_limitResulte.Text = "FAIL";
-                                time_lbl_limitResulte.ForeColor = Color.Red;
+                                DataRow dt = testdata.surFaceData_dbm.Rows[currentSweepCont];
+                                DataRow dtc = testdata.surFaceData_dbc.Rows[currentSweepCont];
+                                dt[3] = "FAIL";
+                                dtc[3] = "FAIL";
                             }
                         }
-                        if (fm.isdBm)
-                            this.time_plot.RealValue = currenty;
-                        else
-                            this.time_plot.RealValue = currenty - 43;
-                        OfftenMethod.ToNewRows(ds.dt, ds.sxy.currentCount,
-                                  (float)ds.sxy.f1, (float)ds.sen_tx1,
-                                  (float)ds.sxy.f2, (float)ds.sen_tx2,
-                                  ds.sxy.x, ds.sxy.y);//添加数据到表格
-                        OfftenMethod.ToNewRows(ds.dtc, ds.sxy.currentCount,
-                                  (float)ds.sxy.f1, (float)ds.sen_tx1,
-                                  (float)ds.sxy.f2, (float)ds.sen_tx2,
-                                  ds.sxy.x, ds.sxy.y - ds.pow1);//添加数据到表格
+                    }
+                    if (fm.isdBm)
+                        this.time_plot.RealValue = currenty;
+                    else
+                        this.time_plot.RealValue = currenty - (float)TimeSweepLeft.st_pow;
+
+                    int m=testdata.pimDate[currentSweepCont].currentTime+1;
+                    if (m == 1)
+                    {
+                        OfftenMethod.ToNewRows(testdata.surFaceData_dbm, currentSweepCont+1,
+                                             _pim_max,"--", time_lbl_limitResulte.Text);//添加数据到表格
+
+                        OfftenMethod.ToNewRows(testdata.surFaceData_dbc, currentSweepCont+1,
+                                         _pim_max - (float)TimeSweepLeft.st_pow, "--", time_lbl_limitResulte.Text);//添加数据到表格
+
+                        testdata.pimDate[currentSweepCont].currentpimMax = _pim_max;
+                        testdata.pimDate[currentSweepCont].currentpimMax_dbc = _pim_max - (float)TimeSweepLeft.st_pow;
+                    }
+     
+                    OfftenMethod.ToNewRows(testdata.pimDate[currentSweepCont].dt_dbm, 
+                                            m, 
+                                            testdata.pimDate[currentSweepCont].currentTestF1,
+                                            testdata.pimDate[currentSweepCont].sen_tx1,
+                                            testdata.pimDate[currentSweepCont].currentTestF2, 
+                                            testdata.pimDate[currentSweepCont].sen_tx1,
+                                             testdata.pimDate[currentSweepCont].pimFreq[m - 1], 
+                                             testdata.pimDate[currentSweepCont].pimVal_dbm[m - 1]);//添加数据到表格
+                    OfftenMethod.ToNewRows(testdata.pimDate[currentSweepCont].dt_dbc, 
+                                            m,
+                                            testdata.pimDate[currentSweepCont].currentTestF1,
+                                          testdata.pimDate[currentSweepCont].sen_tx1,
+                                          testdata.pimDate[currentSweepCont].currentTestF2,
+                                          testdata.pimDate[currentSweepCont].sen_tx1,
+                                           testdata.pimDate[currentSweepCont].pimFreq[m - 1], 
+                                           testdata.pimDate[currentSweepCont].pimVal_dbc[m - 1]);//添加数据到表格
+
+
+                 
+                    
+
+                    if (time_dgvPim.Rows.Count >= 1)
+                    {
                         time_dgvPim.FirstDisplayedScrollingRowIndex = time_dgvPim.Rows.Count - 1;//显示当前行
-                        CreatScrollbar_t();
-                    }));
+                        time_dgvPim.Rows[time_dgvPim.Rows.Count - 1].Selected = true;
+                    }
+
+
+                    CreatScrollbar_t();
+                }));
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
-
         void Powhand(int s)
         {
             this.Invoke(new ThreadStart(delegate()
@@ -266,19 +549,24 @@ namespace JcMBP
                     this.time_tb_log.AppendText("开始设置频谱\r\n");
                     this.time_tb_log.AppendText("功放开启\r\n");
                 }));
+         
         }
 
 
         void VcoHand(bool isVco, double real_vco,double off_vco)
         {
             if (ClsUpLoad._vco)
-                this.time_tb_log.AppendText("Now_vco: " + real_vco.ToString("0.00") + " , Offset_vco: " + off_vco.ToString("0.00") + "\r\n");//添加点频vco检测信息text
+            {
+                this.Invoke(new ThreadStart(delegate()
+                {
+                    this.time_tb_log.AppendText("Now_vco: " + real_vco.ToString("0.00") + " , Offset_vco: " + off_vco.ToString("0.00") + "\r\n");//添加点频vco检测信息text
+                }));
+            }
             if (isVco)
             {
                 this.Invoke(new ThreadStart(delegate()
                 {
                     time_tb_rxPass.Text = "PASS";
-                    this.time_tb_rxPass.ForeColor = Color.Green;
                 }));
             }
             else
@@ -289,12 +577,14 @@ namespace JcMBP
                     this.time_tb_rxPass.ForeColor = Color.Red;
                     this.time_tb_log.AppendText("错误： VCO未检测到!" + "\r\n");
                     this.time_tb_log.AppendText("关闭功放\r\n");
+                    jb_err = true;
                 }));
             }
             if (isVco == false)
             {
                 this.Invoke(new ThreadStart(delegate()
                 {
+                    jb_err = true;
                     MessageBox.Show(this, "错误： VCO未检测到! 请检查RX接收链路");
                 }));
             }
@@ -308,10 +598,11 @@ namespace JcMBP
             }
         }
 
-        void Tx1Hand(int s, ref double sen_tx1, bool istrue)//ture 假测量值，false 真测量值
+        void Tx1Hand(int s, ref double sen_tx1)
         {
             if (s <= -10000&&ClsUpLoad._checkPow)
             {
+                jb_err = true;
                 if (s == -10018)
                 {
                     this.Invoke(new ThreadStart(delegate()
@@ -335,25 +626,18 @@ namespace JcMBP
             }
             else
             {
-                if (istrue)
-                {
-                    Random rd = new Random();
-                    float val = rd.Next(1, 4) / 10f;
-                    sen_tx1 = ds.pow1+val+ds.off1;
-                }
-                else
-                    sen_tx1 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX1);//tx1显示功率
-                ds.sen_tx1 = sen_tx1;
+                sen_tx1 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX1);//tx1显示功率
+                testdata_.pimDate[currentSweepCont].sen_tx1 =Convert.ToSingle(sen_tx1);
                 this.Invoke(new ThreadStart(delegate()
                 {
                     this.time_tb_log.AppendText("开始调整TX1\r\n");
-                    this.time_tb_show_tx1.Text = ds.sen_tx1.ToString("0.00");//显示功率
-                    this.time_tb_log.AppendText("TX1 =: " + ds.sen_tx1.ToString("0.00") + "\r\n");
+                    this.time_tb_show_tx1.Text = testdata_.pimDate[currentSweepCont].sen_tx1.ToString("0.00");//显示功率
+                    this.time_tb_log.AppendText("TX1 =: " + testdata_.pimDate[currentSweepCont].sen_tx1.ToString("0.00") + "\r\n");
                 }));
             }
         }
 
-        void Tx2Hand(int s, ref double sen_tx2, bool istrue)//ture 假测量值，false 真测量值
+        void Tx2Hand(int s, ref double sen_tx2)
         {
             this.Invoke(new ThreadStart(delegate()
             {
@@ -361,6 +645,7 @@ namespace JcMBP
             }));
             if (s <= -10000&&ClsUpLoad._checkPow)
             {
+                jb_err = true;
                 if (s == -10018)
                 {
                     this.Invoke(new ThreadStart(delegate()
@@ -383,21 +668,15 @@ namespace JcMBP
                 }));
             }
             else
-            {
-                if (istrue)
-                {
-                    Random rd = new Random();
-                    float val = rd.Next(1, 4) / 10f;
-                    sen_tx2 = ds.pow2+val+ds.off2;
-                }
-                else
-                    sen_tx2 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX2);//读取tx2显示功率
-                ds.sen_tx2 = sen_tx2;
+            {            
+                sen_tx2 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX2);//读取tx2显示功率
+                //ds.sen_tx2 = sen_tx2;
+                testdata_.pimDate[currentSweepCont].sen_tx2 = Convert.ToSingle(sen_tx2);
                 this.Invoke(new ThreadStart(delegate()
                 {
                     this.time_tb_log.AppendText("开始调整TX2\r\n");
-                    this.time_tb_show_tx2.Text = ds.sen_tx2.ToString("0.00");//显示功率
-                    this.time_tb_log.AppendText("TX2 =: " + ds.sen_tx2.ToString("0.00") + "\r\n");
+                    this.time_tb_show_tx2.Text = testdata_.pimDate[currentSweepCont].sen_tx2.ToString("0.00");//显示功率
+                    this.time_tb_log.AppendText("TX2 =: " + testdata_.pimDate[currentSweepCont].sen_tx2.ToString("0.00") + "\r\n");
                 }));
             }
         }
@@ -461,12 +740,13 @@ namespace JcMBP
                 label66.Text = "Limit(dBc):";
                 label68.Text = "最大(dBc):";
                 label67.Text = "最小(dBc):";
-                label21.Text = "Now(dBc):";
+                label21.Text = "平均(dBc):";
                 //numericUpDown2.Value -= 43;
-                time_dgvPim.DataSource = ds.dtc;
+                if ( testdata_ != null)
+                time_dgvPim.DataSource = testdata_.surFaceData_dbc;
                 time_plot.MinValue = -193;//timeplot最大值
                 time_plot.MaxValue = -73;//timeplot最小值
-                time_dgvPim.Columns[6].HeaderText = "P_im(dBc)";
+                time_dgvPim.Columns[1].HeaderText = "Peak(dBc)";
                 ShowPimValue(false);
             }
             else
@@ -475,12 +755,13 @@ namespace JcMBP
                 label66.Text = "Limit(dBm):";
                 label68.Text = "最大(dBm):";
                 label67.Text = "最小(dBm):";
-                label21.Text = "Now(dBm):";
+                label21.Text = "平均(dBm):";
                 //numericUpDown2.Value += 43;
-                time_dgvPim.DataSource = ds.dt;
+                if ( testdata_ != null)
+                time_dgvPim.DataSource = testdata_.surFaceData_dbm;
                 time_plot.MinValue = -150;//timeplot最大值
                 time_plot.MaxValue = -30;//timeplot最小值
-                time_dgvPim.Columns[6].HeaderText = "P_im(dBm)";
+                time_dgvPim.Columns[1].HeaderText = "Peak(dBm)";
                 ShowPimValue(true);
             }
         }
@@ -499,12 +780,12 @@ namespace JcMBP
         {
             if (fm.isdBm)
             {
-                numericUpDown2.Value -= 43;
+                numericUpDown2.Value -= Convert.ToDecimal(TimeSweepLeft.st_pow);
                 fm.IsdBm = false;
             }
             else
             {
-                numericUpDown2.Value += 43;
+                numericUpDown2.Value += Convert.ToDecimal(TimeSweepLeft.st_pow);
                 fm.IsdBm = true;
             }
         }
@@ -533,6 +814,14 @@ namespace JcMBP
                 ds.sxy.str_data += "Order: ";
                 ds.sxy.str_data += OfftenMethod.PimFormula(ds.imCo1, ds.imCo2, ds.imLow, ds.imLess);
             }));
+        }
+
+        private void time_dgvPim_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            SingleTestData std;
+            if (fm.isdBm) std = new SingleTestData(testdata_.pimDate[time_dgvPim.CurrentRow.Index].dt_dbm,fm.isdBm);
+            else std = new SingleTestData(testdata_.pimDate[time_dgvPim.CurrentRow.Index].dt_dbc,fm.isdBm);
+            std.ShowDialog();
         }
     }
    

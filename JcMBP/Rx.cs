@@ -12,7 +12,7 @@ namespace JcMBP
     public partial class Rx : Form
     {
         ClsUpLoad cul;
-        public  NumericUpDown[] nuds;
+        NumericUpDown[] nuds;
         byte off_dutport = 0;
         double off_rx_loss = 0;
         public  bool isThreadStart = false;
@@ -21,25 +21,26 @@ namespace JcMBP
         {
             InitializeComponent();
             this.cul = cul;
-            nuds = new NumericUpDown[]{nud_rxoffset_0,nud_rxoffset_1,nud_rxoffset_2,nud_rxoffset_3,
-                                                        nud_rxoffset_4,nud_rxoffset_5,nud_rxoffset_6,nud_rxoffset_7,
-                                                        nud_rxoffset_8,nud_rxoffset_9,nud_rxoffset_10,nud_rxoffset_11,nud_rxoffset_12,numericUpDown2,numericUpDown1};
         }
 
         private void Rx_Load(object sender, EventArgs e)
         {
-            rx_offset_pb.Image = Image.FromFile(Application.StartupPath + "\\Band\\接收校准.JPG");
             if (ClsUpLoad._type == 2)
                 rxoffset_btn_start_b.Visible = false;
+            if (ClsUpLoad._type == 1)
+            {
+                rxoffset_btn_start_a.Text = "REV";
+                rxoffset_btn_start_b.Text = "FWD";
+            }
             OfftenMethod.LoadComboBox(cb_rxoffset_band, cul.BandNames);
             cb_rxoffset_band.SelectedIndex = 0;
             Label[] lables = new Label[]{label25,label27,label28,label29,label30,label31,
-                                        label26,label38,label39,label37,label54,label50,label1,label3,label2};
-            
+                                        label26,label38,label39,label37,label54,label50,label1};
+            nuds = new NumericUpDown[]{nud_rxoffset_0,nud_rxoffset_1,nud_rxoffset_2,nud_rxoffset_3,
+                                                        nud_rxoffset_4,nud_rxoffset_5,nud_rxoffset_6,nud_rxoffset_7,
+                                                        nud_rxoffset_8,nud_rxoffset_9,nud_rxoffset_10,nud_rxoffset_11,nud_rxoffset_12};
             OfftenMethod.LoadLabel(lables, cul.AllBandNames);
             OfftenMethod.LoadOffect(nuds, cul.RxVal);
-            if (FrmMain.offsetPassword) OfftenMethod.Nud_Enabled(nuds, true);
-            
         }
 
         void run_rxoffset(byte byDutPort)

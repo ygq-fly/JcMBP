@@ -19,7 +19,6 @@ namespace JcMBP
         byte imCo2 = 1;
         byte imLow = 0;
         byte imLess = 0;
-        bool orderMode = true;
         float _rxs;
         float _rxe;
         double f1;
@@ -63,8 +62,8 @@ namespace JcMBP
             time_btn_start_a.Enabled = false;
             time_btn_start_a.BackColor = Color.Green;
             groupBox14.Enabled = false;
-            ds.freq1s = Convert.ToDouble(time_nud_f1.Value);
-            ds.freq2e = Convert.ToDouble(time_nud_f2.Value);
+            ds.freq1s = Convert.ToSingle(time_nud_f1.Value);
+            ds.freq2e = Convert.ToSingle(time_nud_f2.Value);
             ds.pow1 = ds.pow2 = Convert.ToSingle(time_nud_p2.Value);
             ds.imCo1 = imCo1;
             ds.imCo2 = imCo2;
@@ -115,14 +114,14 @@ namespace JcMBP
         /// </summary>
         void start()
         {
-            Sweep s = new SweepTime(ds, ClsUpLoad._type.ToString());
-            tsm.Start(s);
-            this.Invoke(new ThreadStart(delegate()
-                {
-                    time_btn_start_a.Enabled = true;
-                    time_btn_start_a.BackColor = Color.White;
-                    groupBox14.Enabled = true;
-                }));
+            //Sweep s = new SweepTime(ds, ClsUpLoad._type.ToString());
+            //tsm.Start(s);
+            //this.Invoke(new ThreadStart(delegate()
+            //    {
+            //        time_btn_start_a.Enabled = true;
+            //        time_btn_start_a.BackColor = Color.White;
+            //        groupBox14.Enabled = true;
+            //    }));
         }
 
         /// <summary>
@@ -167,7 +166,7 @@ namespace JcMBP
         /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
-            PoiOrder ord = new PoiOrder(imCo1, imCo2, imLow, imLess,orderMode);
+            PoiOrder ord = new PoiOrder(imCo1, imCo2, imLow, imLess);
             ord.ShowDialog();
             if (ord.DialogResult == DialogResult.OK)
             {
@@ -223,10 +222,10 @@ namespace JcMBP
         /// <param name="e"></param>
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            time_nud_f1.Maximum = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].F1Max);
-            time_nud_f1.Minimum = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].F1Min);
-            time_nud_f1.Value = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].ord3_F1UpS);
+           
+            time_nud_f1.Maximum = Convert.ToDecimal(cul.ld[comboBox1.SelectedIndex].F1Max);
+            time_nud_f1.Minimum = Convert.ToDecimal(cul.ld[comboBox1.SelectedIndex].F1Min);
+            time_nud_f1.Value = Convert.ToDecimal(cul.ld[comboBox1.SelectedIndex].ord3_F1UpS);
 
             GoB(comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox3.SelectedIndex);
         }
@@ -238,10 +237,10 @@ namespace JcMBP
         /// <param name="e"></param>
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            time_nud_f2.Maximum = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]].F2Max);
-            time_nud_f2.Minimum = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]].F2Min);
-            time_nud_f2.Value = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]].ord3_F2DnE);
+           
+            time_nud_f2.Maximum = Convert.ToDecimal(cul.ld[comboBox2.SelectedIndex].F2Max);
+            time_nud_f2.Minimum = Convert.ToDecimal(cul.ld[comboBox2.SelectedIndex].F2Min);
+            time_nud_f2.Value = Convert.ToDecimal(cul.ld[comboBox2.SelectedIndex].ord3_F2DnE);
             GoB(comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox3.SelectedIndex);
         }
 
@@ -252,10 +251,10 @@ namespace JcMBP
         /// <param name="e"></param>
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _rxs = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].ord3_imS;
-            _rxe = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].ord3_imE;
-            rmax = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].RxMax;
-            rmin = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].RxMin;
+            _rxs = cul.ld[comboBox3.SelectedIndex].ord3_imS;
+            _rxe = cul.ld[comboBox3.SelectedIndex].ord3_imE;
+            rmax = cul.ld[comboBox3.SelectedIndex].RxMax;
+            rmin = cul.ld[comboBox3.SelectedIndex].RxMin;
             button9.Text = _rxs.ToString("0.00") + "-" + _rxe.ToString("0.00");
             GoB(comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox3.SelectedIndex);
         }

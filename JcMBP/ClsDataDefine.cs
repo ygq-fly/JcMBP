@@ -83,7 +83,8 @@ namespace JcMBP
         ST = 1,
         Sf = 2,
         Rx = 3,
-        Tx = 4
+        Tx = 4,
+        Gr=5
     }
 
     class MsgID

@@ -35,9 +35,9 @@ namespace JcMBP
         public static int _type = 1;
         public   int length = 8;
         public static int sweep_index = 5;
-        public static string offset_pass = "";
-        public static string saveFormat = "1";
-        public static bool fastmode = false;
+        public static int qiaoji_times = 0;
+        public static string id = "";
+
         #endregion
 
 
@@ -76,10 +76,8 @@ namespace JcMBP
             _portHole = int.Parse(IniFile.GetString("Port", "scanNumber", "2"));
             _type = int.Parse(IniFile.GetString("Settings", "type_trans", "1"));
             sweep_index = int.Parse(IniFile.GetString("Settings", "sweep_times", "5"));
-            string linshi = OfftenMethod.Mid5Lock("12345678");
-            offset_pass = IniFile.GetString("Settings", "offsetpassword", linshi);
-            saveFormat = IniFile.GetString("Settings", "saveFormat","1" );
-            fastmode = IniFile.GetString("Settings", "fastmode", "0") == "1" ? true : false;
+            qiaoji_times = int.Parse(IniFile.GetString("Settings", "qiaoji_times", "5"));
+            id = IniFile.GetString("Settings", "pim_id", "12345");
             if (_type == 0||_type==1)
             {            
                 sm =SweepMode.Hw;
