@@ -432,8 +432,10 @@ namespace JcMBP
                     }
                 }
                 //读取pim    
+                Random rd = new Random();
+                float valzz = rd.Next(1, 4) / 10f;
                 if (ClsUpLoad.fastmode)
-                    sen_tx1 = ds.pow1;
+                    sen_tx1 = ds.pow1+ds.off1+valzz;
                 else
                     sen_tx1 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX1);//读取显示功率1
                 ClsJcPimDll.fnGetImResult(ref freq_mhz, ref val, "mhz");//读取互调频率和互调值

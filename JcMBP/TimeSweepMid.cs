@@ -339,7 +339,7 @@ namespace JcMBP
                 {
                     Random rd = new Random();
                     float val = rd.Next(1, 4) / 10f;
-                    sen_tx1 = ds.pow1+val;
+                    sen_tx1 = ds.pow1+val+ds.off1;
                 }
                 else
                     sen_tx1 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX1);//tx1显示功率
@@ -388,7 +388,7 @@ namespace JcMBP
                 {
                     Random rd = new Random();
                     float val = rd.Next(1, 4) / 10f;
-                    sen_tx2 = ds.pow2+val;
+                    sen_tx2 = ds.pow2+val+ds.off2;
                 }
                 else
                     sen_tx2 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX2);//读取tx2显示功率
