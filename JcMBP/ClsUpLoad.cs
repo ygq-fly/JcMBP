@@ -79,7 +79,7 @@ namespace JcMBP
             string linshi = OfftenMethod.Mid5Lock("12345678");
             offset_pass = IniFile.GetString("Settings", "offsetpassword", linshi);
             saveFormat = IniFile.GetString("Settings", "saveFormat","1" );
-            fastmode = IniFile.GetString("Settings", "fastmode", "0") == "1" ? true : false;
+            fastmode = IniFile.GetString("Settings", "fastmode", "1") == "1" ? true : false;
             if (_type == 0||_type==1)
             {            
                 sm =SweepMode.Hw;
