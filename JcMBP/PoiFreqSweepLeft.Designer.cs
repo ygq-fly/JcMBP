@@ -622,7 +622,7 @@
             this.ctrl_lbl_pow2.Name = "ctrl_lbl_pow2";
             this.ctrl_lbl_pow2.Size = new System.Drawing.Size(92, 19);
             this.ctrl_lbl_pow2.TabIndex = 117;
-            this.ctrl_lbl_pow2.Text = "功率2 (dBm)";
+            this.ctrl_lbl_pow2.Text = "功率 (dBm)";
             this.ctrl_lbl_pow2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // freq_nud_pow2

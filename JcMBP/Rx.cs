@@ -329,5 +329,20 @@ namespace JcMBP
         {
             OfftenMethod.Formula(sender);
         }
+
+        private void nud_rxoffset_12_MouseClick(object sender, MouseEventArgs e)
+        {
+            OfftenMethod.Formula(sender);
+        }
+
+        private void numericUpDown2_MouseClick(object sender, MouseEventArgs e)
+        {
+            OfftenMethod.Formula(sender);
+        }
+
+        private void numericUpDown1_MouseClick(object sender, MouseEventArgs e)
+        {
+            OfftenMethod.Formula(sender);
+        }
     }
 }
