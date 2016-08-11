@@ -463,6 +463,10 @@ namespace JcMBP
                 {
                     isSame = true;
                 }
+                else
+                {
+                    isSame = false;
+                }
                 LastCode = barcode;
 
                 float pim_rs = byt1 * Convert.ToSingle(nud_f1s.Value) - byt2 * Convert.ToSingle(nud_f2e.Value);
