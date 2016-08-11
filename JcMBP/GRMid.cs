@@ -955,9 +955,9 @@ namespace JcMBP
                                     testdata.pimDate[currentSweepCont].currentTestF2.ToString("0.0") +
                                     "):  " +
                                     testdata.pimDate[currentSweepCont].pimVal_dbm[m - 1].ToString("0.0") +
-                                    "dBm @ " +
+                                    "MHz @ " +
                                     (testdata.pimDate[currentSweepCont].pimFreq[m - 1]+ pimOffset).ToString("0.0") +
-                                    "MHz\r\n");
+                                    "dBm\r\n");
 
             }));
             //}
