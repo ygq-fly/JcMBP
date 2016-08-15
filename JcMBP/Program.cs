@@ -95,32 +95,32 @@ namespace JcMBP
             string su = IniFile.GetString("SN", "su", "0", Application.StartupPath + "\\JcConfig.ini");//超级账号
             bool iscode = su == "637" ? true : false;
 
-            if (!iscode)
-            {
-                //判断授权文件
-                Code c = new Code();
-                try
-                {
-                    if (File.Exists(Code.strFilePath))
-                    {
-                        if (!c.CheckFile(sn))
-                        {
-                            running = false;
-                            MessageBox.Show("授权日期已到！");
-                        }
-                    }
-                    else
-                    {
-                        running = false;
-                        MessageBox.Show("请先生成授权文件！");
-                    }
-                }
-                catch
-                {
-                    running = false;
-                    MessageBox.Show("授权文件缺失或错误，请重新生成授权文件！");
-                }
-            }
+            //if (!iscode)
+            //{
+            //    //判断授权文件
+            //    Code c = new Code();
+            //    try
+            //    {
+            //        if (File.Exists(Code.strFilePath))
+            //        {
+            //            if (!c.CheckFile(sn))
+            //            {
+            //                running = false;
+            //                MessageBox.Show("授权日期已到！");
+            //            }
+            //        }
+            //        else
+            //        {
+            //            running = false;
+            //            MessageBox.Show("请先生成授权文件！");
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        running = false;
+            //        MessageBox.Show("授权文件缺失或错误，请重新生成授权文件！");
+            //    }
+            //}
             if (!running)
                 Application.Exit();
             else

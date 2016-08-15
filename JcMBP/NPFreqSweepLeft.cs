@@ -204,10 +204,10 @@ namespace JcMBP
 
         private void comboBox4_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            f2s = cul.ld[comboBox4.SelectedIndex].ord3_F1UpS;
-            f2e = cul.ld[comboBox4.SelectedIndex].ord3_F1UpE;
-            f2max = cul.ld[comboBox4.SelectedIndex].F2Max;
-            f2min = cul.ld[comboBox4.SelectedIndex].F2Min;
+            f2s = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox4.Text)]].ord3_F1UpS;
+            f2e = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox4.Text)]].ord3_F1UpE;
+            f2max = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox4.Text)]].F2Max;
+            f2min = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox4.Text)]].F2Min;
             button1.Text = f2s.ToString("0.00") + "-" + f2e.ToString("0.00");
             label4.Text = OfftenMethod.GetTestBand_f(imCo1, imCo2, imLow, imLess, f1s, f1e, f2s, f2e);
             if (comboBox3.SelectedIndex < 0 || comboBox4.SelectedIndex < 0 || comboBox1.SelectedIndex < 0)
@@ -230,10 +230,10 @@ namespace JcMBP
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            f1s = cul.ld[comboBox3.SelectedIndex].ord3_F1UpS;
-             f1e= cul.ld[comboBox3.SelectedIndex].ord3_F1UpE;
-             f1max = cul.ld[comboBox3.SelectedIndex].F1Max;
-             f1min = cul.ld[comboBox3.SelectedIndex].F1Min;
+            f1s = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].ord3_F1UpS;
+            f1e = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].ord3_F1UpE;
+            f1max = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].F1Max;
+            f1min = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].F1Min;
              
              button11.Text = f1s.ToString("0.00") + "-" + f1e.ToString("0.00");
              label4.Text = OfftenMethod.GetTestBand_f(imCo1, imCo2, imLow, imLess, f1s, f1e, f2s, f2e);
@@ -244,10 +244,10 @@ namespace JcMBP
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _rxs = cul.ld[comboBox1.SelectedIndex].ord3_imS;
-            _rxe = cul.ld[comboBox1.SelectedIndex].ord3_imE;
-            rmax = cul.ld[comboBox1.SelectedIndex].RxMax;
-            rmin = cul.ld[comboBox1.SelectedIndex].RxMin;
+            _rxs = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].ord3_imS;
+            _rxe = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].ord3_imE;
+            rmax = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].RxMax;
+            rmin = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].RxMin;
             button8.Text = _rxs.ToString("0.00") + "-" + _rxe.ToString("0.00");
             if (comboBox3.SelectedIndex < 0 || comboBox4.SelectedIndex < 0 || comboBox1.SelectedIndex < 0)
                 return;
@@ -485,6 +485,11 @@ namespace JcMBP
         }
 
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }

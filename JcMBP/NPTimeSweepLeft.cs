@@ -222,10 +222,10 @@ namespace JcMBP
         /// <param name="e"></param>
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
-            time_nud_f1.Maximum = Convert.ToDecimal(cul.ld[comboBox1.SelectedIndex].F1Max);
-            time_nud_f1.Minimum = Convert.ToDecimal(cul.ld[comboBox1.SelectedIndex].F1Min);
-            time_nud_f1.Value = Convert.ToDecimal(cul.ld[comboBox1.SelectedIndex].ord3_F1UpS);
+
+            time_nud_f1.Maximum = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].F1Max);
+            time_nud_f1.Minimum = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].F1Min);
+            time_nud_f1.Value = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].ord3_F1UpS);
 
             GoB(comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox3.SelectedIndex);
         }
@@ -251,10 +251,10 @@ namespace JcMBP
         /// <param name="e"></param>
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _rxs = cul.ld[comboBox3.SelectedIndex].ord3_imS;
-            _rxe = cul.ld[comboBox3.SelectedIndex].ord3_imE;
-            rmax = cul.ld[comboBox3.SelectedIndex].RxMax;
-            rmin = cul.ld[comboBox3.SelectedIndex].RxMin;
+            _rxs = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].ord3_imS;
+            _rxe = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].ord3_imE;
+            rmax = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].RxMax;
+            rmin = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].RxMin;
             button9.Text = _rxs.ToString("0.00") + "-" + _rxe.ToString("0.00");
             GoB(comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox3.SelectedIndex);
         }

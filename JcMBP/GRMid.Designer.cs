@@ -203,6 +203,7 @@
             // 
             // nud_offset
             // 
+            this.nud_offset.DecimalPlaces = 1;
             this.nud_offset.Location = new System.Drawing.Point(80, 354);
             this.nud_offset.Name = "nud_offset";
             this.nud_offset.Size = new System.Drawing.Size(100, 21);
@@ -236,6 +237,7 @@
             // 
             // nud_f1s
             // 
+            this.nud_f1s.DecimalPlaces = 1;
             this.nud_f1s.Location = new System.Drawing.Point(82, 210);
             this.nud_f1s.Maximum = new decimal(new int[] {
             10000,
@@ -267,6 +269,7 @@
             // 
             // nud_f1e
             // 
+            this.nud_f1e.DecimalPlaces = 1;
             this.nud_f1e.Location = new System.Drawing.Point(81, 237);
             this.nud_f1e.Maximum = new decimal(new int[] {
             10000,
@@ -289,6 +292,7 @@
             // 
             // nud_f2s
             // 
+            this.nud_f2s.DecimalPlaces = 1;
             this.nud_f2s.Location = new System.Drawing.Point(80, 269);
             this.nud_f2s.Maximum = new decimal(new int[] {
             10000,
@@ -325,6 +329,7 @@
             // 
             // nud_f2e
             // 
+            this.nud_f2e.DecimalPlaces = 1;
             this.nud_f2e.Location = new System.Drawing.Point(81, 296);
             this.nud_f2e.Maximum = new decimal(new int[] {
             10000,
