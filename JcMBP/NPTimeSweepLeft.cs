@@ -20,17 +20,17 @@ namespace JcMBP
         byte imLow = 0;
         byte imLess = 0;
         bool orderMode = true;
-        float _rxs;
-        float _rxe;
+        double _rxs;
+        double _rxe;
         double f1;
         double f2;
         double time = 0;
-        float f1max;
-        float f1min;
-        float f2max;
-        float f2min;
-        float rmax;
-        float rmin;
+        double f1max;
+        double f1min;
+        double f2max;
+        double f2min;
+        double rmax;
+        double rmin;
 
         public NPTimeSweepLeft(ClsUpLoad cul,TimeSweepMid tsm)
         {
@@ -70,7 +70,7 @@ namespace JcMBP
             ds.imCo2 = imCo2;
             ds.imLow = imLow;
             ds.imLess = imLess;
-            ds.time1 = (float)time;
+            ds.time1 = (double)time;
             ds.tx1 = (byte)(cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]);
             ds.tx2 = (byte)(cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]);
             ds.rx = (byte)(cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]);
@@ -78,13 +78,17 @@ namespace JcMBP
             OfftenMethod.ToAddColumns(ds.dtc);
             ds.port = 0;
             if (checkBox1.Checked)
-                ds.off1 = Convert.ToDouble(time_nud_off1.Value);
+                ds.time_off1= ds.off1 = Convert.ToDouble(time_nud_off1.Value);
             else
-                ds.off1 = 0;
+                ds.time_off1= ds.off1 = 0;
             if (time_check_off1.Checked)
-                ds.off2 = Convert.ToDouble(time_nud_off1.Value);
+                ds.time_off2=ds.off2 = Convert.ToDouble(time_nud_off1.Value);
             else
-                ds.off2 = 0;
+                ds.time_off2= ds.off2 = 0;
+            if (checkBox2.Checked)
+                ds.rx_off = Convert.ToDouble(numericUpDown1.Value);
+            else
+                ds.rx_off = 0;
             ds.xstart = _rxs - 2;
             ds.xend = _rxe + 2;
             ds.MaxRx = _rxe;

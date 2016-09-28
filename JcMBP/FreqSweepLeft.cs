@@ -14,8 +14,8 @@ namespace JcMBP
         ClsUpLoad cul;
         DataSweep ds;
         FreqSweepMid fsm;
-        float _rxs;
-        float _rxe;
+        double _rxs;
+        double _rxe;
         int count = 1;
         public static string bandname = "";
         public FreqSweepLeft(ClsUpLoad cul,FreqSweepMid fsm)
@@ -50,9 +50,9 @@ namespace JcMBP
             ds.imCo1 = (byte)(Convert.ToInt32(ds.order) / 2 + 1);
             ds.imCo2 = (byte)(Convert.ToInt32(ds.imCo1) - 1);
             if (freq_check_off1.Checked)
-                ds.off1 = ds.off2 =ds.freq_off2= ds.freq_off1 = Convert.ToDouble(freq_nud_off1.Value);
+                ds.rx_off= ds.off1 = ds.off2 =ds.freq_off2= ds.freq_off1 = Convert.ToDouble(freq_nud_off1.Value);
             else
-                ds.off1 = ds.off2 = ds.freq_off1 = ds.freq_off2 = 0;
+                ds.rx_off= ds.off1 = ds.off2 = ds.freq_off1 = ds.freq_off2 = 0;
             ds.MaxRx = _rxe;
             ds.MinRx = _rxs;
             ds.port = port;
@@ -145,9 +145,9 @@ namespace JcMBP
         {
             FrmMain.Band = freq_cb_band.SelectedIndex;
             OfftenMethod.NudValue(freq_nud_fstart1, freq_nud_fstop1,
-                                             (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)]].TxS, (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)]].TxE);
+                                             (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)]].F1Min, (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)]].F1Max);
             OfftenMethod.NudValue(freq_nud_fstart2, freq_nud_fstop2,
-                                     (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)]].TxS, (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)]].TxE);
+                                     (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)]].F2Min, (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)]].F2Max);
             switch (freq_cb_im.SelectedIndex)
             {
                 case 0:

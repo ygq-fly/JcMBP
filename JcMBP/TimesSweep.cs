@@ -19,16 +19,16 @@ namespace JcMBP
         byte imCo2 = 1;
         byte imLow = 0;
         byte imLess = 0;
-        float _rxs;
-        float _rxe;
+        double _rxs;
+        double _rxe;
         double f1;
         double f2;
         double f1s;
         double f1e;
         double f2s;
         double f2e;
-        float rmax;
-        float rmin;
+        double rmax;
+        double rmin;
         int Count = 0;
         public TimesSweep(ClsUpLoad cul, FreqSweepMid fsm)
         {

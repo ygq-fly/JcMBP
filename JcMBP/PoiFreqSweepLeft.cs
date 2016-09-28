@@ -21,16 +21,16 @@ namespace JcMBP
         byte imLow = 0;
         byte imLess = 0;
         bool orderMode = true;
-        float _rxs;
-        float _rxe;
+        double _rxs;
+        double _rxe;
         double f1;
         double f2;
         double f1s;
         double f1e;
         double f2s;
         double f2e;
-        float rmax;
-        float rmin;
+        double rmax;
+        double rmin;
 
         string jb_path = "";
 
@@ -78,6 +78,11 @@ namespace JcMBP
                 ds.off2 = ds.freq_off2 = Convert.ToDouble(numericUpDown4.Value);
             else
                 ds.off2 = ds.freq_off2 = 0;
+            if (checkBox1.Checked)
+                ds.rx_off = Convert.ToDouble(numericUpDown1.Value);
+            else
+                ds.rx_off = 0;
+
             ds.port = port;
             
             fsm.Clone(ds);
@@ -279,7 +284,7 @@ namespace JcMBP
                 for (int i = 0; i < ds.num; i++)
                 {
                     jd[i] = new JbData();
-                    jd[i].LoadData(@path_test, i, ClsUpLoad._type);
+                    jd[i].LoadData(@path_test, i, ClsUpLoad._type,cul);
                 }
                 string[] names = path_test.Split('\\');
                 jbName = names[names.Length - 1];
@@ -297,32 +302,34 @@ namespace JcMBP
 
         void Jbstart()
         {
-            ds.sxy.starttime = DateTime.Now;
+       
+                ds.sxy.starttime = DateTime.Now;
 
-            for (int i = 0; i < ds.num; i++)
-            {
-                JbIni_(jd[i], i);
-                UpdateGroupControl(i);
-                Sweep s;
-                if (ds.sxy.model == 1)
-                    s = new SweepTime(ds, ClsUpLoad._type.ToString());
-                else
-                    s = new SweepFreq(ds, ClsUpLoad._type.ToString());
-                fsm.JbStart(s, i, jd[i].time_out_M);
-                Thread.Sleep(Convert.ToInt32(ClsUpLoad._sleepTime));
-                if (FreqSweepMid.jb_err||time_btn_start_b.Enabled)
-                    break;
-            }
-            this.Invoke(new ThreadStart(delegate
-            {
-                ds.sxy.endtime = DateTime.Now;
-                ds.sxy.spantime = ds.sxy.endtime - ds.sxy.starttime;
-                fsm.DateAndGr();
-                time_btn_start_a.Enabled = true;
-                time_btn_start_b.Enabled = true;
-                groupBox1.Enabled = true;
-                time_btn_start_b.BackColor = Color.White;
-            }));
+                for (int i = 0; i < ds.num; i++)
+                {
+                    JbIni_(jd[i], i);
+                    UpdateGroupControl(i);
+                    Sweep s;
+                    if (ds.sxy.model == 1)
+                        s = new SweepTime(ds, ClsUpLoad._type.ToString());
+                    else
+                        s = new SweepFreq(ds, ClsUpLoad._type.ToString());
+                    fsm.JbStart(s, i, jd[i].time_out_M);
+                    Thread.Sleep(Convert.ToInt32(ClsUpLoad._sleepTime));
+                    if (FreqSweepMid.jb_err || time_btn_start_b.Enabled)
+                        break;
+                }
+                this.Invoke(new ThreadStart(delegate
+                {
+                    ds.sxy.endtime = DateTime.Now;
+                    ds.sxy.spantime = ds.sxy.endtime - ds.sxy.starttime;
+                    fsm.DateAndGr();
+                    time_btn_start_a.Enabled = true;
+                    time_btn_start_b.Enabled = true;
+                    groupBox1.Enabled = true;
+                    time_btn_start_b.BackColor = Color.White;
+                }));
+     
         }
 
         void JbIni_(JbData jb, int i)
@@ -343,9 +350,10 @@ namespace JcMBP
             ds.imLess = jb.imLess;
             ds.off1 = ds.freq_off1 = jb.off1;
             ds.off2 = ds.freq_off2 = jb.off2;
+            ds.rx_off = jb.rx_off;
             ds.MaxRx = jb.rxe;
             ds.MinRx = jb.rxs;
-            ds.sxy.bandM = jb.bandM;
+           
             ds.sxy.time_out_M = jb.time_out_M;
             ds.sxy.model = jb.model;
             //if (ds.sxy.model == 1)
@@ -386,6 +394,7 @@ namespace JcMBP
                  comboBox3.SelectedIndex =comboBox3.Items.IndexOf(cul.BandNames[cul.BandCount.IndexOf((int)jd[i].tx1)]);
                  comboBox4.SelectedIndex = comboBox4.Items.IndexOf(cul.BandNames[cul.BandCount.IndexOf((int)jd[i].tx2)]);
                  comboBox1.SelectedIndex = comboBox1.Items.IndexOf(cul.BandNames[cul.BandCount.IndexOf((int)jd[i].rx)]);
+                 numericUpDown1.Value = Convert.ToDecimal(jd[i].rx_off);
                  f1s = jd[i].f1s;
                  f1e = jd[i].f1e;
                  f2s = jd[i].f2s;
@@ -408,6 +417,8 @@ namespace JcMBP
                  }
 
                  button8.Text = jd[i].rxs.ToString("0.00") + "-" + jd[i].rxe.ToString("0.00") + "MHz";
+                 //button8.Text = ds.MinRx.ToString("0.00") + "-" +
+                 //    ds.MaxRx.ToString("0.00") + "MHz";
                  label4.Text = OfftenMethod.GetTestBand_f(jd[i].imCo1, jd[i].imCo2, jd[i].imLow, jd[i].imLess,
                                                             jd[i].f1s, jd[i].f1e, jd[i].f2s, jd[i].f2e);
                  fsm.numericUpDown2.Value = Convert.ToDecimal(jd[i].limit);
@@ -508,6 +519,11 @@ namespace JcMBP
         private void freq_cb_step_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void numericUpDown1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            OfftenMethod.Formula(sender);
         }
 
      

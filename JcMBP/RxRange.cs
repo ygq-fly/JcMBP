@@ -10,11 +10,11 @@ namespace JcMBP
 {
     public partial class RxRange : Form
     {
-        public float _rxs;
-        public float _rxe;
-        float rxmax;
-        float rxmin;
-        public RxRange(float rxs,float rxe,float rmax,float rmin)
+        public double _rxs;
+        public double _rxe;
+        double rxmax;
+        double rxmin;
+        public RxRange(double rxs,double rxe,double rmax,double rmin)
         {
             InitializeComponent();
             this._rxe = rxe;

@@ -30,9 +30,9 @@ namespace JcMBP
         public  List<DataSweep> ds_arr=new List<DataSweep>();
         Sweep sweep;
         int getnum = 0;
-        float _pim_max = float.MinValue;
-        float _pim_min = float.MaxValue;
-        float _pim_limit = -110;
+        double _pim_max = double.MinValue;
+        double _pim_min = double.MaxValue;
+        double _pim_limit = -110;
         string type = "0";
      
         
@@ -159,7 +159,7 @@ namespace JcMBP
             try
             {
                 
-                ds.limit=_pim_limit= float.Parse(numericUpDown2.Value.ToString());
+                ds.limit=_pim_limit= double.Parse(numericUpDown2.Value.ToString());
               
                 fm.Limit = Convert.ToSingle(numericUpDown2.Value.ToString());
                
@@ -172,15 +172,15 @@ namespace JcMBP
         /// 更新控件和保存limit
         /// </summary>
         /// <param name="limit_dBm"></param>
-        void Main_SetLimit(float limit_dBm)
+        void Main_SetLimit(double limit_dBm)
         {      
-            freq_plot.SetLimitEnalbe(true, limit_dBm, Color.White);//设置控件limit
+            freq_plot.SetLimitEnalbe(true, (float)limit_dBm, Color.White);//设置控件limit
             freq_plot.MajorLineWidth = freq_plot.MajorLineWidth;
             
             IniFile.SetFileName(Application.StartupPath + "\\JcConfig.ini");//设置文件名
             IniFile.SetString("Settings", "limit", limit_dBm.ToString());//保存limnt到配置文件
             //if (!isdbm)
-            //    IniFile.SetString("Settings", "limit", (limit_dBm - (float)ds.pow1).ToString());//保存limnt到配置文件
+            //    IniFile.SetString("Settings", "limit", (limit_dBm - (double)ds.pow1).ToString());//保存limnt到配置文件
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace JcMBP
                    if (istrue)
                    {
                        Random rd = new Random();
-                       float val = rd.Next(1, 4) / 10f;
+                       double val = rd.Next(1, 4) / 10f;
                        sen_tx1 = ds.pow1+val+ds.off1;
                        //MessageBox.Show("pow1=" + ds.pow1.ToString());
                    }
@@ -306,7 +306,7 @@ namespace JcMBP
                    if (istrue)
                    {
                        Random rd = new Random();
-                       float val = rd.Next(1, 4)/10f;
+                       double val = rd.Next(1, 4)/10f;
                        sen_tx2 = ds.pow2+val+ds.off2;
                    }
                    else
@@ -329,26 +329,26 @@ namespace JcMBP
             this.Invoke(new ThreadStart(delegate
            {
                FrmMain.isjb = false;
-               float currenty = 0;
+               double currenty = 0;
                this.time_tb_show_tx1.Text = ds.sen_tx1.ToString("0.00");
                this.time_tb_show_tx2.Text = ds.sen_tx2.ToString("0.00");
                if (ds.sxy.x <= ds.MaxRx && ds.sxy.x >= ds.MinRx)
                {
                    time_tb_pim_now.Text = ds.sxy.y.ToString("0.0");////控件改变text显示互调当前值
                    time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString("0.0");
-                   currenty = (float)ds.sxy.y;
+                   currenty = (double)ds.sxy.y;
                }
                else
                {
                        ds.sxy.y = -200;
-                       currenty = (float)ds.sxy.y;
+                       currenty = (double)ds.sxy.y;
                }
               
                //if (fm.isdBm)
 
                 
                //else
-               //    currenty = (float)ds.sxy.y - 43;
+               //    currenty = (double)ds.sxy.y - 43;
                if (currenty > _pim_max&&ds.sxy.x <= ds.MaxRx && ds.sxy.x >= ds.MinRx)
                {
                    _pim_max = currenty;//设置pim最大值
@@ -382,26 +382,26 @@ namespace JcMBP
                //double y_start = -160;
                //double y_end = -60;
                //freq_plot.SetYStartStop(y_start, y_end);
-               PointF pf = new PointF(ds.sxy.x, ds.sxy.y);
-               PointF pfc = new PointF(ds.sxy.x, ds.sxy.y - (float)ds.pow1);
+               PointF pf = new PointF(Convert.ToSingle(ds.sxy.x), Convert.ToSingle(ds.sxy.y));
+               PointF pfc = new PointF(Convert.ToSingle(ds.sxy.x), Convert.ToSingle(ds.sxy.y - (double)ds.pow1));
                ChangeY(ds.sxy.y);
                this.freq_plot.Add(new PointF[1] { pf }, ds.sxy.currentPlot, ds.sxy.current);//坐标控件添加点
                this.freq_plot.Add(new PointF[1] { pfc }, ds.sxy.currentPlot + 4, ds.sxy.current);//坐标控件添加点
                this.freq_plot.MajorLineWidth = this.freq_plot.MajorLineWidth;
                OfftenMethod.ToNewRows(ds.dtm, ds.sxy.currentCount,
-                         (float)ds.sxy.f1, (float)ds.sen_tx1,
-                         (float)ds.sxy.f2, (float)ds.sen_tx2,
+                         (double)ds.sxy.f1, (double)ds.sen_tx1,
+                         (double)ds.sxy.f2, (double)ds.sen_tx2,
                          ds.sxy.x, ds.sxy.y);//添加数据到表格
                OfftenMethod.ToNewRows(ds.dtm_c, ds.sxy.currentCount,
-                         (float)ds.sxy.f1, (float)ds.sen_tx1,
-                         (float)ds.sxy.f2, (float)ds.sen_tx2,
-                         ds.sxy.x, ds.sxy.y - (float)ds.pow1);//添加数据到表格
+                         (double)ds.sxy.f1, (double)ds.sen_tx1,
+                         (double)ds.sxy.f2, (double)ds.sen_tx2,
+                         ds.sxy.x, ds.sxy.y - (double)ds.pow1);//添加数据到表格
                freq_dgvPim.FirstDisplayedScrollingRowIndex = freq_dgvPim.Rows.Count- 1;//显示当前行
                CreatScrollbar();
            }));
         }
 
-        void ChangeY(float y)
+        void ChangeY(double y)
         {
            //if (y == -200)
            //     return;
@@ -436,7 +436,7 @@ namespace JcMBP
             else
                 freq_plot.SetYStartStop(ds.dbc_y, ds.dbc_y_e);
         }
-        void ChangeY_j(float y)
+        void ChangeY_j(double y)
         {
             if (y == -200)
                 return;
@@ -471,19 +471,19 @@ namespace JcMBP
                 //time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString();
 
 
-                float currenty = 0;
-                    currenty = (float)ds.sxy.y;
+                double currenty = 0;
+                    currenty = (double)ds.sxy.y;
 
                     if (ds.sxy.x <= ds.MaxRx && ds.sxy.x >= ds.MinRx)
                     {
                         time_tb_pim_now.Text = ds.sxy.y.ToString("0.0");////控件改变text显示互调当前值
                         time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString("0.0");
-                        currenty = (float)ds.sxy.y;
+                        currenty = (double)ds.sxy.y;
                     }
                     else
                     {
                         ds.sxy.y = -200;
-                        currenty = (float)ds.sxy.y;
+                        currenty = (double)ds.sxy.y;
                     }
 
                     if (currenty > _pim_max && ds.sxy.x <= ds.MaxRx && ds.sxy.x >= ds.MinRx)
@@ -521,13 +521,13 @@ namespace JcMBP
                 PointF pfc;
                 if (ds.sxy.model == 1)
                 {
-                    pf = new PointF(ds.sxy.currentCount+1, ds.sxy.y);
-                    pfc = new PointF(ds.sxy.currentCount+1, ds.sxy.y - (float)ds.pow1);
+                    pf = new PointF(Convert.ToSingle(ds.sxy.currentCount+1), Convert.ToSingle(ds.sxy.y));
+                    pfc = new PointF(Convert.ToSingle(ds.sxy.currentCount+1), Convert.ToSingle(ds.sxy.y - (double)ds.pow1));
                 }
                 else
                 {
-                    pf = new PointF(ds.sxy.x, ds.sxy.y);
-                    pfc = new PointF(ds.sxy.x, ds.sxy.y - (float)ds.pow1);
+                    pf = new PointF(Convert.ToSingle(ds.sxy.x), Convert.ToSingle(ds.sxy.y));
+                    pfc = new PointF(Convert.ToSingle(ds.sxy.x), Convert.ToSingle(ds.sxy.y - (double)ds.pow1));
                 }
                 ChangeY_j(ds.sxy.y);
                 this.freq_plot.Add(new PointF[1] { pf }, ds.sxy.currentPlot, ds.sxy.current);//坐标控件添加点
@@ -544,13 +544,13 @@ namespace JcMBP
                 ds.sxy.pf_arr[ds.sxy.currentPlot].Add(pf);
                 ds.sxy.pf_arr[ds.sxy.currentPlot+4].Add(pfc);
                 OfftenMethod.ToNewRows(ds.dt, ds.sxy.currentCount,
-                       (float)ds.sxy.f1, (float)ds.sen_tx1,
-                       (float)ds.sxy.f2, (float)ds.sen_tx2,
+                       (double)ds.sxy.f1, (double)ds.sen_tx1,
+                       (double)ds.sxy.f2, (double)ds.sen_tx2,
                        ds.sxy.x, ds.sxy.y);//添加数据到表格
                 OfftenMethod.ToNewRows(ds.dtc, ds.sxy.currentCount,
-                          (float)ds.sxy.f1, (float)ds.sen_tx1,
-                          (float)ds.sxy.f2, (float)ds.sen_tx2,
-                          ds.sxy.x, ds.sxy.y - (float)ds.pow1);//添加数据到表格
+                          (double)ds.sxy.f1, (double)ds.sen_tx1,
+                          (double)ds.sxy.f2, (double)ds.sen_tx2,
+                          ds.sxy.x, ds.sxy.y - (double)ds.pow1);//添加数据到表格
                 dataGridView1.FirstDisplayedScrollingRowIndex = ds.jb.Rows.Count - 1;
                 curr_row = ds.jb.Rows.Count - 1;
             }));
@@ -566,11 +566,11 @@ namespace JcMBP
                 this.time_tb_show_tx2.Text = ds.sen_tx2.ToString("0.0");
                 time_tb_pim_now.Text = ds.sxy.y.ToString();////控件改变text显示互调当前值
                 time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString();
-                float currenty = 0;
+                double currenty = 0;
                 //if (fm.isdBm)
-                currenty = (float)ds.sxy.y;
+                currenty = (double)ds.sxy.y;
                 //else
-                //    currenty = (float)ds.sxy.y - 43;
+                //    currenty = (double)ds.sxy.y - 43;
                 if (currenty > _pim_max)
                 {
                     _pim_max = currenty;//设置pim最大值
@@ -606,13 +606,13 @@ namespace JcMBP
                 PointF pfc;
                 if (ds.sxy.model == 1)
                 {
-                    pf = new PointF(ds.sxy.currentCount + 1, ds.sxy.y);
-                    pfc = new PointF(ds.sxy.currentCount + 1, ds.sxy.y - (float)ds.pow1);
+                    pf = new PointF(Convert.ToSingle(ds.sxy.currentCount + 1), Convert.ToSingle(ds.sxy.y));
+                    pfc = new PointF(Convert.ToSingle(ds.sxy.currentCount + 1), Convert.ToSingle(ds.sxy.y - (double)ds.pow1));
                 }
                 else
                 {
-                    pf = new PointF(ds.sxy.x, ds.sxy.y);
-                    pfc = new PointF(ds.sxy.x, ds.sxy.y - (float)ds.pow1);
+                    pf = new PointF(Convert.ToSingle(ds.sxy.x), Convert.ToSingle(ds.sxy.y));
+                    pfc = new PointF(Convert.ToSingle(ds.sxy.x), Convert.ToSingle(ds.sxy.y - (double)ds.pow1));
                 }
                 ChangeY_j(ds.sxy.y);
                 this.freq_plot.Add(new PointF[1] { pf }, ds.sxy.currentPlot, ds.sxy.current);//坐标控件添加点
@@ -627,13 +627,13 @@ namespace JcMBP
                 ds.sxy.pf_arr[ds.sxy.currentPlot].Add(pf);
                 ds.sxy.pf_arr[ds.sxy.currentPlot + 4].Add(pfc);
                 OfftenMethod.ToNewRows(ds.dtm, ds.sxy.currentCount,
-                       (float)ds.sxy.f1, (float)ds.sen_tx1,
-                       (float)ds.sxy.f2, (float)ds.sen_tx2,
+                       (double)ds.sxy.f1, (double)ds.sen_tx1,
+                       (double)ds.sxy.f2, (double)ds.sen_tx2,
                        ds.sxy.x, ds.sxy.y);//添加数据到表格
                 OfftenMethod.ToNewRows(ds.dtm_c, ds.sxy.currentCount,
-                          (float)ds.sxy.f1, (float)ds.sen_tx1,
-                          (float)ds.sxy.f2, (float)ds.sen_tx2,
-                          ds.sxy.x, ds.sxy.y - (float)ds.pow1);//添加数据到表格
+                          (double)ds.sxy.f1, (double)ds.sen_tx1,
+                          (double)ds.sxy.f2, (double)ds.sen_tx2,
+                          ds.sxy.x, ds.sxy.y - (double)ds.pow1);//添加数据到表格
                 dataGridView1.FirstDisplayedScrollingRowIndex = ds.dtm_count.Rows.Count - 1;
                 curr_row = ds.dtm_count.Rows.Count - 1;
             }));
@@ -744,8 +744,8 @@ namespace JcMBP
             {
                  ds.dtm.Clear();
                  ds.dtm_c.Clear();
-                _pim_max = float.MinValue;
-                _pim_min = float.MaxValue;
+                _pim_max = double.MinValue;
+                _pim_min = double.MaxValue;
                 if (fm.isdBm)
                     freq_dgvPim.DataSource = ds.dtm;
                 else
@@ -796,8 +796,8 @@ namespace JcMBP
             {
                 ds.dtm.Clear();
                 ds.dtm_c.Clear();
-                _pim_max = float.MinValue;
-                _pim_min = float.MaxValue;
+                _pim_max = double.MinValue;
+                _pim_min = double.MaxValue;
                 if (fm.isdBm)
                     freq_dgvPim.DataSource = ds.dtm;
                 else
@@ -880,8 +880,8 @@ namespace JcMBP
             freq_plot.Clear();
             this.Invoke(new ThreadStart(delegate
             {
-                _pim_max = float.MinValue;
-                _pim_min = float.MaxValue;
+                _pim_max = double.MinValue;
+                _pim_min = double.MaxValue;
                 if (fm.isdBm)
                     dataGridView1.DataSource = ds.jb;
                 else

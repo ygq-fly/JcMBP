@@ -208,9 +208,9 @@ namespace JcMBP
         /// <param name="fpim">扫描频率</param>
         /// <param name="fval">互调值</param>
         public static  void ToNewRows(DataTable dt, int n,
-               float f1, float p1,
-               float f2, float p2,
-               float fpim, float fval)
+               double f1, double p1,
+               double f2, double p2,
+               double fpim, double fval)
         {
             DataRow row = dt.NewRow();
             row[0] = n.ToString();
@@ -413,7 +413,7 @@ namespace JcMBP
         /// <param name="avg"></param>
         /// <param name="str"></param>
        public static  void ToNewRows_test(DataTable dt, string n,
-           float max, float min, float avg, string str)//添加脚本测试数据
+           double max, double min, double avg, string str)//添加脚本测试数据
        {
            DataRow row = dt.NewRow();
            row[0] = n;
@@ -598,10 +598,10 @@ namespace JcMBP
        public static bool savepdf(string sre,List<DataSweep> cjt,bool isdbm)
        {
            #region 定义前导空格的数量
-           float Xleading = 27.5f;
-           float Yleading = 27.5f;
-           float Xdelta = 10f;
-           float Ydelta = 20f;
+           double Xleading = 27.5f;
+           double Yleading = 27.5f;
+           double Xdelta = 10f;
+           double Ydelta = 20f;
            #endregion
            bool is_succ = false;
            string path = Application.StartupPath + "\\pdf";
@@ -910,10 +910,10 @@ namespace JcMBP
 
        private static void DrawReportHeader(PdfContentByte cb,
                                  BaseFont bFont,
-                                 float Xleading,
-                                 float Yleading,
-                                 float Xdelta,
-                                 float Ydelta)
+                                 double Xleading,
+                                 double Yleading,
+                                 double Xdelta,
+                                 double Ydelta)
        {
            #region 绘制报表头部
            //绘制报头的日期与时间
@@ -949,10 +949,10 @@ namespace JcMBP
 
        private static  void DrawReportAbstract(PdfContentByte cb,
                                        BaseFont bFont,
-                                       float Xleading,
-                                       float Yleading,
-                                       float Xdelta,
-                                       float Ydelta,string name,int count)
+                                       double Xleading,
+                                       double Yleading,
+                                       double Xdelta,
+                                       double Ydelta,string name,int count)
        {
            string s;
            BaseColor col;
@@ -1023,10 +1023,10 @@ namespace JcMBP
 
        private static void DrawReportFooter(PdfContentByte cb,
                               BaseFont bFont,
-                              float Xleading,
-                              float Yleading,
-                              float Xdelta,
-                              float Ydelta)
+                              double Xleading,
+                              double Yleading,
+                              double Xdelta,
+                              double Ydelta)
        {
            BaseColor col;
            string s;
@@ -1203,12 +1203,12 @@ namespace JcMBP
                         DataRow row = dtb.Rows[i];
                         cp[i] = new CsvReport_Pim_Entry();
                         cp[i].No = int.Parse(row[0].ToString());
-                        cp[i].F1 = float.Parse(row[1].ToString());
-                        cp[i].P1 = float.Parse(row[2].ToString());
-                        cp[i].F2 = float.Parse(row[3].ToString());
-                        cp[i].P2 = float.Parse(row[4].ToString());
-                        cp[i].Im_F = float.Parse(row[5].ToString());
-                        cp[i].Im_V = float.Parse(row[6].ToString());
+                        cp[i].F1 = double.Parse(row[1].ToString());
+                        cp[i].P1 = double.Parse(row[2].ToString());
+                        cp[i].F2 = double.Parse(row[3].ToString());
+                        cp[i].P2 = double.Parse(row[4].ToString());
+                        cp[i].Im_F = double.Parse(row[5].ToString());
+                        cp[i].Im_V = double.Parse(row[6].ToString());
                     }
                     CsvReport.Save_Csv_Pim(csvFileName, cp);//保存到csv
                    
@@ -1258,12 +1258,12 @@ namespace JcMBP
                            DataRow row = dtb.Rows[i];
                            cp[i] = new CsvReport_Pim_Entry();
                            cp[i].No = int.Parse(row[0].ToString());
-                           cp[i].F1 = float.Parse(row[1].ToString());
-                           cp[i].P1 = float.Parse(row[2].ToString());
-                           cp[i].F2 = float.Parse(row[3].ToString());
-                           cp[i].P2 = float.Parse(row[4].ToString());
-                           cp[i].Im_F = float.Parse(row[5].ToString());
-                           cp[i].Im_V = float.Parse(row[6].ToString());
+                           cp[i].F1 = double.Parse(row[1].ToString());
+                           cp[i].P1 = double.Parse(row[2].ToString());
+                           cp[i].F2 = double.Parse(row[3].ToString());
+                           cp[i].P2 = double.Parse(row[4].ToString());
+                           cp[i].Im_F = double.Parse(row[5].ToString());
+                           cp[i].Im_V = double.Parse(row[6].ToString());
                        }
                        lcr.Add(cp);//保存cp
                        if (j == dt_num-1)
@@ -1318,12 +1318,12 @@ namespace JcMBP
     class CsvReport_Pim_Entry
     {
         int no;
-        float p1;
-        float f1;
-        float p2;
-        float f2;
-        float im_f;
-        float im_v;
+        double p1;
+        double f1;
+        double p2;
+        double f2;
+        double im_f;
+        double im_v;
 
         /// <summary>
         /// 扫描项序号
@@ -1337,7 +1337,7 @@ namespace JcMBP
         /// <summary>
         /// 功放1输出功率，单位 dBm
         /// </summary>
-        public float P1
+        public double P1
         {
             get { return p1; }
             set { p1 = value; }
@@ -1346,7 +1346,7 @@ namespace JcMBP
         /// <summary>
         /// 功放1中心频率，单位 MHz
         /// </summary>
-        public float F1
+        public double F1
         {
             get { return f1; }
             set { f1 = value; }
@@ -1355,7 +1355,7 @@ namespace JcMBP
         /// <summary>
         /// 功放2输出功率，单位 dBm
         /// </summary>
-        public float P2
+        public double P2
         {
             get { return p2; }
             set { p2 = value; }
@@ -1364,7 +1364,7 @@ namespace JcMBP
         /// <summary>
         /// 功放2中心频率，单位 MHz
         /// </summary>
-        public float F2
+        public double F2
         {
             get { return f2; }
             set { f2 = value; }
@@ -1373,7 +1373,7 @@ namespace JcMBP
         /// <summary>
         /// 扫描点的频率，单位 MHz
         /// </summary>
-        public float Im_F
+        public double Im_F
         {
             get { return im_f; }
             set { im_f = value; }
@@ -1382,7 +1382,7 @@ namespace JcMBP
         /// <summary>
         /// 扫描点的互调值，单位 dBc
         /// </summary>
-        public float Im_V
+        public double Im_V
         {
             get { return im_v; }
             set { im_v = value; }

@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -76,16 +78,16 @@
             this.freq_nud_pow2 = new System.Windows.Forms.NumericUpDown();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.freq_dgvPim = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,12 +95,14 @@
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.线损 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.panel4.SuspendLayout();
@@ -115,6 +119,8 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.numericUpDown3);
             this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label2);
@@ -150,9 +156,36 @@
             this.groupBox2.TabIndex = 208;
             this.groupBox2.TabStop = false;
             // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.label3.Location = new System.Drawing.Point(11, 325);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 19);
+            this.label3.TabIndex = 218;
+            this.label3.Text = "Rx线损";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.BackColor = System.Drawing.Color.Black;
+            this.numericUpDown3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericUpDown3.DecimalPlaces = 1;
+            this.numericUpDown3.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numericUpDown3.ForeColor = System.Drawing.Color.White;
+            this.numericUpDown3.Location = new System.Drawing.Point(126, 323);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.ReadOnly = true;
+            this.numericUpDown3.Size = new System.Drawing.Size(85, 21);
+            this.numericUpDown3.TabIndex = 217;
+            this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.numericUpDown3_MouseDoubleClick);
+            // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(79, 355);
+            this.textBox1.Location = new System.Drawing.Point(79, 383);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(133, 21);
             this.textBox1.TabIndex = 216;
@@ -161,9 +194,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft YaHei", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label4.Location = new System.Drawing.Point(12, 357);
+            this.label4.Location = new System.Drawing.Point(12, 385);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 16);
             this.label4.TabIndex = 215;
@@ -173,7 +206,7 @@
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label2.Location = new System.Drawing.Point(11, 298);
             this.label2.Name = "label2";
@@ -187,7 +220,7 @@
             this.numericUpDown1.BackColor = System.Drawing.Color.Black;
             this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numericUpDown1.DecimalPlaces = 1;
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numericUpDown1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.numericUpDown1.ForeColor = System.Drawing.Color.White;
             this.numericUpDown1.Location = new System.Drawing.Point(126, 296);
             this.numericUpDown1.Name = "numericUpDown1";
@@ -202,9 +235,9 @@
             this.numericUpDown2.BackColor = System.Drawing.Color.Black;
             this.numericUpDown2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numericUpDown2.DecimalPlaces = 1;
-            this.numericUpDown2.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numericUpDown2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.numericUpDown2.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown2.Location = new System.Drawing.Point(126, 322);
+            this.numericUpDown2.Location = new System.Drawing.Point(126, 350);
             this.numericUpDown2.Minimum = new decimal(new int[] {
             500,
             0,
@@ -226,9 +259,9 @@
             // 
             this.time_tb_limit.BackColor = System.Drawing.Color.Black;
             this.time_tb_limit.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.time_tb_limit.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_tb_limit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_tb_limit.ForeColor = System.Drawing.Color.White;
-            this.time_tb_limit.Location = new System.Drawing.Point(126, 322);
+            this.time_tb_limit.Location = new System.Drawing.Point(126, 350);
             this.time_tb_limit.Name = "time_tb_limit";
             this.time_tb_limit.Size = new System.Drawing.Size(72, 22);
             this.time_tb_limit.TabIndex = 209;
@@ -240,9 +273,9 @@
             // 
             this.label66.AutoSize = true;
             this.label66.BackColor = System.Drawing.Color.Transparent;
-            this.label66.Font = new System.Drawing.Font("Microsoft YaHei", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label66.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label66.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label66.Location = new System.Drawing.Point(11, 328);
+            this.label66.Location = new System.Drawing.Point(11, 356);
             this.label66.Name = "label66";
             this.label66.Size = new System.Drawing.Size(73, 16);
             this.label66.TabIndex = 210;
@@ -262,8 +295,8 @@
             // 
             // button7
             // 
-            this.button7.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button7.Location = new System.Drawing.Point(76, 501);
+            this.button7.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button7.Location = new System.Drawing.Point(76, 513);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(136, 24);
             this.button7.TabIndex = 207;
@@ -274,9 +307,9 @@
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label1.Location = new System.Drawing.Point(5, 501);
+            this.label1.Location = new System.Drawing.Point(5, 513);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 19);
             this.label1.TabIndex = 206;
@@ -286,7 +319,7 @@
             // label20
             // 
             this.label20.BackColor = System.Drawing.Color.Transparent;
-            this.label20.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label20.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label20.Location = new System.Drawing.Point(11, 272);
             this.label20.Name = "label20";
@@ -298,7 +331,7 @@
             // label19
             // 
             this.label19.BackColor = System.Drawing.Color.Transparent;
-            this.label19.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label19.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label19.Location = new System.Drawing.Point(11, 55);
             this.label19.Name = "label19";
@@ -310,7 +343,7 @@
             // comboBox11
             // 
             this.comboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox11.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
+            this.comboBox11.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.comboBox11.FormattingEnabled = true;
             this.comboBox11.Items.AddRange(new object[] {
             "扫频",
@@ -324,9 +357,9 @@
             // label73
             // 
             this.label73.BackColor = System.Drawing.Color.Transparent;
-            this.label73.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label73.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label73.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label73.Location = new System.Drawing.Point(5, 536);
+            this.label73.Location = new System.Drawing.Point(5, 546);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(59, 19);
             this.label73.TabIndex = 159;
@@ -336,9 +369,9 @@
             // label70
             // 
             this.label70.BackColor = System.Drawing.Color.Transparent;
-            this.label70.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
+            this.label70.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.label70.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label70.Location = new System.Drawing.Point(76, 536);
+            this.label70.Location = new System.Drawing.Point(76, 546);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(136, 19);
             this.label70.TabIndex = 158;
@@ -347,9 +380,9 @@
             // label69
             // 
             this.label69.BackColor = System.Drawing.Color.Transparent;
-            this.label69.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
+            this.label69.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold);
             this.label69.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label69.Location = new System.Drawing.Point(66, 501);
+            this.label69.Location = new System.Drawing.Point(66, 513);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(151, 19);
             this.label69.TabIndex = 157;
@@ -358,8 +391,8 @@
             // 
             // button8
             // 
-            this.button8.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button8.Location = new System.Drawing.Point(78, 420);
+            this.button8.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button8.Location = new System.Drawing.Point(78, 444);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(136, 24);
             this.button8.TabIndex = 152;
@@ -383,7 +416,7 @@
             // label47
             // 
             this.label47.BackColor = System.Drawing.Color.Transparent;
-            this.label47.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label47.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label47.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label47.Location = new System.Drawing.Point(5, 4);
             this.label47.Name = "label47";
@@ -397,7 +430,7 @@
             this.freq_nud_fstart2.BackColor = System.Drawing.Color.Black;
             this.freq_nud_fstart2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_fstart2.DecimalPlaces = 1;
-            this.freq_nud_fstart2.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_fstart2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_fstart2.ForeColor = System.Drawing.Color.White;
             this.freq_nud_fstart2.Location = new System.Drawing.Point(121, 26);
             this.freq_nud_fstart2.Maximum = new decimal(new int[] {
@@ -426,7 +459,7 @@
             // comboBox9
             // 
             this.comboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox9.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
+            this.comboBox9.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.comboBox9.FormattingEnabled = true;
             this.comboBox9.Location = new System.Drawing.Point(68, 2);
             this.comboBox9.Name = "comboBox9";
@@ -437,7 +470,7 @@
             // ctrl_lbl_fstop2
             // 
             this.ctrl_lbl_fstop2.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_fstop2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_fstop2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_fstop2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_fstop2.Location = new System.Drawing.Point(1, 52);
             this.ctrl_lbl_fstop2.Name = "ctrl_lbl_fstop2";
@@ -449,7 +482,7 @@
             // ctrl_lbl_fstart2
             // 
             this.ctrl_lbl_fstart2.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_fstart2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_fstart2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_fstart2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_fstart2.Location = new System.Drawing.Point(1, 26);
             this.ctrl_lbl_fstart2.Name = "ctrl_lbl_fstart2";
@@ -463,7 +496,7 @@
             this.freq_nud_fstop2.BackColor = System.Drawing.Color.Black;
             this.freq_nud_fstop2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_fstop2.DecimalPlaces = 1;
-            this.freq_nud_fstop2.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_fstop2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_fstop2.ForeColor = System.Drawing.Color.White;
             this.freq_nud_fstop2.Location = new System.Drawing.Point(121, 50);
             this.freq_nud_fstop2.Maximum = new decimal(new int[] {
@@ -516,7 +549,7 @@
             // label46
             // 
             this.label46.BackColor = System.Drawing.Color.Transparent;
-            this.label46.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label46.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label46.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label46.Location = new System.Drawing.Point(4, 5);
             this.label46.Name = "label46";
@@ -530,7 +563,7 @@
             this.freq_nud_fstop1.BackColor = System.Drawing.Color.Black;
             this.freq_nud_fstop1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_fstop1.DecimalPlaces = 1;
-            this.freq_nud_fstop1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_fstop1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_fstop1.ForeColor = System.Drawing.Color.White;
             this.freq_nud_fstop1.Location = new System.Drawing.Point(120, 53);
             this.freq_nud_fstop1.Maximum = new decimal(new int[] {
@@ -559,7 +592,7 @@
             // ctrl_lbl_fstop1
             // 
             this.ctrl_lbl_fstop1.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_fstop1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_fstop1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_fstop1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_fstop1.Location = new System.Drawing.Point(2, 53);
             this.ctrl_lbl_fstop1.Name = "ctrl_lbl_fstop1";
@@ -571,7 +604,7 @@
             // comboBox10
             // 
             this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox10.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
+            this.comboBox10.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.comboBox10.FormattingEnabled = true;
             this.comboBox10.Location = new System.Drawing.Point(68, 1);
             this.comboBox10.Name = "comboBox10";
@@ -584,7 +617,7 @@
             this.freq_nud_fstart1.BackColor = System.Drawing.Color.Black;
             this.freq_nud_fstart1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_fstart1.DecimalPlaces = 1;
-            this.freq_nud_fstart1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_fstart1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_fstart1.ForeColor = System.Drawing.Color.White;
             this.freq_nud_fstart1.Location = new System.Drawing.Point(120, 28);
             this.freq_nud_fstart1.Maximum = new decimal(new int[] {
@@ -613,7 +646,7 @@
             // ctrl_lbl_fstart1
             // 
             this.ctrl_lbl_fstart1.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_fstart1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_fstart1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_fstart1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_fstart1.Location = new System.Drawing.Point(2, 28);
             this.ctrl_lbl_fstart1.Name = "ctrl_lbl_fstart1";
@@ -625,7 +658,7 @@
             // freq_cb_step
             // 
             this.freq_cb_step.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.freq_cb_step.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
+            this.freq_cb_step.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.freq_cb_step.FormattingEnabled = true;
             this.freq_cb_step.Items.AddRange(new object[] {
             "0.1m",
@@ -634,7 +667,7 @@
             "3m",
             "5m",
             "10m"});
-            this.freq_cb_step.Location = new System.Drawing.Point(78, 382);
+            this.freq_cb_step.Location = new System.Drawing.Point(78, 410);
             this.freq_cb_step.Name = "freq_cb_step";
             this.freq_cb_step.Size = new System.Drawing.Size(136, 21);
             this.freq_cb_step.TabIndex = 138;
@@ -642,9 +675,9 @@
             // label17
             // 
             this.label17.BackColor = System.Drawing.Color.Transparent;
-            this.label17.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label17.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label17.Location = new System.Drawing.Point(10, 420);
+            this.label17.Location = new System.Drawing.Point(10, 444);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(46, 19);
             this.label17.TabIndex = 137;
@@ -656,7 +689,7 @@
             this.freq_nud_off1.BackColor = System.Drawing.Color.Black;
             this.freq_nud_off1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_off1.DecimalPlaces = 1;
-            this.freq_nud_off1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_off1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_off1.ForeColor = System.Drawing.Color.White;
             this.freq_nud_off1.Location = new System.Drawing.Point(126, 270);
             this.freq_nud_off1.Name = "freq_nud_off1";
@@ -669,9 +702,9 @@
             // label18
             // 
             this.label18.BackColor = System.Drawing.Color.Transparent;
-            this.label18.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label18.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label18.Location = new System.Drawing.Point(11, 459);
+            this.label18.Location = new System.Drawing.Point(11, 483);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(42, 19);
             this.label18.TabIndex = 126;
@@ -681,9 +714,9 @@
             // freq_cb_band
             // 
             this.freq_cb_band.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.freq_cb_band.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
+            this.freq_cb_band.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.freq_cb_band.FormattingEnabled = true;
-            this.freq_cb_band.Location = new System.Drawing.Point(79, 457);
+            this.freq_cb_band.Location = new System.Drawing.Point(79, 481);
             this.freq_cb_band.Name = "freq_cb_band";
             this.freq_cb_band.Size = new System.Drawing.Size(134, 21);
             this.freq_cb_band.TabIndex = 124;
@@ -692,7 +725,7 @@
             // freq_lbl_show_band
             // 
             this.freq_lbl_show_band.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(69)))), ((int)(((byte)(72)))));
-            this.freq_lbl_show_band.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_lbl_show_band.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_lbl_show_band.ForeColor = System.Drawing.Color.White;
             this.freq_lbl_show_band.Location = new System.Drawing.Point(12, 17);
             this.freq_lbl_show_band.Name = "freq_lbl_show_band";
@@ -704,9 +737,9 @@
             // ctrl_lbl_step2
             // 
             this.ctrl_lbl_step2.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_step2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_step2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_step2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.ctrl_lbl_step2.Location = new System.Drawing.Point(3, 384);
+            this.ctrl_lbl_step2.Location = new System.Drawing.Point(3, 412);
             this.ctrl_lbl_step2.Name = "ctrl_lbl_step2";
             this.ctrl_lbl_step2.Size = new System.Drawing.Size(75, 19);
             this.ctrl_lbl_step2.TabIndex = 118;
@@ -716,7 +749,7 @@
             // ctrl_lbl_pow2
             // 
             this.ctrl_lbl_pow2.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_pow2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_pow2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_pow2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_pow2.Location = new System.Drawing.Point(9, 246);
             this.ctrl_lbl_pow2.Name = "ctrl_lbl_pow2";
@@ -730,7 +763,7 @@
             this.freq_nud_pow2.BackColor = System.Drawing.Color.Black;
             this.freq_nud_pow2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_pow2.DecimalPlaces = 1;
-            this.freq_nud_pow2.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_pow2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_pow2.ForeColor = System.Drawing.Color.White;
             this.freq_nud_pow2.Location = new System.Drawing.Point(126, 244);
             this.freq_nud_pow2.Maximum = new decimal(new int[] {
@@ -777,95 +810,6 @@
             this.button11.UseVisualStyleBackColor = false;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
-            // Column8
-            // 
-            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column8.DataPropertyName = "9";
-            this.Column8.FillWeight = 87.44038F;
-            this.Column8.HeaderText = "Rx频段";
-            this.Column8.Name = "Column8";
-            this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column8.Width = 62;
-            // 
-            // Column6
-            // 
-            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column6.DataPropertyName = "7";
-            this.Column6.FillWeight = 113.1229F;
-            this.Column6.HeaderText = "F2开始频率";
-            this.Column6.Name = "Column6";
-            this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column6.Width = 80;
-            // 
-            // Column5
-            // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column5.DataPropertyName = "6";
-            this.Column5.FillWeight = 89.00479F;
-            this.Column5.HeaderText = "F2频段";
-            this.Column5.Name = "Column5";
-            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column5.Width = 62;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column4.DataPropertyName = "5";
-            this.Column4.FillWeight = 113.1229F;
-            this.Column4.HeaderText = "F1结束频率";
-            this.Column4.Name = "Column4";
-            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column4.Width = 80;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column3.DataPropertyName = "4";
-            this.Column3.FillWeight = 113.1229F;
-            this.Column3.HeaderText = "F1开始频率";
-            this.Column3.Name = "Column3";
-            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column3.Width = 79;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column2.DataPropertyName = "3";
-            this.Column2.FillWeight = 90.47394F;
-            this.Column2.HeaderText = "F1频段";
-            this.Column2.Name = "Column2";
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column2.Width = 64;
-            // 
-            // Column15
-            // 
-            this.Column15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column15.DataPropertyName = "2";
-            this.Column15.FillWeight = 57.76111F;
-            this.Column15.HeaderText = "NO.";
-            this.Column15.Name = "Column15";
-            this.Column15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column15.Width = 40;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column1.DataPropertyName = "1";
-            this.Column1.FillWeight = 37.33066F;
-            this.Column1.HeaderText = "";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 27;
-            // 
-            // Column7
-            // 
-            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column7.DataPropertyName = "8";
-            this.Column7.FillWeight = 113.1229F;
-            this.Column7.HeaderText = "F2结束频率";
-            this.Column7.Name = "Column7";
-            this.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column7.Width = 79;
-            // 
             // freq_dgvPim
             // 
             this.freq_dgvPim.AllowUserToAddRows = false;
@@ -878,13 +822,13 @@
             this.freq_dgvPim.BackgroundColor = System.Drawing.Color.Black;
             this.freq_dgvPim.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_dgvPim.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.freq_dgvPim.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.freq_dgvPim.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.freq_dgvPim.ColumnHeadersHeight = 31;
             this.freq_dgvPim.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.freq_dgvPim.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -903,34 +847,35 @@
             this.Column13,
             this.Column14,
             this.线损,
-            this.Column9});
+            this.Column9,
+            this.Column16});
             this.freq_dgvPim.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.NullValue = null;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.freq_dgvPim.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.freq_dgvPim.DefaultCellStyle = dataGridViewCellStyle2;
             this.freq_dgvPim.EnableHeadersVisualStyles = false;
             this.freq_dgvPim.GridColor = System.Drawing.Color.MediumSpringGreen;
             this.freq_dgvPim.Location = new System.Drawing.Point(240, 54);
             this.freq_dgvPim.Name = "freq_dgvPim";
             this.freq_dgvPim.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(39)))), ((int)(((byte)(22)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.freq_dgvPim.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(39)))), ((int)(((byte)(22)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.freq_dgvPim.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.freq_dgvPim.RowHeadersVisible = false;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.freq_dgvPim.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.freq_dgvPim.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.freq_dgvPim.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
             this.freq_dgvPim.RowTemplate.Height = 21;
             this.freq_dgvPim.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -941,6 +886,95 @@
             this.freq_dgvPim.Size = new System.Drawing.Size(980, 654);
             this.freq_dgvPim.TabIndex = 204;
             this.freq_dgvPim.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.freq_dgvPim_CellClick);
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column1.DataPropertyName = "1";
+            this.Column1.FillWeight = 37.33066F;
+            this.Column1.HeaderText = "";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 27;
+            // 
+            // Column15
+            // 
+            this.Column15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column15.DataPropertyName = "2";
+            this.Column15.FillWeight = 57.76111F;
+            this.Column15.HeaderText = "NO.";
+            this.Column15.Name = "Column15";
+            this.Column15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column15.Width = 40;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column2.DataPropertyName = "3";
+            this.Column2.FillWeight = 90.47394F;
+            this.Column2.HeaderText = "F1频段";
+            this.Column2.Name = "Column2";
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column2.Width = 64;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column3.DataPropertyName = "4";
+            this.Column3.FillWeight = 113.1229F;
+            this.Column3.HeaderText = "F1开始频率";
+            this.Column3.Name = "Column3";
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column3.Width = 79;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column4.DataPropertyName = "5";
+            this.Column4.FillWeight = 113.1229F;
+            this.Column4.HeaderText = "F1结束频率";
+            this.Column4.Name = "Column4";
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column4.Width = 80;
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column5.DataPropertyName = "6";
+            this.Column5.FillWeight = 89.00479F;
+            this.Column5.HeaderText = "F2频段";
+            this.Column5.Name = "Column5";
+            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column5.Width = 62;
+            // 
+            // Column6
+            // 
+            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column6.DataPropertyName = "7";
+            this.Column6.FillWeight = 113.1229F;
+            this.Column6.HeaderText = "F2开始频率";
+            this.Column6.Name = "Column6";
+            this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column6.Width = 80;
+            // 
+            // Column7
+            // 
+            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column7.DataPropertyName = "8";
+            this.Column7.FillWeight = 113.1229F;
+            this.Column7.HeaderText = "F2结束频率";
+            this.Column7.Name = "Column7";
+            this.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column7.Width = 79;
+            // 
+            // Column8
+            // 
+            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column8.DataPropertyName = "9";
+            this.Column8.FillWeight = 87.44038F;
+            this.Column8.HeaderText = "Rx频段";
+            this.Column8.Name = "Column8";
+            this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column8.Width = 62;
             // 
             // Column10
             // 
@@ -1009,6 +1043,13 @@
             this.Column9.HeaderText = "Tx2线损";
             this.Column9.Name = "Column9";
             this.Column9.Width = 76;
+            // 
+            // Column16
+            // 
+            this.Column16.DataPropertyName = "17";
+            this.Column16.HeaderText = "R线损";
+            this.Column16.Name = "Column16";
+            this.Column16.Width = 76;
             // 
             // button3
             // 
@@ -1087,6 +1128,7 @@
             this.Load += new System.EventHandler(this.NpJbConfig_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.panel4.ResumeLayout(false);
@@ -1148,16 +1190,23 @@
         private System.Windows.Forms.NumericUpDown freq_nud_pow2;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridView freq_dgvPim;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
@@ -1165,11 +1214,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.DataGridViewTextBoxColumn 线损;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
 
     }
 }

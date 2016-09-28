@@ -50,7 +50,7 @@ namespace Multi_Band_PIM_Analysis
         private int GetThumbHeight()
         {
             int nTrackHeight = (this.Height - (UpArrowImage.Height + DownArrowImage.Height));
-            float fThumbHeight = ((float)LargeChange / (float)Maximum) * nTrackHeight;
+            double fThumbHeight = ((double)LargeChange / (double)Maximum) * nTrackHeight;
             int nThumbHeight = (int)fThumbHeight;
 
             if (nThumbHeight > nTrackHeight)
@@ -141,7 +141,7 @@ namespace Multi_Band_PIM_Analysis
                 moValue = value;
 
                 int nTrackHeight = (this.Height - (UpArrowImage.Height + DownArrowImage.Height));
-                float fThumbHeight = ((float)LargeChange / (float)Maximum) * nTrackHeight;
+                double fThumbHeight = ((double)LargeChange / (double)Maximum) * nTrackHeight;
                 int nThumbHeight = (int)fThumbHeight;
 
                 if (nThumbHeight > nTrackHeight)
@@ -158,13 +158,13 @@ namespace Multi_Band_PIM_Analysis
                 //figure out value
                 int nPixelRange = nTrackHeight - nThumbHeight;
                 int nRealRange = (Maximum - Minimum) - LargeChange;
-                float fPerc = 0.0f;
+                double fPerc = 0.0f;
                 if (nRealRange != 0)
                 {
-                    fPerc = (float)moValue / (float)nRealRange;
+                    fPerc = (double)moValue / (double)nRealRange;
                 }
 
-                float fTop = fPerc * nPixelRange;
+                double fTop = fPerc * nPixelRange;
                 moThumbTop = (int)fTop;
 
                 Invalidate();
@@ -249,7 +249,7 @@ namespace Multi_Band_PIM_Analysis
 
             //draw thumb
             int nTrackHeight = (this.Height - (UpArrowImage.Height + DownArrowImage.Height));
-            float fThumbHeight = ((float)LargeChange / (float)Maximum) * nTrackHeight;
+            double fThumbHeight = ((double)LargeChange / (double)Maximum) * nTrackHeight;
             int nThumbHeight = (int)fThumbHeight;
 
             if (nThumbHeight > nTrackHeight)
@@ -265,7 +265,7 @@ namespace Multi_Band_PIM_Analysis
 
             //Debug.WriteLine(nThumbHeight.ToString());
 
-            float fSpanHeight = (fThumbHeight - (ThumbMiddleImage.Height + ThumbTopImage.Height + ThumbBottomImage.Height)) / 2.0f;
+            double fSpanHeight = (fThumbHeight - (ThumbMiddleImage.Height + ThumbTopImage.Height + ThumbBottomImage.Height)) / 2.0f;
             int nSpanHeight = (int)fSpanHeight;
 
             int nTop = moThumbTop;
@@ -338,7 +338,7 @@ namespace Multi_Band_PIM_Analysis
          Point ptPoint = this.PointToClient(Cursor.Position);
             int nTrackHeight = (this.Height - (UpArrowImage.Height + DownArrowImage.Height));
         
-            float fThumbHeight = ((float)LargeChange / (float)Maximum) * nTrackHeight;
+            double fThumbHeight = ((double)LargeChange / (double)Maximum) * nTrackHeight;
             int nThumbHeight = (int)fThumbHeight;
 
             if (nThumbHeight > nTrackHeight)
@@ -382,8 +382,8 @@ namespace Multi_Band_PIM_Analysis
                             moThumbTop -= SmallChange;
 
                         //figure out value
-                        float fPerc = (float)moThumbTop / (float)nPixelRange;
-                        float fValue = fPerc * (Maximum - LargeChange);
+                        double fPerc = (double)moThumbTop / (double)nPixelRange;
+                        double fValue = fPerc * (Maximum - LargeChange);
 
                         moValue = (int)fValue;
                       //  Debug.WriteLine(moValue.ToString());
@@ -415,8 +415,8 @@ namespace Multi_Band_PIM_Analysis
                             moThumbTop += SmallChange;
 
                         //figure out value
-                        float fPerc = (float)moThumbTop / (float)nPixelRange;
-                        float fValue = fPerc * (Maximum - LargeChange);
+                        double fPerc = (double)moThumbTop / (double)nPixelRange;
+                        double fValue = fPerc * (Maximum - LargeChange);
 
                         moValue = (int)fValue;
                       //  Debug.WriteLine(moValue.ToString());
@@ -449,7 +449,7 @@ namespace Multi_Band_PIM_Analysis
         {
             int nRealRange = Maximum - Minimum;
             int nTrackHeight = (this.Height - (UpArrowImage.Height + DownArrowImage.Height));
-            float fThumbHeight = ((float)LargeChange / (float)Maximum) * nTrackHeight;
+            double fThumbHeight = ((double)LargeChange / (double)Maximum) * nTrackHeight;
             int nThumbHeight = (int)fThumbHeight;
 
             if (nThumbHeight > nTrackHeight)
@@ -486,8 +486,8 @@ namespace Multi_Band_PIM_Analysis
                     }
 
                     //figure out value
-                    float fPerc = (float)moThumbTop / (float)nPixelRange;
-                    float fValue = fPerc * (Maximum - LargeChange);
+                    double fPerc = (double)moThumbTop / (double)nPixelRange;
+                    double fValue = fPerc * (Maximum - LargeChange);
                     moValue = (int)fValue;
                    // Debug.WriteLine(moValue.ToString());
 

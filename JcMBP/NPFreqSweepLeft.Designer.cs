@@ -70,6 +70,8 @@
             this.time_btn_start_b = new System.Windows.Forms.Button();
             this.time_btn_start_a = new System.Windows.Forms.Button();
             this.label45 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -78,11 +80,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_off1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_pow2)).BeginInit();
             this.groupBox11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.label3);
@@ -114,13 +119,13 @@
             this.groupBox1.Controls.Add(this.freq_nud_pow2);
             this.groupBox1.Location = new System.Drawing.Point(3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(217, 458);
+            this.groupBox1.Size = new System.Drawing.Size(217, 470);
             this.groupBox1.TabIndex = 145;
             this.groupBox1.TabStop = false;
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(78, 431);
+            this.label4.Location = new System.Drawing.Point(78, 445);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(131, 17);
             this.label4.TabIndex = 178;
@@ -164,7 +169,7 @@
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label3.Location = new System.Drawing.Point(-1, 182);
             this.label3.Margin = new System.Windows.Forms.Padding(0);
@@ -188,7 +193,7 @@
             // label78
             // 
             this.label78.BackColor = System.Drawing.Color.Transparent;
-            this.label78.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label78.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label78.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label78.Location = new System.Drawing.Point(2, 103);
             this.label78.Margin = new System.Windows.Forms.Padding(0);
@@ -281,7 +286,7 @@
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
+            this.comboBox1.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "1s",
@@ -298,7 +303,7 @@
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label2.Location = new System.Drawing.Point(6, 210);
             this.label2.Name = "label2";
@@ -311,9 +316,9 @@
             // 
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.checkBox2.Location = new System.Drawing.Point(11, 325);
+            this.checkBox2.Location = new System.Drawing.Point(12, 313);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(87, 21);
             this.checkBox2.TabIndex = 163;
@@ -325,9 +330,9 @@
             this.numericUpDown4.BackColor = System.Drawing.Color.Black;
             this.numericUpDown4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numericUpDown4.DecimalPlaces = 1;
-            this.numericUpDown4.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numericUpDown4.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.numericUpDown4.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown4.Location = new System.Drawing.Point(124, 324);
+            this.numericUpDown4.Location = new System.Drawing.Point(122, 313);
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.ReadOnly = true;
             this.numericUpDown4.Size = new System.Drawing.Size(85, 21);
@@ -338,7 +343,7 @@
             // label47
             // 
             this.label47.BackColor = System.Drawing.Color.Transparent;
-            this.label47.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label47.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label47.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label47.Location = new System.Drawing.Point(11, 131);
             this.label47.Name = "label47";
@@ -350,7 +355,7 @@
             // label46
             // 
             this.label46.BackColor = System.Drawing.Color.Transparent;
-            this.label46.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label46.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label46.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label46.Location = new System.Drawing.Point(9, 54);
             this.label46.Name = "label46";
@@ -361,8 +366,8 @@
             // 
             // button8
             // 
-            this.button8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button8.Location = new System.Drawing.Point(76, 403);
+            this.button8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button8.Location = new System.Drawing.Point(76, 417);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(136, 23);
             this.button8.TabIndex = 161;
@@ -373,7 +378,7 @@
             // comboBox4
             // 
             this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
+            this.comboBox4.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(74, 129);
             this.comboBox4.Name = "comboBox4";
@@ -384,9 +389,9 @@
             // label75
             // 
             this.label75.BackColor = System.Drawing.Color.Transparent;
-            this.label75.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label75.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label75.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label75.Location = new System.Drawing.Point(6, 405);
+            this.label75.Location = new System.Drawing.Point(6, 419);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(59, 19);
             this.label75.TabIndex = 160;
@@ -396,9 +401,9 @@
             // label73
             // 
             this.label73.BackColor = System.Drawing.Color.Transparent;
-            this.label73.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label73.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label73.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label73.Location = new System.Drawing.Point(6, 431);
+            this.label73.Location = new System.Drawing.Point(6, 445);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(59, 19);
             this.label73.TabIndex = 159;
@@ -408,7 +413,7 @@
             // comboBox3
             // 
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
+            this.comboBox3.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(73, 50);
             this.comboBox3.Name = "comboBox3";
@@ -418,8 +423,8 @@
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button5.Location = new System.Drawing.Point(76, 376);
+            this.button5.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button5.Location = new System.Drawing.Point(76, 390);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(136, 24);
             this.button5.TabIndex = 152;
@@ -431,9 +436,9 @@
             // 
             this.freq_check_off1.Checked = true;
             this.freq_check_off1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.freq_check_off1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_check_off1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_check_off1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.freq_check_off1.Location = new System.Drawing.Point(12, 299);
+            this.freq_check_off1.Location = new System.Drawing.Point(12, 290);
             this.freq_check_off1.Name = "freq_check_off1";
             this.freq_check_off1.Size = new System.Drawing.Size(87, 21);
             this.freq_check_off1.TabIndex = 139;
@@ -443,7 +448,7 @@
             // freq_cb_step
             // 
             this.freq_cb_step.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.freq_cb_step.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
+            this.freq_cb_step.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
             this.freq_cb_step.FormattingEnabled = true;
             this.freq_cb_step.Items.AddRange(new object[] {
             "0.1m",
@@ -452,7 +457,7 @@
             "3m",
             "5m",
             "10m"});
-            this.freq_cb_step.Location = new System.Drawing.Point(76, 351);
+            this.freq_cb_step.Location = new System.Drawing.Point(76, 365);
             this.freq_cb_step.Name = "freq_cb_step";
             this.freq_cb_step.Size = new System.Drawing.Size(136, 21);
             this.freq_cb_step.TabIndex = 138;
@@ -461,9 +466,9 @@
             // label13
             // 
             this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label13.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label13.Location = new System.Drawing.Point(9, 379);
+            this.label13.Location = new System.Drawing.Point(9, 393);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(46, 19);
             this.label13.TabIndex = 137;
@@ -475,9 +480,9 @@
             this.freq_nud_off1.BackColor = System.Drawing.Color.Black;
             this.freq_nud_off1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_off1.DecimalPlaces = 1;
-            this.freq_nud_off1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_off1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_off1.ForeColor = System.Drawing.Color.White;
-            this.freq_nud_off1.Location = new System.Drawing.Point(123, 298);
+            this.freq_nud_off1.Location = new System.Drawing.Point(123, 289);
             this.freq_nud_off1.Name = "freq_nud_off1";
             this.freq_nud_off1.ReadOnly = true;
             this.freq_nud_off1.Size = new System.Drawing.Size(85, 21);
@@ -488,9 +493,9 @@
             // label7
             // 
             this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label7.Location = new System.Drawing.Point(6, 404);
+            this.label7.Location = new System.Drawing.Point(6, 418);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(57, 19);
             this.label7.TabIndex = 126;
@@ -500,7 +505,7 @@
             // freq_lbl_show_band
             // 
             this.freq_lbl_show_band.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(69)))), ((int)(((byte)(72)))));
-            this.freq_lbl_show_band.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_lbl_show_band.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_lbl_show_band.ForeColor = System.Drawing.Color.White;
             this.freq_lbl_show_band.Location = new System.Drawing.Point(6, 17);
             this.freq_lbl_show_band.Name = "freq_lbl_show_band";
@@ -512,9 +517,9 @@
             // ctrl_lbl_step2
             // 
             this.ctrl_lbl_step2.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_step2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_step2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_step2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.ctrl_lbl_step2.Location = new System.Drawing.Point(2, 349);
+            this.ctrl_lbl_step2.Location = new System.Drawing.Point(2, 363);
             this.ctrl_lbl_step2.Name = "ctrl_lbl_step2";
             this.ctrl_lbl_step2.Size = new System.Drawing.Size(75, 19);
             this.ctrl_lbl_step2.TabIndex = 118;
@@ -524,9 +529,9 @@
             // ctrl_lbl_pow2
             // 
             this.ctrl_lbl_pow2.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_pow2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_pow2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_pow2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.ctrl_lbl_pow2.Location = new System.Drawing.Point(6, 274);
+            this.ctrl_lbl_pow2.Location = new System.Drawing.Point(6, 265);
             this.ctrl_lbl_pow2.Name = "ctrl_lbl_pow2";
             this.ctrl_lbl_pow2.Size = new System.Drawing.Size(92, 19);
             this.ctrl_lbl_pow2.TabIndex = 117;
@@ -538,9 +543,9 @@
             this.freq_nud_pow2.BackColor = System.Drawing.Color.Black;
             this.freq_nud_pow2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_pow2.DecimalPlaces = 1;
-            this.freq_nud_pow2.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_pow2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_pow2.ForeColor = System.Drawing.Color.White;
-            this.freq_nud_pow2.Location = new System.Drawing.Point(123, 272);
+            this.freq_nud_pow2.Location = new System.Drawing.Point(123, 263);
             this.freq_nud_pow2.Maximum = new decimal(new int[] {
             60,
             0,
@@ -570,9 +575,9 @@
             this.groupBox11.Controls.Add(this.time_btn_start_b);
             this.groupBox11.Controls.Add(this.time_btn_start_a);
             this.groupBox11.Controls.Add(this.label45);
-            this.groupBox11.Location = new System.Drawing.Point(3, 463);
+            this.groupBox11.Location = new System.Drawing.Point(3, 474);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(217, 156);
+            this.groupBox11.Size = new System.Drawing.Size(217, 145);
             this.groupBox11.TabIndex = 144;
             this.groupBox11.TabStop = false;
             this.groupBox11.Enter += new System.EventHandler(this.groupBox11_Enter);
@@ -580,7 +585,7 @@
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(69)))), ((int)(((byte)(72)))));
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(124, 13);
             this.label1.Name = "label1";
@@ -593,8 +598,8 @@
             // time_btn_stop
             // 
             this.time_btn_stop.BackColor = System.Drawing.Color.White;
-            this.time_btn_stop.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_btn_stop.Location = new System.Drawing.Point(60, 106);
+            this.time_btn_stop.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_btn_stop.Location = new System.Drawing.Point(60, 95);
             this.time_btn_stop.Name = "time_btn_stop";
             this.time_btn_stop.Size = new System.Drawing.Size(93, 44);
             this.time_btn_stop.TabIndex = 172;
@@ -605,8 +610,8 @@
             // time_btn_start_b
             // 
             this.time_btn_start_b.BackColor = System.Drawing.Color.White;
-            this.time_btn_start_b.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_btn_start_b.Location = new System.Drawing.Point(112, 56);
+            this.time_btn_start_b.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_btn_start_b.Location = new System.Drawing.Point(112, 45);
             this.time_btn_start_b.Name = "time_btn_start_b";
             this.time_btn_start_b.Size = new System.Drawing.Size(93, 44);
             this.time_btn_start_b.TabIndex = 170;
@@ -617,8 +622,8 @@
             // time_btn_start_a
             // 
             this.time_btn_start_a.BackColor = System.Drawing.Color.White;
-            this.time_btn_start_a.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_btn_start_a.Location = new System.Drawing.Point(14, 56);
+            this.time_btn_start_a.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_btn_start_a.Location = new System.Drawing.Point(14, 45);
             this.time_btn_start_a.Name = "time_btn_start_a";
             this.time_btn_start_a.Size = new System.Drawing.Size(93, 44);
             this.time_btn_start_a.TabIndex = 169;
@@ -629,7 +634,7 @@
             // label45
             // 
             this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(69)))), ((int)(((byte)(72)))));
-            this.label45.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label45.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label45.ForeColor = System.Drawing.Color.White;
             this.label45.Location = new System.Drawing.Point(6, 13);
             this.label45.Name = "label45";
@@ -638,6 +643,33 @@
             this.label45.Text = "单次测试";
             this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label45.Click += new System.EventHandler(this.label45_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.checkBox1.Location = new System.Drawing.Point(12, 334);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(87, 21);
+            this.checkBox1.TabIndex = 180;
+            this.checkBox1.Text = "Rx线损：";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.BackColor = System.Drawing.Color.Black;
+            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericUpDown1.DecimalPlaces = 1;
+            this.numericUpDown1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numericUpDown1.ForeColor = System.Drawing.Color.White;
+            this.numericUpDown1.Location = new System.Drawing.Point(121, 337);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.ReadOnly = true;
+            this.numericUpDown1.Size = new System.Drawing.Size(85, 21);
+            this.numericUpDown1.TabIndex = 179;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // NPFreqSweepLeft
             // 
@@ -661,6 +693,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_off1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_pow2)).EndInit();
             this.groupBox11.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -709,5 +742,7 @@
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

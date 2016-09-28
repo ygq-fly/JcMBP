@@ -15,8 +15,8 @@ namespace JcMBP
         TimeSweepMid tsm;
         ClsUpLoad cul;
         int time = 1;
-        float _rxs = 0;
-        float _rxe = 0;
+        double _rxs = 0;
+        double _rxe = 0;
         public TimeSweepLeft(ClsUpLoad cul,TimeSweepMid tsm)
         {
             InitializeComponent();
@@ -46,9 +46,9 @@ namespace JcMBP
             ds.MinRx = _rxs;
             ds.time1 = Convert.ToSingle(numericUpDown1.Value); ;
             if (time_check_off1.Checked)
-                ds.off1 = ds.off2 = ds.time_off2 = ds.time_off1 = Convert.ToDouble(time_nud_off1.Value);
+                ds.rx_off= ds.off1 = ds.off2 = ds.time_off2 = ds.time_off1 = Convert.ToDouble(time_nud_off1.Value);
             else
-                ds.off1 = ds.off2 = ds.time_off2 = ds.time_off1 = 0;
+                ds.rx_off= ds.off1 = ds.off2 = ds.time_off2 = ds.time_off1 = 0;
             OfftenMethod.ToAddColumns(ds.dt);
             OfftenMethod.ToAddColumns(ds.dtc);
             tsm.Clone(ds);
@@ -115,7 +115,7 @@ namespace JcMBP
         {
             FrmMain.Band = time_cb_band.SelectedIndex;
             OfftenMethod.NudValue(time_nud_f1, time_nud_f2,
-                   (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].TxS, (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].TxE);               
+                   (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].F1Min, (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].F2Max);               
             switch (time_cb_im.SelectedIndex)
             {
                 case 0:

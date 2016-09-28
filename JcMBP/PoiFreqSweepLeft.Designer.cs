@@ -35,6 +35,8 @@
             this.time_btn_start_a = new System.Windows.Forms.Button();
             this.label45 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -67,6 +69,7 @@
             this.freq_nud_pow2 = new System.Windows.Forms.NumericUpDown();
             this.groupBox11.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_fstart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_fstop1)).BeginInit();
@@ -83,9 +86,9 @@
             this.groupBox11.Controls.Add(this.time_btn_start_b);
             this.groupBox11.Controls.Add(this.time_btn_start_a);
             this.groupBox11.Controls.Add(this.label45);
-            this.groupBox11.Location = new System.Drawing.Point(3, 430);
+            this.groupBox11.Location = new System.Drawing.Point(3, 454);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(217, 198);
+            this.groupBox11.Size = new System.Drawing.Size(217, 174);
             this.groupBox11.TabIndex = 142;
             this.groupBox11.TabStop = false;
             // 
@@ -106,7 +109,7 @@
             // 
             this.time_btn_stop.BackColor = System.Drawing.Color.White;
             this.time_btn_stop.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_btn_stop.Location = new System.Drawing.Point(61, 135);
+            this.time_btn_stop.Location = new System.Drawing.Point(63, 123);
             this.time_btn_stop.Name = "time_btn_stop";
             this.time_btn_stop.Size = new System.Drawing.Size(93, 43);
             this.time_btn_stop.TabIndex = 172;
@@ -118,7 +121,7 @@
             // 
             this.time_btn_start_b.BackColor = System.Drawing.Color.White;
             this.time_btn_start_b.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_btn_start_b.Location = new System.Drawing.Point(117, 70);
+            this.time_btn_start_b.Location = new System.Drawing.Point(118, 65);
             this.time_btn_start_b.Name = "time_btn_start_b";
             this.time_btn_start_b.Size = new System.Drawing.Size(93, 43);
             this.time_btn_start_b.TabIndex = 170;
@@ -130,7 +133,7 @@
             // 
             this.time_btn_start_a.BackColor = System.Drawing.Color.White;
             this.time_btn_start_a.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_btn_start_a.Location = new System.Drawing.Point(8, 70);
+            this.time_btn_start_a.Location = new System.Drawing.Point(9, 65);
             this.time_btn_start_a.Name = "time_btn_start_a";
             this.time_btn_start_a.Size = new System.Drawing.Size(93, 43);
             this.time_btn_start_a.TabIndex = 169;
@@ -154,6 +157,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.label2);
@@ -186,13 +191,41 @@
             this.groupBox1.Controls.Add(this.freq_nud_pow2);
             this.groupBox1.Location = new System.Drawing.Point(3, -1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(217, 425);
+            this.groupBox1.Size = new System.Drawing.Size(217, 449);
             this.groupBox1.TabIndex = 143;
             this.groupBox1.TabStop = false;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.checkBox1.Location = new System.Drawing.Point(15, 284);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(87, 21);
+            this.checkBox1.TabIndex = 181;
+            this.checkBox1.Text = "Rx线损：";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.BackColor = System.Drawing.Color.Black;
+            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericUpDown1.DecimalPlaces = 1;
+            this.numericUpDown1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numericUpDown1.ForeColor = System.Drawing.Color.White;
+            this.numericUpDown1.Location = new System.Drawing.Point(124, 283);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.ReadOnly = true;
+            this.numericUpDown1.Size = new System.Drawing.Size(85, 21);
+            this.numericUpDown1.TabIndex = 180;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.numericUpDown1_MouseDoubleClick);
+            // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(79, 402);
+            this.label4.Location = new System.Drawing.Point(78, 423);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(131, 17);
             this.label4.TabIndex = 179;
@@ -209,7 +242,7 @@
             "10s",
             "20s",
             "30s"});
-            this.comboBox1.Location = new System.Drawing.Point(77, 343);
+            this.comboBox1.Location = new System.Drawing.Point(76, 364);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(134, 21);
             this.comboBox1.TabIndex = 168;
@@ -220,7 +253,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label2.Location = new System.Drawing.Point(8, 345);
+            this.label2.Location = new System.Drawing.Point(7, 366);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 19);
             this.label2.TabIndex = 167;
@@ -233,7 +266,7 @@
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.checkBox2.Location = new System.Drawing.Point(14, 262);
+            this.checkBox2.Location = new System.Drawing.Point(15, 259);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(87, 21);
             this.checkBox2.TabIndex = 163;
@@ -247,7 +280,7 @@
             this.numericUpDown4.DecimalPlaces = 1;
             this.numericUpDown4.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.numericUpDown4.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown4.Location = new System.Drawing.Point(127, 261);
+            this.numericUpDown4.Location = new System.Drawing.Point(125, 259);
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.ReadOnly = true;
             this.numericUpDown4.Size = new System.Drawing.Size(85, 21);
@@ -313,7 +346,7 @@
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button8.Location = new System.Drawing.Point(76, 372);
+            this.button8.Location = new System.Drawing.Point(75, 393);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(136, 23);
             this.button8.TabIndex = 161;
@@ -392,7 +425,7 @@
             this.label75.BackColor = System.Drawing.Color.Transparent;
             this.label75.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label75.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label75.Location = new System.Drawing.Point(6, 374);
+            this.label75.Location = new System.Drawing.Point(5, 395);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(59, 19);
             this.label75.TabIndex = 160;
@@ -447,7 +480,7 @@
             this.label73.BackColor = System.Drawing.Color.Transparent;
             this.label73.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label73.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label73.Location = new System.Drawing.Point(6, 400);
+            this.label73.Location = new System.Drawing.Point(5, 421);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(59, 19);
             this.label73.TabIndex = 159;
@@ -511,7 +544,7 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button5.Location = new System.Drawing.Point(76, 314);
+            this.button5.Location = new System.Drawing.Point(75, 335);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(136, 24);
             this.button5.TabIndex = 152;
@@ -544,7 +577,7 @@
             "3m",
             "5m",
             "10m"});
-            this.freq_cb_step.Location = new System.Drawing.Point(76, 289);
+            this.freq_cb_step.Location = new System.Drawing.Point(75, 310);
             this.freq_cb_step.Name = "freq_cb_step";
             this.freq_cb_step.Size = new System.Drawing.Size(136, 21);
             this.freq_cb_step.TabIndex = 138;
@@ -555,7 +588,7 @@
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label13.Location = new System.Drawing.Point(9, 317);
+            this.label13.Location = new System.Drawing.Point(8, 338);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(46, 19);
             this.label13.TabIndex = 137;
@@ -582,7 +615,7 @@
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.label7.Location = new System.Drawing.Point(6, 373);
+            this.label7.Location = new System.Drawing.Point(5, 394);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(57, 19);
             this.label7.TabIndex = 126;
@@ -606,7 +639,7 @@
             this.ctrl_lbl_step2.BackColor = System.Drawing.Color.Transparent;
             this.ctrl_lbl_step2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_step2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.ctrl_lbl_step2.Location = new System.Drawing.Point(2, 287);
+            this.ctrl_lbl_step2.Location = new System.Drawing.Point(1, 308);
             this.ctrl_lbl_step2.Name = "ctrl_lbl_step2";
             this.ctrl_lbl_step2.Size = new System.Drawing.Size(75, 19);
             this.ctrl_lbl_step2.TabIndex = 118;
@@ -668,6 +701,7 @@
             this.Load += new System.EventHandler(this.PoiFreqSweepLeft_Load);
             this.groupBox11.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_fstart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.freq_nud_fstop1)).EndInit();
@@ -718,5 +752,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

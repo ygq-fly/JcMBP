@@ -41,12 +41,12 @@ namespace JcMBP
         /// <summary>
         /// Power_dBm
         /// </summary>
-        public float Tx_dBm
+        public double Tx_dBm
         {
             get { return _tx_dbm; }
             set { _tx_dbm = value; }
         }
-        private float _tx_dbm;
+        private double _tx_dbm;
 
         /// <summary>
         /// Pim Order(3/5/7/9)
@@ -91,12 +91,12 @@ namespace JcMBP
         /// <summary>
         /// Limit
         /// </summary>
-        public float Limit_dBm
+        public double Limit_dBm
         {
             get { return _limit_dBm; }
             set { _limit_dBm = value; }
         }
-        private float _limit_dBm;
+        private double _limit_dBm;
 
         /// <summary>
         /// （保留，未使用）是否使用时间计算点数
@@ -127,9 +127,9 @@ namespace JcMBP
         /// <param name="f1"></param>
         /// <param name="f2"></param>
         /// <param name="step"></param>
-        public void SetFreqParam(float f1_start_mhz, float f1_end_mhz,
-                                 float f2_start_mhz, float f2_end_mhz,
-                                 float step1_mhz, float step2_mhz)
+        public void SetFreqParam(double f1_start_mhz, double f1_end_mhz,
+                                 double f2_start_mhz, double f2_end_mhz,
+                                 double step1_mhz, double step2_mhz)
         {
             __FParam.F1_Start_KHz = f1_start_mhz * 1000;
             __FParam.F1_End_KHz = f1_end_mhz * 1000;
@@ -146,7 +146,7 @@ namespace JcMBP
         /// <param name="freq_end"></param>
         /// <param name="time_seconds"></param>
         /// <param name="count"></param>
-        public void SetTimeParam(float f1_mhz, float f2_mhz, int time_seconds)
+        public void SetTimeParam(double f1_mhz, double f2_mhz, int time_seconds)
         {
             __TParam.F1_KHz = f1_mhz * 1000;
             __TParam.F2_KHz = f2_mhz * 1000;
@@ -155,9 +155,9 @@ namespace JcMBP
         }
 
         //阶数计算公式
-        float GetFpim(PIM_Order order, float f1, float f2)
+        double GetFpim(PIM_Order order, double f1, double f2)
         {
-            float results = 0;
+            double results = 0;
             switch (order)
             {
                 case PIM_Order.IM3:
@@ -181,18 +181,18 @@ namespace JcMBP
 
     struct FreqParam
     {
-        public float F1_Start_KHz;
-        public float F1_End_KHz;
-        public float F2_Start_KHz;
-        public float F2_End_KHz;
-        public float Step1_KHz;
-        public float Step2_KHz;
+        public double F1_Start_KHz;
+        public double F1_End_KHz;
+        public double F2_Start_KHz;
+        public double F2_End_KHz;
+        public double Step1_KHz;
+        public double Step2_KHz;
     }
 
     struct TimeParm
     {
-        public float F1_KHz;
-        public float F2_KHz;
+        public double F1_KHz;
+        public double F2_KHz;
         public int Time_Seconds;
         public int Count;
     }

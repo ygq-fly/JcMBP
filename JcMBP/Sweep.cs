@@ -148,110 +148,112 @@ namespace JcMBP
 
         public void Ini()
         {
-            System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
-            st.Start();
-            double sen_tx2 = 0;
-            double sen_tx1 = 0;
-            TimeSpan ts;
-            int s_err = ClsJcPimDll.HwSetMeasBand(ds.tx1, ds.tx2, ds.rx);
-            if (Port() <= -10000)//设置端口
-            {
-                //MessageBox.Show("当前模块未连接或开关设置错误！");
-                FreqSweepMid.jb_err = true;
-                return;
-            }
-            Monitor.Enter(_ctrl);
-            _ctrl.bQuit = false;
-            Monitor.Exit(_ctrl);
-
-            //设置阶数
-            Order();
-            //设置功率
-            ClsJcPimDll.fnSetTxPower(ds.pow1, ds.pow2, ds.off1, ds.off2);
-            //设置频率
-            int s = ClsJcPimDll.HwSetTxFreqs(ds.freq1s, ds.freq2e, "mhz");
-            if (PowerHander != null)
-                PowerHander(s);
-            if (s <= -10000)
-                return;
-           
-            //开启功放
-            ClsJcPimDll.fnSetTxOn(true, ClsJcPimDll.JC_CARRIER_TX1TX2);//开启功放
-            //--------------------------------------------------------------------------------------
-
-            //vco检测
-            bool isVco = true;
-
-            double real_vco = 0;
-            double off_vco = 0;
-            if (ClsUpLoad._vco)
-                isVco = ClsJcPimDll.HwGet_Vco(ref real_vco, ref off_vco);//检测vco
-            //vco显示
-            if (VcoHander != null)
-                VcoHander(isVco, real_vco, off_vco);
-            if (isVco == false)
-            {
-                ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
-                MessageBox.Show("错误：VCO未检测到！请检查RX接收链路");
-                return;
-            }
-
-            //默认切频段时候耦合器开关为tx2，所以不切tx2
-            //ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX2);
-            
-            if (ClsUpLoad.fastmode == true)
-            {
-                //TRUE 显示真实值
-
-                if (Tx2Hander != null)
-                    Tx2Hander(s, ref sen_tx2,false);
-
-                //切换coup1 
-                //ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX1);//切换端口1
-
-                //FALSE 显示设置值
-
-                if (Tx1Hander != null)
-                    Tx1Hander(s, ref sen_tx1, true);
-
-            }
-            else
-            {
-                //--------------------------------------------------------------------------------------
-
-                double dd1 = 0;
-                double dd2 = 0;
-                //P2功率检测
-
-                s = ClsJcPimDll.HwGetSig_Smooth(ref dd2, ClsJcPimDll.JC_CARRIER_TX2);//检测功放2稳定度
-                //double sen_tx2 = 0;
-                if (Tx2Hander != null)
-                    Tx2Hander(s, ref sen_tx2,false);
-                if (s <= -10000 && ClsUpLoad._checkPow)
+          
+                System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
+                st.Start();
+                double sen_tx2 = 0;
+                double sen_tx1 = 0;
+                TimeSpan ts;
+                int s_err = ClsJcPimDll.HwSetMeasBand(ds.tx1, ds.tx2, ds.rx);
+                if (Port() <= -10000)//设置端口
                 {
-                    ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
+                    //MessageBox.Show("当前模块未连接或开关设置错误！");
+                    FreqSweepMid.jb_err = true;
                     return;
                 }
-                //--------------------------------------------------------------------------------------
-                //切换coup1
-                ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX1);//切换端口1
-                //P1功率检测
+                Monitor.Enter(_ctrl);
+                _ctrl.bQuit = false;
+                Monitor.Exit(_ctrl);
 
-                s = ClsJcPimDll.HwGetSig_Smooth(ref dd1, ClsJcPimDll.JC_CARRIER_TX1);//检测tx1稳定度
-                //double sen_tx1 = 0;
-                if (Tx1Hander != null)
-                    Tx1Hander(s, ref sen_tx1, false);
-                if (s <= -1000 && ClsUpLoad._checkPow)
+                //设置阶数
+                Order();
+                //设置功率
+                ClsJcPimDll.fnSetTxPower(ds.pow1, ds.pow2, ds.off1, ds.off2);
+                //设置频率
+                int s = ClsJcPimDll.HwSetTxFreqs(ds.freq1s, ds.freq2e, "mhz");
+                if (PowerHander != null)
+                    PowerHander(s);
+                if (s <= -10000)
+                    return;
+
+                //开启功放
+                ClsJcPimDll.fnSetTxOn(true, ClsJcPimDll.JC_CARRIER_TX1TX2);//开启功放
+                //--------------------------------------------------------------------------------------
+
+                //vco检测
+                bool isVco = true;
+
+                double real_vco = 0;
+                double off_vco = 0;
+                if (ClsUpLoad._vco)
+                    isVco = ClsJcPimDll.HwGet_Vco(ref real_vco, ref off_vco);//检测vco
+                //vco显示
+                if (VcoHander != null)
+                    VcoHander(isVco, real_vco, off_vco);
+                if (isVco == false)
                 {
                     ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
+                    MessageBox.Show("错误：VCO未检测到！请检查RX接收链路");
                     return;
                 }
-                //--------------------------------------------------------------------------------------
-            }
-            st.Stop();
 
-            //MessageBox.Show("time: " + st.ElapsedMilliseconds.ToString() + "ms");
-            SweepTest();
+                //默认切频段时候耦合器开关为tx2，所以不切tx2
+                //ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX2);
+
+                if (ClsUpLoad.fastmode == true)
+                {
+                    //TRUE 显示真实值
+
+                    if (Tx2Hander != null)
+                        Tx2Hander(s, ref sen_tx2, false);
+
+                    //切换coup1 
+                    //ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX1);//切换端口1
+
+                    //FALSE 显示设置值
+
+                    if (Tx1Hander != null)
+                        Tx1Hander(s, ref sen_tx1, true);
+
+                }
+                else
+                {
+                    //--------------------------------------------------------------------------------------
+
+                    double dd1 = 0;
+                    double dd2 = 0;
+                    //P2功率检测
+
+                    s = ClsJcPimDll.HwGetSig_Smooth(ref dd2, ClsJcPimDll.JC_CARRIER_TX2);//检测功放2稳定度
+                    //double sen_tx2 = 0;
+                    if (Tx2Hander != null)
+                        Tx2Hander(s, ref sen_tx2, false);
+                    if (s <= -10000 && ClsUpLoad._checkPow)
+                    {
+                        ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
+                        return;
+                    }
+                    //--------------------------------------------------------------------------------------
+                    //切换coup1
+                    ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX1);//切换端口1
+                    //P1功率检测
+
+                    s = ClsJcPimDll.HwGetSig_Smooth(ref dd1, ClsJcPimDll.JC_CARRIER_TX1);//检测tx1稳定度
+                    //double sen_tx1 = 0;
+                    if (Tx1Hander != null)
+                        Tx1Hander(s, ref sen_tx1, false);
+                    if (s <= -1000 && ClsUpLoad._checkPow)
+                    {
+                        ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
+                        return;
+                    }
+                    //--------------------------------------------------------------------------------------
+                }
+                //st.Stop();
+
+                //MessageBox.Show("time: " + st.ElapsedMilliseconds.ToString() + "ms");
+                SweepTest();
+         
         }
 
         public void Stop()
@@ -302,8 +304,8 @@ namespace JcMBP
             }
             for (int i = 0; i < ds.time1; ++i)
             {
-                float x = 0;
-                float y = 0;
+                double x = 0;
+                double y = 0;
                 Monitor.Enter(_ctrl);
                 bool isQuit = _ctrl.bQuit;
                 Monitor.Exit(_ctrl);
@@ -317,9 +319,9 @@ namespace JcMBP
                 double freq_mhz = 0;
                 double val = 0;
                 ClsJcPimDll.fnGetImResult(ref freq_mhz, ref val, "mhz");//读取互调值和互调频率
-                x = (float)freq_mhz;
-                val += ds.time_off1;
-                y = (float)val;
+                x = (double)freq_mhz;
+                val += ds.rx_off;
+                y = (double)val;
                 ds.sxy.x = x;
                 ds.sxy.y = y;
                 ds.sxy.current = i;
@@ -363,10 +365,11 @@ namespace JcMBP
             double dd1 = 0;
             double dd2 = 0;
             int s = 0;
-            float x = 0;
-            float y = 0;
-            float step1 = ds.step1;
-            float step2 = ds.step2 * 2;
+            double x = 0;
+            double y = 0;
+            double step1 = ds.step1;
+            double step2 = ds.step2 * 2;
+          
             for (int i = 0; i <= n1; ++i)
             {
 
@@ -383,21 +386,7 @@ namespace JcMBP
                         continue;
                     }
                 }
-                //else
-                //{
-                //    get_xnum = StaticMethod.GetFreq(ds.imCo1, ds.imCo2, 0, 0, f, ds.freq2e);//当前扫频频率      
-                //    if (FreqSweepLeft.bandname == "dd800" && ClsUpLoad._type == 0 || ClsUpLoad._type == 1)
-                //        get_xnum = StaticMethod.GetFreq(ds.imCo1, ds.imCo2, 1, 0, f, ds.freq2e);//当前扫频频率
-                //    if (get_xnum > ds.MaxRx || get_xnum < ds.MinRx)//不在rx范围内则跳过
-                //    {
-
-                //        f += ds.step1;//设置频率
-                //        m1++;//跳过点数加1
-                //        continue;
-                //        //ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
-                //        //return;
-                //    }
-                //}
+    
                 if (isQuit)
                 {
                     ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
@@ -433,24 +422,24 @@ namespace JcMBP
                 }
                 //读取pim    
                 Random rd = new Random();
-                float valzz = rd.Next(1, 4) / 10f;
+                double valzz = rd.Next(1, 4) / 10f;
                 if (ClsUpLoad.fastmode)
-                    sen_tx1 = ds.pow1+ds.off1+valzz;
+                    sen_tx1 = ds.pow1 + ds.off1 + valzz;
                 else
                     sen_tx1 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX1);//读取显示功率1
                 ClsJcPimDll.fnGetImResult(ref freq_mhz, ref val, "mhz");//读取互调频率和互调值
-                val += ds.freq_off1;//互调值
+                val += ds.rx_off;//互调值
                 //显示
 
-                x = (float)Math.Round(freq_mhz, 1);//互调频率四舍五入保留1位小数
-                y = (float)Math.Round(val, 1);//互调值四舍五入保留1位小数
+                x = (double)Math.Round(freq_mhz, 1);//互调频率四舍五入保留1位小数
+                y = (double)Math.Round(val, 1);//互调值四舍五入保留1位小数
                 ds.sen_tx1 = sen_tx1;
                 ds.sxy.x = x;
                 ds.sxy.y = y;
                 ds.sxy.currentPlot = 0;
                 ds.sxy.current = i;
                 ds.sxy.currentCount = i + 1 - m1;
-                ds.sxy.f1 = (float)f;
+                ds.sxy.f1 = (double)f;
                 ds.sxy.f2 = ds.freq2e;
                 Sthandmethod();
 
@@ -502,10 +491,10 @@ namespace JcMBP
                    
                     sen_tx1 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX1);//切换端口
                     ClsJcPimDll.fnGetImResult(ref freq_mhz, ref val, "mhz");//获取互调值和互调频率
-                    val += ds.freq_off1;
+                    val += ds.rx_off;
                     //显示
-                    x = (float)Math.Round(freq_mhz, 1);//互调频率四舍五入保留一位小数
-                    y = (float)Math.Round(val, 1);//互调值四舍五入保留一位小数
+                    x = (double)Math.Round(freq_mhz, 1);//互调频率四舍五入保留一位小数
+                    y = (double)Math.Round(val, 1);//互调值四舍五入保留一位小数
                     ds.sen_tx1 = sen_tx1;
                     ds.sxy.x = x;
                     ds.sxy.y = y;
@@ -515,7 +504,7 @@ namespace JcMBP
                     ds.sxy.currentCount = (int)n1 + 1 + i + 1 - m1 - m3;
                     //else
                     //    ds.sxy.currentCount = (int)n1 + 1 + i + 1 - m1 - m3;
-                    ds.sxy.f1 = (float)f;
+                    ds.sxy.f1 = (double)f;
                     ds.sxy.f2 = ds.freq2s;
                     Sthandmethod();
                     f += step1;
@@ -523,7 +512,7 @@ namespace JcMBP
                 }
             }
             //切换开关1
-            if(ClsUpLoad.fastmode)
+            if (ClsUpLoad.fastmode)
                 ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX1);//切换端口1
 
             s = ClsJcPimDll.HwSetTxFreqs(ds.freq1s, ds.freq2e, "mhz");//设置频率
@@ -556,20 +545,7 @@ namespace JcMBP
                         continue;
                     }
                 }
-                //else
-                //{
-                //    get_xnum = StaticMethod.GetFreq(ds.imCo1, ds.imCo2, 0, 0, ds.freq1s, f);//当前扫频频率
-                //    if (ds.tx1 == 1)
-                //        get_xnum = StaticMethod.GetFreq(ds.imCo1, ds.imCo2, 1, 0, ds.freq1s, f);//当前扫频频率
-                //    if (get_xnum > ds.MaxRx || get_xnum < ds.MinRx)//不在rx范围内则跳过
-                //    {
-                //        f -= ds.step2;
-                //        m2++;
-                //        continue;
-                //        //ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
-                //        //return;
-                //    }
-                //}
+              
                 if (isQuit)
                 {
                     ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
@@ -605,13 +581,13 @@ namespace JcMBP
                 }
 
                 ClsJcPimDll.fnGetImResult(ref freq_mhz, ref val, "mhz");//获取互调值和互调频率
-                val += ds.freq_off1;
+                val += ds.rx_off;
 
                  
           
                 //显示
-                x = (float)Math.Round(freq_mhz, 1);//互调频率
-                y = (float)Math.Round(val, 1);//互调值
+                x = (double)Math.Round(freq_mhz, 1);//互调频率
+                y = (double)Math.Round(val, 1);//互调值
                 ds.sen_tx2 = sen_tx2;
                 ds.sen_tx1 = sen_tx1;
                 ds.sxy.x = x;
@@ -619,7 +595,7 @@ namespace JcMBP
                 ds.sxy.currentPlot = 1;
                 ds.sxy.current = i;
                 ds.sxy.currentCount = (int)n1 + 1 + (int)n3 + 1 + i - m1 - m2 - m3;
-                ds.sxy.f2 = (float)f;
+                ds.sxy.f2 = (double)f;
                 ds.sxy.f1 = ds.freq1s;
                 Sthandmethod();
                 f -= step2;
@@ -662,17 +638,17 @@ namespace JcMBP
                     ClsJcPimDll.HwGetSig_Smooth(ref dd2, ClsJcPimDll.JC_CARRIER_TX2);
                     sen_tx2 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX2);
                     ClsJcPimDll.fnGetImResult(ref freq_mhz, ref val, "mhz");
-                    val += ds.freq_off1;
+                    val += ds.rx_off;
                     //显示
-                    x = (float)Math.Round(freq_mhz, 1);
-                    y = (float)Math.Round(val, 1);
+                    x = (double)Math.Round(freq_mhz, 1);
+                    y = (double)Math.Round(val, 1);
                     ds.sen_tx2 = sen_tx2;
                     ds.sxy.x = x;
                     ds.sxy.y = y;
                     ds.sxy.currentPlot = 2;
                     ds.sxy.current = i;
                     ds.sxy.currentCount = (int)n3 + 1 + (int)n1 + 1 + (int)n2 + 1 + i + 1 - m1 - m2 - m3 - m4;
-                    ds.sxy.f2 = (float)f;
+                    ds.sxy.f2 = (double)f;
                     ds.sxy.f1 = ds.freq1e;
                     Sthandmethod();
                     f -= step2;

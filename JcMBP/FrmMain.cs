@@ -30,7 +30,7 @@ namespace JcMBP
         public static int count = 1;
         public static bool vco = true;
         public static bool offsetPassword = false;
-        public  float limit = -110;
+        public  double limit = -110;
         public  static bool isjb = false;
         //
         TimeSweepMid tm = null;
@@ -143,7 +143,7 @@ namespace JcMBP
                 
             }
         }
-        public  float Limit
+        public  double Limit
         {
         
             get {               

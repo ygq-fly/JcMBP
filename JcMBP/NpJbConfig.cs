@@ -18,14 +18,14 @@ namespace JcMBP
         byte imLow = 0;
         byte imLess = 0;
         bool orderMode = true;
-        float _rxs;
-        float _rxe;
+        double _rxs;
+        double _rxe;
         double f1s;
         double f1e;
         double f2s;
         double f2e;
-        float rmax;
-        float rmin;
+        double rmax;
+        double rmin;
         int n = 0;
         byte porttx1 = 0;
         byte porttx2 = 0;
@@ -34,11 +34,11 @@ namespace JcMBP
         string time_out_Message = "";
         List<string> bandM = new List<string>();
         List<string> time_out_M = new List<string>();
-        List<float> limit = new List<float>();
+        List<double> limit = new List<double>();
       
         List<byte[]> port_arr = new List<byte[]>();
         
-        List<float[]> rx_arr = new List<float[]>();
+        List<double[]> rx_arr = new List<double[]>();
        
         List<byte[]> im_arr = new List<byte[]>();
         public NpJbConfig(ClsUpLoad cul)
@@ -179,7 +179,7 @@ namespace JcMBP
             port[1] = porttx2;
             port[2] = portrx;
             port_arr.Add(port);
-            float[] rx = new float[2];
+            double[] rx = new double[2];
             rx[0] = _rxs;
             rx[1] = _rxe;
             rx_arr.Add(rx);
@@ -195,7 +195,7 @@ namespace JcMBP
            string tx2, double f2s, double f2e,
            string rx,
            string model, int order, string str2,
-           float set_s, float pow, float off, float off2)
+           double set_s, double pow, double off, double off2)
         {
             DataRow row = dt.NewRow();
             row[0] = b;
@@ -258,7 +258,7 @@ namespace JcMBP
                     port[1] = 0;
                     port[2] = 0;
                     port_arr.Add(port);
-                    float[] rx = new float[2];
+                    double[] rx = new double[2];
                     rx[0] = 0;
                     rx[1] = 0;
                     rx_arr.Add(rx);
@@ -467,7 +467,7 @@ namespace JcMBP
                 port_arr[a - 1] = port_arr[a];
                 port_arr[a] = s;
 
-                float[] s2 = rx_arr[a - 1];
+                double[] s2 = rx_arr[a - 1];
                 rx_arr[a - 1] = rx_arr[a];
                 rx_arr[a] = s2;
 
@@ -475,7 +475,7 @@ namespace JcMBP
                 bandM[a - 1] = bandM[a];
                 bandM[a] = s3;
 
-                float s4 = limit[a - 1];
+                double s4 = limit[a - 1];
                 limit[a - 1] = limit[a];
                 limit[a] = s4;
 
@@ -518,7 +518,7 @@ namespace JcMBP
                 port_arr[a + 1] = port_arr[a];
                 port_arr[a] = s;
 
-                float[] s2 = rx_arr[a + 1];
+                double[] s2 = rx_arr[a + 1];
                 rx_arr[a + 1] = rx_arr[a];
                 rx_arr[a] = s2;
 
@@ -526,7 +526,7 @@ namespace JcMBP
                 bandM[a + 1] = bandM[a];
                 bandM[a] = s3;
 
-                float s4 = limit[a + 1];
+                double s4 = limit[a + 1];
                 limit[a + 1] = limit[a];
                 limit[a] = s4;
 
@@ -595,7 +595,7 @@ namespace JcMBP
                             port[1] = 0;
                             port[2] = 0;
                             port_arr.Add(port);
-                            float[] rx = new float[2];
+                            double[] rx = new double[2];
                             rx[0] = 0;
                             rx[1] = 0;
                             rx_arr.Add(rx);
@@ -618,14 +618,14 @@ namespace JcMBP
                             freq_nud_off1.Value = decimal.Parse(str_ini[11]);
                             numericUpDown1.Value = decimal.Parse(str_ini[12]);
                             numericUpDown2.Value = decimal.Parse(str_ini[15]);
-                            ToNewRows(dt, i + 1, true, cul.BandNames[int.Parse(str_ini[0])], float.Parse(str_ini[1]), float.Parse(str_ini[2]),
-                                cul.BandNames[int.Parse(str_ini[3])], float.Parse(str_ini[4]), float.Parse(str_ini[5]),
+                            ToNewRows(dt, i + 1, true, cul.BandNames[int.Parse(str_ini[0])], double.Parse(str_ini[1]), double.Parse(str_ini[2]),
+                                cul.BandNames[int.Parse(str_ini[3])], double.Parse(str_ini[4]), double.Parse(str_ini[5]),
                                 cul.BandNames[int.Parse(str_ini[6])], str_ini[7] == "1" ? "点频" : "扫频", int.Parse(str_ini[16]) + int.Parse(str_ini[17]), str_ini[8],
-                                 float.Parse(str_ini[9]), float.Parse(str_ini[10]), float.Parse(str_ini[11]), float.Parse(str_ini[12]));
-                            f1s = float.Parse(str_ini[1]);
-                            f1e = float.Parse(str_ini[2]);
-                            f2s = float.Parse(str_ini[4]);
-                            f2e = float.Parse(str_ini[5]);
+                                 double.Parse(str_ini[9]), double.Parse(str_ini[10]), double.Parse(str_ini[11]), double.Parse(str_ini[12]));
+                            f1s = double.Parse(str_ini[1]);
+                            f1e = double.Parse(str_ini[2]);
+                            f2s = double.Parse(str_ini[4]);
+                            f2e = double.Parse(str_ini[5]);
 
                             time_out_M.Add(str_ini[21]);
                             bandMessage = str_ini[20];
@@ -641,9 +641,9 @@ namespace JcMBP
                             if (port[2] == 0)
                                 radioButton4.Checked = true;
                             port_arr.Add(port);
-                            float[] rx = new float[2];
-                           _rxs= rx[0] = float.Parse(str_ini[13]);
-                           _rxe= rx[1] = float.Parse(str_ini[14]);
+                            double[] rx = new double[2];
+                           _rxs= rx[0] = double.Parse(str_ini[13]);
+                           _rxe= rx[1] = double.Parse(str_ini[14]);
                            byte[] im = new byte[4];
                            imCo1= im[0] = byte.Parse(str_ini[16]);
                            imCo2= im[1] = byte.Parse(str_ini[17]);
@@ -652,7 +652,7 @@ namespace JcMBP
                             im_arr.Add(im);
                             rx_arr.Add(rx);
                             button7.Text = _rxs.ToString() + "-" + _rxe.ToString() + "MHz";
-                            limit.Add(float.Parse(str_ini[15]));
+                            limit.Add(double.Parse(str_ini[15]));
                             label70.Text = OfftenMethod.GetTestBand_f(imCo1, imCo2, imLow, imLess, f1s, f1e, f2s, f2e);
                             n++;
                         }

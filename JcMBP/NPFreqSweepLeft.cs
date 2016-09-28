@@ -22,18 +22,18 @@ namespace JcMBP
         byte imLess = 0;
 
         bool orderMode = true;
-        float _rxs;
-        float _rxe;
+        double _rxs;
+        double _rxe;
         double f1s;
         double f1e;
         double f2s;
         double f2e;
-        float f1max;
-        float f1min;
-        float f2max;
-        float f2min;
-        float rmax;
-        float rmin;
+        double f1max;
+        double f1min;
+        double f2max;
+        double f2min;
+        double rmax;
+        double rmin;
         public NPFreqSweepLeft()
         {
             InitializeComponent();
@@ -87,6 +87,11 @@ namespace JcMBP
                 ds.off2 = ds.freq_off2 = Convert.ToDouble(numericUpDown4.Value);
             else
                 ds.off2 = ds.freq_off2 = 0;
+            if (checkBox1.Checked)
+                ds.rx_off = Convert.ToDouble(numericUpDown1.Value);
+            else
+                ds.rx_off = 0;
+
             ds.port = port;
 
             if (radioButton6.Checked)
@@ -295,7 +300,7 @@ namespace JcMBP
                 for (int i = 0; i < ds.num; i++)
                 {
                      jd[i] = new JbData();
-                    jd[i].LoadData(@path_test, i, ClsUpLoad._type);
+                    jd[i].LoadData(@path_test, i, ClsUpLoad._type,cul);
                 }
                 JbIni();
             }
@@ -327,6 +332,7 @@ namespace JcMBP
             ds.imLess = jb.imLess;
             ds.off1 = ds.freq_off1 = jb.off1;
             ds.off2 = ds.freq_off2 = jb.off2;
+            ds.rx_off = jb.rx_off;
             ds.tx1Port = jb.porttx1;
             ds.tx2Port = jb.porttx2;
             ds.rxPort = jb.portrx;

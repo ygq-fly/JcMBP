@@ -9,8 +9,8 @@ namespace JcMBP
     {
         public DataTable dt;
         public DataTable dtc;
-        public float max = 0;
-        public float min = 0;
+        public double max = 0;
+        public double min = 0;
         public string val = "true";
     }
 }

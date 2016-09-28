@@ -20,12 +20,12 @@ namespace JcMBP
          byte imLess = 0;
          bool orderMode = true;
          int time = 1;
-         float _rxs;
-         float _rxe;
+         double _rxs;
+         double _rxe;
          double f1;
          double f2;
-         float rmax;
-         float rmin;
+         double rmax;
+         double rmin;
 
          public PoiTimeSweepLeft(ClsUpLoad cul,TimeSweepMid tsm)
          {
@@ -67,17 +67,23 @@ namespace JcMBP
             ds.tx2 = (byte)(cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]);
             ds.rx = (byte)(cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]);
             ds.port = 0;
-            ds.time1 = (float)time;
+            ds.time1 = (double)time;
             OfftenMethod.ToAddColumns(ds.dt);
             OfftenMethod.ToAddColumns(ds.dtc);
             if (checkBox1.Checked)
-                ds.off1 =  Convert.ToDouble(time_nud_off1.Value);
+               ds.time_off1= ds.off1 =  Convert.ToDouble(time_nud_off1.Value);
             else
                 ds.off1 =  0;
             if(time_check_off1.Checked)
-                ds.off2 = Convert.ToDouble(time_nud_off1.Value);
+               ds.time_off2= ds.off2 = Convert.ToDouble(time_nud_off1.Value);
             else
                 ds.off2 = 0;
+
+            if (checkBox2.Checked)
+                ds.rx_off = Convert.ToDouble(numericUpDown1.Value);
+            else
+                ds.rx_off = 0;
+              
             ds.MaxRx = _rxe;
             ds.MinRx= _rxs;
             tsm.Clone(ds);

@@ -11,9 +11,9 @@ namespace JcMBP
 {
     public partial class TimeSweepMid : Form
     {
-        float _pim_limit = -110;
-        float _pim_max = -10000;
-        float _pim_min = 0;
+        double _pim_limit = -110;
+        double _pim_max = -10000;
+        double _pim_min = 0;
         ClsUpLoad cul;
                     Form form;
         public   DataSweep ds;
@@ -87,7 +87,7 @@ namespace JcMBP
             try
             {
                
-               ds.limit=_pim_limit = float.Parse(numericUpDown2.Value.ToString());
+               ds.limit=_pim_limit = double.Parse(numericUpDown2.Value.ToString());
                if (FreqSweepMid.isLoad)
                {
                
@@ -98,13 +98,13 @@ namespace JcMBP
             Main_SetLimit(_pim_limit);
         }
 
-        void Main_SetLimit(float limit_dBm)
+        void Main_SetLimit(double limit_dBm)
         {
             time_plot.Value = limit_dBm;//设置limint参数
             IniFile.SetFileName(Application.StartupPath + "\\JcConfig.ini");//设置文件名
             IniFile.SetString("Settings", "limit", limit_dBm.ToString());//保存limnt到配置文件
             //if (!isdbm)
-            //    IniFile.SetString("Settings", "limit", (limit_dBm - (float)freq_nud_pow2.Value).ToString());//保存limnt到配置文件
+            //    IniFile.SetString("Settings", "limit", (limit_dBm - (double)freq_nud_pow2.Value).ToString());//保存limnt到配置文件
         }
 
         public void Clone(DataSweep ds)
@@ -121,8 +121,8 @@ namespace JcMBP
                     FrmMain.isjb = false;
                     ds.dt.Clear();
                     ds.dtc.Clear();
-                    _pim_max = float.MinValue;
-                    _pim_min = float.MaxValue;
+                    _pim_max = double.MinValue;
+                    _pim_min = double.MaxValue;
                     time_tb_log.Clear();
                     if (fm.isdBm)
                         time_dgvPim.DataSource = ds.dt;
@@ -200,7 +200,7 @@ namespace JcMBP
                         this.time_tb_show_tx2.Text = ds.sen_tx2.ToString("0.00");//控件显示tx1功率
                         time_tb_pim_now.Text = ds.sxy.y.ToString("0.0");//当前互调值
                         time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString("0.0");//当前互调值
-                        float currenty = 0;
+                        double currenty = 0;
                         //if (fm.isdBm)
                         currenty = ds.sxy.y;
                         //else
@@ -239,12 +239,12 @@ namespace JcMBP
                         else
                             this.time_plot.RealValue = currenty - 43;
                         OfftenMethod.ToNewRows(ds.dt, ds.sxy.currentCount,
-                                  (float)ds.sxy.f1, (float)ds.sen_tx1,
-                                  (float)ds.sxy.f2, (float)ds.sen_tx2,
+                                  (double)ds.sxy.f1, (double)ds.sen_tx1,
+                                  (double)ds.sxy.f2, (double)ds.sen_tx2,
                                   ds.sxy.x, ds.sxy.y);//添加数据到表格
                         OfftenMethod.ToNewRows(ds.dtc, ds.sxy.currentCount,
-                                  (float)ds.sxy.f1, (float)ds.sen_tx1,
-                                  (float)ds.sxy.f2, (float)ds.sen_tx2,
+                                  (double)ds.sxy.f1, (double)ds.sen_tx1,
+                                  (double)ds.sxy.f2, (double)ds.sen_tx2,
                                   ds.sxy.x, ds.sxy.y - ds.pow1);//添加数据到表格
                         time_dgvPim.FirstDisplayedScrollingRowIndex = time_dgvPim.Rows.Count - 1;//显示当前行
                         CreatScrollbar_t();
@@ -338,7 +338,7 @@ namespace JcMBP
                 if (istrue)
                 {
                     Random rd = new Random();
-                    float val = rd.Next(1, 4) / 10f;
+                    double val = rd.Next(1, 4) / 10f;
                     sen_tx1 = ds.pow1+val+ds.off1;
                 }
                 else
@@ -387,7 +387,7 @@ namespace JcMBP
                 if (istrue)
                 {
                     Random rd = new Random();
-                    float val = rd.Next(1, 4) / 10f;
+                    double val = rd.Next(1, 4) / 10f;
                     sen_tx2 = ds.pow2+val+ds.off2;
                 }
                 else

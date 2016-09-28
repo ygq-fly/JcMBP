@@ -14,15 +14,15 @@ namespace CustomControls
         /// <summary>
         /// 最小值
         /// </summary>
-        float _MinValue;
+        double _MinValue;
         /// <summary>
         /// 最大值
         /// </summary>
-        float _MaxValue;
+        double _MaxValue;
         /// <summary>
         /// 当前值
         /// </summary>
-        float _Value;
+        double _Value;
         /// <summary>
         /// 进度条背景
         /// </summary>
@@ -46,7 +46,7 @@ namespace CustomControls
         /// <summary>
         /// 实际值
         /// </summary>
-        private float _RealValue;
+        private double _RealValue;
 
         #endregion
 
@@ -54,7 +54,7 @@ namespace CustomControls
         /// <summary>
         /// 最大值
         /// </summary>
-        public float MaxValue
+        public double MaxValue
         {
             get
             {
@@ -69,7 +69,7 @@ namespace CustomControls
         /// <summary>
         /// 最小值
         /// </summary>
-        public float MinValue
+        public double MinValue
         {
             get
             {
@@ -84,7 +84,7 @@ namespace CustomControls
         /// <summary>
         /// 当前值
         /// </summary>
-        public float Value
+        public double Value
         {
             get
             {
@@ -175,7 +175,7 @@ namespace CustomControls
         /// <summary>
         /// 实际值
         /// </summary>
-        public float RealValue
+        public double RealValue
         {
             get { return _RealValue; }
             set 
@@ -227,20 +227,20 @@ namespace CustomControls
                 Rectangle rcKeDu = new Rectangle(new Point(0,8), new Size(48, rc.Height-16));
                     //进度区
                 Rectangle rcJinDu = new Rectangle(48, 8, rc.Width - 48, rc.Height-16);
-                float hk = (float)(_Value-_MinValue)/(_MaxValue-_MinValue);
+                double hk = (double)(_Value-_MinValue)/(_MaxValue-_MinValue);
                 int JinDuForeHeight = (int)(rcJinDu.Height * hk);
                 Rectangle rcJinDuFore = new Rectangle(48, rcJinDu.Height - JinDuForeHeight + 8, rcJinDu.Width, JinDuForeHeight);
                 //绘制操作
                     //绘制刻度
-                float KeDuK =  (float)(_MaxValue - _MinValue)/_GraduationNumber;
-                float[] KeDuZT = new float[_GraduationNumber+1];
+                double KeDuK =  (double)(_MaxValue - _MinValue)/_GraduationNumber;
+                double[] KeDuZT = new double[_GraduationNumber+1];
                 KeDuZT[0] = _MinValue;
                 KeDuZT[_GraduationNumber] = _MaxValue;
                 for (int i = 1; i < _GraduationNumber;i++)
                 {
                     KeDuZT[i] = (int)(i*KeDuK)+_MinValue;
                 }
-                float JinDuSK = (float)rcKeDu.Height / (5*_GraduationNumber);
+                double JinDuSK = (double)rcKeDu.Height / (5*_GraduationNumber);
                 for (int i = 0,ofk = 5; i <= 5*_GraduationNumber;i++)
                 {
                     ofk = 5;
@@ -259,7 +259,7 @@ namespace CustomControls
                 gBmp.FillRectangle(_ProgramBarForeGround, rcJinDuFore);
                 gBmp.DrawRectangle(new Pen(Brushes.Transparent, 3), rcJinDu);
                 //绘制真实值
-                float fk = rcJinDu.Height / (MaxValue - MinValue);
+                double fk = rcJinDu.Height / (MaxValue - MinValue);
 
              //   System.Diagnostics.Trace.WriteLine(RealValue);
              //   System.Diagnostics.Trace.WriteLine((RealValue - MinValue) * fk);

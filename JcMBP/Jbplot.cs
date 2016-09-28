@@ -7,8 +7,8 @@ namespace JcMBP
 {
     class Jbplot
     {
-        public float x = 0;
-        public float y = 0;
+        public double x = 0;
+        public double y = 0;
         public int n1 = 0;
         public int n2 = 0;
         public int n3 = 0;

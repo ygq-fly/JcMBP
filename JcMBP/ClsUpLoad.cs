@@ -17,7 +17,7 @@ namespace JcMBP
         }
         #region 配置文件
         public static  SweepMode sm=SweepMode.Poi;
-        public static  float _limit = -110;//limit指标
+        public static  double _limit = -110;//limit指标
         public static  bool _vco = false;//vco检测
         public static   bool _checkTwoSignalROSC = false;//同步线
         public static  bool _checkPow = false;//功率
@@ -65,7 +65,7 @@ namespace JcMBP
             addr_sig1 = IniFile.GetString("Settings", "signal1", "0");//信号源1地址
             addr_sig2 = IniFile.GetString("Settings", "signal2", "0");//信号源2地址
             addr_ana = IniFile.GetString("Settings", "analyzer", "0");//频谱仪地址
-            _limit = float.Parse(IniFile.GetString("Settings", "limit", "-110"));
+            _limit = double.Parse(IniFile.GetString("Settings", "limit", "-110"));
             _vco = IniFile.GetString("Settings", "vco_enable", "1") == "0" ? false : true;
             _checkTwoSignalROSC = IniFile.GetString("Settings", "CheckTwoSignalROSC", "1") == "1" ? true : false;
             _checkPow = IniFile.GetString("DEBUG", "checkpow", "1") == "1" ? true : false;
@@ -79,7 +79,7 @@ namespace JcMBP
             string linshi = OfftenMethod.Mid5Lock("12345678");
             offset_pass = IniFile.GetString("Settings", "offsetpassword", linshi);
             saveFormat = IniFile.GetString("Settings", "saveFormat","1" );
-            fastmode = IniFile.GetString("Settings", "fastmode", "1") == "1" ? true : false;
+            fastmode = IniFile.GetString("Settings", "fastmode", "0") == "1" ? true : false;
             if (_type == 0||_type==1)
             {            
                 sm =SweepMode.Hw;
@@ -209,53 +209,50 @@ namespace JcMBP
     public  class LoadingData
     {
        
-        public float set_rx_Max = 0;//rx最大值
-        public float set_rx_Min = 0;//rx最小值
+        public double set_rx_Max = 0;//rx最大值
+        public double set_rx_Min = 0;//rx最小值
         public string Info;
-        public float ord3_F1UpS = 930;//默认3阶f1起始频率
-        public float ord3_F1UpE = 937;//默认3阶f1结束频率
-        public float ord3_F2DnS = 945;//默认3阶f2起始频率
-        public float ord3_F2DnE = 960;//默认3阶f2结束频率
-        public float ord3_F1Step = 1;//默认3阶f1步进
-        public float ord3_F2Step = 1;//默认3阶f1步进
-        public float ord3_imS = 899;//默认3阶rx起始频率
-        public float ord3_imE = 915;//默认3阶rx结束频率
-        public float ord5_F1UpS = 933;
-        public float ord5_F1UpE = 941;
-        public float ord5_F2DnS = 942;
-        public float ord5_F2DnE = 957;
-        public float ord5_F1Step = 1;
-        public float ord5_F2Step = 1;
-        public float ord5_imS = 885;
-        public float ord5_imE = 915;
-        public float ord7_F1UpS = 938;
-        public float ord7_F1UpE = 942;
-        public float ord7_F2DnS = 947;
-        public float ord7_F2DnE = 955;
-        public float ord7_F1Step = 1;
-        public float ord7_F2Step = 1;
-        public float ord7_imS = 886;
-        public float ord7_imE = 912;
-        public float ord9_F1UpS = 939;
-        public float ord9_F1UpE = 942;
-        public float ord9_F2DnS = 946;
-        public float ord9_F2DnE = 952;
-        public float ord9_F1Step = 1;
-        public float ord9_F2Step = 1;
-        public float ord9_imS = 886;
-        public float ord9_imE = 912;
+        public double ord3_F1UpS = 930;//默认3阶f1起始频率
+        public double ord3_F1UpE = 937;//默认3阶f1结束频率
+        public double ord3_F2DnS = 945;//默认3阶f2起始频率
+        public double ord3_F2DnE = 960;//默认3阶f2结束频率
+        public double ord3_F1Step = 1;//默认3阶f1步进
+        public double ord3_F2Step = 1;//默认3阶f1步进
+        public double ord3_imS = 899;//默认3阶rx起始频率
+        public double ord3_imE = 915;//默认3阶rx结束频率
+        public double ord5_F1UpS = 933;
+        public double ord5_F1UpE = 941;
+        public double ord5_F2DnS = 942;
+        public double ord5_F2DnE = 957;
+        public double ord5_F1Step = 1;
+        public double ord5_F2Step = 1;
+        public double ord5_imS = 885;
+        public double ord5_imE = 915;
+        public double ord7_F1UpS = 938;
+        public double ord7_F1UpE = 942;
+        public double ord7_F2DnS = 947;
+        public double ord7_F2DnE = 955;
+        public double ord7_F1Step = 1;
+        public double ord7_F2Step = 1;
+        public double ord7_imS = 886;
+        public double ord7_imE = 912;
+        public double ord9_F1UpS = 939;
+        public double ord9_F1UpE = 942;
+        public double ord9_F2DnS = 946;
+        public double ord9_F2DnE = 952;
+        public double ord9_F1Step = 1;
+        public double ord9_F2Step = 1;
+        public double ord9_imS = 886;
+        public double ord9_imE = 912;
       
-        public float TxS = 930;
-        public float TxE = 960;
-        public float RxS = 885;
-        public float RxE = 915;
+  
 
-        public float F1Min = 925;//f1最小值
-        public float F1Max = 960;//f1最大值
-        public float F2Min = 925;//f2最小值
-        public float F2Max = 960;//f2最大值
-        public float RxMin = 880;//rx最小值
-        public float RxMax = 915;//tx最大值
+        public double F1Min = 925;//f1最小值
+        public double F1Max = 960;//f1最大值
+        public double F2Min = 925;//f2最小值
+        public double F2Max = 960;//f2最大值
+        public double RxMin = 880;//rx最小值
+        public double RxMax = 915;//tx最大值
        
 
         
@@ -263,55 +260,49 @@ namespace JcMBP
         internal void LoadSettings(string fileName)
         {
             IniFile.SetFileName(fileName);
-            ord3_F1UpS = float.Parse(IniFile.GetString("Specifics", "ord3_F1UpS", "869")); //F1: 869~871.5 
-            ord3_F1UpE = float.Parse(IniFile.GetString("Specifics", "ord3_F1UpE", "871.5"));
-            ord3_F2DnS = float.Parse(IniFile.GetString("Specifics", "ord3_F2DnS", "889")); //F2: 889~894
-            ord3_F2DnE = float.Parse(IniFile.GetString("Specifics", "ord3_F2DnE", "894"));
-            ord3_F1Step = float.Parse(IniFile.GetString("Specifics", "ord3_F1Step", "1")); //Step
-            ord3_F2Step = float.Parse(IniFile.GetString("Specifics", "ord3_F2Step", "1"));
-            ord3_imS = float.Parse(IniFile.GetString("Specifics", "ord3_imS", "844")); //Im3: 844~849
-            ord3_imE = float.Parse(IniFile.GetString("Specifics", "ord3_imE", "849"));
+            ord3_F1UpS = double.Parse(IniFile.GetString("Specifics", "ord3_F1UpS", "869")); //F1: 869~871.5 
+            ord3_F1UpE = double.Parse(IniFile.GetString("Specifics", "ord3_F1UpE", "871.5"));
+            ord3_F2DnS = double.Parse(IniFile.GetString("Specifics", "ord3_F2DnS", "889")); //F2: 889~894
+            ord3_F2DnE = double.Parse(IniFile.GetString("Specifics", "ord3_F2DnE", "894"));
+            ord3_F1Step = double.Parse(IniFile.GetString("Specifics", "ord3_F1Step", "1")); //Step
+            ord3_F2Step = double.Parse(IniFile.GetString("Specifics", "ord3_F2Step", "1"));
+            ord3_imS = double.Parse(IniFile.GetString("Specifics", "ord3_imS", "844")); //Im3: 844~849
+            ord3_imE = double.Parse(IniFile.GetString("Specifics", "ord3_imE", "849"));
 
-            ord5_F1UpS = float.Parse(IniFile.GetString("Specifics", "ord5_F1UpS", "869")); //F1: 869~871.5 
-            ord5_F1UpE = float.Parse(IniFile.GetString("Specifics", "ord5_F1UpE", "871.5"));
-            ord5_F2DnS = float.Parse(IniFile.GetString("Specifics", "ord5_F2DnS", "889")); //F2: 889~894
-            ord5_F2DnE = float.Parse(IniFile.GetString("Specifics", "ord5_F2DnE", "894"));
-            ord5_F1Step = float.Parse(IniFile.GetString("Specifics", "ord5_F1Step", "1")); //Step
-            ord5_F2Step = float.Parse(IniFile.GetString("Specifics", "ord5_F2Step", "1"));
-            ord5_imS = float.Parse(IniFile.GetString("Specifics", "ord5_imS", "844")); //Im3: 844~849
-            ord5_imE = float.Parse(IniFile.GetString("Specifics", "ord5_imE", "849"));
+            ord5_F1UpS = double.Parse(IniFile.GetString("Specifics", "ord5_F1UpS", "869")); //F1: 869~871.5 
+            ord5_F1UpE = double.Parse(IniFile.GetString("Specifics", "ord5_F1UpE", "871.5"));
+            ord5_F2DnS = double.Parse(IniFile.GetString("Specifics", "ord5_F2DnS", "889")); //F2: 889~894
+            ord5_F2DnE = double.Parse(IniFile.GetString("Specifics", "ord5_F2DnE", "894"));
+            ord5_F1Step = double.Parse(IniFile.GetString("Specifics", "ord5_F1Step", "1")); //Step
+            ord5_F2Step = double.Parse(IniFile.GetString("Specifics", "ord5_F2Step", "1"));
+            ord5_imS = double.Parse(IniFile.GetString("Specifics", "ord5_imS", "844")); //Im3: 844~849
+            ord5_imE = double.Parse(IniFile.GetString("Specifics", "ord5_imE", "849"));
 
-            ord7_F1UpS = float.Parse(IniFile.GetString("Specifics", "ord7_F1UpS", "869")); //F1: 869~871.5 
-            ord7_F1UpE = float.Parse(IniFile.GetString("Specifics", "ord7_F1UpE", "871.5"));
-            ord7_F2DnS = float.Parse(IniFile.GetString("Specifics", "ord7_F2DnS", "889")); //F2: 889~894
-            ord7_F2DnE = float.Parse(IniFile.GetString("Specifics", "ord7_F2DnE", "894"));
-            ord7_F1Step = float.Parse(IniFile.GetString("Specifics", "ord7_F1Step", "1")); //Step
-            ord7_F2Step = float.Parse(IniFile.GetString("Specifics", "ord7_F2Step", "1"));
-            ord7_imS = float.Parse(IniFile.GetString("Specifics", "ord7_imS", "844")); //Im3: 844~849
-            ord7_imE = float.Parse(IniFile.GetString("Specifics", "ord7_imE", "849"));
+            ord7_F1UpS = double.Parse(IniFile.GetString("Specifics", "ord7_F1UpS", "869")); //F1: 869~871.5 
+            ord7_F1UpE = double.Parse(IniFile.GetString("Specifics", "ord7_F1UpE", "871.5"));
+            ord7_F2DnS = double.Parse(IniFile.GetString("Specifics", "ord7_F2DnS", "889")); //F2: 889~894
+            ord7_F2DnE = double.Parse(IniFile.GetString("Specifics", "ord7_F2DnE", "894"));
+            ord7_F1Step = double.Parse(IniFile.GetString("Specifics", "ord7_F1Step", "1")); //Step
+            ord7_F2Step = double.Parse(IniFile.GetString("Specifics", "ord7_F2Step", "1"));
+            ord7_imS = double.Parse(IniFile.GetString("Specifics", "ord7_imS", "844")); //Im3: 844~849
+            ord7_imE = double.Parse(IniFile.GetString("Specifics", "ord7_imE", "849"));
 
-            ord9_F1UpS = float.Parse(IniFile.GetString("Specifics", "ord9_F1UpS", "869")); //F1: 869~871.5 
-            ord9_F1UpE = float.Parse(IniFile.GetString("Specifics", "ord9_F1UpE", "871.5"));
-            ord9_F2DnS = float.Parse(IniFile.GetString("Specifics", "ord9_F2DnS", "889")); //F2: 889~894
-            ord9_F2DnE = float.Parse(IniFile.GetString("Specifics", "ord9_F2DnE", "894"));
-            ord9_F1Step = float.Parse(IniFile.GetString("Specifics", "ord9_F1Step", "1")); //Step
-            ord9_F2Step = float.Parse(IniFile.GetString("Specifics", "ord9_F2Step", "1"));
-            ord9_imS = float.Parse(IniFile.GetString("Specifics", "ord9_imS", "844")); //Im3: 844~849
-            ord9_imE = float.Parse(IniFile.GetString("Specifics", "ord9_imE", "849"));
+            ord9_F1UpS = double.Parse(IniFile.GetString("Specifics", "ord9_F1UpS", "869")); //F1: 869~871.5 
+            ord9_F1UpE = double.Parse(IniFile.GetString("Specifics", "ord9_F1UpE", "871.5"));
+            ord9_F2DnS = double.Parse(IniFile.GetString("Specifics", "ord9_F2DnS", "889")); //F2: 889~894
+            ord9_F2DnE = double.Parse(IniFile.GetString("Specifics", "ord9_F2DnE", "894"));
+            ord9_F1Step = double.Parse(IniFile.GetString("Specifics", "ord9_F1Step", "1")); //Step
+            ord9_F2Step = double.Parse(IniFile.GetString("Specifics", "ord9_F2Step", "1"));
+            ord9_imS = double.Parse(IniFile.GetString("Specifics", "ord9_imS", "844")); //Im3: 844~849
+            ord9_imE = double.Parse(IniFile.GetString("Specifics", "ord9_imE", "849"));
 
 
-
-            TxS = float.Parse(IniFile.GetString("Specifics", "TxS", "869")); //Tx: 869~894
-            TxE = float.Parse(IniFile.GetString("Specifics", "TxE", "894"));
-            RxS = float.Parse(IniFile.GetString("Specifics", "RxS", "824")); //Rx: 824~849
-            RxE = float.Parse(IniFile.GetString("Specifics", "RxE", "849"));
-
-            F1Min = float.Parse(IniFile.GetString("Specifics", "F1Min", "925"));
-            F1Max = float.Parse(IniFile.GetString("Specifics", "F1Max", "960"));
-            F2Min = float.Parse(IniFile.GetString("Specifics", "F2Min", "925"));
-            F2Max = float.Parse(IniFile.GetString("Specifics", "F2Max", "960"));
-            set_rx_Min = RxMin = float.Parse(IniFile.GetString("Specifics", "RxMin", "0"));
-            set_rx_Max = RxMax = float.Parse(IniFile.GetString("Specifics", "RxMax", "0"));
+            F1Min = double.Parse(IniFile.GetString("Specifics", "F1Min", "925"));
+            F1Max = double.Parse(IniFile.GetString("Specifics", "F1Max", "960"));
+            F2Min = double.Parse(IniFile.GetString("Specifics", "F2Min", "925"));
+            F2Max = double.Parse(IniFile.GetString("Specifics", "F2Max", "960"));
+            set_rx_Min = RxMin = double.Parse(IniFile.GetString("Specifics", "RxMin", "0"));
+            set_rx_Max = RxMax = double.Parse(IniFile.GetString("Specifics", "RxMax", "0"));
 
         }
 
@@ -325,10 +316,10 @@ namespace JcMBP
     }
     class BandIni
     {
-        float f1s = 0;
-        float f1e = 0;
-        float f2s = 0;
-        float f2e = 0;
+        double f1s = 0;
+        double f1e = 0;
+        double f2s = 0;
+        double f2e = 0;
     
     }
 }

@@ -31,7 +31,7 @@ namespace JcMBP
                 numericUpDown1.Enabled = false;
             }
         }
-        public SettingFreq(double f1, double f2,float max,float min)
+        public SettingFreq(double f1, double f2,double max,double min)
         {
             InitializeComponent();
             this.f1 = f1;
