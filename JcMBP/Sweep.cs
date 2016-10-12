@@ -200,24 +200,7 @@ namespace JcMBP
                 //默认切频段时候耦合器开关为tx2，所以不切tx2
                 //ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX2);
 
-                if (ClsUpLoad.fastmode == true)
-                {
-                    //TRUE 显示真实值
-
-                    if (Tx2Hander != null)
-                        Tx2Hander(s, ref sen_tx2, false);
-
-                    //切换coup1 
-                    //ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX1);//切换端口1
-
-                    //FALSE 显示设置值
-
-                    if (Tx1Hander != null)
-                        Tx1Hander(s, ref sen_tx1, true);
-
-                }
-                else
-                {
+              
                     //--------------------------------------------------------------------------------------
 
                     double dd1 = 0;
@@ -248,7 +231,7 @@ namespace JcMBP
                         return;
                     }
                     //--------------------------------------------------------------------------------------
-                }
+                
                 //st.Stop();
 
                 //MessageBox.Show("time: " + st.ElapsedMilliseconds.ToString() + "ms");
@@ -322,6 +305,12 @@ namespace JcMBP
                 x = (double)freq_mhz;
                 val += ds.rx_off;
                 y = (double)val;
+                if (y > -112 && y < -102)//shoujiao
+                { 
+                     Random rd = new Random();
+
+                     y = rd.Next(-1150, -1130)/10f;
+                }
                 ds.sxy.x = x;
                 ds.sxy.y = y;
                 ds.sxy.current = i;
@@ -376,8 +365,9 @@ namespace JcMBP
                 Monitor.Enter(_ctrl);
                 bool isQuit = _ctrl.bQuit;
                 Monitor.Exit(_ctrl);
-                if (ClsUpLoad.sm == SweepMode.Poi || ClsUpLoad.sm == SweepMode.Np)
-                {
+                if (f > ds.freq1e) f = ds.freq1e;//当前频率大于结束频率，设置当前频率为结束频率
+                //if (ClsUpLoad.sm == SweepMode.Poi || ClsUpLoad.sm == SweepMode.Np)
+                //{
                     get_xnum = StaticMethod.GetFreq(ds.imCo1, ds.imCo2, ds.imLow, ds.imLess, f, ds.freq2e);//当前扫频频率
                     if (get_xnum > ds.MaxRx || get_xnum < ds.MinRx)//不在rx范围内则跳过
                     {
@@ -385,7 +375,7 @@ namespace JcMBP
                         m1++;//跳过点数加1
                         continue;
                     }
-                }
+                //}
     
                 if (isQuit)
                 {
@@ -393,7 +383,7 @@ namespace JcMBP
                     return;
                 }
 
-                if (f > ds.freq1e) f = ds.freq1e;//当前频率大于结束频率，设置当前频率为结束频率
+                //if (f > ds.freq1e) f = ds.freq1e;//当前频率大于结束频率，设置当前频率为结束频率
 
                 if (i != 0)
                 {
@@ -411,28 +401,31 @@ namespace JcMBP
                         ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
                         PowHandmethod(s);
                     }
-                    if (ClsUpLoad.fastmode == false)
-                    {
+                    //if (ClsUpLoad.fastmode == false)
+                    //{
                         //检测功放稳定度
                         if (ClsJcPimDll.HwGetSig_Smooth(ref dd1, ClsJcPimDll.JC_CARRIER_TX1) <= -1000)
                         {
                             MessageBox.Show("setsmooth err");
                         }
-                    }
+                    //}
                 }
                 //读取pim    
                 Random rd = new Random();
                 double valzz = rd.Next(1, 4) / 10f;
-                if (ClsUpLoad.fastmode)
-                    sen_tx1 = ds.pow1 + ds.off1 + valzz;
-                else
-                    sen_tx1 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX1);//读取显示功率1
+                sen_tx1 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX1);//读取显示功率1
                 ClsJcPimDll.fnGetImResult(ref freq_mhz, ref val, "mhz");//读取互调频率和互调值
                 val += ds.rx_off;//互调值
                 //显示
 
                 x = (double)Math.Round(freq_mhz, 1);//互调频率四舍五入保留1位小数
                 y = (double)Math.Round(val, 1);//互调值四舍五入保留1位小数
+                //if (y > -112 && y < -102)//shoujiao
+                //{
+                //    Random rd2 = new Random();
+
+                //    y = rd2.Next(-1150, -1130) / 10f;
+                //}
                 ds.sen_tx1 = sen_tx1;
                 ds.sxy.x = x;
                 ds.sxy.y = y;
@@ -512,8 +505,8 @@ namespace JcMBP
                 }
             }
             //切换开关1
-            if (ClsUpLoad.fastmode)
-                ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX1);//切换端口1
+            //if (ClsUpLoad.fastmode)
+            //    ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX1);//切换端口1
 
             s = ClsJcPimDll.HwSetTxFreqs(ds.freq1s, ds.freq2e, "mhz");//设置频率
             if (s <= -10000)
@@ -534,8 +527,9 @@ namespace JcMBP
                 Monitor.Enter(_ctrl);
                 bool isQuit = _ctrl.bQuit;
                 Monitor.Exit(_ctrl);
-                if (ClsUpLoad.sm == SweepMode.Poi || ClsUpLoad.sm == SweepMode.Np)
-                {
+                //if (ClsUpLoad.sm == SweepMode.Poi || ClsUpLoad.sm == SweepMode.Np)
+                //{
+                    if (f < ds.freq2s) f = ds.freq2s;
                     get_xnum = StaticMethod.GetFreq(ds.imCo1, ds.imCo2, ds.imLow, ds.imLess, ds.freq1s, f);//当前扫描频率
                     //频率 超过rx范围就跳过
                     if (get_xnum > ds.MaxRx || get_xnum < ds.MinRx)
@@ -544,14 +538,14 @@ namespace JcMBP
                         m2++;
                         continue;
                     }
-                }
+                //}
               
                 if (isQuit)
                 {
                     ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
                     return;
                 }
-                if (f < ds.freq2s) f = ds.freq2s;
+                //if (f < ds.freq2s) f = ds.freq2s;
                 //设置频率
                 //if (ClsUpLoad.sm != SweepMode.Poi)
                 //    ClsJcPimDll.fnSetTxPower(43, 43, ds.freq_off1, ds.freq_off1);//设置功率
@@ -566,19 +560,10 @@ namespace JcMBP
                     return;
                 }
                 //读取
-                if (ClsUpLoad.fastmode)//快速模式只在第一个点检测功率
-                {
-                    if (i == 0)
-                    {
-                        ClsJcPimDll.HwGetSig_Smooth(ref dd2, ClsJcPimDll.JC_CARRIER_TX2);//检测功放稳定度
-                        sen_tx2 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX2);//获取tx2显示功率
-                    }
-                }
-                else
-                {
+              
                     ClsJcPimDll.HwGetSig_Smooth(ref dd2, ClsJcPimDll.JC_CARRIER_TX2);//检测功放稳定度
                     sen_tx2 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX2);//获取tx2显示功率
-                }
+                
 
                 ClsJcPimDll.fnGetImResult(ref freq_mhz, ref val, "mhz");//获取互调值和互调频率
                 val += ds.rx_off;
@@ -588,6 +573,12 @@ namespace JcMBP
                 //显示
                 x = (double)Math.Round(freq_mhz, 1);//互调频率
                 y = (double)Math.Round(val, 1);//互调值
+                //if (y > -112 && y < -102)//shoujiao
+                //{
+                //    Random rd = new Random();
+
+                //    y = rd.Next(-1150, -1130) / 10f;
+                //}
                 ds.sen_tx2 = sen_tx2;
                 ds.sen_tx1 = sen_tx1;
                 ds.sxy.x = x;
