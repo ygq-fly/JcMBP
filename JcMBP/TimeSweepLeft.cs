@@ -51,6 +51,8 @@ namespace JcMBP
                 ds.rx_off= ds.off1 = ds.off2 = ds.time_off2 = ds.time_off1 = 0;
             OfftenMethod.ToAddColumns(ds.dt);
             OfftenMethod.ToAddColumns(ds.dtc);
+
+          
             tsm.Clone(ds);
             Thread th = new Thread(start);
             th.IsBackground = true;

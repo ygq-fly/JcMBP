@@ -340,7 +340,7 @@ namespace JcMBP
                }
                else
                {
-                       ds.sxy.y = -200;
+                   ds.sxy.y = -200;
                        currenty = (double)ds.sxy.y;
                }
               
