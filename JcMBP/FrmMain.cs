@@ -32,6 +32,7 @@ namespace JcMBP
         public static bool offsetPassword = false;
         public  double limit = -110;
         public  static bool isjb = false;
+        bool isDLL_T = false;
         //
         TimeSweepMid tm = null;
        public  FreqSweepMid fm = null;
@@ -51,6 +52,10 @@ namespace JcMBP
                 int v4 = 0;
                 ClsJcPimDll.JcGetDllVersion(ref v1, ref v2, ref v3, ref v4);//获取动态库版本号
                 this.Text += (" && " + v1.ToString() + "." + v2.ToString() + "." + v3.ToString() + "." + v4.ToString());//动态库版本号
+                if (v4 >= 387)
+                {
+                    isDLL_T = true;
+                }
             }
             catch{}
             cul = new ClsUpLoad(Application.StartupPath);
@@ -268,6 +273,11 @@ namespace JcMBP
 
         private void btn_open_Click(object sender, EventArgs e)
         {
+            if (!isDLL_T)
+            {
+                MessageBox.Show("动态库版本过低");
+                return;
+            }
             string saddr = ClsUpLoad.addr_sig1 + "," +
                          ClsUpLoad.addr_sig2 + "," +
                          ClsUpLoad.addr_ana + "," +
