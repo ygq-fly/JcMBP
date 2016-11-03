@@ -38,6 +38,7 @@ namespace JcMBP
         public static string offset_pass = "";
         public static string saveFormat = "1";
         public static bool fastmode = false;
+        public static bool freq_Hw = false;
         #endregion
 
 
@@ -80,6 +81,7 @@ namespace JcMBP
             offset_pass = IniFile.GetString("Settings", "offsetpassword", linshi);
             saveFormat = IniFile.GetString("Settings", "saveFormat","1" );
             fastmode = IniFile.GetString("Settings", "fastmode", "0") == "1" ? true : false;
+            freq_Hw = IniFile.GetString("Settings", "freq_Hw", "1") == "1" ? true : false;
             if (_type == 0||_type==1)
             {            
                 sm =SweepMode.Hw;

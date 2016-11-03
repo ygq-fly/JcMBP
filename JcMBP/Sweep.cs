@@ -170,7 +170,11 @@ namespace JcMBP
                 //设置功率
                 ClsJcPimDll.fnSetTxPower(ds.pow1, ds.pow2, ds.off1, ds.off2);
                 //设置频率
-                int s = ClsJcPimDll.HwSetTxFreqs(ds.freq1s, ds.freq2e, "mhz");
+                int s;
+                if (ClsUpLoad.freq_Hw)
+                    s = ClsJcPimDll.HwSetTxFreqs(ds.freq1s, ds.freq2e, "mhz");
+                else
+                    s = ClsJcPimDll.fnSetTxFreqs(ds.freq1s, ds.freq2e, "mhz");
                 //int s = ClsJcPimDll.HwSetTxFreqs(ds.freq2e, ds.freq1s, "mhz");
                 if (PowerHander != null)
                     PowerHander(s);
@@ -211,7 +215,7 @@ namespace JcMBP
                     s = ClsJcPimDll.HwGetSig_Smooth(ref dd2, ClsJcPimDll.JC_CARRIER_TX2);//检测功放2稳定度
                     //double sen_tx2 = 0;
                     if (Tx2Hander != null)
-                        Tx2Hander(s, ref sen_tx2, true);
+                        Tx2Hander(s, ref sen_tx2, false);
                     if (s <= -10000 && ClsUpLoad._checkPow)
                     {
                         ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
@@ -225,7 +229,7 @@ namespace JcMBP
                     s = ClsJcPimDll.HwGetSig_Smooth(ref dd1, ClsJcPimDll.JC_CARRIER_TX1);//检测tx1稳定度
                     //double sen_tx1 = 0;
                     if (Tx1Hander != null)
-                        Tx1Hander(s, ref sen_tx1, true);
+                        Tx1Hander(s, ref sen_tx1, false);
                     if (s <= -1000 && ClsUpLoad._checkPow)
                     {
                         ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
@@ -539,7 +543,10 @@ namespace JcMBP
                         MessageBox.Show("setpow err");
                     }
                     //设置功率
+                    if(ClsUpLoad.freq_Hw)
                     s = ClsJcPimDll.HwSetTxFreqs(f, ds.freq2e, "mhz");//设置频率
+                    else
+                        s = ClsJcPimDll.fnSetTxFreqs(f, ds.freq2e, "mhz");//设置频率
                     //s = ClsJcPimDll.HwSetTxFreqs(ds.freq2e, f, "mhz");//设置频率
                     //检测错误
                     if (s <= -10000)
@@ -616,7 +623,10 @@ namespace JcMBP
                     //设置频率
                     ClsJcPimDll.fnSetTxPower(ds.pow1, ds.pow2, ds.freq_off1, ds.freq_off2);//设置功率
                     //设置功率
-                    s = ClsJcPimDll.HwSetTxFreqs(f, ds.freq2s, "mhz");//设置频率
+                    if (ClsUpLoad.freq_Hw)
+                        s = ClsJcPimDll.HwSetTxFreqs(f, ds.freq2s, "mhz");//设置频率
+                    else
+                        s = ClsJcPimDll.fnSetTxFreqs(f, ds.freq2s, "mhz");//设置频率
                     //检测错误
                     if (s <= -10000)
                     {
@@ -653,8 +663,10 @@ namespace JcMBP
             //切换开关1
             //if (ClsUpLoad.fastmode)
             //    ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX1);//切换端口1
-
-            s = ClsJcPimDll.HwSetTxFreqs(ds.freq1s, ds.freq2e, "mhz");//设置频率
+            if (ClsUpLoad.freq_Hw)
+                s = ClsJcPimDll.HwSetTxFreqs(ds.freq1s, ds.freq2e, "mhz");//设置频率
+            else
+                s = ClsJcPimDll.fnSetTxFreqs(ds.freq1s, ds.freq2e, "mhz");//设置频率
             if (s <= -10000)
             {
                 ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
@@ -699,7 +711,10 @@ namespace JcMBP
                 //else
                     ClsJcPimDll.fnSetTxPower(ds.pow1, ds.pow2, ds.freq_off1, ds.freq_off2);//设置功率
                 //设置功率
-                    s = ClsJcPimDll.HwSetTxFreqs(ds.freq1s, f, "mhz");//设置频率
+                    if (ClsUpLoad.freq_Hw)
+                        s = ClsJcPimDll.HwSetTxFreqs(ds.freq1s, f, "mhz");//设置频率
+                    else
+                        s = ClsJcPimDll.fnSetTxFreqs(ds.freq1s, f, "mhz");//设置频率
                     //s = ClsJcPimDll.HwSetTxFreqs(f, ds.freq1s, "mhz");//设置频率
                 if (s <= -10000)
                 {
@@ -766,7 +781,10 @@ namespace JcMBP
                     //设置频率
                     ClsJcPimDll.fnSetTxPower(43, 43, ds.freq_off1, ds.freq_off2);
                     //设置功率
-                    s = ClsJcPimDll.HwSetTxFreqs(ds.freq1e, f, "mhz");
+                    if (ClsUpLoad.freq_Hw)
+                        s = ClsJcPimDll.HwSetTxFreqs(ds.freq1e, f, "mhz");
+                    else
+                        s = ClsJcPimDll.fnSetTxFreqs(ds.freq1e, f, "mhz");
                     if (s <= -10000)
                     {
                         ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);

@@ -196,10 +196,15 @@ namespace JcMBP
             {
                 this.Invoke(new ThreadStart(delegate()
                     {
+                        double p = 43;
+                        if (ds.pow1 > ds.pow2)
+                            p = ds.pow1;
+                        else
+                            p = ds.pow2;
                         this.time_tb_show_tx1.Text = ds.sen_tx1.ToString("0.00");//控件显示tx1功率
                         this.time_tb_show_tx2.Text = ds.sen_tx2.ToString("0.00");//控件显示tx1功率
                         time_tb_pim_now.Text = ds.sxy.y.ToString("0.0");//当前互调值
-                        time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString("0.0");//当前互调值
+                        time_tb_pim_now_dbc.Text = (ds.sxy.y - p).ToString("0.0");//当前互调值
                         double currenty = 0;
                         //if (fm.isdBm)
                         currenty = ds.sxy.y;
@@ -209,14 +214,14 @@ namespace JcMBP
                         {
                             _pim_max = currenty;//互调最大值
                             time_tB_valMax.Text = _pim_max.ToString("0.0");//控件显示互调最大值
-                            time_tB_valMax_dbc.Text = (_pim_max - ds.pow1).ToString("0.0");
+                            time_tB_valMax_dbc.Text = (_pim_max - p).ToString("0.0");
                             ds.sxy.max = _pim_max;
                         }
                         if (currenty < _pim_min)
                         {
                             _pim_min = currenty;//互调最小值
                             time_tB_valMin.Text = _pim_min.ToString("0.0");//控件显示互调最小值
-                            time_tB_valMin_dbc.Text = (_pim_min - ds.pow1).ToString("0.0");
+                            time_tB_valMin_dbc.Text = (_pim_min - p).ToString("0.0");
                         }
                         if (fm.isdBm)
                         {
@@ -237,7 +242,7 @@ namespace JcMBP
                         if (fm.isdBm)
                             this.time_plot.RealValue = currenty;
                         else
-                            this.time_plot.RealValue = currenty - 43;
+                            this.time_plot.RealValue = currenty - p;
                         OfftenMethod.ToNewRows(ds.dt, ds.sxy.currentCount,
                                   (double)ds.sxy.f1, (double)ds.sen_tx1,
                                   (double)ds.sxy.f2, (double)ds.sen_tx2,
@@ -245,7 +250,7 @@ namespace JcMBP
                         OfftenMethod.ToNewRows(ds.dtc, ds.sxy.currentCount,
                                   (double)ds.sxy.f1, (double)ds.sen_tx1,
                                   (double)ds.sxy.f2, (double)ds.sen_tx2,
-                                  ds.sxy.x, ds.sxy.y - ds.pow1);//添加数据到表格
+                                  ds.sxy.x, ds.sxy.y - p);//添加数据到表格
                         time_dgvPim.FirstDisplayedScrollingRowIndex = time_dgvPim.Rows.Count - 1;//显示当前行
                         CreatScrollbar_t();
                     }));
@@ -497,14 +502,19 @@ namespace JcMBP
 
         private void button1_Click(object sender, EventArgs e)
         {
+            double p = 43;
+            if (ds.pow1 > ds.pow2)
+                p = ds.pow1;
+            else
+                p = ds.pow2;
             if (fm.isdBm)
             {
-                numericUpDown2.Value -= 43;
+                numericUpDown2.Value -=Convert.ToDecimal( p);
                 fm.IsdBm = false;
             }
             else
             {
-                numericUpDown2.Value += 43;
+                numericUpDown2.Value +=Convert.ToDecimal( p);
                 fm.IsdBm = true;
             }
         }

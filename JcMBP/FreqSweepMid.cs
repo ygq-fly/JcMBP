@@ -328,6 +328,11 @@ namespace JcMBP
         {
             this.Invoke(new ThreadStart(delegate
            {
+               double p = 43;
+               if (ds.pow1 > ds.pow2)
+                   p = ds.pow1;
+               else
+                   p = ds.pow2;
                FrmMain.isjb = false;
                double currenty = 0;
                this.time_tb_show_tx1.Text = ds.sen_tx1.ToString("0.00");
@@ -335,7 +340,7 @@ namespace JcMBP
                if (ds.sxy.x <= ds.MaxRx && ds.sxy.x >= ds.MinRx)
                {
                    time_tb_pim_now.Text = ds.sxy.y.ToString("0.0");////控件改变text显示互调当前值
-                   time_tb_pim_now_dbc.Text = (ds.sxy.y - 43).ToString("0.0");
+                   time_tb_pim_now_dbc.Text = (ds.sxy.y - p).ToString("0.0");
                    currenty = (double)ds.sxy.y;
                }
                else
@@ -353,14 +358,14 @@ namespace JcMBP
                {
                    _pim_max = currenty;//设置pim最大值
                    time_tB_valMax.Text = _pim_max.ToString("0.0");//控件改变text显示互调最大值
-                   time_tB_valMax_dbc.Text = (_pim_max - ds.pow1 ).ToString("0.0");
+                   time_tB_valMax_dbc.Text = (_pim_max - p ).ToString("0.0");
                    ds.sxy.max = _pim_max;
                }
                if (currenty < _pim_min && ds.sxy.x <= ds.MaxRx && ds.sxy.x >= ds.MinRx)
                {
                    _pim_min = currenty;//设置pim最小值
                    time_tB_valMin.Text = _pim_min.ToString("0.0");//控件改变text显示互调最小值
-                   time_tB_valMin_dbc.Text = (_pim_min - ds.pow1).ToString("0.0");
+                   time_tB_valMin_dbc.Text = (_pim_min - p).ToString("0.0");
                }
                if (fm.isdBm)
                {
@@ -395,7 +400,7 @@ namespace JcMBP
                OfftenMethod.ToNewRows(ds.dtm_c, ds.sxy.currentCount,
                          (double)ds.sxy.f1, (double)ds.sen_tx1,
                          (double)ds.sxy.f2, (double)ds.sen_tx2,
-                         ds.sxy.x, ds.sxy.y - (double)ds.pow1);//添加数据到表格
+                         ds.sxy.x, ds.sxy.y - (double)p);//添加数据到表格
                freq_dgvPim.FirstDisplayedScrollingRowIndex = freq_dgvPim.Rows.Count- 1;//显示当前行
                CreatScrollbar();
            }));
@@ -1302,6 +1307,7 @@ namespace JcMBP
         }
         void ChangeUnit()
         {
+
             if (fm.isdBm)
             {
                 freq_plot.SetYStartStop(ds.dbc_y, ds.dbc_y_e);
@@ -1424,15 +1430,21 @@ namespace JcMBP
 
         private void button1_Click(object sender, EventArgs e)
         {
+            double p = 43;
+            if (ds.pow1 > ds.pow2)
+                p = ds.pow1;
+            else
+                p = ds.pow2;
             if (fm.isdBm)
             {
-                numericUpDown2.Value -= 43;
+              
+                numericUpDown2.Value -=Convert.ToDecimal(p);
                 fm.IsdBm = false;
             
             }
             else
             {
-                numericUpDown2.Value += 43;
+                numericUpDown2.Value += Convert.ToDecimal(p);
                 fm.IsdBm = true;
               
             }
