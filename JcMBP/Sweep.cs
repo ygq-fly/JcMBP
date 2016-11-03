@@ -168,6 +168,7 @@ namespace JcMBP
                 //设置阶数
                 Order();
                 //设置功率
+                //MessageBox.Show("p1=" + ds.pow1.ToString() + "   p2=" + ds.pow2.ToString());
                 ClsJcPimDll.fnSetTxPower(ds.pow1, ds.pow2, ds.off1, ds.off2);
                 //设置频率
                 int s;
