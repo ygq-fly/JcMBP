@@ -135,9 +135,14 @@ namespace JcMBP
 
         //------------------------------------------------扩展 API--------------------------------------------------------
 
+        //新版废除，使用后会抛出异常
         //JIONTCOM_API void HwSetIsExtBand(BOOL_ isUse);
         [DllImport(Path, CallingConvention = CallingConvention.Cdecl)]
         public static extern void HwSetIsExtBand(bool isUse);
+
+        //JIONTCOM_API int HwSetExtFlag(int Build, const char* Flag);
+        [DllImport(Path, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int HwSetExtFlag(int Build, string Flag);
 
         //设置初始化地址：格式为逗号隔开(SG1addr,SG2Addr,SAAddr,PMAddr)
         //JIONTCOM_API BOOL_ FnSetInit(ADDRESS_ cDeviceAddr);
