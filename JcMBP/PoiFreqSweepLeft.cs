@@ -477,6 +477,7 @@ namespace JcMBP
         private void time_btn_stop_Click(object sender, EventArgs e)
         {
             fsm.Stop();
+            time_btn_start_b.Enabled = true;
            
         }
 

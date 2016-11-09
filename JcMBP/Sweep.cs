@@ -469,13 +469,17 @@ namespace JcMBP
                 Monitor.Exit(_ctrl);
 
                 if (f < ds.freq2s) f = ds.freq2s;
-                get_xnum = StaticMethod.GetFreq(ds.imCo1, ds.imCo2, ds.imLow, ds.imLess, ds.freq1s, f);//当前扫描频率
-                //频率 超过rx范围就跳过
-                if (get_xnum > ds.MaxRx || get_xnum < ds.MinRx)
+                if (ClsUpLoad.sm == SweepMode.Poi || ClsUpLoad.sm == SweepMode.Np)
                 {
-                    f -= step2;
-                    m2++;
-                    continue;
+                    get_xnum = StaticMethod.GetFreq(ds.imCo1, ds.imCo2, ds.imLow, ds.imLess, ds.freq1s, f);//当前扫描频率
+                    //频率 超过rx范围就跳过
+                    if (get_xnum > ds.MaxRx || get_xnum < ds.MinRx)
+                    {
+                        MessageBox.Show("pimF=" + get_xnum.ToString() + "  rx_max=" + ds.MaxRx.ToString() + "   rx_min=" + ds.MinRx.ToString());
+                        f -= step2;
+                        m2++;
+                        continue;
+                    }
                 }
 
                 if (isQuit)

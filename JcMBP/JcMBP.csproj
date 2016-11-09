@@ -98,6 +98,7 @@
     <Compile Include="DebugPoi.Designer.cs">
       <DependentUpon>DebugPoi.cs</DependentUpon>
     </Compile>
+    <Compile Include="dll_.cs" />
     <Compile Include="FileName.cs">
       <SubType>Form</SubType>
     </Compile>
