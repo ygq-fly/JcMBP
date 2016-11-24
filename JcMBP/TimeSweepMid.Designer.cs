@@ -58,7 +58,6 @@
             this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.time_tb_pim_now = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label65 = new System.Windows.Forms.Label();
@@ -73,6 +72,7 @@
             this.time_lbl_limitResulte = new System.Windows.Forms.Label();
             this.time_tb_pim_now_dbc = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.groupBox18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.time_dgvPim)).BeginInit();
             this.groupBox16.SuspendLayout();
@@ -270,13 +270,13 @@
             this.time_plot.GraduationTextColor = System.Drawing.Color.Black;
             this.time_plot.Location = new System.Drawing.Point(372, 51);
             this.time_plot.Margin = new System.Windows.Forms.Padding(1);
-            this.time_plot.MaxValue = 0F;
-            this.time_plot.MinValue = -180F;
+            this.time_plot.MaxValue = 0D;
+            this.time_plot.MinValue = -180D;
             this.time_plot.Name = "time_plot";
-            this.time_plot.RealValue = -40F;
+            this.time_plot.RealValue = -40D;
             this.time_plot.Size = new System.Drawing.Size(193, 280);
             this.time_plot.TabIndex = 125;
-            this.time_plot.Value = -100F;
+            this.time_plot.Value = -100D;
             // 
             // label71
             // 
@@ -460,27 +460,6 @@
             this.label1.TabIndex = 165;
             this.label1.Text = "Unit:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.BackColor = System.Drawing.Color.Black;
-            this.numericUpDown2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown2.DecimalPlaces = 1;
-            this.numericUpDown2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.numericUpDown2.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown2.Location = new System.Drawing.Point(88, 287);
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.ReadOnly = true;
-            this.numericUpDown2.Size = new System.Drawing.Size(85, 21);
-            this.numericUpDown2.TabIndex = 162;
-            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
-            this.numericUpDown2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.numericUpDown2_MouseClick);
             // 
             // time_tb_pim_now
             // 
@@ -679,6 +658,27 @@
             this.panel1.Size = new System.Drawing.Size(222, 628);
             this.panel1.TabIndex = 154;
             // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.BackColor = System.Drawing.Color.Black;
+            this.numericUpDown2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericUpDown2.DecimalPlaces = 1;
+            this.numericUpDown2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numericUpDown2.ForeColor = System.Drawing.Color.White;
+            this.numericUpDown2.Location = new System.Drawing.Point(88, 287);
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.ReadOnly = true;
+            this.numericUpDown2.Size = new System.Drawing.Size(85, 21);
+            this.numericUpDown2.TabIndex = 162;
+            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
+            this.numericUpDown2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.numericUpDown2_MouseClick);
+            // 
             // TimeSweepMid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -729,7 +729,6 @@
         private System.Windows.Forms.TextBox time_tb_show_tx2;
         private System.Windows.Forms.Label label64;
         private System.Windows.Forms.GroupBox groupBox17;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.TextBox time_tb_pim_now;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label65;
@@ -746,5 +745,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox time_tb_pim_now_dbc;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
     }
 }

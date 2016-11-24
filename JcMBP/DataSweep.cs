@@ -60,8 +60,8 @@ namespace JcMBP
         public double freq2e;
         public double step1;
         public double step2;
-        public double pow1;
-        public double pow2;
+        public double pow1=43;
+        public double pow2=43;
         public double time1;
         public double time2;
         public byte tx1 = 3;

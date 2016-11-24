@@ -133,6 +133,7 @@ namespace JcMBP
             OfftenMethod.LoadComboBox(freq_cb_band, cul.BandNames,0);
             freq_cb_band.SelectedIndex = 0;
             freq_cb_im.SelectedIndex = 0;
+            time_check_vco.Checked = FrmMain.Vco;
             //freq_cb_step.SelectedIndex = 1;
         }
 
@@ -300,6 +301,7 @@ namespace JcMBP
             else
                 ClsUpLoad._vco = false;
             FrmMain.Vco = time_check_vco.Checked;
+
         }
 
         private void FreqSweepLeft_KeyDown(object sender, KeyEventArgs e)

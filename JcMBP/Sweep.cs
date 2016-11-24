@@ -167,7 +167,7 @@ namespace JcMBP
             s = ClsJcPimDll.HwGetSig_Smooth(ref  d1, ClsJcPimDll.JC_CARRIER_TX1);
             if (Tx1Hander != null)
                 Tx1Hander(s, ref disp1, false);
-            if (s <= -1000 && ClsUpLoad._checkPow)
+            if (s <= -10000 && ClsUpLoad._checkPow)
             {
                 ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
                 return false;
@@ -411,7 +411,7 @@ namespace JcMBP
             double x = 0;
             double y = 0;
             double step1 = ds.step1;
-            double step2 = ds.step2 * 2;
+            double step2 = ds.step2 / 2;
 
             for (int i = 0; i <= n1; i++)
             {

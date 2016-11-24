@@ -9,7 +9,7 @@ namespace JcMBP
 
 
 
-        public class ClsJcPimDll__11
+        public class ClsJcPimDll
         {
             //const string Path = "D:\\Sync_ProJects\\Jointcom\\JcPimMultiBandV2\\Debug\\JcPimMultiBandV2.dll";
             const string Path = "JcPimMultiBandV2.dll";
@@ -250,7 +250,7 @@ namespace JcMBP
 
             public static  bool HwGet_Vco(ref double real_val, ref double vco_val)
             {
-                return true;
+                return false;
             }
 
 
