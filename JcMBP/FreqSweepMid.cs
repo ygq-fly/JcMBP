@@ -854,7 +854,7 @@ namespace JcMBP
                 ds.dbm_y_e = -80;
                 ds.dbc_y = -183;
                 ds.dbc_y_e = -123;
-                numericUpDown2.Value = (decimal)PoiFreqSweepLeft.jd[curr_row].limit;
+                numericUpDown2.Value = (decimal)PoiFreqSweepLeft.jd[i].limit;
                if(ds.sxy.model==0)
                 freq_plot.SetXStartStop(ds.MinRx - 2, ds.MaxRx + 2);
                 else

@@ -9,7 +9,7 @@ namespace JcMBP
 
 
 
-        public class ClsJcPimDll
+        public class ClsJcPimDll_11
         {
             //const string Path = "D:\\Sync_ProJects\\Jointcom\\JcPimMultiBandV2\\Debug\\JcPimMultiBandV2.dll";
             const string Path = "JcPimMultiBandV2.dll";

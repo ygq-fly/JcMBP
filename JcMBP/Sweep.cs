@@ -411,7 +411,13 @@ namespace JcMBP
             double x = 0;
             double y = 0;
             double step1 = ds.step1;
-            double step2 = ds.step2 / 2;
+            double step2 = ds.step2 * 2;
+            if (ClsUpLoad.sm == SweepMode.Hw )
+            {
+                if (ClsUpLoad.BandOrder[(int)ds.tx1] == 1)
+                    step2 = step1 / 2;
+            }
+            
 
             for (int i = 0; i <= n1; i++)
             {
@@ -447,7 +453,7 @@ namespace JcMBP
                 //显示
                 x = (double)Math.Round(freq_mhz, 1);//互调频率四舍五入保留1位小数
                 y = (double)Math.Round(val, 1);//互调值四舍五入保留1位小数
-                ds.sen_tx1 = 43;
+                //ds.sen_tx1 = 43;
                 ds.sxy.x = x;
                 ds.sxy.y = y;
                 ds.sxy.currentPlot = 0;
@@ -475,7 +481,7 @@ namespace JcMBP
                     //频率 超过rx范围就跳过
                     if (get_xnum > ds.MaxRx || get_xnum < ds.MinRx)
                     {
-                        MessageBox.Show("pimF=" + get_xnum.ToString() + "  rx_max=" + ds.MaxRx.ToString() + "   rx_min=" + ds.MinRx.ToString());
+                        //MessageBox.Show("pimF=" + get_xnum.ToString() + "  rx_max=" + ds.MaxRx.ToString() + "   rx_min=" + ds.MinRx.ToString());
                         f -= step2;
                         m2++;
                         continue;
@@ -506,8 +512,8 @@ namespace JcMBP
                 x = (double)Math.Round(freq_mhz, 1);//互调频率
                 y = (double)Math.Round(val, 1);//互调值
 
-                ds.sen_tx2 = 43;
-                ds.sen_tx1 = 43;
+                //ds.sen_tx2 = 43;
+                //ds.sen_tx1 = 43;
                 ds.sxy.x = x;
                 ds.sxy.y = y;
                 ds.sxy.currentPlot = 1;

@@ -1060,10 +1060,10 @@ namespace JcMBP
            string path = Application.StartupPath + "\\pdf";
            try
            {
-               //if (!Directory.Exists(path))//判断存放的文件夹是否存在
-               //{
-               //    Directory.CreateDirectory(path);//不存在就创建
-               //}
+               if (!Directory.Exists(path))//判断存放的文件夹是否存在
+               {
+                   Directory.CreateDirectory(path);//不存在就创建
+               }
                string str = sre + ".pdf";//文件名
                iTextSharp.text.Rectangle pageSize = new iTextSharp.text.Rectangle(400f, 400f);//设置pdf页面大小
                pageSize.BackgroundColor = new iTextSharp.text.BaseColor(0xFF, 0xFF, 0xDE);//设置页面颜色
@@ -1171,11 +1171,11 @@ namespace JcMBP
 
        public static bool SaveCsv_pdf(string csvFileName, DataSweep cjt, bool isdbm,bool mode)
        {
-           //string path = Application.StartupPath + "\\csv";//目录
-           //if (!Directory.Exists(path))//判断目录是否存在
-           //{
-           //    Directory.CreateDirectory(path);//不存在创建
-           //}
+           string path = Application.StartupPath + "\\csv";//目录
+           if (!Directory.Exists(path))//判断目录是否存在
+           {
+               Directory.CreateDirectory(path);//不存在创建
+           }
            try
            {
                if (!File.Exists(csvFileName))//判断文件名是否存在

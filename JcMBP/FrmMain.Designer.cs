@@ -319,7 +319,7 @@
             // 
             this.保存校准结果ToolStripMenuItem.Enabled = false;
             this.保存校准结果ToolStripMenuItem.Name = "保存校准结果ToolStripMenuItem";
-            this.保存校准结果ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.保存校准结果ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.保存校准结果ToolStripMenuItem.Text = "保存校准结果";
             this.保存校准结果ToolStripMenuItem.Click += new System.EventHandler(this.保存校准结果ToolStripMenuItem_Click);
             // 

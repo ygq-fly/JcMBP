@@ -384,12 +384,14 @@ namespace JcMBP
 
                     if (sp.ShowDialog() == DialogResult.OK)
                     {
+                        
                         //string s = sfd.FileName;
                         //MessageBox.Show(s);
                         try
                         {
                             if (cm == CheckMode.Sf)
                             {
+                                
                                 success = OfftenMethod.savepdf(Application.StartupPath + "\\pdf\\" + sp.pictureName, fm.ds, isdBm, true);
                                 success = OfftenMethod.SaveCsv_pdf(Application.StartupPath + "\\csv\\" + sp.pictureName + ".csv", fm.ds, isdBm, true);
                             }
@@ -401,7 +403,8 @@ namespace JcMBP
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message);
+                            success = false;
+                            //MessageBox.Show(ex.Message);
                         }
 
                     }
