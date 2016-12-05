@@ -70,12 +70,12 @@ namespace JcMBP
             ds.time1 = (double)time;
             OfftenMethod.ToAddColumns(ds.dt);
             OfftenMethod.ToAddColumns(ds.dtc);
-            if (checkBox1.Checked)
-                ds.time_off1 = ds.off1 = Convert.ToDouble(numericUpDown3.Value);
+            if (time_check_off1.Checked)
+                ds.time_off1 = ds.off1 = Convert.ToDouble(time_nud_off1.Value);
             else
                 ds.off1 =  0;
-            if(time_check_off1.Checked)
-               ds.time_off2= ds.off2 = Convert.ToDouble(time_nud_off1.Value);
+            if(time_check_off2.Checked)
+               ds.time_off2= ds.off2 = Convert.ToDouble(time_nud_off2.Value);
             else
                 ds.off2 = 0;
 
