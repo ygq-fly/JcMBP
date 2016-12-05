@@ -291,8 +291,14 @@ namespace JcMBP
                     return;
                 }
             }
-            for (int i = 0; i < ds.time1; ++i)
+
+            DateTime dt = DateTime.Now;
+            //for (int i = 0; i < ds.time1; ++i)
+            for (int i = 0; i < 100000000; ++i)
             {
+                DateTime dt1 = DateTime.Now;
+                TimeSpan ts = dt1.Subtract(dt);
+                if ((ts.Minutes * 60000 + ts.Seconds * 1000 + ts.Milliseconds) > ds.time1 * 1000) break;
                 double x = 0;
                 double y = 0;
                 Monitor.Enter(_ctrl);

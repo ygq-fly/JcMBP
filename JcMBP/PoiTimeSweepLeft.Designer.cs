@@ -36,11 +36,13 @@
             this.time_pb_pwr_show1 = new System.Windows.Forms.PictureBox();
             this.time_pb_pwr_show2 = new System.Windows.Forms.PictureBox();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.time_check_off1 = new System.Windows.Forms.CheckBox();
+            this.time_nud_off1 = new System.Windows.Forms.NumericUpDown();
             this.button9 = new System.Windows.Forms.Button();
             this.label76 = new System.Windows.Forms.Label();
             this.label74 = new System.Windows.Forms.Label();
@@ -53,26 +55,24 @@
             this.label51 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label57 = new System.Windows.Forms.Label();
-            this.time_check_off1 = new System.Windows.Forms.CheckBox();
+            this.time_check_off2 = new System.Windows.Forms.CheckBox();
             this.time_cb_step = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
-            this.time_nud_off1 = new System.Windows.Forms.NumericUpDown();
+            this.time_nud_off2 = new System.Windows.Forms.NumericUpDown();
             this.time_lbl_show_band = new System.Windows.Forms.Label();
             this.label53 = new System.Windows.Forms.Label();
             this.time_nud_p2 = new System.Windows.Forms.NumericUpDown();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.time_pb_pwr_show1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.time_pb_pwr_show2)).BeginInit();
             this.groupBox14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.time_nud_off1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.time_nud_f1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.time_nud_f2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.time_nud_off1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.time_nud_off2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.time_nud_p2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox11
@@ -152,8 +152,8 @@
             this.groupBox14.Controls.Add(this.label2);
             this.groupBox14.Controls.Add(this.comboBox3);
             this.groupBox14.Controls.Add(this.label1);
-            this.groupBox14.Controls.Add(this.checkBox1);
-            this.groupBox14.Controls.Add(this.numericUpDown3);
+            this.groupBox14.Controls.Add(this.time_check_off1);
+            this.groupBox14.Controls.Add(this.time_nud_off1);
             this.groupBox14.Controls.Add(this.button9);
             this.groupBox14.Controls.Add(this.label76);
             this.groupBox14.Controls.Add(this.label74);
@@ -166,11 +166,11 @@
             this.groupBox14.Controls.Add(this.label51);
             this.groupBox14.Controls.Add(this.comboBox2);
             this.groupBox14.Controls.Add(this.label57);
-            this.groupBox14.Controls.Add(this.time_check_off1);
+            this.groupBox14.Controls.Add(this.time_check_off2);
             this.groupBox14.Controls.Add(this.time_cb_step);
             this.groupBox14.Controls.Add(this.label8);
             this.groupBox14.Controls.Add(this.label52);
-            this.groupBox14.Controls.Add(this.time_nud_off1);
+            this.groupBox14.Controls.Add(this.time_nud_off2);
             this.groupBox14.Controls.Add(this.time_lbl_show_band);
             this.groupBox14.Controls.Add(this.label53);
             this.groupBox14.Controls.Add(this.time_nud_p2);
@@ -179,6 +179,33 @@
             this.groupBox14.Size = new System.Drawing.Size(217, 422);
             this.groupBox14.TabIndex = 129;
             this.groupBox14.TabStop = false;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.checkBox2.Location = new System.Drawing.Point(6, 251);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(88, 21);
+            this.checkBox2.TabIndex = 169;
+            this.checkBox2.Text = "RX线损：";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.BackColor = System.Drawing.Color.Black;
+            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericUpDown1.DecimalPlaces = 1;
+            this.numericUpDown1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numericUpDown1.ForeColor = System.Drawing.Color.White;
+            this.numericUpDown1.Location = new System.Drawing.Point(123, 251);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.ReadOnly = true;
+            this.numericUpDown1.Size = new System.Drawing.Size(85, 21);
+            this.numericUpDown1.TabIndex = 168;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
@@ -217,33 +244,33 @@
             this.label1.Text = "Rx频段:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // checkBox1
+            // time_check_off1
             // 
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.checkBox1.Location = new System.Drawing.Point(9, 199);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(88, 21);
-            this.checkBox1.TabIndex = 164;
-            this.checkBox1.Text = "Tx1线损：";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.time_check_off1.Checked = true;
+            this.time_check_off1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.time_check_off1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_check_off1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.time_check_off1.Location = new System.Drawing.Point(9, 199);
+            this.time_check_off1.Name = "time_check_off1";
+            this.time_check_off1.Size = new System.Drawing.Size(88, 21);
+            this.time_check_off1.TabIndex = 164;
+            this.time_check_off1.Text = "Tx1线损：";
+            this.time_check_off1.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown3
+            // time_nud_off1
             // 
-            this.numericUpDown3.BackColor = System.Drawing.Color.Black;
-            this.numericUpDown3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown3.DecimalPlaces = 1;
-            this.numericUpDown3.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.numericUpDown3.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown3.Location = new System.Drawing.Point(123, 199);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.ReadOnly = true;
-            this.numericUpDown3.Size = new System.Drawing.Size(85, 21);
-            this.numericUpDown3.TabIndex = 163;
-            this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.numericUpDown3_MouseClick);
+            this.time_nud_off1.BackColor = System.Drawing.Color.Black;
+            this.time_nud_off1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.time_nud_off1.DecimalPlaces = 1;
+            this.time_nud_off1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_nud_off1.ForeColor = System.Drawing.Color.White;
+            this.time_nud_off1.Location = new System.Drawing.Point(123, 199);
+            this.time_nud_off1.Name = "time_nud_off1";
+            this.time_nud_off1.ReadOnly = true;
+            this.time_nud_off1.Size = new System.Drawing.Size(85, 21);
+            this.time_nud_off1.TabIndex = 163;
+            this.time_nud_off1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.time_nud_off1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.numericUpDown3_MouseClick);
             // 
             // button9
             // 
@@ -423,18 +450,18 @@
             this.label57.Text = "F2 (MHz)";
             this.label57.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // time_check_off1
+            // time_check_off2
             // 
-            this.time_check_off1.Checked = true;
-            this.time_check_off1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.time_check_off1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_check_off1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.time_check_off1.Location = new System.Drawing.Point(9, 224);
-            this.time_check_off1.Name = "time_check_off1";
-            this.time_check_off1.Size = new System.Drawing.Size(88, 21);
-            this.time_check_off1.TabIndex = 137;
-            this.time_check_off1.Text = "TX2线损：";
-            this.time_check_off1.UseVisualStyleBackColor = true;
+            this.time_check_off2.Checked = true;
+            this.time_check_off2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.time_check_off2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_check_off2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
+            this.time_check_off2.Location = new System.Drawing.Point(9, 224);
+            this.time_check_off2.Name = "time_check_off2";
+            this.time_check_off2.Size = new System.Drawing.Size(88, 21);
+            this.time_check_off2.TabIndex = 137;
+            this.time_check_off2.Text = "TX2线损：";
+            this.time_check_off2.UseVisualStyleBackColor = true;
             // 
             // time_cb_step
             // 
@@ -446,7 +473,8 @@
             "5s",
             "10s",
             "20s",
-            "30s"});
+            "30s",
+            "60s"});
             this.time_cb_step.Location = new System.Drawing.Point(79, 278);
             this.time_cb_step.Name = "time_cb_step";
             this.time_cb_step.Size = new System.Drawing.Size(134, 21);
@@ -477,20 +505,20 @@
             this.label52.Text = "Time (s)";
             this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // time_nud_off1
+            // time_nud_off2
             // 
-            this.time_nud_off1.BackColor = System.Drawing.Color.Black;
-            this.time_nud_off1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.time_nud_off1.DecimalPlaces = 1;
-            this.time_nud_off1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.time_nud_off1.ForeColor = System.Drawing.Color.White;
-            this.time_nud_off1.Location = new System.Drawing.Point(123, 224);
-            this.time_nud_off1.Name = "time_nud_off1";
-            this.time_nud_off1.ReadOnly = true;
-            this.time_nud_off1.Size = new System.Drawing.Size(85, 21);
-            this.time_nud_off1.TabIndex = 130;
-            this.time_nud_off1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.time_nud_off1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_nud_off1_MouseClick);
+            this.time_nud_off2.BackColor = System.Drawing.Color.Black;
+            this.time_nud_off2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.time_nud_off2.DecimalPlaces = 1;
+            this.time_nud_off2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_nud_off2.ForeColor = System.Drawing.Color.White;
+            this.time_nud_off2.Location = new System.Drawing.Point(123, 224);
+            this.time_nud_off2.Name = "time_nud_off2";
+            this.time_nud_off2.ReadOnly = true;
+            this.time_nud_off2.Size = new System.Drawing.Size(85, 21);
+            this.time_nud_off2.TabIndex = 130;
+            this.time_nud_off2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.time_nud_off2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_nud_off1_MouseClick);
             // 
             // time_lbl_show_band
             // 
@@ -546,33 +574,6 @@
             0});
             this.time_nud_p2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_nud_p2_MouseClick);
             // 
-            // checkBox2
-            // 
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
-            this.checkBox2.Location = new System.Drawing.Point(6, 251);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(88, 21);
-            this.checkBox2.TabIndex = 169;
-            this.checkBox2.Text = "RX线损：";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.BackColor = System.Drawing.Color.Black;
-            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown1.DecimalPlaces = 1;
-            this.numericUpDown1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.numericUpDown1.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown1.Location = new System.Drawing.Point(123, 251);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.ReadOnly = true;
-            this.numericUpDown1.Size = new System.Drawing.Size(85, 21);
-            this.numericUpDown1.TabIndex = 168;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // PoiTimeSweepLeft
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -588,12 +589,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.time_pb_pwr_show1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.time_pb_pwr_show2)).EndInit();
             this.groupBox14.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.time_nud_off1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.time_nud_f1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.time_nud_f2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.time_nud_off1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.time_nud_off2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.time_nud_p2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -607,8 +608,8 @@
         private System.Windows.Forms.PictureBox time_pb_pwr_show1;
         private System.Windows.Forms.PictureBox time_pb_pwr_show2;
         private System.Windows.Forms.GroupBox groupBox14;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.CheckBox time_check_off1;
+        private System.Windows.Forms.NumericUpDown time_nud_off1;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label label76;
         private System.Windows.Forms.Label label74;
@@ -621,11 +622,11 @@
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.CheckBox time_check_off1;
+        private System.Windows.Forms.CheckBox time_check_off2;
         private System.Windows.Forms.ComboBox time_cb_step;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.NumericUpDown time_nud_off1;
+        private System.Windows.Forms.NumericUpDown time_nud_off2;
         private System.Windows.Forms.Label time_lbl_show_band;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.NumericUpDown time_nud_p2;
