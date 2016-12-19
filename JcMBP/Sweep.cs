@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -237,9 +238,10 @@ namespace JcMBP
             }
             //--------------------------------------------------------------------------------------
 
-            //st.Stop();
-            //MessageBox.Show("time: " + st.ElapsedMilliseconds.ToString() + "ms");
+
             SweepTest();
+           
+            //SweepTest_Un(f1,f2);
 
         }
 
@@ -254,6 +256,7 @@ namespace JcMBP
         }
 
         public abstract void SweepTest();
+        public abstract void SweepTest_Un(List<double>list_f1,List<double>list_f2);
 
     }
 
@@ -265,7 +268,8 @@ namespace JcMBP
             : base(ds, type)
         { }
 
-    
+        public override void SweepTest_Un(List<double>f1,List<double>f2)
+        { }
         public override void SweepTest()
         {
             double get_xnum = 0;
@@ -333,7 +337,7 @@ namespace JcMBP
     }
 
 
-
+    
     //重改版本开始（1.6.0.70）快速模式
     //快速模式：初始化时不检测和调整任何功率，只检测tx2功率，
     //快速模式下 第一条线：不切任何开关，只检测tx'2功率
@@ -343,7 +347,104 @@ namespace JcMBP
         public SweepFreq(DataSweep ds, string type)
             : base(ds, type)
         { }
+        public  override void SweepTest_Un(List<double> list_f1,List<double> list_f2)
+        {
+            if (list_f1.Count != list_f2.Count || list_f2.Count > 0 || list_f1.Count > 0)
+            {
+                MessageBox.Show("data error");
+                return;
+            }
+            int n = list_f1.Count;
+            double get_xnum = 0;
+            int m1 = 0;//跳过点数
+            int s = 0;
+            double x = 0;
+            double y = 0;
+            double sen_tx1 = 0;
+            double sen_tx2 = 0;
+            double val = 0;
+            double freq_mhz = 0;
+            double dd1 = 0;
+            double dd2 = 0;
+            for (int i = 0; i < n; i++)
+            {
+                Monitor.Enter(_ctrl);
+                bool isQuit = _ctrl.bQuit;
+                Monitor.Exit(_ctrl);
+                if (ClsUpLoad.sm == SweepMode.Poi || ClsUpLoad.sm == SweepMode.Np)
+                {
+                    get_xnum = StaticMethod.GetFreq(ds.imCo1, ds.imCo2, ds.imLow, ds.imLess, list_f1[i], list_f2[i]);//当前扫频频率
+                    if (get_xnum > ds.MaxRx || get_xnum < ds.MinRx)//不在rx范围内则跳过
+                    {
+                        m1++;//跳过点数加1
+                        continue;
+                    }
+                    if (isQuit)
+                    {
+                        ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
+                        return;
+                    }
+                    if (i == 0)
+                    {
+                        if (ClsJcPimDll.HwGetSig_Smooth(ref dd1, ClsJcPimDll.JC_CARRIER_TX1) <= -1000)
+                        {
+                            MessageBox.Show("setsmooth err");
+                        }
+                        sen_tx1 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX1);//读取显示功率1
+                        ClsJcPimDll.HwSetCoup(ClsJcPimDll.JC_COUP_TX2);//切换端口2
+                        if (ClsJcPimDll.HwGetSig_Smooth(ref dd2, ClsJcPimDll.JC_CARRIER_TX2) <= -1000)
+                        {
+                            MessageBox.Show("setsmooth err");
+                        }
+                        sen_tx2 = ClsJcPimDll.HwGetCoup_Dsp(ClsJcPimDll.JC_COUP_TX2);//读取显示功率1
+                    }
+                    if (i != 0)
+                    {
+                        //设置频率
+                        s = ClsJcPimDll.fnSetTxPower(ds.pow1, ds.pow2, ds.freq_off1+dd1, ds.freq_off2+dd2);//设置功率
+                        if (s <= -1000)
+                        {
+                            MessageBox.Show("setpow err");
+                        }
+                        //设置功率
+                        if (ClsUpLoad.freq_Hw)
+                            s = ClsJcPimDll.HwSetTxFreqs(list_f1[i], list_f2[i], "mhz");//设置频率
+                        else
+                            s = ClsJcPimDll.fnSetTxFreqs(list_f1[i], list_f2[i], "mhz");//设置频率
+                        //s = ClsJcPimDll.HwSetTxFreqs(ds.freq2e, f, "mhz");//设置频率
+                        //检测错误
+                        if (s <= -10000)
+                        {
+                            ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
+                            PowHandmethod(s);
+                        }
+                      
+                    }
+                    //读取pim    
+                    Random rd = new Random();
+                    double valzz = rd.Next(1, 4) / 10f;
+                   
+                    ClsJcPimDll.fnGetImResult(ref freq_mhz, ref val, "mhz");//读取互调频率和互调值
+                    val += ds.rx_off;//互调值
+                    //显示
 
+                    x = (double)Math.Round(freq_mhz, 1);//互调频率四舍五入保留1位小数
+                    y = (double)Math.Round(val, 1);//互调值四舍五入保留1位小数
+
+                    ds.sen_tx1 = sen_tx1;
+                    ds.sen_tx2 = sen_tx2;
+                    ds.sxy.x = x;
+                    ds.sxy.y = y;
+                    ds.sxy.currentPlot = 0;
+                    ds.sxy.current = i;
+                    ds.sxy.currentCount = i + 1 - m1;
+                    ds.sxy.f1 = list_f1[i];
+                    ds.sxy.f2 = list_f2[i];
+                    Sthandmethod();
+                }
+            }
+
+        }
         public override void SweepTest()
         {
             double f = ds.freq1s;
