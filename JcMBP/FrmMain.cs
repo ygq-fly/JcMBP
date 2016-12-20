@@ -268,6 +268,10 @@ namespace JcMBP
 
         private void btn_open_Click(object sender, EventArgs e)
         {
+
+
+         
+
             string saddr = ClsUpLoad.addr_sig1 + "," +
                          ClsUpLoad.addr_sig2 + "," +
                          ClsUpLoad.addr_ana + "," +

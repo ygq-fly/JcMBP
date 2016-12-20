@@ -240,8 +240,21 @@ namespace JcMBP
 
 
             SweepTest();
-           
-            //SweepTest_Un(f1,f2);
+            //System.IO.FileStream fs = new System.IO.FileStream(Application.StartupPath + "\\data\\111.txt", System.IO.FileMode.Open);
+            //byte[] arr_byte = new byte[1024];
+            //fs.Read(arr_byte, 0, arr_byte.Length);
+            //string val = Encoding.ASCII.GetString(arr_byte);
+            //string[] ss = val.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            //List<double> f1 = new List<double>();
+            //List<double> f2 = new List<double>();
+            //for (int i = 0; i < ss.Length; i++)
+            //{
+            //    string[] res = ss[i].Split(',');
+            //    f1.Add(Convert.ToDouble(res[0].Trim()));
+            //    f2.Add(Convert.ToDouble(res[1].Trim()));
+            //}
+            //fs.Close();
+            //SweepTest_Un(f1, f2);
 
         }
 
@@ -269,7 +282,9 @@ namespace JcMBP
         { }
 
         public override void SweepTest_Un(List<double>f1,List<double>f2)
-        { }
+        {
+            SweepTest();
+        }
         public override void SweepTest()
         {
             double get_xnum = 0;
@@ -349,7 +364,7 @@ namespace JcMBP
         { }
         public  override void SweepTest_Un(List<double> list_f1,List<double> list_f2)
         {
-            if (list_f1.Count != list_f2.Count || list_f2.Count > 0 || list_f1.Count > 0)
+            if (list_f1.Count != list_f2.Count || list_f2.Count <= 0 || list_f1.Count <= 0)
             {
                 MessageBox.Show("data error");
                 return;
@@ -379,6 +394,7 @@ namespace JcMBP
                         m1++;//跳过点数加1
                         continue;
                     }
+                }
                     if (isQuit)
                     {
                         ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
@@ -442,7 +458,7 @@ namespace JcMBP
                     ds.sxy.f2 = list_f2[i];
                     Sthandmethod();
                 }
-            }
+            
 
         }
         public override void SweepTest()
