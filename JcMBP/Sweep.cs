@@ -439,7 +439,7 @@ namespace JcMBP
                     if (get_xnum > ds.MaxRx || get_xnum < ds.MinRx)
                     {
                         //MessageBox.Show("pimF=" + get_xnum.ToString() + "  rx_max=" + ds.MaxRx.ToString() + "   rx_min=" + ds.MinRx.ToString());
-                        f -= step1;
+                        f += step1;
                         m1++;
                         continue;
                     }
