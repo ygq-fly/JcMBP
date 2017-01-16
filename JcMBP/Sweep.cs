@@ -152,6 +152,7 @@ namespace JcMBP
             ClsJcPimDll.fnSetTxOn(true, ClsJcPimDll.JC_CARRIER_TX2);
             ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1);
             int s = ClsJcPimDll.HwGetSig_Smooth(ref  d2, ClsJcPimDll.JC_CARRIER_TX2);
+            Thread.Sleep(100);
             if (Tx2Hander != null)
                 Tx2Hander(s, ref disp2, false);
             if (s <= -10000 && ClsUpLoad._checkPow)
@@ -165,6 +166,7 @@ namespace JcMBP
             ClsJcPimDll.fnSetTxOn(true, ClsJcPimDll.JC_CARRIER_TX1);
             ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX2);
             s = ClsJcPimDll.HwGetSig_Smooth(ref  d1, ClsJcPimDll.JC_CARRIER_TX1);
+            Thread.Sleep(100);
             if (Tx1Hander != null)
                 Tx1Hander(s, ref disp1, false);
             if (s <= -10000 && ClsUpLoad._checkPow)
@@ -430,6 +432,18 @@ namespace JcMBP
                 bool isQuit = _ctrl.bQuit;
                 Monitor.Exit(_ctrl);
                 if (f > ds.freq1e) f = ds.freq1e;//当前频率大于结束频率，设置当前频率为结束频率
+                if (ClsUpLoad.sm == SweepMode.Poi || ClsUpLoad.sm == SweepMode.Np)
+                {
+                    get_xnum = StaticMethod.GetFreq(ds.imCo1, ds.imCo2, ds.imLow, ds.imLess, f, ds.freq2e);//当前扫描频率
+                    //频率 超过rx范围就跳过
+                    if (get_xnum > ds.MaxRx || get_xnum < ds.MinRx)
+                    {
+                        //MessageBox.Show("pimF=" + get_xnum.ToString() + "  rx_max=" + ds.MaxRx.ToString() + "   rx_min=" + ds.MinRx.ToString());
+                        f -= step1;
+                        m1++;
+                        continue;
+                    }
+                }
                 if (isQuit)
                 {
                     ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
