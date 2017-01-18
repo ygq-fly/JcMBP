@@ -574,6 +574,120 @@ namespace JcMBP
             }
         }
 
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filenameB = "";
+            string filename = Application.StartupPath;
+            if (ClsUpLoad._type == 0 || ClsUpLoad._type == 1)
+            {
+                filenameB = filename + "\\Band\\band";
+
+            }
+            else if (ClsUpLoad._type == 2)
+            {
+                filenameB = filename + "\\Band\\poi_band";
+            }
+            else if (ClsUpLoad._type == 3)
+            {
+                filenameB = filename + "\\Band\\newpoi_band";
+            }
+            else
+            {
+                filenameB = filename + "\\Band\\newband";
+            }
+            if (cm == CheckMode.Sf)
+            {
+             
+                IniFile.SetFileName(filenameB + fm.ds.tx1 + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_F1UpS", fm.ds.freq1s.ToString());
+                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_F1UpE", fm.ds.freq1e.ToString());
+                IniFile.SetFileName(filenameB + fm.ds.tx2 + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_F2DnS", fm.ds.freq2s.ToString());
+                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_F2DnE", fm.ds.freq2e.ToString());
+                IniFile.SetFileName(filenameB + fm.ds.rx + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_imS", fm.ds.freq2s.ToString());
+                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_imE", fm.ds.freq2e.ToString());
+
+                switch (fm.ds.imCo2 + fm.ds.imCo1)
+                {
+                    case 3:
+                        cul.ld[fm.ds.tx1].ord3_F1UpS = fm.ds.freq1s;
+                        cul.ld[fm.ds.tx1].ord3_F1UpE = fm.ds.freq1e;
+                        cul.ld[fm.ds.tx2].ord3_F2DnS = fm.ds.freq2s;
+                        cul.ld[fm.ds.tx2].ord3_F2DnE = fm.ds.freq2e;
+                        cul.ld[fm.ds.rx].ord3_imS = fm.ds.MinRx;
+                        cul.ld[fm.ds.rx].ord3_imE = fm.ds.MaxRx;
+                        break;
+                    case 5:
+                         cul.ld[fm.ds.tx1].ord5_F1UpS = fm.ds.freq1s;
+                        cul.ld[fm.ds.tx1].ord5_F1UpE = fm.ds.freq1e;
+                        cul.ld[fm.ds.tx2].ord5_F2DnS = fm.ds.freq2s;
+                        cul.ld[fm.ds.tx2].ord5_F2DnE = fm.ds.freq2e;
+                        cul.ld[fm.ds.rx].ord5_imS = fm.ds.MinRx;
+                        cul.ld[fm.ds.rx].ord5_imE = fm.ds.MaxRx;
+                        break;
+                    case 7:
+                         cul.ld[fm.ds.tx1].ord7_F1UpS = fm.ds.freq1s;
+                        cul.ld[fm.ds.tx1].ord7_F1UpE = fm.ds.freq1e;
+                        cul.ld[fm.ds.tx2].ord7_F2DnS = fm.ds.freq2s;
+                        cul.ld[fm.ds.tx2].ord7_F2DnE = fm.ds.freq2e;
+                        cul.ld[fm.ds.rx].ord7_imS = fm.ds.MinRx;
+                        cul.ld[fm.ds.rx].ord7_imE = fm.ds.MaxRx;
+                        break;
+                    case 9:
+                         cul.ld[fm.ds.tx1].ord9_F1UpS = fm.ds.freq1s;
+                        cul.ld[fm.ds.tx1].ord9_F1UpE = fm.ds.freq1e;
+                        cul.ld[fm.ds.tx2].ord9_F2DnS = fm.ds.freq2s;
+                        cul.ld[fm.ds.tx2].ord9_F2DnE = fm.ds.freq2e;
+                        cul.ld[fm.ds.rx].ord9_imS = fm.ds.MinRx;
+                        cul.ld[fm.ds.rx].ord9_imE = fm.ds.MaxRx;
+                        break;
+                }
+
+                 
+
+            }
+            else if (cm == CheckMode.ST)
+            {
+                IniFile.SetFileName(filenameB + tm.ds.tx1 + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (tm.ds.imCo1 + tm.ds.imCo2).ToString() + "_F1UpS", tm.ds.freq1s.ToString());
+                IniFile.SetFileName(filenameB + tm.ds.tx2 + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (tm.ds.imCo1 + tm.ds.imCo2).ToString() + "_F2DnE", tm.ds.freq2e.ToString());
+                IniFile.SetFileName(filenameB + tm.ds.rx + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (tm.ds.imCo1 + tm.ds.imCo2).ToString() + "_imS", tm.ds.freq2s.ToString());
+                IniFile.SetString("Now", "ord" + (tm.ds.imCo1 + tm.ds.imCo2).ToString() + "_imE", tm.ds.freq2e.ToString());
+
+                switch (tm.ds.imCo2 + tm.ds.imCo1)
+                {
+                    case 3:
+                        cul.ld[tm.ds.tx1].ord3_F1UpS = tm.ds.freq1s;
+                        cul.ld[tm.ds.tx2].ord3_F2DnE = tm.ds.freq2e;
+                        cul.ld[tm.ds.rx].ord3_imS = tm.ds.MinRx;
+                        cul.ld[tm.ds.rx].ord3_imE = tm.ds.MaxRx;
+                        break;
+                    case 5:
+                        cul.ld[tm.ds.tx1].ord5_F1UpS = tm.ds.freq1s;
+                        cul.ld[tm.ds.tx2].ord5_F2DnE = tm.ds.freq2e;
+                        cul.ld[tm.ds.rx].ord5_imS = tm.ds.MinRx;
+                        cul.ld[tm.ds.rx].ord5_imE = tm.ds.MaxRx;
+                        break;
+                    case 7:
+                        cul.ld[tm.ds.tx1].ord7_F1UpS = tm.ds.freq1s;
+                        cul.ld[tm.ds.tx2].ord7_F2DnE = tm.ds.freq2e;
+                        cul.ld[tm.ds.rx].ord7_imS = tm.ds.MinRx;
+                        cul.ld[tm.ds.rx].ord7_imE = tm.ds.MaxRx;
+                        break;
+                    case 9:
+                        cul.ld[tm.ds.tx1].ord9_F1UpS = tm.ds.freq1s;
+                        cul.ld[tm.ds.tx2].ord9_F2DnE = tm.ds.freq2e;
+                        cul.ld[tm.ds.rx].ord9_imS = tm.ds.MinRx;
+                        cul.ld[tm.ds.rx].ord9_imE = tm.ds.MaxRx;
+                        break;
+                }
+            }
+        
+        }
+
 
 
 

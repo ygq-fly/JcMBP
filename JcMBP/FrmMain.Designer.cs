@@ -57,6 +57,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存校准结果ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -243,7 +244,8 @@
             this.老化ToolStripMenuItem,
             this.dBmToolStripMenuItem,
             this.测试次数ToolStripMenuItem,
-            this.解锁校准配置ToolStripMenuItem});
+            this.解锁校准配置ToolStripMenuItem,
+            this.保存ToolStripMenuItem});
             this.jcConfigToolStripMenuItem.Name = "jcConfigToolStripMenuItem";
             this.jcConfigToolStripMenuItem.Size = new System.Drawing.Size(58, 21);
             this.jcConfigToolStripMenuItem.Text = "Config";
@@ -335,6 +337,13 @@
             this.menuStrip1.TabIndex = 190;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // 保存ToolStripMenuItem
+            // 
+            this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.保存ToolStripMenuItem.Text = "保存";
+            this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -402,6 +411,7 @@
         private System.Windows.Forms.ToolStripMenuItem 保存校准结果ToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
         public System.Windows.Forms.ToolStripMenuItem 解锁校准配置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 保存ToolStripMenuItem;
 
 
     }

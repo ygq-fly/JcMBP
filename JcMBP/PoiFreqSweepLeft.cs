@@ -11,11 +11,11 @@ namespace JcMBP
 {
     public partial class PoiFreqSweepLeft : Form
     {
-       ClsUpLoad cul;
+        ClsUpLoad cul;
         DataSweep ds;
         FreqSweepMid fsm;
-       public static JbData[] jd;
-       public static string jbName = "";
+        public static JbData[] jd;
+        public static string jbName = "";
         byte imCo1 = 2;
         byte imCo2 = 1;
         byte imLow = 0;
@@ -33,6 +33,14 @@ namespace JcMBP
         double rmin;
 
         string jb_path = "";
+
+        public double save_F1s;
+        public double save_F1e;
+        public double save_F2s;
+        public double save_F2e;
+        public double save_rxs;
+        public double save_rxe;
+
 
         public  PoiFreqSweepLeft(ClsUpLoad cul,FreqSweepMid fsm)
         {
@@ -415,7 +423,6 @@ namespace JcMBP
                      case "5": freq_cb_step.SelectedIndex = 4; break;
                      case "10": freq_cb_step.SelectedIndex = 5; break;
                  }
-
                  button8.Text = jd[i].rxs.ToString("0.00") + "-" + jd[i].rxe.ToString("0.00") + "MHz";
                  //button8.Text = ds.MinRx.ToString("0.00") + "-" +
                  //    ds.MaxRx.ToString("0.00") + "MHz";

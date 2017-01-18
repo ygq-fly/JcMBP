@@ -18,7 +18,7 @@ namespace JcMBP
         public static bool jb_err = false;
         public static bool isLoad = false;
         int curr_row = 0;
-        Form form;
+        public Form form;
         ClsUpLoad cul;
         int dbm_y = -140;
         int dbm_y_e = -80;

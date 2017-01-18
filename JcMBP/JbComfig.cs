@@ -187,8 +187,13 @@ namespace JcMBP
             //        return;
             //    }
             n++;
+            string stepOrTime = "";
+            if (comboBox11.SelectedIndex == 1)
+                stepOrTime = freq_cb_step.Text.Replace('s', ' ').Trim();
+            else
+                stepOrTime = freq_cb_step.Text.Replace('m', ' ').Trim();
             ToNewRows(dt, n, true, comboBox10.Text, f1s, f1e, comboBox9.Text, f2s, f2e, freq_cb_band.Text,
-                comboBox11.Text, (imCo1 + imCo2), button8.Text, Convert.ToSingle(freq_cb_step.Text.Replace('m', ' ')),
+                comboBox11.Text, (imCo1 + imCo2), button8.Text, stepOrTime,
                 Convert.ToSingle(freq_nud_pow2.Value), Convert.ToSingle(freq_nud_off1.Value), Convert.ToSingle(numericUpDown1.Value), Convert.ToSingle(numericUpDown3.Value));
             bandMessage = textBox1.Text;
             bandM.Add(bandMessage);
@@ -203,7 +208,7 @@ namespace JcMBP
            string tx2, double f2s, double f2e,
            string rx,
            string model, int order, string str2,
-           double set_s, double pow, double off, double off2,double rx_off)
+           string set_s, double pow, double off, double off2,double rx_off)
         {
             DataRow row = dt.NewRow();
             row[0] = b;
@@ -218,7 +223,7 @@ namespace JcMBP
             row[9] = model;
             row[10] = order.ToString();
             row[11] = str2;
-            row[12] = set_s.ToString();
+            row[12] = set_s;
             row[13] = pow.ToString("0.00");
             row[14] = off.ToString();
             row[15] = off2.ToString();
@@ -625,7 +630,7 @@ namespace JcMBP
                             ToNewRows(dt, i + 1, true, cul.BandNames[int.Parse(str_ini[0])], double.Parse(str_ini[1]), double.Parse(str_ini[2]),
                                 cul.BandNames[int.Parse(str_ini[3])], double.Parse(str_ini[4]), double.Parse(str_ini[5]),
                                 cul.BandNames[int.Parse(str_ini[6])], str_ini[7] == "1" ? "点频" : "扫频", int.Parse(str_ini[17]) + int.Parse(str_ini[18]), str_ini[8],
-                                 double.Parse(str_ini[9]), double.Parse(str_ini[10]), double.Parse(str_ini[11]), double.Parse(str_ini[12]),double.Parse(str_ini[13]));
+                                str_ini[9], double.Parse(str_ini[10]), double.Parse(str_ini[11]), double.Parse(str_ini[12]),double.Parse(str_ini[13]));
                             f1s = double.Parse(str_ini[1]);
                             f1e = double.Parse(str_ini[2]);
                             f2s = double.Parse(str_ini[4]);
@@ -647,6 +652,10 @@ namespace JcMBP
                             button7.Text = _rxs.ToString() + "-" + _rxe.ToString() + "MHz";
                             limit.Add(double.Parse(str_ini[16]));
                             label70.Text = OfftenMethod.GetTestBand_f(imCo1, imCo2, imLow, imLess, f1s, f1e, f2s, f2e);
+                            if (comboBox11.SelectedIndex == 1)
+                                freq_cb_step.SelectedItem = (str_ini[9] + "s");
+                            else
+                                freq_cb_step.SelectedItem = (str_ini[9] + "m");
                             n++;
                         }
                     }
@@ -705,11 +714,17 @@ namespace JcMBP
             {
                 switch (dro[12].ToString())
                 {
-                    case "1": freq_cb_step.SelectedIndex = 0; break;
-                    case "5": freq_cb_step.SelectedIndex = 1; break;
-                    case "10": freq_cb_step.SelectedIndex = 2; break;
-                    case "15": freq_cb_step.SelectedIndex = 3; break;
-                    case "20": freq_cb_step.SelectedIndex = 4; break;
+                    //case "1": freq_cb_step.SelectedIndex = 0; break;
+                    //case "5": freq_cb_step.SelectedIndex = 1; break;
+                    //case "10": freq_cb_step.SelectedIndex = 2; break;
+                    //case "15": freq_cb_step.SelectedIndex = 3; break;
+                    //case "20": freq_cb_step.SelectedIndex = 4; break;
+                    case "0.1": freq_cb_step.SelectedIndex = 0; break;
+                    case "1": freq_cb_step.SelectedIndex = 1; break;
+                    case "2": freq_cb_step.SelectedIndex = 2; break;
+                    case "3": freq_cb_step.SelectedIndex = 3; break;
+                    case "5": freq_cb_step.SelectedIndex = 4; break;
+                    case "10": freq_cb_step.SelectedIndex = 5; break;
                 }
 
             }
@@ -778,17 +793,23 @@ namespace JcMBP
         {
             comboBox4_SelectedIndexChanged(null, null);
             comboBox3_SelectedIndexChanged(null, null);
+            freq_cb_step.Items.Clear();
             if (comboBox11.SelectedIndex == 1)
             {
                 freq_nud_fstop1.Enabled = false;
                 freq_nud_fstart2.Enabled = false;
+                freq_cb_step.Items.AddRange(new string[] { "0.1s", "1s", "2s", "3s", "5s", "10s" });
+                 
+                ctrl_lbl_step2.Text = "Time(s)";
             }
             else
             {
                 freq_nud_fstop1.Enabled = true;
                 freq_nud_fstart2.Enabled = true;
-
+                freq_cb_step.Items.AddRange(new string[] { "0.1m", "1m", "2m", "3m", "5m", "10m" });
+                ctrl_lbl_step2.Text = "Step(MHz)";
             }
+            freq_cb_step.SelectedIndex = 1;
 
         }
 

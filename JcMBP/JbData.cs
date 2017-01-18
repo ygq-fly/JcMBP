@@ -61,9 +61,9 @@ namespace JcMBP
                 off1 = double.Parse(str[11]);
                 off2 = double.Parse(str[12]);
                 rx_off = double.Parse(str[13]);
-                //rxs = double.Parse(str[14]);
-                //rxe = double.Parse(str[15]);
-                GetRx();
+                rxs  = double.Parse(str[14]);
+                rxe = double.Parse(str[15]);
+                //GetRx();
                 limit = double.Parse(str[16]);
                 imCo1 = byte.Parse(str[17]);
                 imCo2 = byte.Parse(str[18]);

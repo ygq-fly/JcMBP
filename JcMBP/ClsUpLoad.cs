@@ -260,49 +260,102 @@ namespace JcMBP
         internal void LoadSettings(string fileName)
         {
             IniFile.SetFileName(fileName);
-            ord3_F1UpS = double.Parse(IniFile.GetString("Specifics", "ord3_F1UpS", "869")); //F1: 869~871.5 
-            ord3_F1UpE = double.Parse(IniFile.GetString("Specifics", "ord3_F1UpE", "871.5"));
-            ord3_F2DnS = double.Parse(IniFile.GetString("Specifics", "ord3_F2DnS", "889")); //F2: 889~894
-            ord3_F2DnE = double.Parse(IniFile.GetString("Specifics", "ord3_F2DnE", "894"));
-            ord3_F1Step = double.Parse(IniFile.GetString("Specifics", "ord3_F1Step", "1")); //Step
-            ord3_F2Step = double.Parse(IniFile.GetString("Specifics", "ord3_F2Step", "1"));
-            ord3_imS = double.Parse(IniFile.GetString("Specifics", "ord3_imS", "844")); //Im3: 844~849
-            ord3_imE = double.Parse(IniFile.GetString("Specifics", "ord3_imE", "849"));
+            string title = "Specifics";
+            F1Min = double.Parse(IniFile.GetString(title, "F1Min", "925"));
+            F1Max = double.Parse(IniFile.GetString(title, "F1Max", "960"));
+            F2Min = double.Parse(IniFile.GetString(title, "F2Min", "925"));
+            F2Max = double.Parse(IniFile.GetString(title, "F2Max", "960"));
+            set_rx_Min = RxMin = double.Parse(IniFile.GetString(title, "RxMin", "0"));
+            set_rx_Max = RxMax = double.Parse(IniFile.GetString(title, "RxMax", "0"));
+            if (double.Parse(IniFile.GetString("Now", "ord3_F1Step", "-1")) != -1)
+            {
+                title = "Now";
+            }
 
-            ord5_F1UpS = double.Parse(IniFile.GetString("Specifics", "ord5_F1UpS", "869")); //F1: 869~871.5 
-            ord5_F1UpE = double.Parse(IniFile.GetString("Specifics", "ord5_F1UpE", "871.5"));
-            ord5_F2DnS = double.Parse(IniFile.GetString("Specifics", "ord5_F2DnS", "889")); //F2: 889~894
-            ord5_F2DnE = double.Parse(IniFile.GetString("Specifics", "ord5_F2DnE", "894"));
-            ord5_F1Step = double.Parse(IniFile.GetString("Specifics", "ord5_F1Step", "1")); //Step
-            ord5_F2Step = double.Parse(IniFile.GetString("Specifics", "ord5_F2Step", "1"));
-            ord5_imS = double.Parse(IniFile.GetString("Specifics", "ord5_imS", "844")); //Im3: 844~849
-            ord5_imE = double.Parse(IniFile.GetString("Specifics", "ord5_imE", "849"));
+                ord3_F1UpS = double.Parse(IniFile.GetString(title, "ord3_F1UpS", "869")); //F1: 869~871.5 
+                ord3_F1UpE = double.Parse(IniFile.GetString(title, "ord3_F1UpE", "871.5"));
+                ord3_F2DnS = double.Parse(IniFile.GetString(title, "ord3_F2DnS", "889")); //F2: 889~894
+                ord3_F2DnE = double.Parse(IniFile.GetString(title, "ord3_F2DnE", "894"));
+                ord3_F1Step = double.Parse(IniFile.GetString(title, "ord3_F1Step", "1")); //Step
+                ord3_F2Step = double.Parse(IniFile.GetString(title, "ord3_F2Step", "1"));
+                ord3_imS = double.Parse(IniFile.GetString(title, "ord3_imS", "844")); //Im3: 844~849
+                ord3_imE = double.Parse(IniFile.GetString(title, "ord3_imE", "849"));
 
-            ord7_F1UpS = double.Parse(IniFile.GetString("Specifics", "ord7_F1UpS", "869")); //F1: 869~871.5 
-            ord7_F1UpE = double.Parse(IniFile.GetString("Specifics", "ord7_F1UpE", "871.5"));
-            ord7_F2DnS = double.Parse(IniFile.GetString("Specifics", "ord7_F2DnS", "889")); //F2: 889~894
-            ord7_F2DnE = double.Parse(IniFile.GetString("Specifics", "ord7_F2DnE", "894"));
-            ord7_F1Step = double.Parse(IniFile.GetString("Specifics", "ord7_F1Step", "1")); //Step
-            ord7_F2Step = double.Parse(IniFile.GetString("Specifics", "ord7_F2Step", "1"));
-            ord7_imS = double.Parse(IniFile.GetString("Specifics", "ord7_imS", "844")); //Im3: 844~849
-            ord7_imE = double.Parse(IniFile.GetString("Specifics", "ord7_imE", "849"));
+                ord5_F1UpS = double.Parse(IniFile.GetString(title, "ord5_F1UpS", "869")); //F1: 869~871.5 
+                ord5_F1UpE = double.Parse(IniFile.GetString(title, "ord5_F1UpE", "871.5"));
+                ord5_F2DnS = double.Parse(IniFile.GetString(title, "ord5_F2DnS", "889")); //F2: 889~894
+                ord5_F2DnE = double.Parse(IniFile.GetString(title, "ord5_F2DnE", "894"));
+                ord5_F1Step = double.Parse(IniFile.GetString(title, "ord5_F1Step", "1")); //Step
+                ord5_F2Step = double.Parse(IniFile.GetString(title, "ord5_F2Step", "1"));
+                ord5_imS = double.Parse(IniFile.GetString(title, "ord5_imS", "844")); //Im3: 844~849
+                ord5_imE = double.Parse(IniFile.GetString(title, "ord5_imE", "849"));
 
-            ord9_F1UpS = double.Parse(IniFile.GetString("Specifics", "ord9_F1UpS", "869")); //F1: 869~871.5 
-            ord9_F1UpE = double.Parse(IniFile.GetString("Specifics", "ord9_F1UpE", "871.5"));
-            ord9_F2DnS = double.Parse(IniFile.GetString("Specifics", "ord9_F2DnS", "889")); //F2: 889~894
-            ord9_F2DnE = double.Parse(IniFile.GetString("Specifics", "ord9_F2DnE", "894"));
-            ord9_F1Step = double.Parse(IniFile.GetString("Specifics", "ord9_F1Step", "1")); //Step
-            ord9_F2Step = double.Parse(IniFile.GetString("Specifics", "ord9_F2Step", "1"));
-            ord9_imS = double.Parse(IniFile.GetString("Specifics", "ord9_imS", "844")); //Im3: 844~849
-            ord9_imE = double.Parse(IniFile.GetString("Specifics", "ord9_imE", "849"));
+                ord7_F1UpS = double.Parse(IniFile.GetString(title, "ord7_F1UpS", "869")); //F1: 869~871.5 
+                ord7_F1UpE = double.Parse(IniFile.GetString(title, "ord7_F1UpE", "871.5"));
+                ord7_F2DnS = double.Parse(IniFile.GetString(title, "ord7_F2DnS", "889")); //F2: 889~894
+                ord7_F2DnE = double.Parse(IniFile.GetString(title, "ord7_F2DnE", "894"));
+                ord7_F1Step = double.Parse(IniFile.GetString(title, "ord7_F1Step", "1")); //Step
+                ord7_F2Step = double.Parse(IniFile.GetString(title, "ord7_F2Step", "1"));
+                ord7_imS = double.Parse(IniFile.GetString(title, "ord7_imS", "844")); //Im3: 844~849
+                ord7_imE = double.Parse(IniFile.GetString(title, "ord7_imE", "849"));
+
+                ord9_F1UpS = double.Parse(IniFile.GetString(title, "ord9_F1UpS", "869")); //F1: 869~871.5 
+                ord9_F1UpE = double.Parse(IniFile.GetString(title, "ord9_F1UpE", "871.5"));
+                ord9_F2DnS = double.Parse(IniFile.GetString(title, "ord9_F2DnS", "889")); //F2: 889~894
+                ord9_F2DnE = double.Parse(IniFile.GetString(title, "ord9_F2DnE", "894"));
+                ord9_F1Step = double.Parse(IniFile.GetString(title, "ord9_F1Step", "1")); //Step
+                ord9_F2Step = double.Parse(IniFile.GetString(title, "ord9_F2Step", "1"));
+                ord9_imS = double.Parse(IniFile.GetString(title, "ord9_imS", "844")); //Im3: 844~849
+                ord9_imE = double.Parse(IniFile.GetString(title, "ord9_imE", "849"));
 
 
-            F1Min = double.Parse(IniFile.GetString("Specifics", "F1Min", "925"));
-            F1Max = double.Parse(IniFile.GetString("Specifics", "F1Max", "960"));
-            F2Min = double.Parse(IniFile.GetString("Specifics", "F2Min", "925"));
-            F2Max = double.Parse(IniFile.GetString("Specifics", "F2Max", "960"));
-            set_rx_Min = RxMin = double.Parse(IniFile.GetString("Specifics", "RxMin", "0"));
-            set_rx_Max = RxMax = double.Parse(IniFile.GetString("Specifics", "RxMax", "0"));
+                //F1Min = double.Parse(IniFile.GetString(title, "F1Min", "925"));
+                //F1Max = double.Parse(IniFile.GetString(title, "F1Max", "960"));
+                //F2Min = double.Parse(IniFile.GetString(title, "F2Min", "925"));
+                //F2Max = double.Parse(IniFile.GetString(title, "F2Max", "960"));
+                //set_rx_Min = RxMin = double.Parse(IniFile.GetString(title, "RxMin", "0"));
+                //set_rx_Max = RxMax = double.Parse(IniFile.GetString(title, "RxMax", "0"));
+                if (double.Parse(IniFile.GetString("Now", "ord3_F1Step", "-1")) == -1)
+                {
+                    title = "Now";
+                    IniFile.SetString(title, "ord3_F1UpS", ord3_F1UpS.ToString()); //F1: 869~871.5 
+                    IniFile.SetString(title, "ord3_F1UpE", ord3_F1UpE.ToString());
+                    IniFile.SetString(title, "ord3_F2DnS", ord3_F2DnS.ToString()); //F2: 889~894
+                    IniFile.SetString(title, "ord3_F2DnE", ord3_F2DnE.ToString());
+                    IniFile.SetString(title, "ord3_F1Step", ord3_F1Step.ToString()); //Step
+                    IniFile.SetString(title, "ord3_F2Step", ord3_F2Step.ToString());
+                    IniFile.SetString(title, "ord3_imS", ord3_imS.ToString()); //Im3: 844~849
+                    IniFile.SetString(title, "ord3_imE", ord3_imE.ToString());
+
+                    IniFile.SetString(title, "ord5_F1UpS", ord5_F1UpS.ToString()); //F1: 869~871.5 
+                    IniFile.SetString(title, "ord5_F1UpE", ord5_F1UpE.ToString());
+                    IniFile.SetString(title, "ord5_F2DnS", ord5_F2DnS.ToString()); //F2: 889~894
+                    IniFile.SetString(title, "ord5_F2DnE", ord5_F2DnE.ToString());
+                    IniFile.SetString(title, "ord5_F1Step", ord5_F1Step.ToString()); //Step
+                    IniFile.SetString(title, "ord5_F2Step", ord5_F2Step.ToString());
+                    IniFile.SetString(title, "ord5_imS", ord5_imS.ToString()); //Im3: 844~849
+                    IniFile.SetString(title, "ord5_imE", ord5_imE.ToString());
+
+                    IniFile.SetString(title, "ord7_F1UpS", ord7_F1UpS.ToString()); //F1: 869~871.5 
+                    IniFile.SetString(title, "ord7_F1UpE", ord7_F1UpE.ToString());
+                    IniFile.SetString(title, "ord7_F2DnS", ord7_F2DnS.ToString()); //F2: 889~894
+                    IniFile.SetString(title, "ord7_F2DnE", ord7_F2DnE.ToString());
+                    IniFile.SetString(title, "ord7_F1Step", ord7_F1Step.ToString()); //Step
+                    IniFile.SetString(title, "ord7_F2Step", ord7_F2Step.ToString());
+                    IniFile.SetString(title, "ord7_imS", ord7_imS.ToString()); //Im3: 844~849
+                    IniFile.SetString(title, "ord7_imE", ord7_imE.ToString());
+
+                    IniFile.SetString(title, "ord9_F1UpS", ord9_F1UpS.ToString()); //F1: 869~871.5 
+                    IniFile.SetString(title, "ord9_F1UpE", ord9_F1UpE.ToString());
+                    IniFile.SetString(title, "ord9_F2DnS", ord9_F2DnS.ToString()); //F2: 889~894
+                    IniFile.SetString(title, "ord9_F2DnE", ord9_F2DnE.ToString());
+                    IniFile.SetString(title, "ord9_F1Step", ord9_F1Step.ToString()); //Step
+                    IniFile.SetString(title, "ord9_F2Step", ord9_F2Step.ToString());
+                    IniFile.SetString(title, "ord9_imS", ord9_imS.ToString()); //Im3: 844~849
+                    IniFile.SetString(title, "ord9_imE", ord9_imE.ToString());
+                   
+                }
+          
 
         }
 
