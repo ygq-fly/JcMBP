@@ -152,12 +152,16 @@ namespace JcMBP
             ClsJcPimDll.fnSetTxOn(true, ClsJcPimDll.JC_CARRIER_TX2);
             ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1);
             int s = ClsJcPimDll.HwGetSig_Smooth(ref  d2, ClsJcPimDll.JC_CARRIER_TX2);
-            Thread.Sleep(100);
+            if (s <= -10000 && ClsUpLoad._checkPow)
+            {
+                ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
+                
+            }
+            Thread.Sleep(100);          
             if (Tx2Hander != null)
                 Tx2Hander(s, ref disp2, false);
             if (s <= -10000 && ClsUpLoad._checkPow)
             {
-                ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
                 return false;
             }
 
@@ -166,14 +170,19 @@ namespace JcMBP
             ClsJcPimDll.fnSetTxOn(true, ClsJcPimDll.JC_CARRIER_TX1);
             ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX2);
             s = ClsJcPimDll.HwGetSig_Smooth(ref  d1, ClsJcPimDll.JC_CARRIER_TX1);
+            if (s <= -10000 && ClsUpLoad._checkPow)
+            {
+                ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
+            }
             Thread.Sleep(100);
             if (Tx1Hander != null)
                 Tx1Hander(s, ref disp1, false);
             if (s <= -10000 && ClsUpLoad._checkPow)
             {
-                ClsJcPimDll.fnSetTxOn(false, ClsJcPimDll.JC_CARRIER_TX1TX2);//关闭功放
+               
                 return false;
             }
+           
 
             ClsJcPimDll.fnSetTxOn(true, ClsJcPimDll.JC_CARRIER_TX2);
             return true;
