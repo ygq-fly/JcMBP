@@ -17,6 +17,18 @@ namespace JcMBP
         int time = 1;
         double _rxs = 0;
         double _rxe = 0;
+
+        //public double save_F1s;
+        //public double save_F1e;
+        //public double save_F2s;
+        //public double save_F2e;
+        //public double save_rxs;
+        //public double save_rxe;
+        //public int save_imCo1 = 2;
+        //public int save_imCo2 = 1;
+        //public int save_tx1;
+        //public int save_tx2;
+        //public int save_rx;
         public TimeSweepLeft(ClsUpLoad cul,TimeSweepMid tsm)
         {
             InitializeComponent();
@@ -124,30 +136,43 @@ namespace JcMBP
                     time_nud_f1.Value = Convert.ToDecimal((decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].ord3_F1UpS);
                     time_nud_f2.Value = Convert.ToDecimal((decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].ord3_F2DnE);
                     //OfftenMethod.NudValue(time_nud_f1, time_nud_f2,
-                    // (decimal)cul.ld[time_cb_band.SelectedIndex].ord3_F1UpS, (decimal)cul.ld[time_cb_band.SelectedIndex].ord3_F2DnE);               
+                    // (decimal)cul.ld[time_cb_band.SelectedIndex].ord3_F1UpS, (decimal)cul.ld[time_cb_band.SelectedIndex].ord3_F2DnE);    
+                    tsm.save_imCo1 = 2;
+                    tsm.save_imCo2 = 1;
                     break;
                 case 1:
                     time_nud_f1.Value = Convert.ToDecimal((decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].ord5_F1UpS);
                     time_nud_f2.Value = Convert.ToDecimal((decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].ord5_F2DnE);
                     //OfftenMethod.NudValue(time_nud_f1, time_nud_f2,
                     //(decimal)cul.ld[time_cb_band.SelectedIndex].ord3_F1UpS, (decimal)cul.ld[time_cb_band.SelectedIndex].ord3_F2DnE);
+                     tsm.save_imCo1 = 3;
+                     tsm.save_imCo2 = 2;
                     break;
                 case 2:
                     time_nud_f1.Value = Convert.ToDecimal((decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].ord7_F1UpS);
                     time_nud_f2.Value = Convert.ToDecimal((decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].ord7_F2DnE);
                     //OfftenMethod.NudValue(time_nud_f1, time_nud_f2,
                     //(decimal)cul.ld[time_cb_band.SelectedIndex].ord3_F1UpS, (decimal)cul.ld[time_cb_band.SelectedIndex].ord3_F2DnE);
+                    tsm.save_imCo1 = 4;
+                    tsm.save_imCo2 = 3;
                     break;
                 case 3:
                     time_nud_f1.Value = Convert.ToDecimal((decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].ord9_F1UpS);
                     time_nud_f2.Value = Convert.ToDecimal((decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].ord9_F2DnE);
                     //OfftenMethod.NudValue(time_nud_f1, time_nud_f2,
                     //(decimal)cul.ld[time_cb_band.SelectedIndex].ord3_F1UpS, (decimal)cul.ld[time_cb_band.SelectedIndex].ord3_F2DnE);
+                    tsm.save_imCo1 = 5;
+                    tsm.save_imCo2 = 4;
                     break;
                 case 4: break;
             }
             _rxs = cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].ord3_imS;
             _rxe = cul.ld[cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)]].ord3_imE;
+
+            tsm.save_rxs = _rxs;
+            tsm.save_rxe = _rxe;
+            tsm.save_tx1 = tsm.save_tx2 = tsm.save_rx = cul.BandCount[cul.BandNames.IndexOf(time_cb_band.Text)];
+
         }
 
         private void time_btn_stop_Click(object sender, EventArgs e)
@@ -227,6 +252,16 @@ namespace JcMBP
             OfftenMethod.Formula(sender);
             IniFile.SetFileName(Application.StartupPath + "\\JcConfig.ini");
             IniFile.SetString("Settings", "sweep_times", numericUpDown1.Value.ToString());
+        }
+
+        private void time_nud_f1_ValueChanged(object sender, EventArgs e)
+        {
+            tsm.save_F1s = Convert.ToDouble(time_nud_f1.Value);
+        }
+
+        private void time_nud_f2_ValueChanged(object sender, EventArgs e)
+        {
+            tsm.save_F2e = Convert.ToDouble(time_nud_f2.Value);
         }
 
 

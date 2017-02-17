@@ -99,7 +99,7 @@
             // 
             this.numericUpDown1.BackColor = System.Drawing.Color.Black;
             this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericUpDown1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.numericUpDown1.ForeColor = System.Drawing.Color.White;
             this.numericUpDown1.Location = new System.Drawing.Point(123, 293);
             this.numericUpDown1.Maximum = new decimal(new int[] {
@@ -124,7 +124,7 @@
             this.time_nud_f1.BackColor = System.Drawing.Color.Black;
             this.time_nud_f1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.time_nud_f1.DecimalPlaces = 2;
-            this.time_nud_f1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_nud_f1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_nud_f1.ForeColor = System.Drawing.Color.White;
             this.time_nud_f1.Location = new System.Drawing.Point(126, 77);
             this.time_nud_f1.Maximum = new decimal(new int[] {
@@ -147,6 +147,7 @@
             0,
             0,
             0});
+            this.time_nud_f1.ValueChanged += new System.EventHandler(this.time_nud_f1_ValueChanged);
             this.time_nud_f1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_nud_f1_MouseClick);
             // 
             // time_nud_f2
@@ -154,7 +155,7 @@
             this.time_nud_f2.BackColor = System.Drawing.Color.Black;
             this.time_nud_f2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.time_nud_f2.DecimalPlaces = 2;
-            this.time_nud_f2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_nud_f2.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_nud_f2.ForeColor = System.Drawing.Color.White;
             this.time_nud_f2.Location = new System.Drawing.Point(123, 165);
             this.time_nud_f2.Maximum = new decimal(new int[] {
@@ -177,12 +178,13 @@
             0,
             0,
             0});
+            this.time_nud_f2.ValueChanged += new System.EventHandler(this.time_nud_f2_ValueChanged);
             this.time_nud_f2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_nud_f2_MouseClick);
             // 
             // label51
             // 
             this.label51.BackColor = System.Drawing.Color.Transparent;
-            this.label51.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label51.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label51.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label51.Location = new System.Drawing.Point(7, 78);
             this.label51.Name = "label51";
@@ -194,7 +196,7 @@
             // label57
             // 
             this.label57.BackColor = System.Drawing.Color.Transparent;
-            this.label57.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label57.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label57.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label57.Location = new System.Drawing.Point(5, 165);
             this.label57.Name = "label57";
@@ -207,7 +209,7 @@
             // 
             this.time_check_off1.Checked = true;
             this.time_check_off1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.time_check_off1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_check_off1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_check_off1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.time_check_off1.Location = new System.Drawing.Point(9, 244);
             this.time_check_off1.Name = "time_check_off1";
@@ -219,7 +221,7 @@
             // label8
             // 
             this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label8.Location = new System.Drawing.Point(8, 325);
             this.label8.Name = "label8";
@@ -231,7 +233,7 @@
             // time_cb_im
             // 
             this.time_cb_im.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.time_cb_im.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
+            this.time_cb_im.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
             this.time_cb_im.FormattingEnabled = true;
             this.time_cb_im.Items.AddRange(new object[] {
             "IM3",
@@ -248,7 +250,7 @@
             // label52
             // 
             this.label52.BackColor = System.Drawing.Color.Transparent;
-            this.label52.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label52.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label52.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label52.Location = new System.Drawing.Point(8, 295);
             this.label52.Name = "label52";
@@ -262,7 +264,7 @@
             this.time_nud_off1.BackColor = System.Drawing.Color.Black;
             this.time_nud_off1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.time_nud_off1.DecimalPlaces = 1;
-            this.time_nud_off1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_nud_off1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_nud_off1.ForeColor = System.Drawing.Color.White;
             this.time_nud_off1.Location = new System.Drawing.Point(123, 244);
             this.time_nud_off1.Minimum = new decimal(new int[] {
@@ -280,7 +282,7 @@
             // label49
             // 
             this.label49.BackColor = System.Drawing.Color.Transparent;
-            this.label49.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label49.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label49.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label49.Location = new System.Drawing.Point(8, 355);
             this.label49.Name = "label49";
@@ -292,7 +294,7 @@
             // time_cb_band
             // 
             this.time_cb_band.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.time_cb_band.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
+            this.time_cb_band.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
             this.time_cb_band.FormattingEnabled = true;
             this.time_cb_band.Items.AddRange(new object[] {
             "LTE700",
@@ -311,7 +313,7 @@
             // time_lbl_show_band
             // 
             this.time_lbl_show_band.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(69)))), ((int)(((byte)(72)))));
-            this.time_lbl_show_band.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_lbl_show_band.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_lbl_show_band.ForeColor = System.Drawing.Color.White;
             this.time_lbl_show_band.Location = new System.Drawing.Point(6, 17);
             this.time_lbl_show_band.Name = "time_lbl_show_band";
@@ -323,7 +325,7 @@
             // label53
             // 
             this.label53.BackColor = System.Drawing.Color.Transparent;
-            this.label53.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label53.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label53.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label53.Location = new System.Drawing.Point(5, 193);
             this.label53.Name = "label53";
@@ -335,7 +337,7 @@
             // label55
             // 
             this.label55.BackColor = System.Drawing.Color.Transparent;
-            this.label55.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label55.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label55.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label55.Location = new System.Drawing.Point(8, 105);
             this.label55.Name = "label55";
@@ -349,7 +351,7 @@
             this.time_nud_p2.BackColor = System.Drawing.Color.Black;
             this.time_nud_p2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.time_nud_p2.DecimalPlaces = 1;
-            this.time_nud_p2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_nud_p2.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_nud_p2.ForeColor = System.Drawing.Color.White;
             this.time_nud_p2.Location = new System.Drawing.Point(123, 193);
             this.time_nud_p2.Maximum = new decimal(new int[] {
@@ -379,7 +381,7 @@
             this.time_nud_p1.BackColor = System.Drawing.Color.Black;
             this.time_nud_p1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.time_nud_p1.DecimalPlaces = 1;
-            this.time_nud_p1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_nud_p1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_nud_p1.ForeColor = System.Drawing.Color.White;
             this.time_nud_p1.Location = new System.Drawing.Point(126, 105);
             this.time_nud_p1.Maximum = new decimal(new int[] {
@@ -423,7 +425,7 @@
             // time_btn_stop
             // 
             this.time_btn_stop.BackColor = System.Drawing.Color.White;
-            this.time_btn_stop.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_btn_stop.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_btn_stop.Location = new System.Drawing.Point(55, 161);
             this.time_btn_stop.Name = "time_btn_stop";
             this.time_btn_stop.Size = new System.Drawing.Size(93, 43);
@@ -435,7 +437,7 @@
             // time_check_vco
             // 
             this.time_check_vco.AutoSize = true;
-            this.time_check_vco.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_check_vco.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_check_vco.Location = new System.Drawing.Point(36, 68);
             this.time_check_vco.Name = "time_check_vco";
             this.time_check_vco.Size = new System.Drawing.Size(148, 21);
@@ -447,7 +449,7 @@
             // time_btn_start_b
             // 
             this.time_btn_start_b.BackColor = System.Drawing.Color.White;
-            this.time_btn_start_b.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_btn_start_b.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_btn_start_b.Location = new System.Drawing.Point(104, 93);
             this.time_btn_start_b.Name = "time_btn_start_b";
             this.time_btn_start_b.Size = new System.Drawing.Size(93, 62);
@@ -459,7 +461,7 @@
             // time_btn_start_a
             // 
             this.time_btn_start_a.BackColor = System.Drawing.Color.White;
-            this.time_btn_start_a.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_btn_start_a.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_btn_start_a.Location = new System.Drawing.Point(6, 93);
             this.time_btn_start_a.Name = "time_btn_start_a";
             this.time_btn_start_a.Size = new System.Drawing.Size(93, 62);
@@ -471,7 +473,7 @@
             // label45
             // 
             this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(69)))), ((int)(((byte)(72)))));
-            this.label45.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label45.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label45.ForeColor = System.Drawing.Color.White;
             this.label45.Location = new System.Drawing.Point(6, 14);
             this.label45.Name = "label45";

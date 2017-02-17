@@ -267,7 +267,7 @@ namespace JcMBP
             F2Max = double.Parse(IniFile.GetString(title, "F2Max", "960"));
             set_rx_Min = RxMin = double.Parse(IniFile.GetString(title, "RxMin", "0"));
             set_rx_Max = RxMax = double.Parse(IniFile.GetString(title, "RxMax", "0"));
-            if (double.Parse(IniFile.GetString("Now", "ord3_F1Step", "-1")) != -1)
+            if (double.Parse(IniFile.GetString("Now", "ord3_F1UpS", "-1")) != -1)
             {
                 title = "Now";
             }
@@ -280,7 +280,12 @@ namespace JcMBP
                 ord3_F2Step = double.Parse(IniFile.GetString(title, "ord3_F2Step", "1"));
                 ord3_imS = double.Parse(IniFile.GetString(title, "ord3_imS", "844")); //Im3: 844~849
                 ord3_imE = double.Parse(IniFile.GetString(title, "ord3_imE", "849"));
-
+                if (double.Parse(IniFile.GetString("Now", "ord5_F1UpS", "-1")) != -1)
+                {
+                    title = "Now";
+                }
+                else
+                    title = "Specifics";
                 ord5_F1UpS = double.Parse(IniFile.GetString(title, "ord5_F1UpS", "869")); //F1: 869~871.5 
                 ord5_F1UpE = double.Parse(IniFile.GetString(title, "ord5_F1UpE", "871.5"));
                 ord5_F2DnS = double.Parse(IniFile.GetString(title, "ord5_F2DnS", "889")); //F2: 889~894
@@ -289,7 +294,12 @@ namespace JcMBP
                 ord5_F2Step = double.Parse(IniFile.GetString(title, "ord5_F2Step", "1"));
                 ord5_imS = double.Parse(IniFile.GetString(title, "ord5_imS", "844")); //Im3: 844~849
                 ord5_imE = double.Parse(IniFile.GetString(title, "ord5_imE", "849"));
-
+                if (double.Parse(IniFile.GetString("Now", "ord7_F1UpS", "-1")) != -1)
+                {
+                    title = "Now";
+                }
+                else
+                    title = "Specifics";
                 ord7_F1UpS = double.Parse(IniFile.GetString(title, "ord7_F1UpS", "869")); //F1: 869~871.5 
                 ord7_F1UpE = double.Parse(IniFile.GetString(title, "ord7_F1UpE", "871.5"));
                 ord7_F2DnS = double.Parse(IniFile.GetString(title, "ord7_F2DnS", "889")); //F2: 889~894
@@ -298,7 +308,12 @@ namespace JcMBP
                 ord7_F2Step = double.Parse(IniFile.GetString(title, "ord7_F2Step", "1"));
                 ord7_imS = double.Parse(IniFile.GetString(title, "ord7_imS", "844")); //Im3: 844~849
                 ord7_imE = double.Parse(IniFile.GetString(title, "ord7_imE", "849"));
-
+                if (double.Parse(IniFile.GetString("Now", "ord9_F1UpS", "-1")) != -1)
+                {
+                    title = "Now";
+                }
+                else
+                    title = "Specifics";
                 ord9_F1UpS = double.Parse(IniFile.GetString(title, "ord9_F1UpS", "869")); //F1: 869~871.5 
                 ord9_F1UpE = double.Parse(IniFile.GetString(title, "ord9_F1UpE", "871.5"));
                 ord9_F2DnS = double.Parse(IniFile.GetString(title, "ord9_F2DnS", "889")); //F2: 889~894

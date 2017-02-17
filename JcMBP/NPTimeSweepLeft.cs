@@ -161,6 +161,9 @@ namespace JcMBP
                 _rxs = rr._rxs;
                 _rxe = rr._rxe;
                 button9.Text = _rxs.ToString("0.00") + "-" + _rxe.ToString("0.00");
+
+                tsm.save_rxs = _rxs;
+                tsm.save_rxe = _rxe;
             }
         }
 
@@ -181,6 +184,9 @@ namespace JcMBP
                 imCo2 = ord.imCo2;//阶数参数
                 button6.Text = ord.val;//扫频阶数按钮text
                 label2.Text = OfftenMethod.GetTestBand(imCo1, imCo2, imLow, imLess, f1, f2).ToString("0.00") + "MHz";
+
+                tsm.save_imCo1 = imCo1;
+                tsm.save_imCo2 = imCo2;
             }
         }
 
@@ -194,6 +200,7 @@ namespace JcMBP
         {
             f1 = Convert.ToDouble(time_nud_f1.Value);
             label2.Text = OfftenMethod.GetTestBand(imCo1, imCo2, imLow, imLess, f1, f2).ToString("0.00") + "MHz";
+            tsm.save_F1s = f1;
         }
 
         /// <summary>
@@ -205,6 +212,7 @@ namespace JcMBP
         {
             f2 = Convert.ToDouble(time_nud_f2.Value);
             label2.Text = OfftenMethod.GetTestBand(imCo1, imCo2, imLow, imLess, f1, f2).ToString("0.00") + "MHz";
+            tsm.save_F2e = f2;
         }
 
         /// <summary>
@@ -233,6 +241,8 @@ namespace JcMBP
             time_nud_f1.Value = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].ord3_F1UpS);
 
             GoB(comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox3.SelectedIndex);
+
+            tsm.save_tx1 = cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)];
         }
 
         /// <summary>
@@ -247,6 +257,8 @@ namespace JcMBP
             time_nud_f2.Minimum = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]].F2Min);
             time_nud_f2.Value = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]].ord3_F2DnE);
             GoB(comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox3.SelectedIndex);
+
+            tsm.save_tx2=cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)];
         }
 
         /// <summary>
@@ -262,6 +274,10 @@ namespace JcMBP
             rmin = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].RxMin;
             button9.Text = _rxs.ToString("0.00") + "-" + _rxe.ToString("0.00");
             GoB(comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox3.SelectedIndex);
+
+            tsm.save_rx = cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)];
+            tsm.save_rxs = _rxs;
+            tsm.save_rxe = _rxe;
         }
 
         #region numericupdown控件事件

@@ -15,12 +15,24 @@ namespace JcMBP
         double _pim_max = -10000;
         double _pim_min = 0;
         ClsUpLoad cul;
-                    Form form;
+        public   Form form;
         public   DataSweep ds;
         Sweep sweep;
         string type = "0";
         FrmMain fm;
         public  bool isThreadStart = false;
+
+        public double save_F1s;
+        public double save_F1e;
+        public double save_F2s;
+        public double save_F2e;
+        public double save_rxs;
+        public double save_rxe;
+        public int save_imCo1 = 2;
+        public int save_imCo2 = 1;
+        public int save_tx1;
+        public int save_tx2;
+        public int save_rx;
         public TimeSweepMid(ClsUpLoad cul,FrmMain fm)
         {
             InitializeComponent();

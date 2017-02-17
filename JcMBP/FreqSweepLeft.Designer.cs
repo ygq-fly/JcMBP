@@ -108,7 +108,7 @@
             this.freq_nud_fstart2.BackColor = System.Drawing.Color.Black;
             this.freq_nud_fstart2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_fstart2.DecimalPlaces = 2;
-            this.freq_nud_fstart2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_fstart2.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_fstart2.ForeColor = System.Drawing.Color.White;
             this.freq_nud_fstart2.Location = new System.Drawing.Point(123, 157);
             this.freq_nud_fstart2.Maximum = new decimal(new int[] {
@@ -131,12 +131,13 @@
             0,
             0,
             0});
+            this.freq_nud_fstart2.ValueChanged += new System.EventHandler(this.freq_nud_fstart2_ValueChanged);
             this.freq_nud_fstart2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.freq_nud_fstart2_MouseClick);
             // 
             // ctrl_lbl_fstop2
             // 
             this.ctrl_lbl_fstop2.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_fstop2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_fstop2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_fstop2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_fstop2.Location = new System.Drawing.Point(4, 183);
             this.ctrl_lbl_fstop2.Name = "ctrl_lbl_fstop2";
@@ -150,7 +151,7 @@
             this.freq_nud_fstop1.BackColor = System.Drawing.Color.Black;
             this.freq_nud_fstop1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_fstop1.DecimalPlaces = 2;
-            this.freq_nud_fstop1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_fstop1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_fstop1.ForeColor = System.Drawing.Color.White;
             this.freq_nud_fstop1.Location = new System.Drawing.Point(125, 84);
             this.freq_nud_fstop1.Maximum = new decimal(new int[] {
@@ -173,12 +174,13 @@
             0,
             0,
             0});
+            this.freq_nud_fstop1.ValueChanged += new System.EventHandler(this.freq_nud_fstop1_ValueChanged);
             this.freq_nud_fstop1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.freq_nud_fstop1_MouseClick);
             // 
             // ctrl_lbl_fstart2
             // 
             this.ctrl_lbl_fstart2.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_fstart2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_fstart2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_fstart2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_fstart2.Location = new System.Drawing.Point(4, 157);
             this.ctrl_lbl_fstart2.Name = "ctrl_lbl_fstart2";
@@ -192,7 +194,7 @@
             this.freq_nud_fstop2.BackColor = System.Drawing.Color.Black;
             this.freq_nud_fstop2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_fstop2.DecimalPlaces = 2;
-            this.freq_nud_fstop2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_fstop2.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_fstop2.ForeColor = System.Drawing.Color.White;
             this.freq_nud_fstop2.Location = new System.Drawing.Point(123, 181);
             this.freq_nud_fstop2.Maximum = new decimal(new int[] {
@@ -215,12 +217,13 @@
             0,
             0,
             0});
+            this.freq_nud_fstop2.ValueChanged += new System.EventHandler(this.freq_nud_fstop2_ValueChanged);
             this.freq_nud_fstop2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.freq_nud_fstop2_MouseClick);
             // 
             // ctrl_lbl_fstop1
             // 
             this.ctrl_lbl_fstop1.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_fstop1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_fstop1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_fstop1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_fstop1.Location = new System.Drawing.Point(7, 84);
             this.ctrl_lbl_fstop1.Name = "ctrl_lbl_fstop1";
@@ -234,7 +237,7 @@
             this.freq_nud_fstart1.BackColor = System.Drawing.Color.Black;
             this.freq_nud_fstart1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_fstart1.DecimalPlaces = 2;
-            this.freq_nud_fstart1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_fstart1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_fstart1.ForeColor = System.Drawing.Color.White;
             this.freq_nud_fstart1.Location = new System.Drawing.Point(125, 59);
             this.freq_nud_fstart1.Maximum = new decimal(new int[] {
@@ -257,12 +260,13 @@
             0,
             0,
             0});
+            this.freq_nud_fstart1.ValueChanged += new System.EventHandler(this.freq_nud_fstart1_ValueChanged);
             this.freq_nud_fstart1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.freq_nud_fstart1_MouseClick);
             // 
             // ctrl_lbl_fstart1
             // 
             this.ctrl_lbl_fstart1.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_fstart1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_fstart1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_fstart1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_fstart1.Location = new System.Drawing.Point(7, 59);
             this.ctrl_lbl_fstart1.Name = "ctrl_lbl_fstart1";
@@ -275,7 +279,7 @@
             // 
             this.freq_check_off1.Checked = true;
             this.freq_check_off1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.freq_check_off1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_check_off1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_check_off1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.freq_check_off1.Location = new System.Drawing.Point(15, 249);
             this.freq_check_off1.Name = "freq_check_off1";
@@ -287,7 +291,7 @@
             // freq_cb_step
             // 
             this.freq_cb_step.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.freq_cb_step.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
+            this.freq_cb_step.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
             this.freq_cb_step.FormattingEnabled = true;
             this.freq_cb_step.Items.AddRange(new object[] {
             "1m",
@@ -303,7 +307,7 @@
             // label13
             // 
             this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label13.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label13.Location = new System.Drawing.Point(9, 327);
             this.label13.Name = "label13";
@@ -315,7 +319,7 @@
             // freq_cb_im
             // 
             this.freq_cb_im.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.freq_cb_im.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
+            this.freq_cb_im.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
             this.freq_cb_im.FormattingEnabled = true;
             this.freq_cb_im.Items.AddRange(new object[] {
             "IM3",
@@ -334,7 +338,7 @@
             this.freq_nud_off1.BackColor = System.Drawing.Color.Black;
             this.freq_nud_off1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_off1.DecimalPlaces = 1;
-            this.freq_nud_off1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_off1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_off1.ForeColor = System.Drawing.Color.White;
             this.freq_nud_off1.Location = new System.Drawing.Point(123, 249);
             this.freq_nud_off1.Minimum = new decimal(new int[] {
@@ -352,7 +356,7 @@
             // label7
             // 
             this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.label7.Location = new System.Drawing.Point(10, 351);
             this.label7.Name = "label7";
@@ -364,7 +368,7 @@
             // freq_cb_band
             // 
             this.freq_cb_band.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.freq_cb_band.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Bold);
+            this.freq_cb_band.Font = new System.Drawing.Font("SimSun", 10F, System.Drawing.FontStyle.Bold);
             this.freq_cb_band.FormattingEnabled = true;
             this.freq_cb_band.Items.AddRange(new object[] {
             "LTE700",
@@ -383,7 +387,7 @@
             // freq_lbl_show_band
             // 
             this.freq_lbl_show_band.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(69)))), ((int)(((byte)(72)))));
-            this.freq_lbl_show_band.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_lbl_show_band.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_lbl_show_band.ForeColor = System.Drawing.Color.White;
             this.freq_lbl_show_band.Location = new System.Drawing.Point(6, 17);
             this.freq_lbl_show_band.Name = "freq_lbl_show_band";
@@ -395,7 +399,7 @@
             // ctrl_lbl_step2
             // 
             this.ctrl_lbl_step2.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_step2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_step2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_step2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_step2.Location = new System.Drawing.Point(2, 295);
             this.ctrl_lbl_step2.Name = "ctrl_lbl_step2";
@@ -407,7 +411,7 @@
             // ctrl_lbl_pow2
             // 
             this.ctrl_lbl_pow2.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_pow2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_pow2.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_pow2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_pow2.Location = new System.Drawing.Point(7, 224);
             this.ctrl_lbl_pow2.Name = "ctrl_lbl_pow2";
@@ -419,7 +423,7 @@
             // ctrl_lbl_pow1
             // 
             this.ctrl_lbl_pow1.BackColor = System.Drawing.Color.Transparent;
-            this.ctrl_lbl_pow1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ctrl_lbl_pow1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ctrl_lbl_pow1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(53)))), ((int)(((byte)(53)))));
             this.ctrl_lbl_pow1.Location = new System.Drawing.Point(10, 121);
             this.ctrl_lbl_pow1.Name = "ctrl_lbl_pow1";
@@ -433,7 +437,7 @@
             this.freq_nud_pow2.BackColor = System.Drawing.Color.Black;
             this.freq_nud_pow2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_pow2.DecimalPlaces = 1;
-            this.freq_nud_pow2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_pow2.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_pow2.ForeColor = System.Drawing.Color.White;
             this.freq_nud_pow2.Location = new System.Drawing.Point(123, 222);
             this.freq_nud_pow2.Maximum = new decimal(new int[] {
@@ -463,7 +467,7 @@
             this.freq_nud_pow1.BackColor = System.Drawing.Color.Black;
             this.freq_nud_pow1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.freq_nud_pow1.DecimalPlaces = 1;
-            this.freq_nud_pow1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.freq_nud_pow1.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freq_nud_pow1.ForeColor = System.Drawing.Color.White;
             this.freq_nud_pow1.Location = new System.Drawing.Point(124, 121);
             this.freq_nud_pow1.Maximum = new decimal(new int[] {
@@ -506,7 +510,7 @@
             // time_btn_stop
             // 
             this.time_btn_stop.BackColor = System.Drawing.Color.White;
-            this.time_btn_stop.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_btn_stop.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_btn_stop.Location = new System.Drawing.Point(56, 168);
             this.time_btn_stop.Name = "time_btn_stop";
             this.time_btn_stop.Size = new System.Drawing.Size(93, 43);
@@ -518,7 +522,7 @@
             // time_check_vco
             // 
             this.time_check_vco.AutoSize = true;
-            this.time_check_vco.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_check_vco.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_check_vco.Location = new System.Drawing.Point(36, 63);
             this.time_check_vco.Name = "time_check_vco";
             this.time_check_vco.Size = new System.Drawing.Size(148, 21);
@@ -530,7 +534,7 @@
             // time_btn_start_b
             // 
             this.time_btn_start_b.BackColor = System.Drawing.Color.White;
-            this.time_btn_start_b.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_btn_start_b.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_btn_start_b.Location = new System.Drawing.Point(105, 100);
             this.time_btn_start_b.Name = "time_btn_start_b";
             this.time_btn_start_b.Size = new System.Drawing.Size(93, 62);
@@ -542,7 +546,7 @@
             // time_btn_start_a
             // 
             this.time_btn_start_a.BackColor = System.Drawing.Color.White;
-            this.time_btn_start_a.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.time_btn_start_a.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.time_btn_start_a.Location = new System.Drawing.Point(7, 100);
             this.time_btn_start_a.Name = "time_btn_start_a";
             this.time_btn_start_a.Size = new System.Drawing.Size(93, 62);
@@ -554,7 +558,7 @@
             // label45
             // 
             this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(69)))), ((int)(((byte)(72)))));
-            this.label45.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label45.Font = new System.Drawing.Font("Microsoft YaHei", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label45.ForeColor = System.Drawing.Color.White;
             this.label45.Location = new System.Drawing.Point(6, 14);
             this.label45.Name = "label45";

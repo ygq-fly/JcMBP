@@ -595,52 +595,57 @@ namespace JcMBP
             {
                 filenameB = filename + "\\Band\\newband";
             }
+
+            int order;
             if (cm == CheckMode.Sf)
             {
-             
-                IniFile.SetFileName(filenameB + fm.ds.tx1 + "_Specifics.ini");
-                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_F1UpS", fm.ds.freq1s.ToString());
-                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_F1UpE", fm.ds.freq1e.ToString());
-                IniFile.SetFileName(filenameB + fm.ds.tx2 + "_Specifics.ini");
-                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_F2DnS", fm.ds.freq2s.ToString());
-                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_F2DnE", fm.ds.freq2e.ToString());
-                IniFile.SetFileName(filenameB + fm.ds.rx + "_Specifics.ini");
-                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_imS", fm.ds.freq2s.ToString());
-                IniFile.SetString("Now", "ord" + (fm.ds.imCo1 + fm.ds.imCo2).ToString() + "_imE", fm.ds.freq2e.ToString());
+                if (ClsUpLoad._type == 0 || ClsUpLoad._type == 1)
+                    order = fm.save_imCo1 + fm.save_imCo2;
+                else
+                    order = 3;
+                IniFile.SetFileName(filenameB + fm.save_tx1 + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (order).ToString() + "_F1UpS", fm.save_F1s.ToString());
+                IniFile.SetString("Now", "ord" + (order).ToString() + "_F1UpE", fm.save_F1e.ToString());
+                IniFile.SetFileName(filenameB + fm.save_tx2 + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (order).ToString() + "_F2DnS", fm.save_F2s.ToString());
+                IniFile.SetString("Now", "ord" + (order).ToString() + "_F2DnE", fm.save_F2e.ToString());
+                IniFile.SetFileName(filenameB + fm.save_rx + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (order).ToString() + "_imS", fm.save_rxs.ToString());
+                IniFile.SetString("Now", "ord" + (order).ToString() + "_imE", fm.save_rxe.ToString());
 
-                switch (fm.ds.imCo2 + fm.ds.imCo1)
+                switch (order)
                 {
                     case 3:
-                        cul.ld[fm.ds.tx1].ord3_F1UpS = fm.ds.freq1s;
-                        cul.ld[fm.ds.tx1].ord3_F1UpE = fm.ds.freq1e;
-                        cul.ld[fm.ds.tx2].ord3_F2DnS = fm.ds.freq2s;
-                        cul.ld[fm.ds.tx2].ord3_F2DnE = fm.ds.freq2e;
-                        cul.ld[fm.ds.rx].ord3_imS = fm.ds.MinRx;
-                        cul.ld[fm.ds.rx].ord3_imE = fm.ds.MaxRx;
+                        cul.ld[fm.save_tx1].ord3_F1UpS = fm.save_F1s;
+                        cul.ld[fm.save_tx1].ord3_F1UpE = fm.save_F1e;
+                        cul.ld[fm.save_tx2].ord3_F2DnS = fm.save_F2s;
+                        cul.ld[fm.save_tx2].ord3_F2DnE = fm.save_F2e;
+                        cul.ld[fm.save_rx].ord3_imS = fm.save_rxs;
+                        cul.ld[fm.save_rx].ord3_imE = fm.save_rxe;
                         break;
                     case 5:
-                         cul.ld[fm.ds.tx1].ord5_F1UpS = fm.ds.freq1s;
-                        cul.ld[fm.ds.tx1].ord5_F1UpE = fm.ds.freq1e;
-                        cul.ld[fm.ds.tx2].ord5_F2DnS = fm.ds.freq2s;
-                        cul.ld[fm.ds.tx2].ord5_F2DnE = fm.ds.freq2e;
-                        cul.ld[fm.ds.rx].ord5_imS = fm.ds.MinRx;
-                        cul.ld[fm.ds.rx].ord5_imE = fm.ds.MaxRx;
+                        cul.ld[fm.save_tx1].ord5_F1UpS = fm.save_F1s;
+                        cul.ld[fm.save_tx1].ord5_F1UpE = fm.save_F1e;
+                        cul.ld[fm.save_tx2].ord5_F2DnS = fm.save_F2s;
+                        cul.ld[fm.save_tx2].ord5_F2DnE = fm.save_F2e;
+                        cul.ld[fm.save_rx].ord5_imS = fm.save_rxs;
+                        cul.ld[fm.save_rx].ord5_imE = fm.save_rxe;
                         break;
                     case 7:
-                         cul.ld[fm.ds.tx1].ord7_F1UpS = fm.ds.freq1s;
-                        cul.ld[fm.ds.tx1].ord7_F1UpE = fm.ds.freq1e;
-                        cul.ld[fm.ds.tx2].ord7_F2DnS = fm.ds.freq2s;
-                        cul.ld[fm.ds.tx2].ord7_F2DnE = fm.ds.freq2e;
-                        cul.ld[fm.ds.rx].ord7_imS = fm.ds.MinRx;
-                        cul.ld[fm.ds.rx].ord7_imE = fm.ds.MaxRx;
+                        cul.ld[fm.save_tx1].ord7_F1UpS = fm.save_F1s;
+                        cul.ld[fm.save_tx1].ord7_F1UpE = fm.save_F1e;
+                        cul.ld[fm.save_tx2].ord7_F2DnS = fm.save_F2s;
+                        cul.ld[fm.save_tx2].ord7_F2DnE = fm.save_F2e;
+                        cul.ld[fm.save_rx].ord7_imS = fm.save_rxs;
+                        cul.ld[fm.save_rx].ord7_imE = fm.save_rxe;
                         break;
                     case 9:
-                         cul.ld[fm.ds.tx1].ord9_F1UpS = fm.ds.freq1s;
-                        cul.ld[fm.ds.tx1].ord9_F1UpE = fm.ds.freq1e;
-                        cul.ld[fm.ds.tx2].ord9_F2DnS = fm.ds.freq2s;
-                        cul.ld[fm.ds.tx2].ord9_F2DnE = fm.ds.freq2e;
-                        cul.ld[fm.ds.rx].ord9_imS = fm.ds.MinRx;
-                        cul.ld[fm.ds.rx].ord9_imE = fm.ds.MaxRx;
+                        cul.ld[fm.save_tx1].ord9_F1UpS = fm.save_F1s;
+                        cul.ld[fm.save_tx1].ord9_F1UpE = fm.save_F1e;
+                        cul.ld[fm.save_tx2].ord9_F2DnS = fm.save_F2s;
+                        cul.ld[fm.save_tx2].ord9_F2DnE = fm.save_F2e;
+                        cul.ld[fm.save_rx].ord9_imS = fm.save_rxs;
+                        cul.ld[fm.save_rx].ord9_imE = fm.save_rxe;
                         break;
                 }
 
@@ -649,39 +654,44 @@ namespace JcMBP
             }
             else if (cm == CheckMode.ST)
             {
-                IniFile.SetFileName(filenameB + tm.ds.tx1 + "_Specifics.ini");
-                IniFile.SetString("Now", "ord" + (tm.ds.imCo1 + tm.ds.imCo2).ToString() + "_F1UpS", tm.ds.freq1s.ToString());
-                IniFile.SetFileName(filenameB + tm.ds.tx2 + "_Specifics.ini");
-                IniFile.SetString("Now", "ord" + (tm.ds.imCo1 + tm.ds.imCo2).ToString() + "_F2DnE", tm.ds.freq2e.ToString());
-                IniFile.SetFileName(filenameB + tm.ds.rx + "_Specifics.ini");
-                IniFile.SetString("Now", "ord" + (tm.ds.imCo1 + tm.ds.imCo2).ToString() + "_imS", tm.ds.freq2s.ToString());
-                IniFile.SetString("Now", "ord" + (tm.ds.imCo1 + tm.ds.imCo2).ToString() + "_imE", tm.ds.freq2e.ToString());
+              
+                if (ClsUpLoad._type == 0 || ClsUpLoad._type == 1)
+                    order = tm.save_imCo1 + tm.save_imCo2;
+                else
+                    order = 3;
+                IniFile.SetFileName(filenameB + tm.save_tx1 + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (order).ToString() + "_F1UpS", tm.save_F1s.ToString());
+                IniFile.SetFileName(filenameB + tm.save_tx2 + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (order).ToString() + "_F2DnE", tm.save_F2e.ToString());
+                IniFile.SetFileName(filenameB + tm.save_rx + "_Specifics.ini");
+                IniFile.SetString("Now", "ord" + (order).ToString() + "_imS", tm.save_rxs.ToString());
+                IniFile.SetString("Now", "ord" + (order).ToString() + "_imE", tm.save_rxe.ToString());
 
-                switch (tm.ds.imCo2 + tm.ds.imCo1)
+                switch (order)
                 {
                     case 3:
-                        cul.ld[tm.ds.tx1].ord3_F1UpS = tm.ds.freq1s;
-                        cul.ld[tm.ds.tx2].ord3_F2DnE = tm.ds.freq2e;
-                        cul.ld[tm.ds.rx].ord3_imS = tm.ds.MinRx;
-                        cul.ld[tm.ds.rx].ord3_imE = tm.ds.MaxRx;
+                        cul.ld[tm.save_tx1].ord3_F1UpS = tm.save_F1s;
+                        cul.ld[tm.save_tx2].ord3_F2DnE = tm.save_F2e;
+                        cul.ld[tm.save_rx].ord3_imS = tm.save_rxs;
+                        cul.ld[tm.save_rx].ord3_imE = tm.save_rxe;
                         break;
                     case 5:
-                        cul.ld[tm.ds.tx1].ord5_F1UpS = tm.ds.freq1s;
-                        cul.ld[tm.ds.tx2].ord5_F2DnE = tm.ds.freq2e;
-                        cul.ld[tm.ds.rx].ord5_imS = tm.ds.MinRx;
-                        cul.ld[tm.ds.rx].ord5_imE = tm.ds.MaxRx;
+                        cul.ld[tm.save_tx1].ord5_F1UpS = tm.save_F1s;
+                        cul.ld[tm.save_tx2].ord5_F2DnE = tm.save_F2e;
+                        cul.ld[tm.save_rx].ord5_imS = tm.save_rxs;
+                        cul.ld[tm.save_rx].ord5_imE = tm.save_rxe;
                         break;
                     case 7:
-                        cul.ld[tm.ds.tx1].ord7_F1UpS = tm.ds.freq1s;
-                        cul.ld[tm.ds.tx2].ord7_F2DnE = tm.ds.freq2e;
-                        cul.ld[tm.ds.rx].ord7_imS = tm.ds.MinRx;
-                        cul.ld[tm.ds.rx].ord7_imE = tm.ds.MaxRx;
+                        cul.ld[tm.save_tx1].ord7_F1UpS = tm.save_F1s;
+                        cul.ld[tm.save_tx2].ord7_F2DnE = tm.save_F2e;
+                        cul.ld[tm.save_rx].ord7_imS = tm.save_rxs;
+                        cul.ld[tm.save_rx].ord7_imE = tm.save_rxe;
                         break;
                     case 9:
-                        cul.ld[tm.ds.tx1].ord9_F1UpS = tm.ds.freq1s;
-                        cul.ld[tm.ds.tx2].ord9_F2DnE = tm.ds.freq2e;
-                        cul.ld[tm.ds.rx].ord9_imS = tm.ds.MinRx;
-                        cul.ld[tm.ds.rx].ord9_imE = tm.ds.MaxRx;
+                        cul.ld[tm.save_tx1].ord9_F1UpS = tm.save_F1s;
+                        cul.ld[tm.save_tx2].ord9_F2DnE = tm.save_F2e;
+                        cul.ld[tm.save_rx].ord9_imS = tm.save_rxs;
+                        cul.ld[tm.save_rx].ord9_imE = tm.save_rxe;
                         break;
                 }
             }

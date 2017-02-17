@@ -34,8 +34,18 @@ namespace JcMBP
         double _pim_min = double.MaxValue;
         double _pim_limit = -110;
         string type = "0";
-     
-        
+
+        public double save_F1s;
+        public double save_F1e;
+        public double save_F2s;
+        public double save_F2e;
+        public double save_rxs;
+        public double save_rxe;
+        public int save_imCo1 = 2;
+        public int save_imCo2 = 1;
+        public int save_tx1;
+        public int save_tx2;
+        public int save_rx;
         FrmMain fm;
         public FreqSweepMid(ClsUpLoad cul,FrmMain fm)
         {

@@ -27,6 +27,18 @@ namespace JcMBP
          double rmax;
          double rmin;
 
+         //public double save_F1s;
+         //public double save_F1e;
+         //public double save_F2s;
+         //public double save_F2e;
+         //public double save_rxs;
+         //public double save_rxe;
+         //public int save_imCo1 = 2;
+         //public int save_imCo2 = 1;
+         //public int save_tx1;
+         //public int save_tx2;
+         //public int save_rx;
+
          public PoiTimeSweepLeft(ClsUpLoad cul,TimeSweepMid tsm)
          {
              InitializeComponent();
@@ -144,8 +156,8 @@ namespace JcMBP
             {
                 imLess = ord.imLess;//阶数高低频
                 imLow= ord.imLow;//阶数加减法
-                imCo1 = ord.imCo1;//阶数参数
-                imCo2 = ord.imCo2;//阶数参数
+                tsm.save_imCo1 = imCo1 = ord.imCo1;//阶数参数
+                tsm.save_imCo2 = imCo2 = ord.imCo2;//阶数参数
                 orderMode = ord.poi_order;
                 button6.Text = ord.val;//扫频阶数按钮text
                 label2.Text = OfftenMethod.GetTestBand(imCo1, imCo2, imLow, imLess, f1, f2).ToString("0.00") + "MHz";
@@ -158,8 +170,8 @@ namespace JcMBP
             rr.ShowDialog();
             if (rr.DialogResult == DialogResult.OK)
             {
-                _rxs = rr._rxs;
-                _rxe = rr._rxe;
+                tsm.save_rxs = _rxs = rr._rxs;
+                tsm.save_rxe = _rxe = rr._rxe;
                 button9.Text = _rxs.ToString("0.00") + "-" + _rxe.ToString("0.00");
             }
         }
@@ -168,12 +180,14 @@ namespace JcMBP
         {
             f1 = Convert.ToDouble(time_nud_f1.Value);
            label2.Text= OfftenMethod.GetTestBand(imCo1, imCo2, imLow, imLess, f1, f2).ToString("0.00")+"MHz";
+           tsm.save_F1s = f1;
         }
 
         private void time_nud_f2_ValueChanged(object sender, EventArgs e)
         {
             f2 = Convert.ToDouble(time_nud_f2.Value);
             label2.Text = OfftenMethod.GetTestBand(imCo1, imCo2, imLow, imLess, f1, f2).ToString("0.00") + "MHz";
+            tsm.save_F2e = f2;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -187,6 +201,8 @@ namespace JcMBP
             time_nud_f1.Maximum = (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].F1Max;
             time_nud_f1.Minimum = (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].F1Min;
             time_nud_f1.Value = (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)]].ord3_F1UpS;
+
+            tsm.save_tx1 = cul.BandCount[cul.BandNames.IndexOf(comboBox1.Text)];
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -200,6 +216,8 @@ namespace JcMBP
             time_nud_f2.Maximum = (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]].F2Max;
             time_nud_f2.Minimum = (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]].F2Min;
             time_nud_f2.Value = (decimal)cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)]].ord3_F2DnE;
+
+            tsm.save_tx2 = cul.BandCount[cul.BandNames.IndexOf(comboBox2.Text)];
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -215,6 +233,10 @@ namespace JcMBP
             rmax = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].RxMax;
             rmin = cul.ld[cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)]].RxMin;
             button9.Text = _rxs.ToString("0.00") + "-" + _rxe.ToString("0.00");
+
+            tsm.save_rx = cul.BandCount[cul.BandNames.IndexOf(comboBox3.Text)];
+            tsm.save_rxs = _rxs;
+            tsm.save_rxe = _rxe;
         }
 
         private void time_nud_f1_MouseClick(object sender, MouseEventArgs e)

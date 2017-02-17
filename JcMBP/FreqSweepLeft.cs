@@ -18,6 +18,19 @@ namespace JcMBP
         double _rxe;
         int count = 1;
         public static string bandname = "";
+
+        //public double save_F1s;
+        //public double save_F1e;
+        //public double save_F2s;
+        //public double save_F2e;
+        //public double save_rxs;
+        //public double save_rxe;
+        //public int save_imCo1 = 2;
+        //public int save_imCo2 = 1;
+        //public int save_tx1;
+        //public int save_tx2;
+        //public int save_rx;
+
         public FreqSweepLeft(ClsUpLoad cul,FreqSweepMid fsm)
         {
             InitializeComponent();
@@ -160,7 +173,8 @@ namespace JcMBP
                     //                         (decimal)cul.ld[freq_cb_band.SelectedIndex].ord3_F1UpS, (decimal)cul.ld[freq_cb_band.SelectedIndex].ord3_F1UpE);
                     //OfftenMethod.NudValue(freq_nud_fstart2, freq_nud_fstop2,
                     //                         (decimal)cul.ld[freq_cb_band.SelectedIndex].ord3_F2DnS, (decimal)cul.ld[freq_cb_band.SelectedIndex].ord3_F2DnE);
-                   
+                    fsm.save_imCo1 = 2;
+                    fsm.save_imCo2 = 1;
                     break;
                 case 1:
                     freq_nud_fstart1.Value = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)]].ord5_F1UpS);
@@ -171,7 +185,8 @@ namespace JcMBP
                     //                         (decimal)cul.ld[freq_cb_band.SelectedIndex].ord5_F1UpS, (decimal)cul.ld[freq_cb_band.SelectedIndex].ord5_F1UpE);
                     //OfftenMethod.NudValue(freq_nud_fstart2, freq_nud_fstop2,
                     //                         (decimal)cul.ld[freq_cb_band.SelectedIndex].ord5_F2DnS, (decimal)cul.ld[freq_cb_band.SelectedIndex].ord5_F2DnE);      
-                    
+                    fsm.save_imCo1 = 3;
+                    fsm.save_imCo2 = 2;
                     break;
                 case 2:
                     freq_nud_fstart1.Value = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)]].ord7_F1UpS);
@@ -182,7 +197,8 @@ namespace JcMBP
                     //                         (decimal)cul.ld[freq_cb_band.SelectedIndex].ord7_F1UpS, (decimal)cul.ld[freq_cb_band.SelectedIndex].ord7_F1UpE);
                     //OfftenMethod.NudValue(freq_nud_fstart2, freq_nud_fstop2,
                     //                         (decimal)cul.ld[freq_cb_band.SelectedIndex].ord7_F2DnS, (decimal)cul.ld[freq_cb_band.SelectedIndex].ord7_F2DnE);     
-                  
+                    fsm.save_imCo1 = 4;
+                    fsm.save_imCo2 = 3;
                     break;
                 case 3:
                     freq_nud_fstart1.Value = Convert.ToDecimal(cul.ld[cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)]].ord9_F1UpS);
@@ -193,7 +209,8 @@ namespace JcMBP
                     //                         (decimal)cul.ld[freq_cb_band.SelectedIndex].ord9_F1UpS, (decimal)cul.ld[freq_cb_band.SelectedIndex].ord9_F1UpE);
                     //OfftenMethod.NudValue(freq_nud_fstart2, freq_nud_fstop2,
                     //                         (decimal)cul.ld[freq_cb_band.SelectedIndex].ord9_F2DnS, (decimal)cul.ld[freq_cb_band.SelectedIndex].ord9_F2DnE);  
-                
+                    fsm.save_imCo1 = 5;
+                    fsm.save_imCo2 = 4;
                     break;
                 case 4: break;
             }
@@ -222,6 +239,10 @@ namespace JcMBP
                     break;
                 
             }
+
+            fsm.save_tx1 = fsm.save_tx2 = fsm.save_rx = cul.BandCount[cul.BandNames.IndexOf(freq_cb_band.Text)];
+            fsm.save_rxs = _rxs;
+            fsm.save_rxe = _rxe;
         
         }
 
@@ -315,6 +336,26 @@ namespace JcMBP
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void freq_nud_fstart1_ValueChanged(object sender, EventArgs e)
+        {
+            fsm.save_F1s = Convert.ToDouble(freq_nud_fstart1.Value);
+        }
+
+        private void freq_nud_fstop1_ValueChanged(object sender, EventArgs e)
+        {
+            fsm.save_F1e = Convert.ToDouble(freq_nud_fstop1.Value);
+        }
+
+        private void freq_nud_fstart2_ValueChanged(object sender, EventArgs e)
+        {
+            fsm.save_F2s = Convert.ToDouble(freq_nud_fstart2.Value);
+        }
+
+        private void freq_nud_fstop2_ValueChanged(object sender, EventArgs e)
+        {
+            fsm.save_F2e = Convert.ToDouble(freq_nud_fstop2.Value);
         }
     }
 }
