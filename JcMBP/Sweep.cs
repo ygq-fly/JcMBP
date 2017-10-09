@@ -482,6 +482,7 @@ namespace JcMBP
                 x = (double)Math.Round(freq_mhz, 1);//互调频率四舍五入保留1位小数
                 y = (double)Math.Round(val, 1);//互调值四舍五入保留1位小数
                 //ds.sen_tx1 = 43;
+                
                 ds.sxy.x = x;
                 ds.sxy.y = y;
                 ds.sxy.currentPlot = 0;
@@ -542,6 +543,7 @@ namespace JcMBP
 
                 //ds.sen_tx2 = 43;
                 //ds.sen_tx1 = 43;
+               
                 ds.sxy.x = x;
                 ds.sxy.y = y;
                 ds.sxy.currentPlot = 1;

@@ -44,67 +44,74 @@ namespace JcMBP
 
         void run_rxoffset(byte byDutPort)
         {
-            if (!isThreadStart)
+            try
             {
-                isThreadStart = true;
-                cb_rxoffset_band.Enabled = false;
-                 off_dutport = 0;
-                 off_rx_loss = 0;
-                 band =cul.BandCount[cul.BandNames.IndexOf(cb_rxoffset_band.Text)];
-                off_dutport = byDutPort;//端口
-                off_rx_loss = OfftenMethod.GetOffectAndSet(cul.filenameB + band.ToString() + "_Specifics.ini", nuds, band, true);//获取offset
-
-                if (MessageBox.Show("确认是否 开始 RX 校准！校准差损值: " + off_rx_loss.ToString(), "提示", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                if (!isThreadStart)
                 {
-                    rxoffset_btn_start_a.BackColor = Color.White;//改变rx校准port1按钮颜色
-                    rxoffset_btn_start_b.BackColor = Color.White;//改变rx校准port2按钮颜色   
-                    rxoffset_btn_start_a.Enabled = true;
-                    rxoffset_btn_start_b.Enabled = true;
-                    cb_rxoffset_band.Enabled = true;
-                    button2.Enabled = true;
-                    isThreadStart = false;
-                    return;
+                    isThreadStart = true;
+                    cb_rxoffset_band.Enabled = false;
+                    off_dutport = 0;
+                    off_rx_loss = 0;
+                    band = cul.BandCount[cul.BandNames.IndexOf(cb_rxoffset_band.Text)];
+                    off_dutport = byDutPort;//端口
+                    off_rx_loss = OfftenMethod.GetOffectAndSet(cul.filenameB + band.ToString() + "_Specifics.ini", nuds, band, true);//获取offset
+
+                    if (MessageBox.Show("确认是否 开始 RX 校准！校准差损值: " + off_rx_loss.ToString(), "提示", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                    {
+                        rxoffset_btn_start_a.BackColor = Color.White;//改变rx校准port1按钮颜色
+                        rxoffset_btn_start_b.BackColor = Color.White;//改变rx校准port2按钮颜色   
+                        rxoffset_btn_start_a.Enabled = true;
+                        rxoffset_btn_start_b.Enabled = true;
+                        cb_rxoffset_band.Enabled = true;
+                        button2.Enabled = true;
+                        isThreadStart = false;
+                        return;
+                    }
+
+                    int rxcount = ClsJcPimDll.JcGetOffsetRxNum((byte)band);//读取校准次数
+                    if (rxcount < -10000)
+                    {
+                        MessageBox.Show("数据库错误");//显示信息
+                        isThreadStart = false;
+                        return;
+                    }
+                    this.progress_offset_rx.Minimum = 0;//设置进度条最小值为0
+                    this.progress_offset_rx.Maximum = rxcount + 5;//设置进度条最大值
+                    this.progress_offset_rx.Value = 0;//设置进度条当前值
+
+                    if (byDutPort == 0)
+                        rxoffset_btn_start_a.BackColor = Color.Green;//改变rx校准port1按钮颜色
+                    else
+                        rxoffset_btn_start_b.BackColor = Color.Green;//改变rx校准port2按钮颜色
+
+                    //设置开关
+
+                    ClsJcPimDll.fnSetMeasBand((byte)band);//设置频段
+
+                    if (ClsJcPimDll.fnSetDutPort(byDutPort) <= -10000)//设置端口
+                    {
+                        MessageBox.Show("开关设置错误！");
+                        rxoffset_btn_start_a.BackColor = Color.White;//改变rx校准port1按钮颜色
+                        rxoffset_btn_start_b.BackColor = Color.White;//改变rx校准port2按钮颜色   
+                        rxoffset_btn_start_a.Enabled = true;
+                        rxoffset_btn_start_b.Enabled = true;
+                        cb_rxoffset_band.Enabled = true;
+                        button2.Enabled = true;
+                        isThreadStart = false;
+                        return;
+                    }
+
+                    Thread.Sleep(300 + 200);//暂停
+                    button2.Enabled = false;//改变vco按钮
+                    Thread trd = new Thread(Start_offset_rx);//开启线程
+                    trd.IsBackground = true;
+                    trd.Start();
+                    //isThreadStart = true;
                 }
-
-                int rxcount = ClsJcPimDll.JcGetOffsetRxNum((byte)band);//读取校准次数
-                if (rxcount < -10000)
-                {
-                    MessageBox.Show("数据库错误");//显示信息
-                    isThreadStart = false;
-                    return;
-                }
-                this.progress_offset_rx.Minimum = 0;//设置进度条最小值为0
-                this.progress_offset_rx.Maximum = rxcount + 5;//设置进度条最大值
-                this.progress_offset_rx.Value = 0;//设置进度条当前值
-
-                if (byDutPort == 0)
-                    rxoffset_btn_start_a.BackColor = Color.Green;//改变rx校准port1按钮颜色
-                else
-                    rxoffset_btn_start_b.BackColor = Color.Green;//改变rx校准port2按钮颜色
-
-                //设置开关
-
-                ClsJcPimDll.fnSetMeasBand((byte)band);//设置频段
-
-                if (ClsJcPimDll.fnSetDutPort(byDutPort) <= -10000)//设置端口
-                {
-                    MessageBox.Show("开关设置错误！");
-                    rxoffset_btn_start_a.BackColor = Color.White;//改变rx校准port1按钮颜色
-                    rxoffset_btn_start_b.BackColor = Color.White;//改变rx校准port2按钮颜色   
-                    rxoffset_btn_start_a.Enabled = true;
-                    rxoffset_btn_start_b.Enabled = true;
-                    cb_rxoffset_band.Enabled = true;
-                    button2.Enabled = true;
-                    isThreadStart = false;
-                    return;
-                }
-
-                Thread.Sleep(300 + 200);//暂停
-                button2.Enabled = false;//改变vco按钮
-                Thread trd = new Thread(Start_offset_rx);//开启线程
-                trd.IsBackground = true;
-                trd.Start();
-                //isThreadStart = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -112,36 +119,44 @@ namespace JcMBP
 
         void Start_offset_rx()
         {
-            this.Invoke(new ThreadStart(delegate()
-            {
-                tb_offset_rx_log.Text = ("<<Start>>\r\n");//设置rx校准信息text
-            }));
-            byte[] err = new byte[256];
-            int s = ClsJcPimDll.JcSetOffsetRx((byte)band, off_dutport, off_rx_loss,
-                                      new ClsJcPimDll.Callback_Get_RX_Offset_Point(Callback_offset_rx));//开始rx校准
-            if (s <= -10000)
-            {
-                ClsJcPimDll.JcGetError(err, 256);//获取错误
-                MessageBox.Show(this, Encoding.ASCII.GetString(err));//显示错误
-            }
+            
+                this.Invoke(new ThreadStart(delegate()
+                {
+                    tb_offset_rx_log.Text = ("<<Start>>\r\n");//设置rx校准信息text
+                }));
+                byte[] err = new byte[256];
+                int s=0;
+                try { 
+                s = ClsJcPimDll.JcSetOffsetRx((byte)band, off_dutport, off_rx_loss,
+                                          new ClsJcPimDll.Callback_Get_RX_Offset_Point(Callback_offset_rx));//开始rx校准
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                if (s <= -10000)
+                {
+                    ClsJcPimDll.JcGetError(err, 256);//获取错误
+                    MessageBox.Show(this, Encoding.ASCII.GetString(err));//显示错误
+                }
 
-            this.Invoke(new ThreadStart(delegate()
-            {
-                //if(s>-10000)
-                //    MessageBox.Show("校准完成");
-                this.tb_offset_rx_log.AppendText("<<Rx Offset Complete!>>");//添加text
-                this.progress_offset_rx.Value = this.progress_offset_rx.Maximum;//进度条值为最大值
-                rxoffset_btn_start_a.BackColor = Color.White;
-                rxoffset_btn_start_b.BackColor = Color.White;
-                rxoffset_btn_start_a.Enabled = true;
-                rxoffset_btn_start_b.Enabled = true;
-                cb_rxoffset_band.Enabled = true;
-                button2.Enabled = true;
-                if (s > -10000)
-                    MessageBox.Show(this, "校准完成");//显示信息
-            }));
-            isThreadStart = false;
-
+                this.Invoke(new ThreadStart(delegate()
+                {
+                    //if(s>-10000)
+                    //    MessageBox.Show("校准完成");
+                    this.tb_offset_rx_log.AppendText("<<Rx Offset Complete!>>");//添加text
+                    this.progress_offset_rx.Value = this.progress_offset_rx.Maximum;//进度条值为最大值
+                    rxoffset_btn_start_a.BackColor = Color.White;
+                    rxoffset_btn_start_b.BackColor = Color.White;
+                    rxoffset_btn_start_a.Enabled = true;
+                    rxoffset_btn_start_b.Enabled = true;
+                    cb_rxoffset_band.Enabled = true;
+                    button2.Enabled = true;
+                    if (s > -10000)
+                        MessageBox.Show(this, "校准完成");//显示信息
+                }));
+                isThreadStart = false;
+           
         }
 
         void Callback_offset_rx(double offset_freq, double Offset_val)

@@ -54,10 +54,10 @@
             this.dBcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.测试次数ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.解锁校准配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存校准结果ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +75,7 @@
             // btn_close
             // 
             this.btn_close.BackColor = System.Drawing.Color.White;
-            this.btn_close.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_close.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_close.Location = new System.Drawing.Point(152, 28);
             this.btn_close.Name = "btn_close";
             this.btn_close.Size = new System.Drawing.Size(138, 39);
@@ -87,7 +87,7 @@
             // btn_open
             // 
             this.btn_open.BackColor = System.Drawing.Color.White;
-            this.btn_open.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_open.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_open.Location = new System.Drawing.Point(8, 28);
             this.btn_open.Name = "btn_open";
             this.btn_open.Size = new System.Drawing.Size(138, 39);
@@ -100,7 +100,7 @@
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.BackColor = System.Drawing.Color.White;
-            this.button4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button4.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button4.Location = new System.Drawing.Point(762, 28);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(138, 39);
@@ -113,7 +113,7 @@
             // 
             this.rxoffset_btn_save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rxoffset_btn_save.BackColor = System.Drawing.Color.White;
-            this.rxoffset_btn_save.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.rxoffset_btn_save.Font = new System.Drawing.Font("Microsoft YaHei", 12F);
             this.rxoffset_btn_save.Location = new System.Drawing.Point(903, 28);
             this.rxoffset_btn_save.Name = "rxoffset_btn_save";
             this.rxoffset_btn_save.Size = new System.Drawing.Size(126, 39);
@@ -125,7 +125,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.Location = new System.Drawing.Point(8, 73);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(257, 31);
@@ -138,7 +138,7 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button2.Location = new System.Drawing.Point(271, 73);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(248, 31);
@@ -150,7 +150,7 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button3.Location = new System.Drawing.Point(525, 73);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(253, 31);
@@ -162,7 +162,7 @@
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.White;
-            this.button5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button5.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button5.Location = new System.Drawing.Point(784, 73);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(245, 31);
@@ -174,7 +174,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 14F);
             this.label1.Location = new System.Drawing.Point(471, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 25);
@@ -309,6 +309,14 @@
             this.解锁校准配置ToolStripMenuItem.Text = "解锁校准配置";
             this.解锁校准配置ToolStripMenuItem.Click += new System.EventHandler(this.解锁校准配置ToolStripMenuItem_Click);
             // 
+            // 保存ToolStripMenuItem
+            // 
+            this.保存ToolStripMenuItem.Enabled = false;
+            this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.保存ToolStripMenuItem.Text = "保存";
+            this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
+            // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -321,7 +329,7 @@
             // 
             this.保存校准结果ToolStripMenuItem.Enabled = false;
             this.保存校准结果ToolStripMenuItem.Name = "保存校准结果ToolStripMenuItem";
-            this.保存校准结果ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.保存校准结果ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.保存校准结果ToolStripMenuItem.Text = "保存校准结果";
             this.保存校准结果ToolStripMenuItem.Click += new System.EventHandler(this.保存校准结果ToolStripMenuItem_Click);
             // 
@@ -336,13 +344,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(1038, 25);
             this.menuStrip1.TabIndex = 190;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // 保存ToolStripMenuItem
-            // 
-            this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.保存ToolStripMenuItem.Text = "保存";
-            this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
